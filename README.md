@@ -24,6 +24,7 @@ Current work includes:
 - independent validation plan and module-by-module validation matrix.
 - validation source register linking external tools, standards, literature, and databases to each model module.
 - short project positioning note explaining novelty and selling points.
+- first executable independent validation checks for CO2 properties, capacity arithmetic, integrity wall thickness, and cost arithmetic.
 
 ## Repository Structure
 
@@ -60,6 +61,22 @@ python scripts\run_goldeneye_benchmark.py
 ```
 
 This reads the Goldeneye assumptions, recalculates capacity, lifetime, cost, and the pre-LCA decision, then updates the report and trace files.
+
+Run the independent validation checks:
+
+```powershell
+python scripts\run_independent_validation.py
+```
+
+This compares selected Goldeneye model values with independent checks, including CoolProp for CO2 properties and a simple wall-thickness sanity check. Start by reading:
+
+- `reports/independent_validation_report.md`
+
+If CoolProp is missing on a new computer, install it once:
+
+```powershell
+python -m pip install CoolProp
+```
 
 Choose and run one pipeline scenario:
 
@@ -124,6 +141,7 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `reports/nsta_pipeline_completeness.md`: completeness check for NSTA fields such as wall thickness, internal diameter, max operating pressure, fluid, status, and start date.
 - `reports/nsta_candidate_ranking.md`: first-pass ranking of model-ready hydrocarbon pipeline candidates and checks for known CCS/reuse names such as Goldeneye, Atlantic, Cromarty, SAGE, and others.
 - `reports/goldeneye_benchmark.md`: benchmark reproduction of the Goldeneye dissertation and poster cases, now including the pre-LCA gate decision.
+- `reports/independent_validation_report.md`: first independent validation report, including CoolProp property checks and wall-thickness review flags.
 - `reports/pipeline_screen_goldeneye_poster.md`: example report for running one selected pipeline scenario.
 - `reports/pipeline_screen_nsta_pl774.md`: example report for running one selected NSTA candidate.
 - `data/benchmarks/goldeneye_benchmark_trace.json`: traceable inputs, outputs, assumptions, warnings, and formula notes for each Goldeneye module.
@@ -135,6 +153,10 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `data/validation/independent_validation_matrix.csv`: tracking table for validation status, references, pass targets, and first actions.
 - `docs/validation_source_register.md`: plain-language guide to which external sources can validate each module.
 - `data/validation/validation_source_register.csv`: structured source register for validation references, access status, and exact checks.
+- `data/validation/co2_property_validation.csv`: CoolProp comparison for Goldeneye CO2 density, viscosity, Z factor, and phase.
+- `data/validation/capacity_validation.csv`: capacity arithmetic and CoolProp-Z sensitivity checks.
+- `data/validation/integrity_barlow_sanity_check.csv`: simple wall-thickness sanity check that flags integrity items needing review.
+- `data/validation/cost_arithmetic_validation.csv`: cost component and contingency arithmetic check.
 - `docs/novelty_and_selling_points.md`: simple explanation of what is novel and competitive about the project.
 - `docs/similar_tools_and_data_sources.md`: notes on similar tools such as NETL REPACT, NETL CO2 Transport Cost Model, SimCCS, and Sequestrix.
 

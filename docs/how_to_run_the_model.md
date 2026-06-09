@@ -241,3 +241,46 @@ python scripts\run_pipeline_screen.py --list-nsta --top 20
 ```
 
 Then copy the `PL...` number exactly.
+
+## Option 3: Run The Independent Validation Checks
+
+Use this when you want to check whether the model is technically credible.
+
+### Step 1: Run The Validation Command
+
+```powershell
+python scripts\run_independent_validation.py
+```
+
+If PowerShell says `CoolProp is required`, run this once:
+
+```powershell
+python -m pip install CoolProp
+```
+
+Then run the validation command again.
+
+### Step 2: Read The Validation Report
+
+Open this file:
+
+```text
+reports/independent_validation_report.md
+```
+
+Start with the `Plain Summary` section.
+
+### Step 3: Understand The Main Outputs
+
+The command also creates these detailed tables:
+
+| File | What it checks |
+| --- | --- |
+| `data/validation/co2_property_validation.csv` | CO2 density, viscosity, and Z factor against CoolProp. |
+| `data/validation/capacity_validation.csv` | Capacity equation arithmetic and sensitivity to CoolProp Z factor. |
+| `data/validation/integrity_barlow_sanity_check.csv` | Simple wall-thickness sanity check. |
+| `data/validation/cost_arithmetic_validation.csv` | Cost component sum and contingency arithmetic. |
+
+Important:
+
+If the validation report says `review_required`, it does not automatically mean the model is wrong. It means we need to check that item carefully before trusting it.

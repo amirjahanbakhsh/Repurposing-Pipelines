@@ -1,0 +1,26 @@
+parameter,value,unit,source,quality,notes
+transport_temperature_c,12,degC,screening_default,assumed,Default CO2 transport temperature used until project-specific temperature is known
+capacity_factor,0.85,fraction,screening_default,assumed,Used to convert annual project flow into design flow
+required_project_flow_mtpa,5.0,MtCO2/year,screening_default,assumed,Default target flow for early CCS screening
+molecular_weight_co2_g_per_mol,44.01,g/mol,CO2_reference,reported,Molecular weight of pure CO2
+compressibility_factor_z,0.204449,dimensionless,goldeneye_benchmark_default,assumed,Goldeneye benchmark value reused for first NSTA screening until properties module is added
+density_kg_per_m3,904.0128,kg/m3,goldeneye_benchmark_default,assumed,Not currently used directly by the capacity equation but retained for traceability
+viscosity_micro_pa_s,92.6516,microPa.s,goldeneye_benchmark_default,assumed,Goldeneye benchmark value reused for first NSTA screening until properties module is added
+fanning_friction_factor,0.003,dimensionless,screening_default,assumed,Simple default friction factor for early screening only
+pipe_grade,X60,text,screening_default,assumed,Default grade used only to estimate minimum wall thickness
+smys_mpa,413.7,MPa,screening_default,assumed,Approximate SMYS for X60 grade
+design_factor,0.72,fraction,screening_default,assumed,Simple Barlow-style screening factor; not a requalification code check
+outlet_pressure_psia,1100,psia,goldeneye_benchmark_default,assumed,Default outlet pressure; clipped to 80 percent of inlet if needed
+assessment_year,2026,year,project_default,assumed,Used to estimate historical operating years from NSTA start date
+fallback_historical_corrosion_years,25,years,screening_default,assumed,Used when NSTA start date is missing
+historical_corrosion_rate_mm_per_year,0.05,mm/year,screening_default,assumed,Simple historical corrosion placeholder for first screening only
+future_co2_corrosion_rate_mm_per_year,0.10,mm/year,screening_default,assumed,Simple future CO2 corrosion placeholder for first screening only
+reference_cost_length_km,101.68,km,goldeneye_benchmark,reported,Goldeneye length used to scale cost components by length only
+cost_material_usd_2025,54181373,USD,goldeneye_benchmark,reported,Reference cost component scaled by length for NSTA screening
+cost_labor_usd_2025,109835004,USD,goldeneye_benchmark,reported,Reference cost component scaled by length for NSTA screening
+cost_row_damages_usd_2025,6688098,USD,goldeneye_benchmark,reported,Reference cost component scaled by length for NSTA screening
+cost_misc_usd_2025,34355862,USD,goldeneye_benchmark,reported,Reference cost component scaled by length for NSTA screening
+cost_surge_tank_usd_2025,2447622,USD,goldeneye_benchmark,reported,Reference cost component scaled by length for NSTA screening
+cost_control_system_usd_2025,220051,USD,goldeneye_benchmark,reported,Reference cost component scaled by length for NSTA screening
+cost_booster_station_usd_2025,0,USD,goldeneye_benchmark,reported,No booster station assumed in the first screening default
+contingency_fraction,0.10,fraction,screening_default,assumed,Project contingency factor

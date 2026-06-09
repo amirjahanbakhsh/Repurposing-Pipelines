@@ -82,6 +82,23 @@ def evaluate_pre_lca_gate(
             decision = "fail"
             confidence = "medium"
             reasons.append(f"One or more upstream modules failed: {_joined(failing_modules)}.")
+            if "integrity" in failing_modules:
+                next_data.extend(
+                    [
+                        "verify wall thickness and inspection records",
+                        "check pipe grade, design factor, defects, and pressure basis",
+                        "replace simple Barlow screening with a proper requalification method",
+                    ]
+                )
+            if "capacity" in failing_modules:
+                next_data.extend(
+                    [
+                        "check CO2 inlet and outlet pressure assumptions",
+                        "validate CO2 density, viscosity, compressibility, and phase behaviour",
+                    ]
+                )
+            if "cost" in failing_modules:
+                next_data.append("check cost assumptions and reuse/new-build cost basis")
         else:
             capacity_mtpa = float(outputs["capacity_mtpa"])
             required_design_mtpa = float(outputs["required_design_mtpa"])

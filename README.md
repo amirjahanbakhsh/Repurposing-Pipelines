@@ -17,6 +17,8 @@ Current work includes:
 - first-pass ranking of model-ready hydrocarbon pipeline candidates.
 - Goldeneye benchmark cases for the dissertation and poster assumptions.
 - modular architecture with traceable inputs, outputs, assumptions, warnings, and two decision gates.
+- tooling strategy for using existing CCS tools as benchmarks while building our own transparent model engine.
+- Phase 2 roadmap for possible well repurposing screening.
 
 ## Repository Structure
 
@@ -35,6 +37,7 @@ scripts/       Reproducible extraction and analysis scripts
 - `reports/nsta_candidate_ranking.md`: first-pass ranking of model-ready hydrocarbon pipeline candidates and checks for known CCS/reuse names such as Goldeneye, Atlantic, Cromarty, SAGE, and others.
 - `reports/goldeneye_benchmark.md`: benchmark reproduction of the Goldeneye dissertation and poster cases.
 - `docs/system_architecture.md`: proposed modular architecture, traceability design, and pre-/post-LCA decision gates.
+- `docs/tooling_strategy.md`: strategy for using REPACT, NETL cost tools, CoolProp/REFPROP, openLCA/Brightway, ecoinvent, and future well repurposing.
 - `docs/model_validation_review.md`: initial model validation review for CO2 properties, hydraulics, corrosion, cost, and LCA.
 - `docs/similar_tools_and_data_sources.md`: notes on similar tools such as NETL REPACT, NETL CO2 Transport Cost Model, SimCCS, and Sequestrix.
 

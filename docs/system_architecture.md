@@ -466,6 +466,47 @@ Every run should be exportable as:
 - Markdown/HTML report for humans;
 - JSON trace file for audit/reuse by the app.
 
+## Roadmap Beyond Pipelines
+
+The first working tool should remain pipeline focused. This keeps the first model clear, testable, and publishable.
+
+After the pipeline workflow is stable, the same modular structure can be extended to other CCS repurposing assets.
+
+| Phase | Scope | Reason |
+| --- | --- | --- |
+| Phase 1 | Pipeline repurposing | This is the current core and already has NSTA data, Goldeneye benchmarks, and dissertation/poster assumptions. |
+| Phase 2 | Well repurposing | Wells are important for CCS storage reuse, but they need different data and integrity checks. |
+| Phase 3 | Facilities, hubs, and networks | These can connect pipelines and wells into a wider CCS infrastructure planning tool. |
+
+### Future Well Repurposing Module
+
+The well module should follow the same traceability rules as the pipeline modules.
+
+Possible inputs:
+
+- well location and status;
+- casing and cement information;
+- pressure and temperature;
+- completion and abandonment history;
+- reservoir or storage link;
+- inspection or integrity evidence;
+- conversion, re-entry, monitoring, and abandonment costs;
+- LCA assumptions for reuse versus drilling a new injection well.
+
+Possible outputs:
+
+- well data completeness;
+- reuse suitability screen;
+- leakage/integrity warning level;
+- conversion cost estimate;
+- monitoring requirement;
+- LCA input package;
+- well reuse decision status.
+
+The well module should not be built until the pipeline module structure is reusable. That way the same input/output, warning, assumption, and trace records can support both pipelines and wells.
+
+For the external-tool strategy, see `docs/tooling_strategy.md`.
+
 ## Immediate Implementation Plan
 
 1. Convert the Goldeneye benchmark script into reusable modules.

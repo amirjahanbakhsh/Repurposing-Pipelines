@@ -50,6 +50,8 @@ Current position:
 
 The detailed tracking table is stored in `data/validation/independent_validation_matrix.csv`.
 
+The detailed source register is stored in `data/validation/validation_source_register.csv` and explained in `docs/validation_source_register.md`.
+
 ## Module Notes
 
 ### 1. Data Validation
@@ -170,7 +172,7 @@ This gives us a clean technical foundation before we build more interface featur
 | [ecoinvent](https://ecoinvent.org/) | LCA inventory datasets |
 | [Brightway](https://docs.brightway.dev/en/latest/) | Python-native LCA calculation framework |
 | [openLCA](https://www.openlca.org/) | Independent LCA software for cross-checking |
-| NETL CO2 transport cost tools | Independent cost benchmark, subject to access/availability |
+| [NETL CO2_T_COM 2024](https://www.osti.gov/biblio/2473642) | Independent cost benchmark for liquid-phase CO2 pipeline transport |
 | NORSOK M-506 | Corrosion benchmark if official examples/spreadsheets are available |
 
 ## Current Decision

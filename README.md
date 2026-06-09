@@ -22,6 +22,8 @@ Current work includes:
 - first reusable Python package for Goldeneye capacity, integrity, cost, and trace outputs.
 - first pre-LCA decision gate to say whether a case should move into LCA screening.
 - independent validation plan and module-by-module validation matrix.
+- validation source register linking external tools, standards, literature, and databases to each model module.
+- short project positioning note explaining novelty and selling points.
 
 ## Repository Structure
 
@@ -131,6 +133,9 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `docs/model_validation_review.md`: initial model validation review for CO2 properties, hydraulics, corrosion, cost, and LCA.
 - `docs/independent_validation_plan.md`: plan for validating every module against independent sources, not only the student dissertation.
 - `data/validation/independent_validation_matrix.csv`: tracking table for validation status, references, pass targets, and first actions.
+- `docs/validation_source_register.md`: plain-language guide to which external sources can validate each module.
+- `data/validation/validation_source_register.csv`: structured source register for validation references, access status, and exact checks.
+- `docs/novelty_and_selling_points.md`: simple explanation of what is novel and competitive about the project.
 - `docs/similar_tools_and_data_sources.md`: notes on similar tools such as NETL REPACT, NETL CO2 Transport Cost Model, SimCCS, and Sequestrix.
 
 ## Optional Full Geometry Download

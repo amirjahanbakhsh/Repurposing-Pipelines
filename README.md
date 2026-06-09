@@ -53,6 +53,23 @@ python scripts\run_goldeneye_benchmark.py
 
 This reads the Goldeneye assumptions, recalculates capacity, lifetime, cost, and the pre-LCA decision, then updates the report and trace files.
 
+Choose and run one pipeline scenario:
+
+```powershell
+python scripts\run_pipeline_screen.py --list-scenarios
+python scripts\run_pipeline_screen.py --scenario goldeneye_poster
+```
+
+The first command shows the available scenario names. The second command runs only the selected scenario.
+
+For `goldeneye_poster`, the command creates:
+
+- `reports/pipeline_screen_goldeneye_poster.md`
+- `data/processed/pipeline_screen_goldeneye_poster.csv`
+- `data/processed/pipeline_screen_goldeneye_poster_trace.json`
+
+For now, available scenarios come from `data/benchmarks/goldeneye_assumptions.csv`. To run a new pipeline, we need to add a new scenario to that file with the same required inputs.
+
 Run the tests:
 
 ```powershell
@@ -82,6 +99,7 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `reports/nsta_pipeline_completeness.md`: completeness check for NSTA fields such as wall thickness, internal diameter, max operating pressure, fluid, status, and start date.
 - `reports/nsta_candidate_ranking.md`: first-pass ranking of model-ready hydrocarbon pipeline candidates and checks for known CCS/reuse names such as Goldeneye, Atlantic, Cromarty, SAGE, and others.
 - `reports/goldeneye_benchmark.md`: benchmark reproduction of the Goldeneye dissertation and poster cases, now including the pre-LCA gate decision.
+- `reports/pipeline_screen_goldeneye_poster.md`: example report for running one selected pipeline scenario.
 - `data/benchmarks/goldeneye_benchmark_trace.json`: traceable inputs, outputs, assumptions, warnings, and formula notes for each Goldeneye module.
 - `docs/system_architecture.md`: proposed modular architecture, traceability design, and pre-/post-LCA decision gates.
 - `docs/tooling_strategy.md`: strategy for using REPACT, NETL cost tools, CoolProp/REFPROP, openLCA/Brightway, ecoinvent, and future well repurposing.

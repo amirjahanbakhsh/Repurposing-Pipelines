@@ -534,10 +534,12 @@ Completed first:
 - Regression tests added for the dissertation and poster Goldeneye cases.
 - JSON trace output added for audit and future app evidence panels.
 - Simple pre-LCA gate added for deciding whether a case is ready for LCA screening.
+- Simple one-scenario runner added so a user can choose a scenario from an assumptions file.
 
 Next implementation steps:
 
-1. Add a simple LCA screening module using transparent assumptions.
-2. Later connect LCA to ecoinvent/openLCA/Brightway workflow.
-3. Generalise the modules from Goldeneye to the ranked NSTA candidate dataset.
-4. Add external benchmark comparisons with REPACT and NETL CO2_T_COM.
+1. Add an override/assumption file format for new NSTA pipelines.
+2. Add a simple LCA screening module using transparent assumptions.
+3. Later connect LCA to ecoinvent/openLCA/Brightway workflow.
+4. Generalise the modules from Goldeneye to the ranked NSTA candidate dataset.
+5. Add external benchmark comparisons with REPACT and NETL CO2_T_COM.

@@ -1,6 +1,6 @@
 # Goldeneye Benchmark
 
-Generated: 2026-06-09T16:30:52+00:00
+Generated: 2026-06-09T16:56:43+00:00
 
 Assumptions: `data/benchmarks/goldeneye_assumptions.csv`
 

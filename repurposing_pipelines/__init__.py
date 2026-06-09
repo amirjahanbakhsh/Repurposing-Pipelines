@@ -7,5 +7,6 @@ __all__ = [
     "goldeneye",
     "hydraulics",
     "integrity",
+    "pipeline_screen",
     "trace",
 ]

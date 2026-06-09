@@ -108,7 +108,7 @@ def evaluate_pre_lca_gate(
             if weak_inputs:
                 reasons.append(
                     "Some important values are assumed or sensitivity inputs: "
-                    f"{_joined(weak_inputs)}."
+                    f"{', '.join(weak_inputs)}."
                 )
             if has_module_warnings:
                 reasons.append("Upstream modules still contain validation warnings.")

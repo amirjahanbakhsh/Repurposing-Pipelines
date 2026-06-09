@@ -20,6 +20,7 @@ Current work includes:
 - tooling strategy for using existing CCS tools as benchmarks while building our own transparent model engine.
 - Phase 2 roadmap for possible well repurposing screening.
 - first reusable Python package for Goldeneye capacity, integrity, cost, and trace outputs.
+- first pre-LCA decision gate to say whether a case should move into LCA screening.
 
 ## Repository Structure
 
@@ -50,7 +51,7 @@ Run the Goldeneye benchmark:
 python scripts\run_goldeneye_benchmark.py
 ```
 
-This reads the Goldeneye assumptions, recalculates capacity, lifetime, and cost, then updates the report and trace files.
+This reads the Goldeneye assumptions, recalculates capacity, lifetime, cost, and the pre-LCA decision, then updates the report and trace files.
 
 Run the tests:
 
@@ -80,7 +81,7 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 
 - `reports/nsta_pipeline_completeness.md`: completeness check for NSTA fields such as wall thickness, internal diameter, max operating pressure, fluid, status, and start date.
 - `reports/nsta_candidate_ranking.md`: first-pass ranking of model-ready hydrocarbon pipeline candidates and checks for known CCS/reuse names such as Goldeneye, Atlantic, Cromarty, SAGE, and others.
-- `reports/goldeneye_benchmark.md`: benchmark reproduction of the Goldeneye dissertation and poster cases.
+- `reports/goldeneye_benchmark.md`: benchmark reproduction of the Goldeneye dissertation and poster cases, now including the pre-LCA gate decision.
 - `data/benchmarks/goldeneye_benchmark_trace.json`: traceable inputs, outputs, assumptions, warnings, and formula notes for each Goldeneye module.
 - `docs/system_architecture.md`: proposed modular architecture, traceability design, and pre-/post-LCA decision gates.
 - `docs/tooling_strategy.md`: strategy for using REPACT, NETL cost tools, CoolProp/REFPROP, openLCA/Brightway, ecoinvent, and future well repurposing.

@@ -19,6 +19,24 @@ This avoids a black-box tool. A user should be able to see:
 - what result came out;
 - which later module used that result.
 
+## Coding Style In Plain Language
+
+The code should stay understandable to non-specialist programmers.
+
+We use two simple ideas:
+
+- data objects hold information, sources, assumptions, warnings, and outputs;
+- calculation functions do the engineering maths.
+
+In plain terms:
+
+- an object is like a labelled form;
+- a function is like a small calculator;
+- a module is a group of related calculators;
+- a trace is the receipt that shows what numbers were used and how the answer was produced.
+
+This is why the project uses objects such as `ModuleResult`, `InputRecord`, and `OutputRecord`, but keeps equations as simple functions. It makes the model easier to check, test, and explain.
+
 ## High-Level Workflow
 
 ```text
@@ -509,9 +527,16 @@ For the external-tool strategy, see `docs/tooling_strategy.md`.
 
 ## Immediate Implementation Plan
 
-1. Convert the Goldeneye benchmark script into reusable modules.
-2. Add standard result objects and trace records.
-3. Add tests for the dissertation and poster Goldeneye cases.
-4. Add a simple pre-LCA gate.
-5. Add a simple LCA screening module using transparent assumptions.
-6. Later connect LCA to ecoinvent/openLCA/Brightway workflow.
+Completed first:
+
+- Goldeneye benchmark script converted into reusable capacity, integrity, cost, and traceability modules.
+- Standard result objects added for inputs, outputs, assumptions, warnings, and formula trace.
+- Regression tests added for the dissertation and poster Goldeneye cases.
+- JSON trace output added for audit and future app evidence panels.
+
+Next implementation steps:
+
+1. Add a simple pre-LCA gate.
+2. Add a simple LCA screening module using transparent assumptions.
+3. Later connect LCA to ecoinvent/openLCA/Brightway workflow.
+4. Generalise the modules from Goldeneye to the ranked NSTA candidate dataset.

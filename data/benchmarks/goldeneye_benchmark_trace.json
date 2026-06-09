@@ -1,0 +1,2083 @@
+[
+  {
+    "scenario": "goldeneye_dissertation",
+    "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+    "model_version": "goldeneye_benchmark_v0.2",
+    "source_parameters": [
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "pipeline_name",
+        "value": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "unit": "text",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Case-study pipeline name"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "pipeline_length_km",
+        "value": "101.68",
+        "unit": "km",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Goldeneye pipeline length"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "outer_diameter_in",
+        "value": "20.0",
+        "unit": "in",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Nominal outside diameter"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "inner_diameter_in",
+        "value": "18.25",
+        "unit": "in",
+        "source": "dissertation",
+        "quality": "assumed_or_standard",
+        "notes": "Standard inner diameter shown in dissertation app screenshot"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "nominal_wall_thickness_mm",
+        "value": "22.23",
+        "unit": "mm",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Pipeline information shown in dissertation"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "pipe_grade",
+        "value": "X60",
+        "unit": "text",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Pipeline information shown in dissertation"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "start_operation_year",
+        "value": "2003",
+        "unit": "year",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Pipeline information shown in dissertation"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "end_operation_year",
+        "value": "2011",
+        "unit": "year",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Goldeneye ceased production in 2011"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "inlet_pressure_psia",
+        "value": "1740",
+        "unit": "psia",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Pale Blue Dot / Acorn condition used in case study"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "outlet_pressure_psia",
+        "value": "1100",
+        "unit": "psia",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Pale Blue Dot / Acorn condition used in case study"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "transport_temperature_c",
+        "value": "12",
+        "unit": "degC",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Pale Blue Dot / Acorn condition used in case study"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "capacity_factor",
+        "value": "0.85",
+        "unit": "fraction",
+        "source": "dissertation",
+        "quality": "assumed",
+        "notes": "Used to convert project flow requirement to design flow"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "required_project_flow_mtpa",
+        "value": "5.0",
+        "unit": "MtCO2/year",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Maximum Acorn requirement used in case study"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "molecular_weight_co2_g_per_mol",
+        "value": "44.01",
+        "unit": "g/mol",
+        "source": "dissertation",
+        "quality": "reported",
+        "notes": "Input shown in app screenshot"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "compressibility_factor_z",
+        "value": "0.204449",
+        "unit": "dimensionless",
+        "source": "dissertation",
+        "quality": "calculated",
+        "notes": "Reported app output"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "density_kg_per_m3",
+        "value": "904.0128",
+        "unit": "kg/m3",
+        "source": "dissertation",
+        "quality": "calculated",
+        "notes": "Reported app output"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "viscosity_micro_pa_s",
+        "value": "92.6516",
+        "unit": "microPa.s",
+        "source": "dissertation",
+        "quality": "calculated",
+        "notes": "Reported app output"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "fanning_friction_factor",
+        "value": "0.003042",
+        "unit": "dimensionless",
+        "source": "dissertation",
+        "quality": "calculated",
+        "notes": "Reported app output"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "reported_capacity_mtpa",
+        "value": "9.125",
+        "unit": "MtCO2/year",
+        "source": "dissertation",
+        "quality": "calculated",
+        "notes": "Reported max capacity around 9.1 MtCO2/year"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "historical_corrosion_years",
+        "value": "22",
+        "unit": "years",
+        "source": "dissertation",
+        "quality": "assumed",
+        "notes": "Years considered in dissertation corrosion calculation"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "historical_corrosion_rate_mm_per_year",
+        "value": "0.373",
+        "unit": "mm/year",
+        "source": "dissertation",
+        "quality": "calculated",
+        "notes": "Reported historical corrosion rate"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "minimum_wall_thickness_mm",
+        "value": "6.23",
+        "unit": "mm",
+        "source": "dissertation",
+        "quality": "calculated",
+        "notes": "Reported minimum safe wall thickness"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "future_co2_corrosion_rate_mm_per_year",
+        "value": "0.10",
+        "unit": "mm/year",
+        "source": "dissertation",
+        "quality": "assumed",
+        "notes": "Representative dense-phase CO2 corrosion rate used for future lifetime"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "reported_remaining_life_years",
+        "value": "78.0",
+        "unit": "years",
+        "source": "dissertation",
+        "quality": "calculated",
+        "notes": "Reported future CO2 transport lifetime"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "cost_material_usd_2025",
+        "value": "54181373",
+        "unit": "USD",
+        "source": "dissertation_or_poster",
+        "quality": "calculated",
+        "notes": "Parker model cost component"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "cost_labor_usd_2025",
+        "value": "109835004",
+        "unit": "USD",
+        "source": "dissertation_or_poster",
+        "quality": "calculated",
+        "notes": "Parker model cost component"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "cost_row_damages_usd_2025",
+        "value": "6688098",
+        "unit": "USD",
+        "source": "dissertation_or_poster",
+        "quality": "calculated",
+        "notes": "Parker model cost component"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "cost_misc_usd_2025",
+        "value": "34355862",
+        "unit": "USD",
+        "source": "dissertation_or_poster",
+        "quality": "calculated",
+        "notes": "Parker model cost component"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "cost_surge_tank_usd_2025",
+        "value": "2447622",
+        "unit": "USD",
+        "source": "dissertation_or_poster",
+        "quality": "calculated",
+        "notes": "Additional CO2 pipeline component"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "cost_control_system_usd_2025",
+        "value": "220051",
+        "unit": "USD",
+        "source": "dissertation_or_poster",
+        "quality": "calculated",
+        "notes": "Additional CO2 pipeline component"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "cost_booster_station_usd_2025",
+        "value": "0",
+        "unit": "USD",
+        "source": "dissertation_or_poster",
+        "quality": "calculated",
+        "notes": "No booster station in Goldeneye case"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "contingency_fraction",
+        "value": "0.10",
+        "unit": "fraction",
+        "source": "dissertation_or_poster",
+        "quality": "assumed",
+        "notes": "Project contingency factor"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "reported_total_capex_usd_2025",
+        "value": "228500812",
+        "unit": "USD",
+        "source": "dissertation_or_poster",
+        "quality": "calculated",
+        "notes": "Reported avoided new-build CAPEX"
+      }
+    ],
+    "module_results": [
+      {
+        "module": "capacity",
+        "model_version": "capacity_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "pipeline_length_km",
+            "value": 101.68,
+            "unit": "km",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Goldeneye pipeline length"
+          },
+          {
+            "name": "inner_diameter_in",
+            "value": 18.25,
+            "unit": "in",
+            "source": "dissertation",
+            "quality": "assumed_or_standard",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Standard inner diameter shown in dissertation app screenshot"
+          },
+          {
+            "name": "inlet_pressure_psia",
+            "value": 1740.0,
+            "unit": "psia",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Pale Blue Dot / Acorn condition used in case study"
+          },
+          {
+            "name": "outlet_pressure_psia",
+            "value": 1100.0,
+            "unit": "psia",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Pale Blue Dot / Acorn condition used in case study"
+          },
+          {
+            "name": "transport_temperature_c",
+            "value": 12.0,
+            "unit": "degC",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Pale Blue Dot / Acorn condition used in case study"
+          },
+          {
+            "name": "molecular_weight_co2_g_per_mol",
+            "value": 44.01,
+            "unit": "g/mol",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Input shown in app screenshot"
+          },
+          {
+            "name": "compressibility_factor_z",
+            "value": 0.204449,
+            "unit": "dimensionless",
+            "source": "dissertation",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Reported app output"
+          },
+          {
+            "name": "viscosity_micro_pa_s",
+            "value": 92.6516,
+            "unit": "microPa.s",
+            "source": "dissertation",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Reported app output"
+          },
+          {
+            "name": "fanning_friction_factor",
+            "value": 0.003042,
+            "unit": "dimensionless",
+            "source": "dissertation",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Reported app output"
+          },
+          {
+            "name": "required_project_flow_mtpa",
+            "value": 5.0,
+            "unit": "MtCO2/year",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Maximum Acorn requirement used in case study"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "inner_diameter_m",
+            "value": 0.46354999999999996,
+            "unit": "m",
+            "quality": "calculated",
+            "used_by": [
+              "capacity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "average_pressure_mpa",
+            "value": 9.956288489354991,
+            "unit": "MPa",
+            "quality": "calculated",
+            "used_by": [
+              "capacity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_kg_per_s",
+            "value": 289.3353676362459,
+            "unit": "kg/s",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_mtpa",
+            "value": 9.130729797717594,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_capacity_mtpa",
+            "value": 9.125,
+            "unit": "MtCO2/year",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_delta_mtpa",
+            "value": 0.005729797717593854,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "required_design_mtpa",
+            "value": 5.882352941176471,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_suitable",
+            "value": "yes",
+            "unit": "yes/no",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reynolds_number",
+            "value": 8577527.787218632,
+            "unit": "dimensionless",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "capacity_factor",
+            "value": 0.85,
+            "unit": "fraction",
+            "source": "dissertation",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Used to convert project flow requirement to design flow"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "CO2 properties are currently supplied by the benchmark assumptions; CoolProp/REFPROP validation is still required.",
+            "affected_modules": [
+              "capacity"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "average_pressure",
+            "formula": "(2/3) * (P_in + P_out - P_in * P_out / (P_in + P_out))",
+            "inputs": [
+              "inlet_pressure_psia",
+              "outlet_pressure_psia"
+            ],
+            "result_name": "average_pressure_mpa",
+            "notes": ""
+          },
+          {
+            "name": "capacity",
+            "formula": "sqrt((pi^2 * D^5 * MW * (P_in^2 - P_out^2)) / (64 * f * Z * R * T * L))",
+            "inputs": [
+              "inner_diameter_in",
+              "pipeline_length_km",
+              "inlet_pressure_psia",
+              "outlet_pressure_psia",
+              "transport_temperature_c",
+              "compressibility_factor_z",
+              "fanning_friction_factor",
+              "molecular_weight_co2_g_per_mol"
+            ],
+            "result_name": "capacity_mtpa",
+            "notes": "This reproduces the dissertation/poster equation form."
+          },
+          {
+            "name": "required_design_flow",
+            "formula": "required_project_flow_mtpa / capacity_factor",
+            "inputs": [
+              "required_project_flow_mtpa",
+              "capacity_factor"
+            ],
+            "result_name": "required_design_mtpa",
+            "notes": ""
+          },
+          {
+            "name": "reynolds_number",
+            "formula": "4 * mass_flow / (pi * viscosity * inner_diameter)",
+            "inputs": [
+              "capacity_kg_per_s",
+              "viscosity_micro_pa_s",
+              "inner_diameter_m"
+            ],
+            "result_name": "reynolds_number",
+            "notes": ""
+          }
+        ]
+      },
+      {
+        "module": "integrity",
+        "model_version": "integrity_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "nominal_wall_thickness_mm",
+            "value": 22.23,
+            "unit": "mm",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Pipeline information shown in dissertation"
+          },
+          {
+            "name": "minimum_wall_thickness_mm",
+            "value": 6.23,
+            "unit": "mm",
+            "source": "dissertation",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Reported minimum safe wall thickness"
+          },
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "source": "dissertation",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Representative dense-phase CO2 corrosion rate used for future lifetime"
+          },
+          {
+            "name": "reported_remaining_life_years",
+            "value": 78.0,
+            "unit": "years",
+            "source": "dissertation",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Reported future CO2 transport lifetime"
+          },
+          {
+            "name": "historical_corrosion_rate_mm_per_year",
+            "value": 0.373,
+            "unit": "mm/year",
+            "source": "dissertation",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Reported historical corrosion rate"
+          },
+          {
+            "name": "historical_corrosion_years",
+            "value": 22.0,
+            "unit": "years",
+            "source": "dissertation",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Years considered in dissertation corrosion calculation"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "historical_wall_loss_mm",
+            "value": 8.206,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": "Calculated from historical corrosion rate and historical years."
+          },
+          {
+            "name": "current_wall_thickness_mm",
+            "value": 14.024000000000001,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "minimum_wall_thickness_mm",
+            "value": 6.23,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_thickness_mm",
+            "value": 7.7940000000000005,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_years",
+            "value": 77.94,
+            "unit": "years",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_remaining_life_years",
+            "value": 78.0,
+            "unit": "years",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_delta_years",
+            "value": -0.060000000000002274,
+            "unit": "years",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "source": "dissertation",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Representative dense-phase CO2 corrosion rate used for future lifetime"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Integrity result is a screening estimate only; inspection records, material grade checks, defects, and requalification are still needed.",
+            "affected_modules": [
+              "integrity",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "historical_wall_loss",
+            "formula": "reported_historical_wall_loss_mm, if available; otherwise historical_corrosion_rate_mm_per_year * historical_corrosion_years",
+            "inputs": [
+              "reported_historical_wall_loss_mm",
+              "historical_corrosion_rate_mm_per_year",
+              "historical_corrosion_years"
+            ],
+            "result_name": "historical_wall_loss_mm",
+            "notes": ""
+          },
+          {
+            "name": "current_wall_thickness",
+            "formula": "nominal_wall_thickness_mm - historical_wall_loss_mm",
+            "inputs": [
+              "nominal_wall_thickness_mm",
+              "historical_wall_loss_mm"
+            ],
+            "result_name": "current_wall_thickness_mm",
+            "notes": ""
+          },
+          {
+            "name": "available_wall_thickness",
+            "formula": "current_wall_thickness_mm - minimum_wall_thickness_mm",
+            "inputs": [
+              "current_wall_thickness_mm",
+              "minimum_wall_thickness_mm"
+            ],
+            "result_name": "available_wall_thickness_mm",
+            "notes": ""
+          },
+          {
+            "name": "remaining_life",
+            "formula": "available_wall_thickness_mm / future_co2_corrosion_rate_mm_per_year",
+            "inputs": [
+              "available_wall_thickness_mm",
+              "future_co2_corrosion_rate_mm_per_year"
+            ],
+            "result_name": "remaining_life_years",
+            "notes": ""
+          }
+        ]
+      },
+      {
+        "module": "cost",
+        "model_version": "cost_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "cost_material_usd_2025",
+            "value": 54181373.0,
+            "unit": "USD",
+            "source": "dissertation_or_poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Parker model cost component"
+          },
+          {
+            "name": "cost_labor_usd_2025",
+            "value": 109835004.0,
+            "unit": "USD",
+            "source": "dissertation_or_poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Parker model cost component"
+          },
+          {
+            "name": "cost_row_damages_usd_2025",
+            "value": 6688098.0,
+            "unit": "USD",
+            "source": "dissertation_or_poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Parker model cost component"
+          },
+          {
+            "name": "cost_misc_usd_2025",
+            "value": 34355862.0,
+            "unit": "USD",
+            "source": "dissertation_or_poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Parker model cost component"
+          },
+          {
+            "name": "cost_surge_tank_usd_2025",
+            "value": 2447622.0,
+            "unit": "USD",
+            "source": "dissertation_or_poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Additional CO2 pipeline component"
+          },
+          {
+            "name": "cost_control_system_usd_2025",
+            "value": 220051.0,
+            "unit": "USD",
+            "source": "dissertation_or_poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Additional CO2 pipeline component"
+          },
+          {
+            "name": "cost_booster_station_usd_2025",
+            "value": 0.0,
+            "unit": "USD",
+            "source": "dissertation_or_poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "No booster station in Goldeneye case"
+          },
+          {
+            "name": "contingency_fraction",
+            "value": 0.1,
+            "unit": "fraction",
+            "source": "dissertation_or_poster",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Project contingency factor"
+          },
+          {
+            "name": "reported_total_capex_usd_2025",
+            "value": 228500812.0,
+            "unit": "USD",
+            "source": "dissertation_or_poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Reported avoided new-build CAPEX"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "cost_subtotal_usd_2025",
+            "value": 207728010.0,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_contingency_usd_2025",
+            "value": 20772801.0,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_total_usd_2025",
+            "value": 228500811.0,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_total_capex_usd_2025",
+            "value": 228500812.0,
+            "unit": "USD 2025",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_delta_usd_2025",
+            "value": -1.0,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "contingency_fraction",
+            "value": 0.1,
+            "unit": "fraction",
+            "source": "dissertation_or_poster",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Project contingency factor"
+          }
+        ],
+        "warnings": [],
+        "trace": [
+          {
+            "name": "cost_subtotal",
+            "formula": "sum(material, labor, ROW damages, misc, surge tank, control system, booster station)",
+            "inputs": [
+              "cost_material_usd_2025",
+              "cost_labor_usd_2025",
+              "cost_row_damages_usd_2025",
+              "cost_misc_usd_2025",
+              "cost_surge_tank_usd_2025",
+              "cost_control_system_usd_2025",
+              "cost_booster_station_usd_2025"
+            ],
+            "result_name": "cost_subtotal_usd_2025",
+            "notes": ""
+          },
+          {
+            "name": "contingency",
+            "formula": "contingency_fraction * cost_subtotal_usd_2025",
+            "inputs": [
+              "contingency_fraction",
+              "cost_subtotal_usd_2025"
+            ],
+            "result_name": "cost_contingency_usd_2025",
+            "notes": ""
+          },
+          {
+            "name": "total_cost",
+            "formula": "cost_subtotal_usd_2025 + cost_contingency_usd_2025",
+            "inputs": [
+              "cost_subtotal_usd_2025",
+              "cost_contingency_usd_2025"
+            ],
+            "result_name": "cost_total_usd_2025",
+            "notes": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "goldeneye_poster",
+    "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+    "model_version": "goldeneye_benchmark_v0.2",
+    "source_parameters": [
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "pipeline_name",
+        "value": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "unit": "text",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Case-study pipeline name"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "pipeline_length_km",
+        "value": "101.68",
+        "unit": "km",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Goldeneye pipeline length"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "outer_diameter_in",
+        "value": "20.0",
+        "unit": "in",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Nominal outside diameter"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "inner_diameter_in",
+        "value": "18.876",
+        "unit": "in",
+        "source": "poster",
+        "quality": "assumed_or_standard",
+        "notes": "Standard inner diameter shown in poster capacity output"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "nominal_wall_thickness_mm",
+        "value": "14.28",
+        "unit": "mm",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Pipeline information shown in poster"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "pipe_grade",
+        "value": "X60",
+        "unit": "text",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Pipeline information shown in poster"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "start_operation_year",
+        "value": "2003",
+        "unit": "year",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Pipeline information shown in poster"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "end_operation_year",
+        "value": "2011",
+        "unit": "year",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Pipeline information shown in poster"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "inlet_pressure_psia",
+        "value": "1740",
+        "unit": "psia",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Goldeneye capacity assessment input"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "outlet_pressure_psia",
+        "value": "1100",
+        "unit": "psia",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Goldeneye capacity assessment input"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "transport_temperature_c",
+        "value": "12",
+        "unit": "degC",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Goldeneye capacity assessment input"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "capacity_factor",
+        "value": "0.85",
+        "unit": "fraction",
+        "source": "poster",
+        "quality": "assumed",
+        "notes": "Used to convert project flow requirement to design flow"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "required_project_flow_mtpa",
+        "value": "5.0",
+        "unit": "MtCO2/year",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Initial Acorn requirement used in poster"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "molecular_weight_co2_g_per_mol",
+        "value": "44.01",
+        "unit": "g/mol",
+        "source": "poster",
+        "quality": "reported",
+        "notes": "Input shown in app screenshot"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "compressibility_factor_z",
+        "value": "0.204449",
+        "unit": "dimensionless",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Reported app output"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "density_kg_per_m3",
+        "value": "904.0128",
+        "unit": "kg/m3",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Reported app output"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "viscosity_micro_pa_s",
+        "value": "92.6516",
+        "unit": "microPa.s",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Reported app output"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "fanning_friction_factor",
+        "value": "0.003021",
+        "unit": "dimensionless",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Reported app output"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "reported_capacity_mtpa",
+        "value": "9.961",
+        "unit": "MtCO2/year",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Poster reports approximately 10 MtCO2/year"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "historical_corrosion_years",
+        "value": "8",
+        "unit": "years",
+        "source": "poster",
+        "quality": "assumed",
+        "notes": "Poster states years considered for corrosion: 8 years (2003-2011)"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "historical_corrosion_rate_mm_per_year",
+        "value": "0.36625",
+        "unit": "mm/year",
+        "source": "derived_from_poster",
+        "quality": "derived",
+        "notes": "2.93 mm wall loss divided by 8 years"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "reported_historical_wall_loss_mm",
+        "value": "2.93",
+        "unit": "mm",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Poster key finding"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "minimum_wall_thickness_mm",
+        "value": "6.44",
+        "unit": "mm",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Poster key finding"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "future_co2_corrosion_rate_mm_per_year",
+        "value": "0.20",
+        "unit": "mm/year",
+        "source": "poster",
+        "quality": "assumed",
+        "notes": "Input shown in poster app screenshot"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "reported_remaining_life_years",
+        "value": "24.54",
+        "unit": "years",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Poster key finding"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "cost_material_usd_2025",
+        "value": "54181373",
+        "unit": "USD",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Parker model cost component"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "cost_labor_usd_2025",
+        "value": "109835004",
+        "unit": "USD",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Parker model cost component"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "cost_row_damages_usd_2025",
+        "value": "6688098",
+        "unit": "USD",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Parker model cost component"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "cost_misc_usd_2025",
+        "value": "34355862",
+        "unit": "USD",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Parker model cost component"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "cost_surge_tank_usd_2025",
+        "value": "2447622",
+        "unit": "USD",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Additional CO2 pipeline component"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "cost_control_system_usd_2025",
+        "value": "220051",
+        "unit": "USD",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Additional CO2 pipeline component"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "cost_booster_station_usd_2025",
+        "value": "0",
+        "unit": "USD",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "No booster station in Goldeneye case"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "contingency_fraction",
+        "value": "0.10",
+        "unit": "fraction",
+        "source": "poster",
+        "quality": "assumed",
+        "notes": "Project contingency factor"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "reported_total_capex_usd_2025",
+        "value": "228500812",
+        "unit": "USD",
+        "source": "poster",
+        "quality": "calculated",
+        "notes": "Reported avoided new-build CAPEX"
+      }
+    ],
+    "module_results": [
+      {
+        "module": "capacity",
+        "model_version": "capacity_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "pipeline_length_km",
+            "value": 101.68,
+            "unit": "km",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Goldeneye pipeline length"
+          },
+          {
+            "name": "inner_diameter_in",
+            "value": 18.876,
+            "unit": "in",
+            "source": "poster",
+            "quality": "assumed_or_standard",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Standard inner diameter shown in poster capacity output"
+          },
+          {
+            "name": "inlet_pressure_psia",
+            "value": 1740.0,
+            "unit": "psia",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Goldeneye capacity assessment input"
+          },
+          {
+            "name": "outlet_pressure_psia",
+            "value": 1100.0,
+            "unit": "psia",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Goldeneye capacity assessment input"
+          },
+          {
+            "name": "transport_temperature_c",
+            "value": 12.0,
+            "unit": "degC",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Goldeneye capacity assessment input"
+          },
+          {
+            "name": "molecular_weight_co2_g_per_mol",
+            "value": 44.01,
+            "unit": "g/mol",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Input shown in app screenshot"
+          },
+          {
+            "name": "compressibility_factor_z",
+            "value": 0.204449,
+            "unit": "dimensionless",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Reported app output"
+          },
+          {
+            "name": "viscosity_micro_pa_s",
+            "value": 92.6516,
+            "unit": "microPa.s",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Reported app output"
+          },
+          {
+            "name": "fanning_friction_factor",
+            "value": 0.003021,
+            "unit": "dimensionless",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Reported app output"
+          },
+          {
+            "name": "required_project_flow_mtpa",
+            "value": 5.0,
+            "unit": "MtCO2/year",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Initial Acorn requirement used in poster"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "inner_diameter_m",
+            "value": 0.4794504,
+            "unit": "m",
+            "quality": "calculated",
+            "used_by": [
+              "capacity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "average_pressure_mpa",
+            "value": 9.956288489354991,
+            "unit": "MPa",
+            "quality": "calculated",
+            "used_by": [
+              "capacity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_kg_per_s",
+            "value": 315.88100849411586,
+            "unit": "kg/s",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_mtpa",
+            "value": 9.968446513653912,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_capacity_mtpa",
+            "value": 9.961,
+            "unit": "MtCO2/year",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_delta_mtpa",
+            "value": 0.007446513653912135,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "required_design_mtpa",
+            "value": 5.882352941176471,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_suitable",
+            "value": "yes",
+            "unit": "yes/no",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reynolds_number",
+            "value": 9053927.77425474,
+            "unit": "dimensionless",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "capacity_factor",
+            "value": 0.85,
+            "unit": "fraction",
+            "source": "poster",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Used to convert project flow requirement to design flow"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "CO2 properties are currently supplied by the benchmark assumptions; CoolProp/REFPROP validation is still required.",
+            "affected_modules": [
+              "capacity"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "average_pressure",
+            "formula": "(2/3) * (P_in + P_out - P_in * P_out / (P_in + P_out))",
+            "inputs": [
+              "inlet_pressure_psia",
+              "outlet_pressure_psia"
+            ],
+            "result_name": "average_pressure_mpa",
+            "notes": ""
+          },
+          {
+            "name": "capacity",
+            "formula": "sqrt((pi^2 * D^5 * MW * (P_in^2 - P_out^2)) / (64 * f * Z * R * T * L))",
+            "inputs": [
+              "inner_diameter_in",
+              "pipeline_length_km",
+              "inlet_pressure_psia",
+              "outlet_pressure_psia",
+              "transport_temperature_c",
+              "compressibility_factor_z",
+              "fanning_friction_factor",
+              "molecular_weight_co2_g_per_mol"
+            ],
+            "result_name": "capacity_mtpa",
+            "notes": "This reproduces the dissertation/poster equation form."
+          },
+          {
+            "name": "required_design_flow",
+            "formula": "required_project_flow_mtpa / capacity_factor",
+            "inputs": [
+              "required_project_flow_mtpa",
+              "capacity_factor"
+            ],
+            "result_name": "required_design_mtpa",
+            "notes": ""
+          },
+          {
+            "name": "reynolds_number",
+            "formula": "4 * mass_flow / (pi * viscosity * inner_diameter)",
+            "inputs": [
+              "capacity_kg_per_s",
+              "viscosity_micro_pa_s",
+              "inner_diameter_m"
+            ],
+            "result_name": "reynolds_number",
+            "notes": ""
+          }
+        ]
+      },
+      {
+        "module": "integrity",
+        "model_version": "integrity_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "nominal_wall_thickness_mm",
+            "value": 14.28,
+            "unit": "mm",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Pipeline information shown in poster"
+          },
+          {
+            "name": "minimum_wall_thickness_mm",
+            "value": 6.44,
+            "unit": "mm",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Poster key finding"
+          },
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "poster",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Input shown in poster app screenshot"
+          },
+          {
+            "name": "reported_remaining_life_years",
+            "value": 24.54,
+            "unit": "years",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Poster key finding"
+          },
+          {
+            "name": "reported_historical_wall_loss_mm",
+            "value": 2.93,
+            "unit": "mm",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Poster key finding"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "historical_wall_loss_mm",
+            "value": 2.93,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": "Used reported historical wall loss."
+          },
+          {
+            "name": "current_wall_thickness_mm",
+            "value": 11.35,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "minimum_wall_thickness_mm",
+            "value": 6.44,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_thickness_mm",
+            "value": 4.909999999999999,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_years",
+            "value": 24.549999999999994,
+            "unit": "years",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_remaining_life_years",
+            "value": 24.54,
+            "unit": "years",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_delta_years",
+            "value": 0.009999999999994458,
+            "unit": "years",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "poster",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Input shown in poster app screenshot"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Integrity result is a screening estimate only; inspection records, material grade checks, defects, and requalification are still needed.",
+            "affected_modules": [
+              "integrity",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "historical_wall_loss",
+            "formula": "reported_historical_wall_loss_mm, if available; otherwise historical_corrosion_rate_mm_per_year * historical_corrosion_years",
+            "inputs": [
+              "reported_historical_wall_loss_mm",
+              "historical_corrosion_rate_mm_per_year",
+              "historical_corrosion_years"
+            ],
+            "result_name": "historical_wall_loss_mm",
+            "notes": ""
+          },
+          {
+            "name": "current_wall_thickness",
+            "formula": "nominal_wall_thickness_mm - historical_wall_loss_mm",
+            "inputs": [
+              "nominal_wall_thickness_mm",
+              "historical_wall_loss_mm"
+            ],
+            "result_name": "current_wall_thickness_mm",
+            "notes": ""
+          },
+          {
+            "name": "available_wall_thickness",
+            "formula": "current_wall_thickness_mm - minimum_wall_thickness_mm",
+            "inputs": [
+              "current_wall_thickness_mm",
+              "minimum_wall_thickness_mm"
+            ],
+            "result_name": "available_wall_thickness_mm",
+            "notes": ""
+          },
+          {
+            "name": "remaining_life",
+            "formula": "available_wall_thickness_mm / future_co2_corrosion_rate_mm_per_year",
+            "inputs": [
+              "available_wall_thickness_mm",
+              "future_co2_corrosion_rate_mm_per_year"
+            ],
+            "result_name": "remaining_life_years",
+            "notes": ""
+          }
+        ]
+      },
+      {
+        "module": "cost",
+        "model_version": "cost_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "cost_material_usd_2025",
+            "value": 54181373.0,
+            "unit": "USD",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Parker model cost component"
+          },
+          {
+            "name": "cost_labor_usd_2025",
+            "value": 109835004.0,
+            "unit": "USD",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Parker model cost component"
+          },
+          {
+            "name": "cost_row_damages_usd_2025",
+            "value": 6688098.0,
+            "unit": "USD",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Parker model cost component"
+          },
+          {
+            "name": "cost_misc_usd_2025",
+            "value": 34355862.0,
+            "unit": "USD",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Parker model cost component"
+          },
+          {
+            "name": "cost_surge_tank_usd_2025",
+            "value": 2447622.0,
+            "unit": "USD",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Additional CO2 pipeline component"
+          },
+          {
+            "name": "cost_control_system_usd_2025",
+            "value": 220051.0,
+            "unit": "USD",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Additional CO2 pipeline component"
+          },
+          {
+            "name": "cost_booster_station_usd_2025",
+            "value": 0.0,
+            "unit": "USD",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "No booster station in Goldeneye case"
+          },
+          {
+            "name": "contingency_fraction",
+            "value": 0.1,
+            "unit": "fraction",
+            "source": "poster",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Project contingency factor"
+          },
+          {
+            "name": "reported_total_capex_usd_2025",
+            "value": 228500812.0,
+            "unit": "USD",
+            "source": "poster",
+            "quality": "calculated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Reported avoided new-build CAPEX"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "cost_subtotal_usd_2025",
+            "value": 207728010.0,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_contingency_usd_2025",
+            "value": 20772801.0,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_total_usd_2025",
+            "value": 228500811.0,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_total_capex_usd_2025",
+            "value": 228500812.0,
+            "unit": "USD 2025",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_delta_usd_2025",
+            "value": -1.0,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "contingency_fraction",
+            "value": 0.1,
+            "unit": "fraction",
+            "source": "poster",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Project contingency factor"
+          }
+        ],
+        "warnings": [],
+        "trace": [
+          {
+            "name": "cost_subtotal",
+            "formula": "sum(material, labor, ROW damages, misc, surge tank, control system, booster station)",
+            "inputs": [
+              "cost_material_usd_2025",
+              "cost_labor_usd_2025",
+              "cost_row_damages_usd_2025",
+              "cost_misc_usd_2025",
+              "cost_surge_tank_usd_2025",
+              "cost_control_system_usd_2025",
+              "cost_booster_station_usd_2025"
+            ],
+            "result_name": "cost_subtotal_usd_2025",
+            "notes": ""
+          },
+          {
+            "name": "contingency",
+            "formula": "contingency_fraction * cost_subtotal_usd_2025",
+            "inputs": [
+              "contingency_fraction",
+              "cost_subtotal_usd_2025"
+            ],
+            "result_name": "cost_contingency_usd_2025",
+            "notes": ""
+          },
+          {
+            "name": "total_cost",
+            "formula": "cost_subtotal_usd_2025 + cost_contingency_usd_2025",
+            "inputs": [
+              "cost_subtotal_usd_2025",
+              "cost_contingency_usd_2025"
+            ],
+            "result_name": "cost_total_usd_2025",
+            "notes": ""
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,12 +1,17 @@
 # Goldeneye Benchmark
 
-Generated: 2026-06-09T14:24:44+00:00
+Generated: 2026-06-09T16:16:31+00:00
 
 Assumptions: `data/benchmarks/goldeneye_assumptions.csv`
 
-Script: `scripts/run_goldeneye_benchmark.py`
+Runner script: `scripts/run_goldeneye_benchmark.py`
 
-Outputs: `data/benchmarks/goldeneye_benchmark_outputs.csv`
+Core modules: `repurposing_pipelines/`
+
+Outputs:
+
+- `data/benchmarks/goldeneye_benchmark_outputs.csv`
+- `data/benchmarks/goldeneye_benchmark_trace.json`
 
 ## Purpose
 
@@ -18,6 +23,15 @@ It compares two available versions:
 - `goldeneye_poster`
 
 The benchmark currently reproduces the headline capacity, remaining-life, and cost results using the values reported in the dissertation/poster. It is still a screening model, not an engineering approval model.
+
+## How To Read This Report
+
+- Capacity means how much CO2 the pipeline could carry each year.
+- Integrity/lifetime means whether enough wall thickness remains for screening.
+- Cost means the estimated avoided cost of building a new equivalent pipeline.
+- Reported values are the values from the dissertation or poster.
+- Calculated values are produced by our Python code.
+- Small differences are expected because of rounding.
 
 ## Capacity Benchmark
 
@@ -48,6 +62,16 @@ The benchmark currently reproduces the headline capacity, remaining-life, and co
 - The capacity difference is mainly caused by the internal diameter/friction assumptions: `18.25 in` in the dissertation case versus about `18.876 in` in the poster case.
 - Cost is consistent between the two versions because both use the same Parker-style new-build cost breakdown.
 
+## Traceability
+
+Each scenario now has traceable module results for:
+
+- capacity;
+- integrity;
+- cost.
+
+The JSON trace records the inputs, outputs, assumptions, warnings, and formula notes used by each module. This is the first building block for the future web app evidence panel.
+
 ## NETL Benchmark Plan
 
 We should use NETL tools as external checks:
@@ -59,11 +83,9 @@ The project should not depend on Excel workbooks as the core engine. The profess
 
 ## Next Technical Step
 
-Turn this benchmark into tested Python modules:
+Add a simple pre-LCA gate that consumes the capacity, integrity, and cost module results and returns:
 
-- `properties`
-- `hydraulics`
-- `integrity`
-- `cost`
-
-Then add one validation test that checks the Goldeneye dissertation and poster cases stay reproducible.
+- `pass`;
+- `marginal`;
+- `fail`;
+- `insufficient_data`.

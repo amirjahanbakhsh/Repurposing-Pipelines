@@ -15,6 +15,7 @@ Current work includes:
 - direct extraction of public NSTA offshore pipeline data;
 - completeness checks for key engineering fields;
 - first-pass ranking of model-ready hydrocarbon pipeline candidates.
+- Goldeneye benchmark cases for the dissertation and poster assumptions.
 
 ## Repository Structure
 
@@ -31,6 +32,7 @@ scripts/       Reproducible extraction and analysis scripts
 
 - `reports/nsta_pipeline_completeness.md`: completeness check for NSTA fields such as wall thickness, internal diameter, max operating pressure, fluid, status, and start date.
 - `reports/nsta_candidate_ranking.md`: first-pass ranking of model-ready hydrocarbon pipeline candidates and checks for known CCS/reuse names such as Goldeneye, Atlantic, Cromarty, SAGE, and others.
+- `reports/goldeneye_benchmark.md`: benchmark reproduction of the Goldeneye dissertation and poster cases.
 - `docs/model_validation_review.md`: initial model validation review for CO2 properties, hydraulics, corrosion, cost, and LCA.
 - `docs/similar_tools_and_data_sources.md`: notes on similar tools such as NETL REPACT, NETL CO2 Transport Cost Model, SimCCS, and Sequestrix.
 
@@ -46,6 +48,12 @@ Rank model-ready hydrocarbon candidates:
 
 ```powershell
 python scripts\rank_nsta_candidates.py
+```
+
+Run the Goldeneye benchmark:
+
+```powershell
+python scripts\run_goldeneye_benchmark.py
 ```
 
 Optionally download full map geometry:

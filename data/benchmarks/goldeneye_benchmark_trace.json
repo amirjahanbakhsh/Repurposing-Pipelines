@@ -2,7 +2,7 @@
   {
     "scenario": "goldeneye_dissertation",
     "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
-    "model_version": "goldeneye_benchmark_v0.2",
+    "model_version": "goldeneye_benchmark_v0.3",
     "source_parameters": [
       {
         "scenario": "goldeneye_dissertation",
@@ -1038,13 +1038,102 @@
             "notes": ""
           }
         ]
+      },
+      {
+        "module": "pre_lca_gate",
+        "model_version": "pre_lca_gate_v0.1",
+        "status": "marginal",
+        "inputs": [],
+        "outputs": [
+          {
+            "name": "pre_lca_decision",
+            "value": "marginal",
+            "unit": "decision",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_confidence",
+            "value": "medium",
+            "unit": "quality",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_reason_summary",
+            "value": "Move to LCA only as a sensitivity case until assumptions are checked.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_reasons",
+            "value": "Capacity passes: 9.13 MtCO2/year versus 5.88 MtCO2/year required.; Integrity passes at screening level: 77.94 years remaining life and 7.79 mm available wall.; Cost screen is positive: benchmark avoided new-build CAPEX is $228,500,811.; Some important values are assumed or sensitivity inputs: capacity_factor; contingency_fraction; future_co2_corrosion_rate_mm_per_year; historical_corrosion_years; inner_diameter_in.; Upstream modules still contain validation warnings.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_next_data",
+            "value": "verify wall thickness and inspection records; validate CO2 density, viscosity, compressibility, and phase behaviour; compare cost with NETL CO2_T_COM or another external benchmark; define reuse modification cost before detailed LCA",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Pipeline is technically promising, but should not move to detailed LCA without checking key assumptions.",
+            "affected_modules": [
+              "pre_lca_gate",
+              "lca"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "pre_lca_gate",
+            "formula": "fail if any upstream module fails; insufficient_data if key outputs are missing; marginal if outputs pass but key assumptions or validation warnings remain; otherwise pass",
+            "inputs": [
+              "capacity_mtpa",
+              "required_design_mtpa",
+              "remaining_life_years",
+              "available_wall_thickness_mm",
+              "cost_total_usd_2025"
+            ],
+            "result_name": "pre_lca_decision",
+            "notes": "This is a screening gate, not an engineering approval decision."
+          }
+        ]
       }
     ]
   },
   {
     "scenario": "goldeneye_poster",
     "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
-    "model_version": "goldeneye_benchmark_v0.2",
+    "model_version": "goldeneye_benchmark_v0.3",
     "source_parameters": [
       {
         "scenario": "goldeneye_poster",
@@ -2075,6 +2164,95 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
+          }
+        ]
+      },
+      {
+        "module": "pre_lca_gate",
+        "model_version": "pre_lca_gate_v0.1",
+        "status": "marginal",
+        "inputs": [],
+        "outputs": [
+          {
+            "name": "pre_lca_decision",
+            "value": "marginal",
+            "unit": "decision",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_confidence",
+            "value": "medium",
+            "unit": "quality",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_reason_summary",
+            "value": "Move to LCA only as a sensitivity case until assumptions are checked.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_reasons",
+            "value": "Capacity passes: 9.97 MtCO2/year versus 5.88 MtCO2/year required.; Integrity passes at screening level: 24.55 years remaining life and 4.91 mm available wall.; Cost screen is positive: benchmark avoided new-build CAPEX is $228,500,811.; Some important values are assumed or sensitivity inputs: capacity_factor; contingency_fraction; future_co2_corrosion_rate_mm_per_year; inner_diameter_in.; Upstream modules still contain validation warnings.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_next_data",
+            "value": "verify wall thickness and inspection records; validate CO2 density, viscosity, compressibility, and phase behaviour; compare cost with NETL CO2_T_COM or another external benchmark; define reuse modification cost before detailed LCA",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Pipeline is technically promising, but should not move to detailed LCA without checking key assumptions.",
+            "affected_modules": [
+              "pre_lca_gate",
+              "lca"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "pre_lca_gate",
+            "formula": "fail if any upstream module fails; insufficient_data if key outputs are missing; marginal if outputs pass but key assumptions or validation warnings remain; otherwise pass",
+            "inputs": [
+              "capacity_mtpa",
+              "required_design_mtpa",
+              "remaining_life_years",
+              "available_wall_thickness_mm",
+              "cost_total_usd_2025"
+            ],
+            "result_name": "pre_lca_decision",
+            "notes": "This is a screening gate, not an engineering approval decision."
           }
         ]
       }

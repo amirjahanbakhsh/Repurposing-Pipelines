@@ -30,10 +30,13 @@ class GoldeneyeBenchmarkTest(unittest.TestCase):
         self.assertAlmostEqual(row["remaining_life_years"], 77.94, places=2)
         self.assertEqual(row["cost_total_usd_2025"], 228_500_811)
         self.assertEqual(row["capacity_suitable"], "yes")
+        self.assertEqual(row["pre_lca_decision"], "marginal")
+        self.assertEqual(row["pre_lca_confidence"], "medium")
         self.assertEqual([result["module"] for result in trace["module_results"]], [
             "capacity",
             "integrity",
             "cost",
+            "pre_lca_gate",
         ])
 
     def test_poster_case_reproduces_headline_outputs(self) -> None:
@@ -46,7 +49,9 @@ class GoldeneyeBenchmarkTest(unittest.TestCase):
         self.assertAlmostEqual(row["remaining_life_years"], 24.55, places=2)
         self.assertEqual(row["cost_total_usd_2025"], 228_500_811)
         self.assertEqual(row["capacity_suitable"], "yes")
-        self.assertEqual(trace["model_version"], "goldeneye_benchmark_v0.2")
+        self.assertEqual(row["pre_lca_decision"], "marginal")
+        self.assertIn("assumptions", row["pre_lca_reason_summary"])
+        self.assertEqual(trace["model_version"], "goldeneye_benchmark_v0.3")
 
 
 if __name__ == "__main__":

@@ -533,10 +533,11 @@ Completed first:
 - Standard result objects added for inputs, outputs, assumptions, warnings, and formula trace.
 - Regression tests added for the dissertation and poster Goldeneye cases.
 - JSON trace output added for audit and future app evidence panels.
+- Simple pre-LCA gate added for deciding whether a case is ready for LCA screening.
 
 Next implementation steps:
 
-1. Add a simple pre-LCA gate.
-2. Add a simple LCA screening module using transparent assumptions.
-3. Later connect LCA to ecoinvent/openLCA/Brightway workflow.
-4. Generalise the modules from Goldeneye to the ranked NSTA candidate dataset.
+1. Add a simple LCA screening module using transparent assumptions.
+2. Later connect LCA to ecoinvent/openLCA/Brightway workflow.
+3. Generalise the modules from Goldeneye to the ranked NSTA candidate dataset.
+4. Add external benchmark comparisons with REPACT and NETL CO2_T_COM.

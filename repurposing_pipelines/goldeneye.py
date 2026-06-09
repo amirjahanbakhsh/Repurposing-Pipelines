@@ -10,12 +10,13 @@ from typing import Any
 
 from .assumptions import ScenarioAssumptions, read_scenario_assumptions
 from .costs import evaluate_cost
+from .gates import evaluate_pre_lca_gate
 from .hydraulics import evaluate_capacity
 from .integrity import evaluate_integrity
 from .trace import ModuleResult, module_results_to_dicts
 
 
-MODEL_VERSION = "goldeneye_benchmark_v0.2"
+MODEL_VERSION = "goldeneye_benchmark_v0.3"
 
 FIELDNAMES = [
     "scenario",
@@ -45,6 +46,11 @@ FIELDNAMES = [
     "cost_total_usd_2025",
     "reported_total_capex_usd_2025",
     "cost_delta_usd_2025",
+    "pre_lca_decision",
+    "pre_lca_confidence",
+    "pre_lca_reason_summary",
+    "pre_lca_reasons",
+    "pre_lca_next_data",
 ]
 
 
@@ -62,7 +68,8 @@ def benchmark_scenario_with_trace(
     capacity = evaluate_capacity(scenario)
     integrity = evaluate_integrity(scenario)
     cost = evaluate_cost(scenario)
-    outputs = _outputs(capacity, integrity, cost)
+    pre_lca_gate = evaluate_pre_lca_gate(capacity=capacity, integrity=integrity, cost=cost)
+    outputs = _outputs(capacity, integrity, cost, pre_lca_gate)
 
     row = {
         "scenario": name,
@@ -94,9 +101,14 @@ def benchmark_scenario_with_trace(
         "cost_total_usd_2025": outputs["cost_total_usd_2025"],
         "reported_total_capex_usd_2025": outputs["reported_total_capex_usd_2025"],
         "cost_delta_usd_2025": outputs["cost_delta_usd_2025"],
+        "pre_lca_decision": outputs["pre_lca_decision"],
+        "pre_lca_confidence": outputs["pre_lca_confidence"],
+        "pre_lca_reason_summary": outputs["pre_lca_reason_summary"],
+        "pre_lca_reasons": outputs["pre_lca_reasons"],
+        "pre_lca_next_data": outputs["pre_lca_next_data"],
     }
 
-    module_results = [capacity, integrity, cost]
+    module_results = [capacity, integrity, cost, pre_lca_gate]
     trace = {
         "scenario": name,
         "pipeline_name": scenario.raw("pipeline_name"),
@@ -159,6 +171,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
     summary_rows = []
     integrity_rows = []
     cost_rows = []
+    gate_rows = []
     for row in rows:
         summary_rows.append(
             [
@@ -188,6 +201,14 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
                 usd(row["cost_contingency_usd_2025"]),
                 usd(row["cost_total_usd_2025"]),
                 usd(row["reported_total_capex_usd_2025"]),
+            ]
+        )
+        gate_rows.append(
+            [
+                row["scenario"],
+                row["pre_lca_decision"],
+                row["pre_lca_confidence"],
+                row["pre_lca_reason_summary"],
             ]
         )
 
@@ -222,6 +243,7 @@ The benchmark currently reproduces the headline capacity, remaining-life, and co
 - Capacity means how much CO2 the pipeline could carry each year.
 - Integrity/lifetime means whether enough wall thickness remains for screening.
 - Cost means the estimated avoided cost of building a new equivalent pipeline.
+- Pre-LCA gate means the simple decision on whether the case is ready for LCA.
 - Reported values are the values from the dissertation or poster.
 - Calculated values are produced by our Python code.
 - Small differences are expected because of rounding.
@@ -238,6 +260,17 @@ The benchmark currently reproduces the headline capacity, remaining-life, and co
 
 {markdown_table(["Scenario", "Subtotal", "Contingency", "Calculated total", "Reported total"], cost_rows)}
 
+## Pre-LCA Gate
+
+{markdown_table(["Scenario", "Decision", "Confidence", "Meaning"], gate_rows)}
+
+Plain meaning:
+
+- `pass`: good enough to move into LCA screening.
+- `marginal`: technically promising, but important assumptions still need checking.
+- `fail`: do not move into LCA until the failed screen is fixed.
+- `insufficient_data`: do not move into LCA because key data are missing.
+
 ## Interpretation
 
 - The dissertation and poster use different Goldeneye wall-thickness assumptions.
@@ -245,6 +278,7 @@ The benchmark currently reproduces the headline capacity, remaining-life, and co
 - The poster case uses a lower nominal wall (`14.28 mm`) and higher future CO2 corrosion rate (`0.20 mm/year`), which gives about `24.5 years`.
 - The capacity difference is mainly caused by the internal diameter/friction assumptions: `18.25 in` in the dissertation case versus about `18.876 in` in the poster case.
 - Cost is consistent between the two versions because both use the same Parker-style new-build cost breakdown.
+- Both Goldeneye cases are currently `marginal`, because the calculations pass but key assumptions still need independent validation before detailed LCA.
 
 ## Traceability
 
@@ -252,7 +286,8 @@ Each scenario now has traceable module results for:
 
 - capacity;
 - integrity;
-- cost.
+- cost;
+- pre-LCA gate.
 
 The JSON trace records the inputs, outputs, assumptions, warnings, and formula notes used by each module. This is the first building block for the future web app evidence panel.
 
@@ -267,12 +302,7 @@ The project should not depend on Excel workbooks as the core engine. The profess
 
 ## Next Technical Step
 
-Add a simple pre-LCA gate that consumes the capacity, integrity, and cost module results and returns:
-
-- `pass`;
-- `marginal`;
-- `fail`;
-- `insufficient_data`.
+Add the first simple LCA screening module for reuse versus new-build pipeline emissions.
 """
     path.write_text(report, encoding="utf-8")
 

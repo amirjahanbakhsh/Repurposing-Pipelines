@@ -3,6 +3,7 @@
 __all__ = [
     "assumptions",
     "costs",
+    "gates",
     "goldeneye",
     "hydraulics",
     "integrity",

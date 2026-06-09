@@ -1,0 +1,4 @@
+# Large generated geospatial extract.
+# Regenerate with:
+#   python scripts/extract_nsta_pipeline_data.py --include-geometry
+data/raw/nsta_pipeline_linear.geojson

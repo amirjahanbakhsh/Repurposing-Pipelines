@@ -70,6 +70,23 @@ For `goldeneye_poster`, the command creates:
 
 For now, available scenarios come from `data/benchmarks/goldeneye_assumptions.csv`. To run a new pipeline, we need to add a new scenario to that file with the same required inputs.
 
+Choose and run one NSTA candidate:
+
+```powershell
+python scripts\run_pipeline_screen.py --list-nsta --top 5
+python scripts\run_pipeline_screen.py --nsta-id PL774
+```
+
+The first command shows the top ranked NSTA candidates. The second command runs one selected NSTA pipeline using NSTA data plus simple default assumptions from `data/inputs/nsta_screening_defaults.csv`.
+
+For `PL774`, the command creates:
+
+- `reports/pipeline_screen_nsta_pl774.md`
+- `data/processed/pipeline_screen_nsta_pl774.csv`
+- `data/processed/pipeline_screen_nsta_pl774_trace.json`
+
+The NSTA run is an early screening only. Many values, such as CO2 properties, corrosion rates, and cost basis, still need better project-specific assumptions.
+
 Run the tests:
 
 ```powershell
@@ -100,7 +117,9 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `reports/nsta_candidate_ranking.md`: first-pass ranking of model-ready hydrocarbon pipeline candidates and checks for known CCS/reuse names such as Goldeneye, Atlantic, Cromarty, SAGE, and others.
 - `reports/goldeneye_benchmark.md`: benchmark reproduction of the Goldeneye dissertation and poster cases, now including the pre-LCA gate decision.
 - `reports/pipeline_screen_goldeneye_poster.md`: example report for running one selected pipeline scenario.
+- `reports/pipeline_screen_nsta_pl774.md`: example report for running one selected NSTA candidate.
 - `data/benchmarks/goldeneye_benchmark_trace.json`: traceable inputs, outputs, assumptions, warnings, and formula notes for each Goldeneye module.
+- `data/inputs/nsta_screening_defaults.csv`: simple assumptions used when NSTA does not provide all model inputs.
 - `docs/system_architecture.md`: proposed modular architecture, traceability design, and pre-/post-LCA decision gates.
 - `docs/tooling_strategy.md`: strategy for using REPACT, NETL cost tools, CoolProp/REFPROP, openLCA/Brightway, ecoinvent, and future well repurposing.
 - `docs/model_validation_review.md`: initial model validation review for CO2 properties, hydraulics, corrosion, cost, and LCA.

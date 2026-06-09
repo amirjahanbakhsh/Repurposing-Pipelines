@@ -82,8 +82,10 @@ def evaluate_capacity(scenario: ScenarioAssumptions) -> ModuleResult:
     )
     average_pressure_mpa = average_pressure_pa(inlet_pa, outlet_pa) / 1e6
     reynolds = reynolds_number(capacity_kg_per_s, viscosity_pa_s, inner_diameter_m)
-    reported_capacity = scenario.number("reported_capacity_mtpa")
-    capacity_delta = capacity_mtpa - reported_capacity
+    reported_capacity = scenario.optional_number("reported_capacity_mtpa")
+    capacity_delta = (
+        capacity_mtpa - reported_capacity if reported_capacity is not None else None
+    )
     capacity_suitable = "yes" if capacity_mtpa >= required_design_mtpa else "no"
 
     warnings = [
@@ -96,7 +98,7 @@ def evaluate_capacity(scenario: ScenarioAssumptions) -> ModuleResult:
             affected_modules=["capacity"],
         )
     ]
-    if abs(capacity_delta) > 0.1:
+    if capacity_delta is not None and abs(capacity_delta) > 0.1:
         warnings.append(
             WarningRecord(
                 level="high",

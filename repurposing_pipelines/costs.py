@@ -23,14 +23,21 @@ def evaluate_cost(scenario: ScenarioAssumptions) -> ModuleResult:
     subtotal = sum(scenario.number(name) for name in COST_COMPONENT_PARAMETERS)
     contingency = scenario.number("contingency_fraction") * subtotal
     total = subtotal + contingency
-    reported_total = scenario.number("reported_total_capex_usd_2025")
+    reported_total = scenario.optional_number("reported_total_capex_usd_2025")
+    cost_delta = total - reported_total if reported_total is not None else None
 
     return ModuleResult(
         module="cost",
         model_version=MODEL_VERSION,
         status="pass" if total > 0 else "fail",
         inputs=scenario.input_records(
-            COST_COMPONENT_PARAMETERS + ["contingency_fraction", "reported_total_capex_usd_2025"],
+            COST_COMPONENT_PARAMETERS
+            + ["contingency_fraction"]
+            + (
+                ["reported_total_capex_usd_2025"]
+                if "reported_total_capex_usd_2025" in scenario.records
+                else []
+            ),
             used_by=["cost"],
         ),
         assumptions=[
@@ -64,7 +71,7 @@ def evaluate_cost(scenario: ScenarioAssumptions) -> ModuleResult:
             ),
             OutputRecord(
                 "cost_delta_usd_2025",
-                total - reported_total,
+                cost_delta,
                 "USD 2025",
                 used_by=["validation"],
             ),

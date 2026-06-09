@@ -28,7 +28,10 @@ def evaluate_integrity(scenario: ScenarioAssumptions) -> ModuleResult:
     remaining_life_years = (
         available_wall_thickness / future_corrosion_rate if available_wall_thickness > 0 else 0
     )
-    reported_life = scenario.number("reported_remaining_life_years")
+    reported_life = scenario.optional_number("reported_remaining_life_years")
+    remaining_life_delta = (
+        remaining_life_years - reported_life if reported_life is not None else None
+    )
 
     warnings = [
         WarningRecord(
@@ -53,8 +56,9 @@ def evaluate_integrity(scenario: ScenarioAssumptions) -> ModuleResult:
         "nominal_wall_thickness_mm",
         "minimum_wall_thickness_mm",
         "future_co2_corrosion_rate_mm_per_year",
-        "reported_remaining_life_years",
     ]
+    if "reported_remaining_life_years" in scenario.records:
+        input_names.append("reported_remaining_life_years")
     if reported_historical_wall_loss is None:
         input_names.extend(["historical_corrosion_rate_mm_per_year", "historical_corrosion_years"])
     else:
@@ -119,7 +123,7 @@ def evaluate_integrity(scenario: ScenarioAssumptions) -> ModuleResult:
             ),
             OutputRecord(
                 "remaining_life_delta_years",
-                remaining_life_years - reported_life,
+                remaining_life_delta,
                 "years",
                 used_by=["validation"],
             ),

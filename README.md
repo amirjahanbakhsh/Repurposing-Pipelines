@@ -39,6 +39,10 @@ tests/         Regression tests for benchmark cases
 
 ## Simple Commands
 
+For a step-by-step beginner guide, start here:
+
+- `docs/how_to_run_the_model.md`
+
 Open PowerShell in this folder:
 
 ```powershell

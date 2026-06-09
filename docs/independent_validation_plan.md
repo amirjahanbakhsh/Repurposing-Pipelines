@@ -52,6 +52,8 @@ The detailed tracking table is stored in `data/validation/independent_validation
 
 The detailed source register is stored in `data/validation/validation_source_register.csv` and explained in `docs/validation_source_register.md`.
 
+The first executable validation report is stored in `reports/independent_validation_report.md`.
+
 ## Module Notes
 
 ### 1. Data Validation

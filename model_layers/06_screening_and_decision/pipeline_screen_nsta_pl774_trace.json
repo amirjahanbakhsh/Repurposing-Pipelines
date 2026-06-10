@@ -1996,6 +1996,6 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   }
 ]

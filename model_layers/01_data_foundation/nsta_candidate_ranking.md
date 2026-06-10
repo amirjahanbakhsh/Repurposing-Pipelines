@@ -1,8 +1,8 @@
 # NSTA Candidate Ranking
 
-Generated: 2026-06-09T13:46:32+00:00
+Generated: 2026-06-10T09:39:05+00:00
 
-Input data: `data/processed/nsta_pipeline_attributes.csv`
+Input data: `model_layers/01_data_foundation/nsta_pipeline_attributes.csv`
 
 Ranking script: `scripts/rank_nsta_candidates.py`
 

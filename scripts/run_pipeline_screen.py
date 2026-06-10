@@ -10,12 +10,12 @@ Examples:
 
 At this stage, scenarios come from:
 
-    data/benchmarks/goldeneye_assumptions.csv
+    model_layers/06_screening_and_decision/goldeneye_assumptions.csv
 
 NSTA runs combine:
 
-    data/processed/nsta_candidate_ranked.csv
-    data/inputs/nsta_screening_defaults.csv
+    model_layers/01_data_foundation/nsta_candidate_ranked.csv
+    model_layers/06_screening_and_decision/nsta_screening_defaults.csv
 """
 
 from __future__ import annotations
@@ -27,6 +27,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+DATA_LAYER = ROOT / "model_layers" / "01_data_foundation"
+SCREENING_LAYER = ROOT / "model_layers" / "06_screening_and_decision"
 
 from repurposing_pipelines.pipeline_screen import (  # noqa: E402
     available_nsta_candidates,
@@ -87,17 +89,17 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--assumptions",
-        default=str(ROOT / "data" / "benchmarks" / "goldeneye_assumptions.csv"),
+        default=str(SCREENING_LAYER / "goldeneye_assumptions.csv"),
         help="Path to the assumptions CSV file.",
     )
     parser.add_argument(
         "--nsta-candidates",
-        default=str(ROOT / "data" / "processed" / "nsta_candidate_ranked.csv"),
+        default=str(DATA_LAYER / "nsta_candidate_ranked.csv"),
         help="Path to the ranked NSTA candidate CSV file.",
     )
     parser.add_argument(
         "--nsta-defaults",
-        default=str(ROOT / "data" / "inputs" / "nsta_screening_defaults.csv"),
+        default=str(SCREENING_LAYER / "nsta_screening_defaults.csv"),
         help="Path to the NSTA screening defaults CSV file.",
     )
     return parser
@@ -128,9 +130,9 @@ def main() -> int:
         return 0
 
     if args.screen_all_nsta:
-        output_csv_path = ROOT / "data" / "processed" / "pipeline_screen_nsta_all.csv"
-        trace_path = ROOT / "data" / "processed" / "pipeline_screen_nsta_all_trace.json"
-        report_path = ROOT / "reports" / "pipeline_screen_nsta_all.md"
+        output_csv_path = SCREENING_LAYER / "pipeline_screen_nsta_all.csv"
+        trace_path = SCREENING_LAYER / "pipeline_screen_nsta_all_trace.json"
+        report_path = SCREENING_LAYER / "pipeline_screen_nsta_all.md"
         rows = screen_all_nsta_pipelines(
             candidates_path=candidates_path,
             defaults_path=defaults_path,
@@ -153,9 +155,9 @@ def main() -> int:
         else:
             selector = args.nsta_name or "nsta"
         safe_name = f"nsta_{safe_filename(str(selector))}"
-        output_csv_path = ROOT / "data" / "processed" / f"pipeline_screen_{safe_name}.csv"
-        trace_path = ROOT / "data" / "processed" / f"pipeline_screen_{safe_name}_trace.json"
-        report_path = ROOT / "reports" / f"pipeline_screen_{safe_name}.md"
+        output_csv_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}.csv"
+        trace_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}_trace.json"
+        report_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}.md"
         try:
             row = screen_nsta_pipeline(
                 candidates_path=candidates_path,
@@ -187,9 +189,9 @@ def main() -> int:
         )
 
     safe_name = safe_filename(args.scenario)
-    output_csv_path = ROOT / "data" / "processed" / f"pipeline_screen_{safe_name}.csv"
-    trace_path = ROOT / "data" / "processed" / f"pipeline_screen_{safe_name}_trace.json"
-    report_path = ROOT / "reports" / f"pipeline_screen_{safe_name}.md"
+    output_csv_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}.csv"
+    trace_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}_trace.json"
+    report_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}.md"
 
     try:
         row = screen_one_pipeline(

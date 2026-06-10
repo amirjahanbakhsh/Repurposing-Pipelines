@@ -1996,7 +1996,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1761",
@@ -3995,7 +3995,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl762",
@@ -5994,7 +5994,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3088",
@@ -7986,7 +7986,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2225",
@@ -9985,7 +9985,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl164",
@@ -11985,7 +11985,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1339",
@@ -13975,7 +13975,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl774",
@@ -15975,7 +15975,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl762_pl762_pl762",
@@ -17975,7 +17975,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1849",
@@ -19965,7 +19965,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1360",
@@ -21948,7 +21948,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3086",
@@ -23948,7 +23948,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl872",
@@ -25948,7 +25948,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3924",
@@ -27931,7 +27931,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1361",
@@ -29914,7 +29914,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2141",
@@ -31897,7 +31897,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2921",
@@ -33889,7 +33889,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1257a",
@@ -35881,7 +35881,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl917",
@@ -37873,7 +37873,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1340",
@@ -39864,7 +39864,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1760",
@@ -41864,7 +41864,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3517",
@@ -43847,7 +43847,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3635",
@@ -45830,7 +45830,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3639",
@@ -47813,7 +47813,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3636",
@@ -49796,7 +49796,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3632",
@@ -51779,7 +51779,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3628",
@@ -53762,7 +53762,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3634",
@@ -55745,7 +55745,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3627",
@@ -57728,7 +57728,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3631",
@@ -59711,7 +59711,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3633",
@@ -61694,7 +61694,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2759j2",
@@ -63684,7 +63684,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2759j1",
@@ -65674,7 +65674,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl918",
@@ -67666,7 +67666,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1387",
@@ -69657,7 +69657,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6385",
@@ -71640,7 +71640,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1384",
@@ -73631,7 +73631,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2670",
@@ -75614,7 +75614,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3110",
@@ -77597,7 +77597,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2922",
@@ -79589,7 +79589,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl919",
@@ -81580,7 +81580,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl920",
@@ -83571,7 +83571,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl921",
@@ -85562,7 +85562,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1386",
@@ -87552,7 +87552,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2365",
@@ -89535,7 +89535,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1648",
@@ -91527,7 +91527,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1652",
@@ -93519,7 +93519,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl200",
@@ -95519,7 +95519,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891.1",
@@ -97502,7 +97502,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891.2",
@@ -99485,7 +99485,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1251",
@@ -101476,7 +101476,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2921",
@@ -103468,7 +103468,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1645",
@@ -105468,7 +105468,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3999jwp2",
@@ -107459,7 +107459,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3733",
@@ -109450,7 +109450,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3995jwp1",
@@ -111441,7 +111441,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3999jwp1",
@@ -113432,7 +113432,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2924",
@@ -115424,7 +115424,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3080jmdc5",
@@ -117415,7 +117415,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3080jmdc4",
@@ -119406,7 +119406,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3080jndc1",
@@ -121397,7 +121397,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1911jc",
@@ -123380,7 +123380,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1911jb",
@@ -125363,7 +125363,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891.3",
@@ -127346,7 +127346,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1253",
@@ -129337,7 +129337,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3184",
@@ -131328,7 +131328,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1648",
@@ -133320,7 +133320,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1714",
@@ -135311,7 +135311,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3262",
@@ -137302,7 +137302,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3286",
@@ -139293,7 +139293,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3457",
@@ -141284,7 +141284,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3393",
@@ -143275,7 +143275,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3456",
@@ -145266,7 +145266,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3516",
@@ -147257,7 +147257,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3390",
@@ -149248,7 +149248,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1416",
@@ -151239,7 +151239,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl922",
@@ -153230,7 +153230,7 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1845",
@@ -155229,7 +155229,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1647",
@@ -157212,7 +157212,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1431",
@@ -159195,7 +159195,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3466",
@@ -161178,7 +161178,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3037",
@@ -163169,7 +163169,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1252",
@@ -165159,7 +165159,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1357jw123",
@@ -167142,7 +167142,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1385",
@@ -169132,7 +169132,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3081jmdc2",
@@ -171114,7 +171114,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6018",
@@ -173097,7 +173097,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3081jmdc1",
@@ -175079,7 +175079,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3444",
@@ -177062,7 +177062,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2204",
@@ -179044,7 +179044,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3168",
@@ -181044,7 +181044,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891_j_p1",
@@ -183027,7 +183027,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891_j_p2",
@@ -185010,7 +185010,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891_j_p4",
@@ -186993,7 +186993,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891_j_p6",
@@ -188976,7 +188976,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891_j_p3",
@@ -190959,7 +190959,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1891_j_p5",
@@ -192942,7 +192942,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3294",
@@ -194932,7 +194932,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2203",
@@ -196923,7 +196923,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2201",
@@ -198914,7 +198914,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1357jw122",
@@ -200905,7 +200905,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2245",
@@ -202888,7 +202888,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3168",
@@ -204888,7 +204888,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl4721",
@@ -206878,7 +206878,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3081jndc3",
@@ -208868,7 +208868,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3081jndc4",
@@ -210858,7 +210858,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1645",
@@ -212849,7 +212849,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl166",
@@ -214840,7 +214840,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6108",
@@ -216823,7 +216823,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2202",
@@ -218814,7 +218814,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl72",
@@ -220805,7 +220805,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl4191",
@@ -222788,7 +222788,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3031",
@@ -224787,7 +224787,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2006",
@@ -226778,7 +226778,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3037",
@@ -228770,7 +228770,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3037",
@@ -230762,7 +230762,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3031",
@@ -232762,7 +232762,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3642",
@@ -234745,7 +234745,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3638",
@@ -236728,7 +236728,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3637",
@@ -238711,7 +238711,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl4769",
@@ -240694,7 +240694,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl4763",
@@ -242677,7 +242677,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2671",
@@ -244659,7 +244659,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1912jc",
@@ -246642,7 +246642,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3111",
@@ -248624,7 +248624,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1912jb",
@@ -250607,7 +250607,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3169",
@@ -252598,7 +252598,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1415",
@@ -254580,7 +254580,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3032",
@@ -256571,7 +256571,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6012",
@@ -258554,7 +258554,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6484",
@@ -260537,7 +260537,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6603",
@@ -262520,7 +262520,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6496",
@@ -264503,7 +264503,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3032",
@@ -266495,7 +266495,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl3169",
@@ -268487,7 +268487,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1652.6",
@@ -270470,7 +270470,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl917a",
@@ -272453,7 +272453,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6107",
@@ -274436,7 +274436,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6485",
@@ -276418,7 +276418,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl4421.1",
@@ -276465,7 +276465,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv",
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv",
     "screening_error": "NSTA pipeline PL4421.1 cannot be screened because length is zero or missing."
   },
   {
@@ -278448,7 +278448,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl4421.2",
@@ -280431,7 +280431,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl4421.3",
@@ -282414,7 +282414,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2852",
@@ -284405,7 +284405,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1652.2",
@@ -286388,7 +286388,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1652.7",
@@ -288371,7 +288371,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl1652.1",
@@ -290354,7 +290354,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl4762",
@@ -292336,7 +292336,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6611",
@@ -294318,7 +294318,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6606",
@@ -296301,7 +296301,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6495",
@@ -298284,7 +298284,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2682",
@@ -300266,7 +300266,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl2584",
@@ -302257,7 +302257,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6137",
@@ -304240,7 +304240,7 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
     "scenario": "nsta_pl6611",
@@ -306222,6 +306222,6 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
-    "defaults_path": "data/inputs/nsta_screening_defaults.csv"
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   }
 ]

@@ -52,7 +52,7 @@ python scripts\run_pipeline_screen.py --scenario goldeneye_poster
 Open this file:
 
 ```text
-reports/pipeline_screen_goldeneye_poster.md
+model_layers/06_screening_and_decision/pipeline_screen_goldeneye_poster.md
 ```
 
 The most important lines are:
@@ -84,7 +84,7 @@ This screens all model-ready NSTA hydrocarbon pipeline candidates using:
 Open this file:
 
 ```text
-reports/pipeline_screen_nsta_all.md
+model_layers/06_screening_and_decision/pipeline_screen_nsta_all.md
 ```
 
 Start with:
@@ -108,7 +108,7 @@ Then run that pipeline using Option 3 below.
 The full table is also saved here:
 
 ```text
-data/processed/pipeline_screen_nsta_all.csv
+model_layers/06_screening_and_decision/pipeline_screen_nsta_all.csv
 ```
 
 ## Option 3: Run One NSTA Pipeline
@@ -124,7 +124,7 @@ python scripts\run_pipeline_screen.py --list-nsta --top 20
 This command reads the ranked NSTA file:
 
 ```text
-data/processed/nsta_candidate_ranked.csv
+model_layers/01_data_foundation/nsta_candidate_ranked.csv
 ```
 
 This shows a list like:
@@ -167,7 +167,7 @@ This is safer than using the pipeline name because names can be long or duplicat
 You can also open the full ranked table here:
 
 ```text
-data/processed/nsta_candidate_ranked.csv
+model_layers/01_data_foundation/nsta_candidate_ranked.csv
 ```
 
 In that file, look for these columns:
@@ -196,9 +196,9 @@ Scenario: nsta_pl774
 Pipeline: CATS PIPELINE
 NSTA number: PL774
 Decision: fail
-Report: C:\Users\aj52\Documents\Repurposing Pipelines\reports\pipeline_screen_nsta_pl774.md
-CSV: C:\Users\aj52\Documents\Repurposing Pipelines\data\processed\pipeline_screen_nsta_pl774.csv
-Trace: C:\Users\aj52\Documents\Repurposing Pipelines\data\processed\pipeline_screen_nsta_pl774_trace.json
+Report: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\06_screening_and_decision\pipeline_screen_nsta_pl774.md
+CSV: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\06_screening_and_decision\pipeline_screen_nsta_pl774.csv
+Trace: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\06_screening_and_decision\pipeline_screen_nsta_pl774_trace.json
 ```
 
 The key line is:
@@ -214,19 +214,19 @@ Your decision may be `pass`, `marginal`, `fail`, or `insufficient_data`.
 For `PL774`, open:
 
 ```text
-reports/pipeline_screen_nsta_pl774.md
+model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.md
 ```
 
 For another pipeline, the file name will follow the same pattern:
 
 ```text
-reports/pipeline_screen_nsta_PIPELINENUMBER.md
+model_layers/06_screening_and_decision/pipeline_screen_nsta_PIPELINENUMBER.md
 ```
 
 Example:
 
 ```text
-reports/pipeline_screen_nsta_pl762.md
+model_layers/06_screening_and_decision/pipeline_screen_nsta_pl762.md
 ```
 
 Start with the report file. It is written for humans.
@@ -262,9 +262,9 @@ For each run, the model normally creates three files.
 
 | File type | What it is for |
 | --- | --- |
-| `reports/...md` | Human-readable report. Start here. |
-| `data/processed/...csv` | Table of calculated numbers. |
-| `data/processed/...json` | Full trace showing inputs, assumptions, warnings, and formulas. |
+| `model_layers/.../*.md` | Human-readable report. Start here. |
+| `model_layers/.../*.csv` | Table of calculated numbers. |
+| `model_layers/.../*.json` | Full trace showing inputs, assumptions, warnings, and formulas. |
 
 ## Very Important Warning
 
@@ -335,7 +335,7 @@ This does not copy ecoinvent data into GitHub. It only checks which useful proce
 Open this file:
 
 ```text
-reports/independent_validation_report.md
+model_layers/07_independent_validation/independent_validation_report.md
 ```
 
 Start with the `Plain Summary` section.
@@ -346,10 +346,10 @@ The command also creates these detailed tables:
 
 | File | What it checks |
 | --- | --- |
-| `data/validation/co2_property_validation.csv` | CO2 density, viscosity, and Z factor against CoolProp. |
-| `data/validation/capacity_validation.csv` | Capacity equation arithmetic and sensitivity to CoolProp Z factor. |
-| `data/validation/integrity_barlow_sanity_check.csv` | Simple wall-thickness sanity check. |
-| `data/validation/cost_arithmetic_validation.csv` | Cost component sum and contingency arithmetic. |
+| `model_layers/02_capacity_hydraulics/co2_property_validation.csv` | CO2 density, viscosity, and Z factor against CoolProp. |
+| `model_layers/02_capacity_hydraulics/capacity_validation.csv` | Capacity equation arithmetic and sensitivity to CoolProp Z factor. |
+| `model_layers/03_corrosion_integrity/integrity_barlow_sanity_check.csv` | Simple wall-thickness sanity check. |
+| `model_layers/04_cost_economics/cost_arithmetic_validation.csv` | Cost component sum and contingency arithmetic. |
 
 Important:
 

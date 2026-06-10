@@ -1,6 +1,6 @@
 # Independent Validation Report
 
-Generated: 2026-06-10T08:49:11+00:00
+Generated: 2026-06-10T09:39:17+00:00
 
 Model validation version: `independent_validation_v0.2`
 
@@ -266,19 +266,19 @@ These CSVs are the bridge between our open model and the private LCA database. T
 
 ## Output Files
 
-- `data/validation/data_extraction_validation.csv`
-- `data/validation/assumption_traceability_validation.csv`
-- `data/validation/assumption_evidence_register.csv`
-- `data/validation/co2_property_validation.csv`
-- `data/validation/capacity_validation.csv`
-- `data/validation/integrity_barlow_sanity_check.csv`
-- `data/validation/cost_arithmetic_validation.csv`
-- `data/validation/pre_lca_gate_validation.csv`
-- `data/validation/ecoinvent_process_mapping_validation.csv`
-- `data/validation/lca_reference_workbook_review.csv`
-- `data/validation/lca_method_reference_register.csv`
-- `data/validation/lca_model_input_csv_validation.csv`
-- `data/validation/validation_status_dashboard.csv`
+- `model_layers/01_data_foundation/data_extraction_validation.csv`
+- `model_layers/07_independent_validation/assumption_traceability_validation.csv`
+- `model_layers/07_independent_validation/assumption_evidence_register.csv`
+- `model_layers/02_capacity_hydraulics/co2_property_validation.csv`
+- `model_layers/02_capacity_hydraulics/capacity_validation.csv`
+- `model_layers/03_corrosion_integrity/integrity_barlow_sanity_check.csv`
+- `model_layers/04_cost_economics/cost_arithmetic_validation.csv`
+- `model_layers/06_screening_and_decision/pre_lca_gate_validation.csv`
+- `model_layers/05_lca/ecoinvent_process_mapping_validation.csv`
+- `model_layers/05_lca/lca_reference_workbook_review.csv`
+- `model_layers/05_lca/lca_method_reference_register.csv`
+- `model_layers/05_lca/lca_model_input_csv_validation.csv`
+- `model_layers/07_independent_validation/validation_status_dashboard.csv`
 
 ## Next Validation Actions
 

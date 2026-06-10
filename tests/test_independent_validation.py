@@ -20,7 +20,12 @@ from repurposing_pipelines.validation import (  # noqa: E402
 class IndependentValidationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        assumptions_path = ROOT / "data" / "benchmarks" / "goldeneye_assumptions.csv"
+        assumptions_path = (
+            ROOT
+            / "model_layers"
+            / "06_screening_and_decision"
+            / "goldeneye_assumptions.csv"
+        )
         cls.scenarios = read_scenario_assumptions(assumptions_path)
 
     def test_coolprop_property_validation_passes_density_for_goldeneye(self) -> None:

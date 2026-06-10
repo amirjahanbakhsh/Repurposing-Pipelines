@@ -37,8 +37,8 @@ But it should not copy the full ecoinvent process inventories into the repositor
 Two shareable CSV files have been added:
 
 ```text
-data/inputs/lca_inventory_template.csv
-data/inputs/lca_process_mapping.csv
+model_layers/05_lca/lca_inventory_template.csv
+model_layers/05_lca/lca_process_mapping.csv
 ```
 
 How they should be used:
@@ -113,9 +113,9 @@ The supplied PDFs are useful for method validation:
 The wider method basis is now tracked in:
 
 ```text
-docs/lca_model_defensibility_basis.md
-data/validation/lca_literature_register.csv
-data/validation/lca_method_reference_register.csv
+model_layers/05_lca/lca_model_defensibility_basis.md
+model_layers/05_lca/lca_literature_register.csv
+model_layers/05_lca/lca_method_reference_register.csv
 ```
 
 They support decisions on:

@@ -3,14 +3,14 @@
 This script uses the public ArcGIS FeatureServer for the NSTA UKCS offshore
 pipeline linear layer. It writes:
 
-- data/raw/nsta_pipeline_attributes.json
-- data/raw/nsta_pipeline_metadata.json
-- data/processed/nsta_pipeline_attributes.csv
-- reports/nsta_pipeline_completeness.md
+- model_layers/01_data_foundation/nsta_pipeline_attributes.json
+- model_layers/01_data_foundation/nsta_pipeline_metadata.json
+- model_layers/01_data_foundation/nsta_pipeline_attributes.csv
+- model_layers/01_data_foundation/nsta_pipeline_completeness.md
 
 Use `--include-geometry` to also write:
 
-- data/raw/nsta_pipeline_linear.geojson
+- model_layers/01_data_foundation/nsta_pipeline_linear.geojson
 """
 
 from __future__ import annotations
@@ -370,12 +370,8 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     root = Path(__file__).resolve().parents[1]
-    raw_dir = root / "data" / "raw"
-    processed_dir = root / "data" / "processed"
-    reports_dir = root / "reports"
-    raw_dir.mkdir(parents=True, exist_ok=True)
-    processed_dir.mkdir(parents=True, exist_ok=True)
-    reports_dir.mkdir(parents=True, exist_ok=True)
+    data_layer = root / "model_layers" / "01_data_foundation"
+    data_layer.mkdir(parents=True, exist_ok=True)
 
     metadata = layer_metadata()
     total_count = count_features()
@@ -405,7 +401,7 @@ def main() -> int:
             "source": LAYER_URL,
             "features": normalised_features,
         }
-        (raw_dir / "nsta_pipeline_linear.geojson").write_text(
+        (data_layer / "nsta_pipeline_linear.geojson").write_text(
             json.dumps(geojson, ensure_ascii=False), encoding="utf-8"
         )
     else:
@@ -413,7 +409,7 @@ def main() -> int:
             normalise_properties(feature.get("attributes", {}), date_fields)
             for feature in features
         ]
-        (raw_dir / "nsta_pipeline_attributes.json").write_text(
+        (data_layer / "nsta_pipeline_attributes.json").write_text(
             json.dumps(
                 {
                     "source": LAYER_URL,
@@ -424,23 +420,23 @@ def main() -> int:
             encoding="utf-8",
         )
 
-    (raw_dir / "nsta_pipeline_metadata.json").write_text(
+    (data_layer / "nsta_pipeline_metadata.json").write_text(
         json.dumps(metadata, indent=2), encoding="utf-8"
     )
-    write_csv(processed_dir / "nsta_pipeline_attributes.csv", rows, fieldnames)
+    write_csv(data_layer / "nsta_pipeline_attributes.csv", rows, fieldnames)
     write_report(
-        reports_dir / "nsta_pipeline_completeness.md",
+        data_layer / "nsta_pipeline_completeness.md",
         rows,
         include_geometry=args.include_geometry,
     )
 
     print(f"Wrote {len(rows)} features")
     if args.include_geometry:
-        print(raw_dir / "nsta_pipeline_linear.geojson")
+        print(data_layer / "nsta_pipeline_linear.geojson")
     else:
-        print(raw_dir / "nsta_pipeline_attributes.json")
-    print(processed_dir / "nsta_pipeline_attributes.csv")
-    print(reports_dir / "nsta_pipeline_completeness.md")
+        print(data_layer / "nsta_pipeline_attributes.json")
+    print(data_layer / "nsta_pipeline_attributes.csv")
+    print(data_layer / "nsta_pipeline_completeness.md")
     return 0
 
 

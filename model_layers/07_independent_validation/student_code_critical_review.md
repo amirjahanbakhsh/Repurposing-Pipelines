@@ -12,7 +12,7 @@ Reviewed files:
 Supporting repo files:
 
 - `scripts/audit_student_submission.py`
-- `reports/student_submission_audit.md`
+- `model_layers/07_independent_validation/student_submission_audit.md`
 
 ## Short Conclusion
 

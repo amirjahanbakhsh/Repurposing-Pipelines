@@ -1,15 +1,15 @@
 # NSTA Pipeline Batch Screening
 
-Generated: 2026-06-10T08:48:28+00:00
+Generated: 2026-06-10T09:39:29+00:00
 
-Candidate file: `data/processed/nsta_candidate_ranked.csv`
+Candidate file: `model_layers/01_data_foundation/nsta_candidate_ranked.csv`
 
-Default assumptions: `data/inputs/nsta_screening_defaults.csv`
+Default assumptions: `model_layers/06_screening_and_decision/nsta_screening_defaults.csv`
 
 Outputs:
 
-- `data/processed/pipeline_screen_nsta_all.csv`
-- `data/processed/pipeline_screen_nsta_all_trace.json`
+- `model_layers/06_screening_and_decision/pipeline_screen_nsta_all.csv`
+- `model_layers/06_screening_and_decision/pipeline_screen_nsta_all_trace.json`
 
 ## Plain Result
 

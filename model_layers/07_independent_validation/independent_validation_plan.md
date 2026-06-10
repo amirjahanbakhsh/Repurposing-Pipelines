@@ -48,11 +48,11 @@ Current position:
 | Wells module | NSTA well data, completion/decommissioning records, well integrity guidance | well status, age, depth, abandonment, integrity risk | no reuse recommendation without well integrity evidence |
 | Interface | command-line model outputs and saved reports | UI outputs equal model outputs | same input gives same result in CLI, report, and app |
 
-The detailed tracking table is stored in `data/validation/independent_validation_matrix.csv`.
+The detailed tracking table is stored in `model_layers/07_independent_validation/independent_validation_matrix.csv`.
 
-The detailed source register is stored in `data/validation/validation_source_register.csv` and explained in `docs/validation_source_register.md`.
+The detailed source register is stored in `model_layers/07_independent_validation/validation_source_register.csv` and explained in `model_layers/07_independent_validation/validation_source_register.md`.
 
-The first executable validation report is stored in `reports/independent_validation_report.md`.
+The first executable validation report is stored in `model_layers/07_independent_validation/independent_validation_report.md`.
 
 ## Module Notes
 
@@ -149,8 +149,8 @@ Independent LCA validation needs:
 
 The first shareable LCA input files are:
 
-- `data/inputs/lca_inventory_template.csv`;
-- `data/inputs/lca_process_mapping.csv`.
+- `model_layers/05_lca/lca_inventory_template.csv`;
+- `model_layers/05_lca/lca_process_mapping.csv`.
 
 These files store project inventory fields and process-mapping metadata only. They do not store licensed ecoinvent unit-process data.
 

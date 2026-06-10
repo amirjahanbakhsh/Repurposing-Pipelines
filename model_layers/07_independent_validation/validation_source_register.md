@@ -10,7 +10,7 @@ It answers a simple question:
 
 > If someone asks "how do you know this calculation is right?", what independent source do we compare against?
 
-The register is stored as a table in `data/validation/validation_source_register.csv`.
+The register is stored as a table in `model_layers/07_independent_validation/validation_source_register.csv`.
 
 ## Validation Rule
 
@@ -189,4 +189,3 @@ Recommended next steps:
 5. Keep integrity as "screening only" until inspection/requalification data is available.
 
 This gives us validation evidence without over-building the web app too early.
-

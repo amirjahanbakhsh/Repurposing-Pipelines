@@ -418,7 +418,7 @@ Compare the environmental impact of reusing an existing pipeline versus building
 Inputs from earlier modules:
 
 - length from data module;
-- diameter/thickness/material from data/integrity module;
+- diameter/thickness/material from the data and integrity modules;
 - remaining life from integrity module;
 - required flow from capacity module;
 - operating/compression assumptions from capacity/cost modules;
@@ -558,7 +558,7 @@ Possible outputs:
 
 The well module should not be built until the pipeline module structure is reusable. That way the same input/output, warning, assumption, and trace records can support both pipelines and wells.
 
-For the external-tool strategy, see `docs/tooling_strategy.md`.
+For the external-tool strategy, see `model_layers/00_project_overview/tooling_strategy.md`.
 
 ## Immediate Implementation Plan
 

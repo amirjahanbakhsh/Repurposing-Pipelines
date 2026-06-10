@@ -1,13 +1,13 @@
 # Pipeline Screen: nsta_pl774
 
-Generated: 2026-06-10T08:48:47+00:00
+Generated: 2026-06-10T09:39:27+00:00
 
-Input assumptions: `data/inputs/nsta_screening_defaults.csv`
+Input assumptions: `model_layers/06_screening_and_decision/nsta_screening_defaults.csv`
 
 Outputs:
 
-- `data/processed/pipeline_screen_nsta_pl774.csv`
-- `data/processed/pipeline_screen_nsta_pl774_trace.json`
+- `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.csv`
+- `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774_trace.json`
 
 ## Plain Result
 

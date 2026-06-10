@@ -9,6 +9,13 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+DATA_LAYER = ROOT / "model_layers" / "01_data_foundation"
+CAPACITY_LAYER = ROOT / "model_layers" / "02_capacity_hydraulics"
+INTEGRITY_LAYER = ROOT / "model_layers" / "03_corrosion_integrity"
+COST_LAYER = ROOT / "model_layers" / "04_cost_economics"
+LCA_LAYER = ROOT / "model_layers" / "05_lca"
+SCREENING_LAYER = ROOT / "model_layers" / "06_screening_and_decision"
+VALIDATION_LAYER = ROOT / "model_layers" / "07_independent_validation"
 
 from repurposing_pipelines.validation import run_independent_validation  # noqa: E402
 
@@ -39,15 +46,30 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     results = run_independent_validation(
-        assumptions_path=ROOT / "data" / "benchmarks" / "goldeneye_assumptions.csv",
-        defaults_path=ROOT / "data" / "inputs" / "nsta_screening_defaults.csv",
-        raw_attributes_path=ROOT / "data" / "raw" / "nsta_pipeline_attributes.json",
-        processed_attributes_path=ROOT / "data" / "processed" / "nsta_pipeline_attributes.csv",
-        ranked_candidates_path=ROOT / "data" / "processed" / "nsta_candidate_ranked.csv",
-        validation_dir=ROOT / "data" / "validation",
-        report_path=ROOT / "reports" / "independent_validation_report.md",
-        lca_inventory_template_path=ROOT / "data" / "inputs" / "lca_inventory_template.csv",
-        lca_process_mapping_path=ROOT / "data" / "inputs" / "lca_process_mapping.csv",
+        assumptions_path=SCREENING_LAYER / "goldeneye_assumptions.csv",
+        defaults_path=SCREENING_LAYER / "nsta_screening_defaults.csv",
+        raw_attributes_path=DATA_LAYER / "nsta_pipeline_attributes.json",
+        processed_attributes_path=DATA_LAYER / "nsta_pipeline_attributes.csv",
+        ranked_candidates_path=DATA_LAYER / "nsta_candidate_ranked.csv",
+        validation_dir=VALIDATION_LAYER,
+        report_path=VALIDATION_LAYER / "independent_validation_report.md",
+        lca_inventory_template_path=LCA_LAYER / "lca_inventory_template.csv",
+        lca_process_mapping_path=LCA_LAYER / "lca_process_mapping.csv",
+        output_paths={
+            "data": DATA_LAYER / "data_extraction_validation.csv",
+            "property": CAPACITY_LAYER / "co2_property_validation.csv",
+            "capacity": CAPACITY_LAYER / "capacity_validation.csv",
+            "integrity": INTEGRITY_LAYER / "integrity_barlow_sanity_check.csv",
+            "cost": COST_LAYER / "cost_arithmetic_validation.csv",
+            "gate": SCREENING_LAYER / "pre_lca_gate_validation.csv",
+            "ecoinvent": LCA_LAYER / "ecoinvent_process_mapping_validation.csv",
+            "lca_reference": LCA_LAYER / "lca_reference_workbook_review.csv",
+            "lca_method": LCA_LAYER / "lca_method_reference_register.csv",
+            "lca_model_inputs": LCA_LAYER / "lca_model_input_csv_validation.csv",
+            "assumptions": VALIDATION_LAYER / "assumption_traceability_validation.csv",
+            "assumption_evidence": VALIDATION_LAYER / "assumption_evidence_register.csv",
+            "dashboard": VALIDATION_LAYER / "validation_status_dashboard.csv",
+        },
         ecoinvent_dir=_existing_path_or_none(args.ecoinvent_dir),
         lca_workbook_path=_existing_path_or_none(args.lca_workbook),
     )
@@ -64,7 +86,7 @@ def main() -> int:
     print(f"LCA workbook checks: {len(results['lca_reference'])}")
     print(f"LCA method references: {len(results['lca_method'])}")
     print(f"LCA model input CSV checks: {len(results['lca_model_inputs'])}")
-    print(f"Report: {ROOT / 'reports' / 'independent_validation_report.md'}")
+    print(f"Report: {VALIDATION_LAYER / 'independent_validation_report.md'}")
     return 0
 
 

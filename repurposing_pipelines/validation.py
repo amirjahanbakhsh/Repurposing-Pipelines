@@ -813,7 +813,10 @@ def validate_lca_model_input_csvs(
                 "observed": "missing file",
                 "expected": "both files present",
                 "status": "review_required",
-                "notes": "Create data/inputs/lca_inventory_template.csv and data/inputs/lca_process_mapping.csv.",
+                "notes": (
+                    "Create model_layers/05_lca/lca_inventory_template.csv and "
+                    "model_layers/05_lca/lca_process_mapping.csv."
+                ),
             }
         ]
 
@@ -1453,6 +1456,13 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
+def _display_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(Path.cwd().resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
 def _status_counts(rows: list[dict[str, Any]]) -> str:
     counts: dict[str, int] = {}
     for row in rows:
@@ -1501,6 +1511,7 @@ def write_validation_report(
     lca_method_rows: list[dict[str, Any]],
     lca_model_input_rows: list[dict[str, Any]],
     dashboard_rows: list[dict[str, Any]],
+    output_files: list[Path],
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -1831,19 +1842,7 @@ These CSVs are the bridge between our open model and the private LCA database. T
 
 ## Output Files
 
-- `data/validation/data_extraction_validation.csv`
-- `data/validation/assumption_traceability_validation.csv`
-- `data/validation/assumption_evidence_register.csv`
-- `data/validation/co2_property_validation.csv`
-- `data/validation/capacity_validation.csv`
-- `data/validation/integrity_barlow_sanity_check.csv`
-- `data/validation/cost_arithmetic_validation.csv`
-- `data/validation/pre_lca_gate_validation.csv`
-- `data/validation/ecoinvent_process_mapping_validation.csv`
-- `data/validation/lca_reference_workbook_review.csv`
-- `data/validation/lca_method_reference_register.csv`
-- `data/validation/lca_model_input_csv_validation.csv`
-- `data/validation/validation_status_dashboard.csv`
+{chr(10).join(f"- `{_display_path(output_file)}`" for output_file in output_files)}
 
 ## Next Validation Actions
 
@@ -1867,6 +1866,7 @@ def run_independent_validation(
     report_path: Path,
     lca_inventory_template_path: Path,
     lca_process_mapping_path: Path,
+    output_paths: dict[str, Path] | None = None,
     ecoinvent_dir: Path | None = None,
     lca_workbook_path: Path | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
@@ -1898,19 +1898,36 @@ def run_independent_validation(
         lca_reference_rows=lca_reference_rows,
     )
 
-    write_csv(validation_dir / "data_extraction_validation.csv", data_rows)
-    write_csv(validation_dir / "assumption_traceability_validation.csv", assumption_rows)
-    write_csv(validation_dir / "assumption_evidence_register.csv", assumption_evidence_rows)
-    write_csv(validation_dir / "co2_property_validation.csv", property_rows)
-    write_csv(validation_dir / "capacity_validation.csv", capacity_rows)
-    write_csv(validation_dir / "integrity_barlow_sanity_check.csv", integrity_rows)
-    write_csv(validation_dir / "cost_arithmetic_validation.csv", cost_rows)
-    write_csv(validation_dir / "pre_lca_gate_validation.csv", gate_rows)
-    write_csv(validation_dir / "ecoinvent_process_mapping_validation.csv", ecoinvent_rows)
-    write_csv(validation_dir / "lca_reference_workbook_review.csv", lca_reference_rows)
-    write_csv(validation_dir / "lca_method_reference_register.csv", lca_method_rows)
-    write_csv(validation_dir / "lca_model_input_csv_validation.csv", lca_model_input_rows)
-    write_csv(validation_dir / "validation_status_dashboard.csv", dashboard_rows)
+    default_outputs = {
+        "data": validation_dir / "data_extraction_validation.csv",
+        "assumptions": validation_dir / "assumption_traceability_validation.csv",
+        "assumption_evidence": validation_dir / "assumption_evidence_register.csv",
+        "property": validation_dir / "co2_property_validation.csv",
+        "capacity": validation_dir / "capacity_validation.csv",
+        "integrity": validation_dir / "integrity_barlow_sanity_check.csv",
+        "cost": validation_dir / "cost_arithmetic_validation.csv",
+        "gate": validation_dir / "pre_lca_gate_validation.csv",
+        "ecoinvent": validation_dir / "ecoinvent_process_mapping_validation.csv",
+        "lca_reference": validation_dir / "lca_reference_workbook_review.csv",
+        "lca_method": validation_dir / "lca_method_reference_register.csv",
+        "lca_model_inputs": validation_dir / "lca_model_input_csv_validation.csv",
+        "dashboard": validation_dir / "validation_status_dashboard.csv",
+    }
+    outputs = {**default_outputs, **(output_paths or {})}
+
+    write_csv(outputs["data"], data_rows)
+    write_csv(outputs["assumptions"], assumption_rows)
+    write_csv(outputs["assumption_evidence"], assumption_evidence_rows)
+    write_csv(outputs["property"], property_rows)
+    write_csv(outputs["capacity"], capacity_rows)
+    write_csv(outputs["integrity"], integrity_rows)
+    write_csv(outputs["cost"], cost_rows)
+    write_csv(outputs["gate"], gate_rows)
+    write_csv(outputs["ecoinvent"], ecoinvent_rows)
+    write_csv(outputs["lca_reference"], lca_reference_rows)
+    write_csv(outputs["lca_method"], lca_method_rows)
+    write_csv(outputs["lca_model_inputs"], lca_model_input_rows)
+    write_csv(outputs["dashboard"], dashboard_rows)
     write_validation_report(
         report_path,
         data_rows=data_rows,
@@ -1926,6 +1943,7 @@ def run_independent_validation(
         lca_method_rows=lca_method_rows,
         lca_model_input_rows=lca_model_input_rows,
         dashboard_rows=dashboard_rows,
+        output_files=list(outputs.values()),
     )
 
     return {

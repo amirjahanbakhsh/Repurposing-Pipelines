@@ -1,0 +1,8 @@
+module,validation_type,check,observed,expected,status,reference,notes
+data_extraction,raw_to_processed_count,raw feature count equals processed CSV row count,9025,9025,pass,NSTA raw attributes JSON,Confirms that no features were lost between raw extract and processed CSV.
+data_extraction,required_fields_present,required NSTA fields exist in processed CSV,none missing,all required fields present,pass,NSTA processed attributes CSV,Checks that the fields needed for screening are available as columns.
+data_extraction,ranked_candidates_are_model_ready,"ranked candidates have positive internal diameter, pressure, and wall thickness",155,155,pass,NSTA ranked candidate CSV,All ranked candidates have usable engineering values.
+data_extraction,spot_check_known_ranked_candidate,PL774 is present and ranked,CATS PIPELINE,CATS,pass,NSTA processed and ranked data,Spot-checks that known large candidates survive extraction and ranking.
+data_extraction,spot_check_known_ranked_candidate,PL1761 is present and ranked,20in Gas Trunkline - Schiehallion PLEM to Sullom Voe terminal,Schiehallion,pass,NSTA processed and ranked data,Spot-checks that known large candidates survive extraction and ranking.
+data_extraction,spot_check_known_ranked_candidate,PL762 is present and ranked,SAGE ALVHEIM TIE-IN SPOOL,SAGE,pass,NSTA processed and ranked data,Spot-checks that known large candidates survive extraction and ranking.
+data_extraction,known_ccs_candidate_data_gap,Goldeneye exists in NSTA but is not model-ready from NSTA alone,92 NSTA matches; 0 ranked matches,Goldeneye present but engineering fields incomplete,data_gap_confirmed,NSTA processed and ranked data,This supports the project observation that Goldeneye needs external enrichment.

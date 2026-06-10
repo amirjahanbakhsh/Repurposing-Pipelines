@@ -25,6 +25,7 @@ Current work includes:
 - validation source register linking external tools, standards, literature, and databases to each model module.
 - short project positioning note explaining novelty and selling points.
 - first executable independent validation checks for CO2 properties, capacity arithmetic, integrity wall thickness, and cost arithmetic.
+- LCA data strategy for using local ecoinvent data without committing licensed datasets to GitHub.
 
 ## Repository Structure
 
@@ -77,6 +78,14 @@ If CoolProp is missing on a new computer, install it once:
 ```powershell
 python -m pip install CoolProp
 ```
+
+Run validation with local LCA evidence:
+
+```powershell
+python scripts\run_independent_validation.py --ecoinvent-dir "D:\Amir\Heriot-Watt University Team Dropbox\RES_EPS_RCCS_Susana_Garcia\RCCS_Capture_Amir Jahanbakhsh\3. USorb-DAC Work\Ecoinvent_data_exported\Ecoinvent_apos_38" --lca-workbook "C:\Users\aj52\OneDrive - Heriot-Watt University\USorb-DAC\1-s2.0-S1750583623002098-mmc2.xlsx"
+```
+
+This reads local licensed/reference data and stores only mapping summaries in the repo.
 
 Choose and run one pipeline scenario:
 
@@ -146,6 +155,8 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `reports/pipeline_screen_nsta_pl774.md`: example report for running one selected NSTA candidate.
 - `data/benchmarks/goldeneye_benchmark_trace.json`: traceable inputs, outputs, assumptions, warnings, and formula notes for each Goldeneye module.
 - `data/inputs/nsta_screening_defaults.csv`: simple assumptions used when NSTA does not provide all model inputs.
+- `data/inputs/lca_inventory_template.csv`: shareable list of LCA inventory quantities the model should calculate or request.
+- `data/inputs/lca_process_mapping.csv`: shareable ecoinvent process-mapping metadata; does not contain licensed impact factors.
 - `docs/system_architecture.md`: proposed modular architecture, traceability design, and pre-/post-LCA decision gates.
 - `docs/tooling_strategy.md`: strategy for using REPACT, NETL cost tools, CoolProp/REFPROP, openLCA/Brightway, ecoinvent, and future well repurposing.
 - `docs/model_validation_review.md`: initial model validation review for CO2 properties, hydraulics, corrosion, cost, and LCA.
@@ -158,6 +169,7 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `data/validation/integrity_barlow_sanity_check.csv`: simple wall-thickness sanity check that flags integrity items needing review.
 - `data/validation/cost_arithmetic_validation.csv`: cost component and contingency arithmetic check.
 - `docs/novelty_and_selling_points.md`: simple explanation of what is novel and competitive about the project.
+- `docs/lca_data_strategy.md`: how to use ecoinvent and LCA references safely for future modelling.
 - `docs/similar_tools_and_data_sources.md`: notes on similar tools such as NETL REPACT, NETL CO2 Transport Cost Model, SimCCS, and Sequestrix.
 
 ## Optional Full Geometry Download

@@ -1,0 +1,149 @@
+# LCA Data Strategy
+
+Date: 2026-06-10
+
+## Purpose
+
+This document explains how we should use ecoinvent and other LCA references for future modelling.
+
+The main rule is:
+
+> Keep the model open, but keep licensed LCA databases private.
+
+So GitHub should contain our scripts, assumptions, dataset mapping, and reports. It should not contain the ecoinvent unit-process database.
+
+## Best Approach
+
+Use a three-layer structure.
+
+| Layer | What it stores | Can it go to GitHub? |
+| --- | --- | --- |
+| Project inventory | Our quantities, such as steel mass, electricity use, diesel use, transport distance, and waste mass. | Yes |
+| Process mapping | Which ecoinvent process should be used for each inventory item. | Yes, as metadata only |
+| Licensed database | Full ecoinvent process data and impact factors. | No |
+
+This means our model can say:
+
+```text
+pipeline_steel -> market for steel, low-alloyed
+electricity -> market group for electricity, medium voltage
+decommissioned_pipeline -> market for decommissioned pipeline, natural gas
+```
+
+But it should not copy the full ecoinvent process inventories into the repository.
+
+## CSV Files The Model Can Use
+
+Two shareable CSV files have been added:
+
+```text
+data/inputs/lca_inventory_template.csv
+data/inputs/lca_process_mapping.csv
+```
+
+How they should be used:
+
+- `lca_inventory_template.csv` lists the quantities our model must calculate or request from the user.
+- `lca_process_mapping.csv` links each inventory item to a candidate ecoinvent process name, location, reference product, and unit.
+
+These files are safe to keep in GitHub because they contain mapping metadata only. They do not contain licensed ecoinvent impact factors or unit-process inventories.
+
+## What We Need For Pipeline Reuse LCA
+
+For the first LCA version, the model should compare:
+
+- reuse existing pipeline;
+- build a new equivalent CO2 pipeline.
+
+Minimum inventory items:
+
+| Inventory item | Why it is needed |
+| --- | --- |
+| pipeline steel mass | Main material difference between reuse and new-build. |
+| coating/insulation proxy | May be relevant for new-build and refurbishment. |
+| construction/refurbishment activity | Captures installation or modification burden. |
+| electricity | Compression, pumping, operation, and auxiliary loads. |
+| diesel machinery | Construction/refurbishment equipment proxy. |
+| freight transport | Movement of materials and waste. |
+| decommissioned pipeline | Reuse, abandonment, or disposal scenario. |
+| scrap steel/waste steel | End-of-life and recycling treatment. |
+| storage/injection infrastructure | Needed when pipeline screening is linked to full CCS chain. |
+
+## Useful Local Evidence
+
+The local ecoinvent folder supplied for this project is:
+
+```text
+D:\Amir\Heriot-Watt University Team Dropbox\RES_EPS_RCCS_Susana_Garcia\RCCS_Capture_Amir Jahanbakhsh\3. USorb-DAC Work\Ecoinvent_data_exported\Ecoinvent_apos_38
+```
+
+The validation script reads:
+
+```text
+FilenameToActivtiyLookup.csv
+datasets/
+```
+
+It checks whether suitable process candidates exist. It does not copy `.spold` files into the repository.
+
+## Useful LCA Workbook
+
+The supplied workbook:
+
+```text
+C:\Users\aj52\OneDrive - Heriot-Watt University\USorb-DAC\1-s2.0-S1750583623002098-mmc2.xlsx
+```
+
+is useful because it contains example inventory structures:
+
+- capture cases per tonne of captured CO2;
+- auxiliary processes;
+- permanent storage at Northern Lights per tonne of injected CO2;
+- pipeline, injection well, electricity, diesel, steel, and decommissioned pipeline entries.
+
+Use it as a template for structure, not as a direct copy of values.
+
+## Useful LCA Method References
+
+The supplied PDFs are useful for method validation:
+
+- NORSUS, `Guidelines for Life Cycle Assessment (LCA) of CCU systems`, OR 28.22, 2022.
+- IOGP Report 672, `Overview of lifecycle assessment for carbon capture and storage projects`, March 2024.
+
+They support decisions on:
+
+- functional unit;
+- system boundary;
+- reference system;
+- baseline;
+- shared transport and storage networks;
+- allocation or proportional treatment;
+- reporting across the CCS project life cycle.
+
+## Recommended Future Data Flow
+
+1. Pipeline model calculates engineering quantities.
+2. LCA inventory builder converts those quantities into LCA inputs.
+3. Dataset mapper links each input to an ecoinvent process.
+4. Brightway or openLCA calculates impacts locally.
+5. GitHub stores only the model code, mapping, and derived report.
+
+## First Functional Unit
+
+Recommended first functional unit:
+
+> Transport and store 1 tonne of CO2 through a selected pipeline route over the selected project lifetime.
+
+For pipeline-only comparison:
+
+> Provide CO2 transport capacity for 1 tonne of CO2 over the selected route, comparing reuse of the existing pipeline with construction of a new equivalent pipeline.
+
+## Important Caveat
+
+LCA should not be used to make a positive decision if the pipeline fails the pre-LCA technical gate.
+
+The first LCA module should therefore run after the pre-LCA gate and should clearly say whether the LCA is:
+
+- decision-grade;
+- sensitivity-only;
+- blocked by missing technical evidence.

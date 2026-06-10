@@ -147,6 +147,13 @@ Independent LCA validation needs:
 - Brightway or openLCA calculation route recorded;
 - sensitivity tests for steel mass, construction activity, refurbishment, electricity, and lifetime.
 
+The first shareable LCA input files are:
+
+- `data/inputs/lca_inventory_template.csv`;
+- `data/inputs/lca_process_mapping.csv`.
+
+These files store project inventory fields and process-mapping metadata only. They do not store licensed ecoinvent unit-process data.
+
 LCA should answer:
 
 > What environmental impact is avoided, added, or shifted by reusing this asset instead of building a new one?

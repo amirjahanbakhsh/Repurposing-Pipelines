@@ -56,8 +56,30 @@ def _money(value: float) -> str:
     return f"${value:,.0f}"
 
 
+def _markdown_cell(value: Any) -> str:
+    text = str(value).replace("\r", " ").replace("\n", " ").replace("|", "/")
+    return " ".join(text.split())
+
+
+def markdown_table(headers: list[str], rows: list[list[Any]]) -> str:
+    lines = [
+        "| " + " | ".join(headers) + " |",
+        "| " + " | ".join("---" for _ in headers) + " |",
+    ]
+    for row in rows:
+        lines.append("| " + " | ".join(_markdown_cell(item) for item in row) + " |")
+    return "\n".join(lines)
+
+
 def _to_float(value: Any) -> float:
     return float(str(value).strip())
+
+
+def _safe_float(value: Any, default: float = 0.0) -> float:
+    try:
+        return _to_float(value)
+    except (TypeError, ValueError):
+        return default
 
 
 def _year_from_date(value: str) -> int | None:
@@ -118,8 +140,13 @@ Meaning: {row["pre_lca_reason_summary"]}
 | CO2 capacity | {row["capacity_mtpa"]:.2f} MtCO2/year |
 | Required design flow | {row["required_design_mtpa"]:.2f} MtCO2/year |
 | Remaining life | {row["remaining_life_years"]:.2f} years |
+| Remaining life range | {row["remaining_life_low_years"]:.2f} to {row["remaining_life_high_years"]:.2f} years |
 | Available wall thickness | {row["available_wall_thickness_mm"]:.2f} mm |
+| Corrosion risk | {row["corrosion_risk_level"]} |
 | Benchmark avoided new-build CAPEX | {_money(row["cost_total_usd_2025"])} |
+| NETL cost check | {row["netl_cost_validation_status"]} |
+| LCA proxy saving | {row["lca_proxy_saving_percent"]:.1f}% |
+| LCA screen | {row["lca_screening_decision"]} |
 
 ## Why This Decision?
 
@@ -242,6 +269,10 @@ def build_nsta_scenario(
     inner_diameter_mm = _to_float(nsta_row["INT_DIAM"])
     wall_thickness_mm = _to_float(nsta_row["THICKNESS"])
     pressure_barg = _to_float(nsta_row["MX_OP_PRES"])
+    if length_km <= 0:
+        raise ValueError(
+            f"NSTA pipeline {nsta_id} cannot be screened because length is zero or missing."
+        )
     outer_diameter_mm = inner_diameter_mm + 2 * wall_thickness_mm
     inlet_pressure_psia = (pressure_barg + 1.01325) * BAR_TO_PSI
     default_outlet_psia = _default_number(defaults, "outlet_pressure_psia")
@@ -369,6 +400,19 @@ def build_nsta_scenario(
         "pipe_grade",
         "historical_corrosion_rate_mm_per_year",
         "future_co2_corrosion_rate_mm_per_year",
+        "future_co2_corrosion_rate_low_mm_per_year",
+        "future_co2_corrosion_rate_high_mm_per_year",
+        "nominal_wall_thickness_uncertainty_fraction",
+        "minimum_wall_thickness_uncertainty_fraction",
+        "historical_wall_loss_uncertainty_fraction",
+        "co2_water_content_ppmv",
+        "co2_water_spec_limit_ppmv",
+        "water_dew_point_margin_c",
+        "steel_density_kg_per_m3",
+        "lca_refurbishment_steel_fraction",
+        "lca_pipeline_steel_factor_kgco2e_per_kg",
+        "lca_new_build_construction_factor_kgco2e_per_km",
+        "lca_refurbishment_activity_factor_kgco2e_per_km",
         "contingency_fraction",
     ]:
         records[parameter] = _default_record(scenario_name, defaults, parameter)
@@ -418,6 +462,232 @@ def screen_one_pipeline(
         trace_path=trace_path,
     )
     return row
+
+
+def _status_counts(rows: list[dict[str, Any]], key: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in rows:
+        value = str(row.get(key, "unknown"))
+        counts[value] = counts.get(value, 0) + 1
+    return counts
+
+
+def _counts_table(counts: dict[str, int]) -> str:
+    if not counts:
+        return "| Value | Count |\n| --- | --- |\n"
+    lines = ["| Value | Count |", "| --- | --- |"]
+    for key, value in sorted(counts.items()):
+        lines.append(f"| {key} | {value} |")
+    return "\n".join(lines)
+
+
+def _screening_sort_key(row: dict[str, Any]) -> tuple[int, float, float, float]:
+    decision_rank = {"pass": 3, "marginal": 2, "fail": 1, "insufficient_data": 0}
+    return (
+        decision_rank.get(str(row.get("pre_lca_decision")), 0),
+        float(row.get("capacity_mtpa") or 0),
+        float(row.get("remaining_life_low_years") or 0),
+        float(row.get("lca_proxy_saving_percent") or 0),
+    )
+
+
+def _row_length_km(row: dict[str, Any]) -> float:
+    return _safe_float(row.get("length_km", 0))
+
+
+def _row_rank(row: dict[str, Any]) -> float:
+    return _safe_float(row.get("nsta_rank", 999999), 999999)
+
+
+def _dedupe_longest_by_nsta_id(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    selected: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        key = str(row.get("nsta_pipeline_number") or row.get("scenario") or "")
+        existing = selected.get(key)
+        if existing is None or _row_length_km(row) > _row_length_km(existing):
+            selected[key] = row
+    return list(selected.values())
+
+
+def write_batch_screening_report(
+    path: Path,
+    *,
+    rows: list[dict[str, Any]],
+    candidates_path: Path,
+    defaults_path: Path,
+    output_csv_path: Path,
+    trace_path: Path,
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    strategic_rows = [row for row in rows if _row_length_km(row) >= 1]
+    strategic_unique_rows = _dedupe_longest_by_nsta_id(strategic_rows)
+    sorted_rows = sorted(strategic_unique_rows, key=_row_rank)
+    top_rows = []
+    for row in sorted_rows[:30]:
+        top_rows.append(
+            [
+                row.get("nsta_rank", ""),
+                row.get("nsta_pipeline_number", ""),
+                row.get("pipeline_name", ""),
+                row.get("nsta_fluid", ""),
+                row.get("nsta_status", ""),
+                f"{float(row.get('length_km') or 0):.1f}",
+                row.get("pre_lca_decision", ""),
+                f"{float(row.get('capacity_mtpa') or 0):.2f}",
+                f"{float(row.get('remaining_life_low_years') or 0):.1f}",
+                f"{float(row.get('remaining_life_years') or 0):.1f}",
+                f"{float(row.get('remaining_life_high_years') or 0):.1f}",
+                row.get("corrosion_risk_level", ""),
+                f"{float(row.get('lca_proxy_saving_percent') or 0):.1f}",
+            ]
+        )
+
+    report = f"""# NSTA Pipeline Batch Screening
+
+Generated: {dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
+
+Candidate file: `{_path_text(candidates_path)}`
+
+Default assumptions: `{_path_text(defaults_path)}`
+
+Outputs:
+
+- `{_path_text(output_csv_path)}`
+- `{_path_text(trace_path)}`
+
+## Plain Result
+
+This report screens all model-ready NSTA hydrocarbon pipeline candidates in one run.
+
+This is the right first use of the tool: screen many pipelines, rank them, then inspect one pipeline in detail.
+
+The full CSV keeps all screened records, including short connecting segments. The table below focuses on strategic pipelines at least 1 km long and keeps the longest record for each NSTA pipeline number.
+
+Wall thickness is treated as uncertain for every pipeline, not only Goldeneye. Goldeneye simply uses a wider uncertainty band because its source data are less clear.
+
+## Candidate Count
+
+Screened pipelines: `{len(rows)}`
+
+Strategic screened records at least 1 km long: `{len(strategic_rows)}`
+
+Unique strategic NSTA pipeline numbers after keeping the longest record per number: `{len(strategic_unique_rows)}`
+
+## Pre-LCA Decisions
+
+{_counts_table(_status_counts(rows, "pre_lca_decision"))}
+
+## Pre-LCA Decisions For Unique Strategic Pipelines
+
+{_counts_table(_status_counts(strategic_unique_rows, "pre_lca_decision"))}
+
+## Corrosion Risk
+
+{_counts_table(_status_counts(rows, "corrosion_risk_level"))}
+
+## Top 30 Strategic Screened Pipelines
+
+{markdown_table(["NSTA rank", "NSTA no.", "Pipeline", "Fluid", "Status", "Length km", "Decision", "Capacity Mtpa", "Life low", "Life base", "Life high", "Corr. risk", "LCA saving %"], top_rows)}
+
+## How To Use This
+
+1. Start with the top table.
+2. Pick a pipeline number such as `PL774`.
+3. Run the single-pipeline command for a detailed report:
+
+```powershell
+python scripts\\run_pipeline_screen.py --nsta-id PL774
+```
+
+## Important Caveat
+
+This is still screening. The strongest candidates are not approved pipelines. They are candidates for data enrichment, technical validation, NETL cost comparison, and proper LCA.
+"""
+    path.write_text(report, encoding="utf-8")
+
+
+def screen_all_nsta_pipelines(
+    *,
+    candidates_path: Path,
+    defaults_path: Path,
+    output_csv_path: Path,
+    trace_path: Path,
+    report_path: Path,
+    limit: int | None = None,
+) -> list[dict[str, Any]]:
+    candidates = read_csv_rows(candidates_path)
+    if limit is not None:
+        candidates = candidates[:limit]
+    defaults = read_defaults(defaults_path)
+    rows: list[dict[str, Any]] = []
+    traces: list[dict[str, Any]] = []
+    for nsta_row in candidates:
+        scenario_name = f"nsta_{safe_filename(nsta_row.get('NSTAPIPNO', 'unknown'))}"
+        try:
+            scenario = build_nsta_scenario(nsta_row=nsta_row, defaults=defaults)
+            row, trace = benchmark_scenario_with_trace(scenario.name, scenario)
+            row["screening_error"] = ""
+        except ValueError as exc:
+            row = {
+                "scenario": scenario_name,
+                "pipeline_name": nsta_row.get("PIPE_NAME", ""),
+                "length_km": _safe_float(nsta_row.get("LENGTH_KM", 0) or 0),
+                "input_mode": "nsta_batch_candidate_plus_defaults",
+                "nsta_pipeline_number": nsta_row.get("NSTAPIPNO", ""),
+                "nsta_rank": nsta_row.get("RANK", ""),
+                "nsta_fluid": nsta_row.get("FLUID", ""),
+                "nsta_status": nsta_row.get("STATUS", ""),
+                "capacity_mtpa": 0,
+                "remaining_life_low_years": 0,
+                "remaining_life_years": 0,
+                "remaining_life_high_years": 0,
+                "corrosion_risk_level": "not_assessed",
+                "lca_proxy_saving_percent": 0,
+                "pre_lca_decision": "insufficient_data",
+                "pre_lca_confidence": "low",
+                "pre_lca_reason_summary": str(exc),
+                "screening_error": str(exc),
+            }
+            trace = {
+                "scenario": scenario_name,
+                "pipeline_name": nsta_row.get("PIPE_NAME", ""),
+                "model_version": "pipeline_screen_nsta_batch_v0.1",
+                "nsta_candidate": nsta_row,
+                "defaults_path": _path_text(defaults_path),
+                "screening_error": str(exc),
+            }
+        row["input_mode"] = "nsta_batch_candidate_plus_defaults"
+        row["nsta_pipeline_number"] = nsta_row.get("NSTAPIPNO", "")
+        row["nsta_rank"] = nsta_row.get("RANK", "")
+        row["nsta_fluid"] = nsta_row.get("FLUID", "")
+        row["nsta_status"] = nsta_row.get("STATUS", "")
+        trace["model_version"] = "pipeline_screen_nsta_batch_v0.1"
+        trace["nsta_candidate"] = nsta_row
+        trace["defaults_path"] = _path_text(defaults_path)
+        rows.append(row)
+        traces.append(trace)
+
+    if rows:
+        output_csv_path.parent.mkdir(parents=True, exist_ok=True)
+        fieldnames: list[str] = []
+        for row in rows:
+            for key in row:
+                if key not in fieldnames:
+                    fieldnames.append(key)
+        with output_csv_path.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+            writer.writeheader()
+            writer.writerows(rows)
+    write_trace(trace_path, traces)
+    write_batch_screening_report(
+        report_path,
+        rows=rows,
+        candidates_path=candidates_path,
+        defaults_path=defaults_path,
+        output_csv_path=output_csv_path,
+        trace_path=trace_path,
+    )
+    return rows
 
 
 def screen_nsta_pipeline(

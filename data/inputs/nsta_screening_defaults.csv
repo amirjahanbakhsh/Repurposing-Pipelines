@@ -15,6 +15,19 @@ assessment_year,2026,year,project_default,assumed,Used to estimate historical op
 fallback_historical_corrosion_years,25,years,screening_default,assumed,Used when NSTA start date is missing
 historical_corrosion_rate_mm_per_year,0.05,mm/year,screening_default,assumed,Simple historical corrosion placeholder for first screening only
 future_co2_corrosion_rate_mm_per_year,0.10,mm/year,screening_default,assumed,Simple future CO2 corrosion placeholder for first screening only
+future_co2_corrosion_rate_low_mm_per_year,0.02,mm/year,screening_default,assumed,Optimistic dry-CO2 corrosion sensitivity for batch screening
+future_co2_corrosion_rate_high_mm_per_year,0.20,mm/year,screening_default,assumed,Conservative dry-CO2 corrosion sensitivity for batch screening
+nominal_wall_thickness_uncertainty_fraction,0.10,fraction,screening_default,assumed,Wall thickness uncertainty range for NSTA records before inspection evidence is available
+minimum_wall_thickness_uncertainty_fraction,0.30,fraction,screening_default,assumed,Minimum wall uncertainty range for screening until design-code basis is verified
+historical_wall_loss_uncertainty_fraction,0.25,fraction,screening_default,assumed,Historical wall loss uncertainty range for screening
+co2_water_content_ppmv,50,ppmv,screening_default,assumed,Placeholder dry CO2 water content for corrosion screening
+co2_water_spec_limit_ppmv,500,ppmv,screening_default,assumed,Placeholder water specification limit for corrosion screening
+water_dew_point_margin_c,10,degC,screening_default,assumed,Assumed positive margin to water dew point for dry-CO2 screening
+steel_density_kg_per_m3,7850,kg/m3,engineering_reference,assumed,Carbon steel density used for first LCA inventory calculation
+lca_refurbishment_steel_fraction,0.05,fraction,screening_default,assumed,Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening
+lca_pipeline_steel_factor_kgco2e_per_kg,2.0,kgCO2e/kg,screening_lca_proxy,assumed,Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result
+lca_new_build_construction_factor_kgco2e_per_km,100000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result
+lca_refurbishment_activity_factor_kgco2e_per_km,20000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data
 reference_cost_length_km,101.68,km,goldeneye_benchmark,reported,Goldeneye length used to scale cost components by length only
 cost_material_usd_2025,54181373,USD,goldeneye_benchmark,reported,Reference cost component scaled by length for NSTA screening
 cost_labor_usd_2025,109835004,USD,goldeneye_benchmark,reported,Reference cost component scaled by length for NSTA screening

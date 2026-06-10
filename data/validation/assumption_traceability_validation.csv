@@ -1,4 +1,4 @@
 module,validation_type,check,observed,expected,status,reference,notes
 assumption_register,required_trace_fields,"every assumption has value, unit, source, quality, and notes",0,0,pass,assumption CSV files,No blank traceability fields found.
 assumption_register,quality_labels,quality labels use approved terms,0,0,pass,assumption CSV files,All quality labels are recognised.
-assumption_register,assumption_visibility,assumed values are visible rather than hidden,26,explicitly labelled,pass,assumption CSV files,Assumed values are acceptable at screening stage when they are clearly labelled.
+assumption_register,assumption_visibility,assumed values are visible rather than hidden,65,explicitly labelled,pass,assumption CSV files,Assumed values are acceptable at screening stage when they are clearly labelled.

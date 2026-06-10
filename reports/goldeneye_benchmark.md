@@ -1,6 +1,6 @@
 # Goldeneye Benchmark
 
-Generated: 2026-06-09T16:56:43+00:00
+Generated: 2026-06-10T08:48:48+00:00
 
 Assumptions: `data/benchmarks/goldeneye_assumptions.csv`
 
@@ -43,17 +43,28 @@ The benchmark currently reproduces the headline capacity, remaining-life, and co
 
 ## Integrity / Lifetime Benchmark
 
-| Scenario | Nominal wall mm | Wall loss mm | Available wall mm | Future corrosion mm/yr | Calculated life years | Reported life years |
-| --- | --- | --- | --- | --- | --- | --- |
-| goldeneye_dissertation | 22.23 | 8.21 | 7.79 | 0.10 | 77.94 | 78.00 |
-| goldeneye_poster | 14.28 | 2.93 | 4.91 | 0.20 | 24.55 | 24.54 |
+| Scenario | Nominal wall mm | Wall loss mm | Available wall mm | Corrosion risk | Low corr. | Base corr. | High corr. | Conservative life | Base life | Optimistic life |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| goldeneye_dissertation | 22.23 | 8.21 | 7.79 | medium | 0.020 | 0.100 | 0.200 | 0.00 | 77.94 | 901.47 |
+| goldeneye_poster | 14.28 | 2.93 | 4.91 | medium | 0.050 | 0.200 | 0.400 | 0.00 | 24.55 | 247.25 |
 
 ## Cost Benchmark
 
-| Scenario | Subtotal | Contingency | Calculated total | Reported total |
-| --- | --- | --- | --- | --- |
-| goldeneye_dissertation | $207,728,010 | $20,772,801 | $228,500,811 | $228,500,812 |
-| goldeneye_poster | $207,728,010 | $20,772,801 | $228,500,811 | $228,500,812 |
+| Scenario | Subtotal | Contingency | Calculated total | Reported total | NETL status |
+| --- | --- | --- | --- | --- | --- |
+| goldeneye_dissertation | $207,728,010 | $20,772,801 | $228,500,811 | $228,500,812 | not_supplied |
+| goldeneye_poster | $207,728,010 | $20,772,801 | $228,500,811 | $228,500,812 | not_supplied |
+
+## LCA Screening Proxy
+
+| Scenario | New steel t | Refurb steel t | New-build proxy tCO2e | Reuse proxy tCO2e | Saving % | LCA screen |
+| --- | --- | --- | --- | --- | --- | --- |
+| goldeneye_dissertation | 27,073 | 1,354 | 64,313 | 4,741 | 92.6 | favour_reuse |
+| goldeneye_poster | 17,673 | 884 | 45,514 | 3,801 | 91.6 | favour_reuse |
+
+Plain meaning:
+
+This is the first calculated LCA-style screening result. It is useful for ranking and sensitivity, but it is not yet a final ecoinvent/Brightway result.
 
 ## Pre-LCA Gate
 
@@ -72,8 +83,9 @@ Plain meaning:
 ## Interpretation
 
 - The dissertation and poster use different Goldeneye wall-thickness assumptions.
-- The dissertation case uses a thicker nominal wall (`22.23 mm`) and lower future CO2 corrosion rate (`0.10 mm/year`), which gives a much longer remaining life.
-- The poster case uses a lower nominal wall (`14.28 mm`) and higher future CO2 corrosion rate (`0.20 mm/year`), which gives about `24.5 years`.
+- The dissertation case uses a thicker nominal wall (`22.23 mm`) and lower future CO2 corrosion rate (`0.10 mm/year`), which gives a much longer base remaining life.
+- The poster case uses a lower nominal wall (`14.28 mm`) and higher future CO2 corrosion rate (`0.20 mm/year`), which gives about `24.5 years` in the base case.
+- The uncertainty range is now reported separately because the Goldeneye wall basis is not cleanly resolved.
 - The capacity difference is mainly caused by the internal diameter/friction assumptions: `18.25 in` in the dissertation case versus about `18.876 in` in the poster case.
 - Cost is consistent between the two versions because both use the same Parker-style new-build cost breakdown.
 - Both Goldeneye cases are currently `marginal`, because the calculations pass but key assumptions still need independent validation before detailed LCA.
@@ -83,9 +95,11 @@ Plain meaning:
 Each scenario now has traceable module results for:
 
 - capacity;
+- corrosion;
 - integrity;
 - cost;
 - pre-LCA gate.
+- LCA screening proxy.
 
 The JSON trace records the inputs, outputs, assumptions, warnings, and formula notes used by each module. This is the first building block for the future web app evidence panel.
 
@@ -100,4 +114,4 @@ The project should not depend on Excel workbooks as the core engine. The profess
 
 ## Next Technical Step
 
-Add the first simple LCA screening module for reuse versus new-build pipeline emissions.
+Run the batch screening command for all model-ready NSTA pipelines, then prioritise the top candidates for data enrichment.

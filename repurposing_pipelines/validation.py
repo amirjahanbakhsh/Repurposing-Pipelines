@@ -14,7 +14,7 @@ from xml.etree import ElementTree as ET
 
 from .assumptions import ScenarioAssumptions, read_scenario_assumptions
 from .constants import G_PER_MOL_TO_KG_PER_MOL, INCH_TO_M, PSI_TO_PA, UNIVERSAL_GAS_CONSTANT
-from .costs import COST_COMPONENT_PARAMETERS
+from .costs import COST_COMPONENT_PARAMETERS, evaluate_cost
 from .gates import evaluate_pre_lca_gate
 from .goldeneye import benchmark_scenario_with_trace
 from .hydraulics import average_pressure_pa
@@ -544,12 +544,12 @@ def assumption_evidence_register() -> list[dict[str, Any]]:
         },
         {
             "assumption_family": "corrosion_and_co2_stream_quality",
-            "current_parameters": "future_co2_corrosion_rate_mm_per_year",
-            "current_sources": "dissertation; poster; screening defaults",
-            "evidence_needed": "CO2 corrosion model, water content, impurities, pH/fugacity/shear-stress basis",
+            "current_parameters": "future_co2_corrosion_rate_mm_per_year; future_co2_corrosion_rate_low/high_mm_per_year; co2_water_content_ppmv; co2_water_spec_limit_ppmv; water_dew_point_margin_c",
+            "current_sources": "dissertation; poster; screening defaults; project screening assumptions",
+            "evidence_needed": "CO2 corrosion model, water content, impurities, pH/fugacity/shear-stress basis, dew-point basis",
             "recommended_sources": "NORSOK M-506; ISO 27913; DNV guidance; CO2 stream-quality literature",
-            "current_status": "not_implemented",
-            "notes": "Current model uses a user-supplied corrosion rate only; it does not calculate CO2 corrosion.",
+            "current_status": "review_required",
+            "notes": "A dry-CO2 screening risk module now exists, but it is not a calibrated NORSOK/DNV corrosion model.",
         },
         {
             "assumption_family": "cost",
@@ -566,8 +566,8 @@ def assumption_evidence_register() -> list[dict[str, Any]]:
             "current_sources": "ecoinvent APOS 3.8 export; supplied LCA supplementary workbook",
             "evidence_needed": "functional unit, system boundary, dataset names, database version, allocation model, impact method",
             "recommended_sources": "ISO 14040/14044; ecoinvent; Brightway; openLCA; supplied LCA workbook; CCS LCA papers",
-            "current_status": "validated_for_mapping",
-            "notes": "Local ecoinvent export and the supplied workbook provide a useful starting point, but no LCA calculation is coded yet.",
+            "current_status": "validated_for_screening",
+            "notes": "A first open proxy calculates steel mass and reuse/new-build CO2e screening. Full ecoinvent calculation is still separate.",
         },
         {
             "assumption_family": "wells",
@@ -1045,6 +1045,8 @@ def validate_integrity_barlow_sanity(
 def validate_cost_arithmetic(scenarios: dict[str, ScenarioAssumptions]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for scenario_name, scenario in sorted(scenarios.items()):
+        cost_result = evaluate_cost(scenario)
+        cost_outputs = cost_result.output_map()
         component_sum = sum(scenario.number(name) for name in COST_COMPONENT_PARAMETERS)
         contingency = component_sum * scenario.number("contingency_fraction")
         total = component_sum + contingency
@@ -1065,11 +1067,20 @@ def validate_cost_arithmetic(scenarios: dict[str, ScenarioAssumptions]) -> list[
                 "calculated_total_usd_2025": _round(total, 2),
                 "reported_total_usd_2025": _round(reported, 2),
                 "difference_usd_2025": _round(difference, 2),
+                "netl_reference_total_usd_2025": _round(
+                    cost_outputs.get("netl_reference_total_capex_usd_2025"),
+                    2,
+                ),
+                "netl_difference_percent": _round(
+                    cost_outputs.get("netl_cost_delta_percent"),
+                    2,
+                ),
+                "netl_status": cost_outputs.get("netl_cost_validation_status"),
                 "status": status,
                 "reference": "student reported cost total",
                 "notes": (
                     "This validates the arithmetic only. Independent cost-model validation "
-                    "against NETL CO2_T_COM is still pending."
+                    "against NETL CO2_T_COM runs when a like-for-like NETL reference is supplied."
                 ),
             }
         )
@@ -1207,6 +1218,15 @@ def lca_method_reference_register() -> list[dict[str, Any]]:
             "notes": "Defines the formal LCA framework; use as the baseline method requirement.",
         },
         {
+            "source_id": "jrc_ilcd_handbook_2011",
+            "source_type": "guidance",
+            "source_name": "International Reference Life Cycle Data System (ILCD) Handbook, 2011",
+            "module": "lca_method",
+            "use_in_project": "practical quality, consistency, and documentation guidance for LCA studies",
+            "status": "method_reference",
+            "notes": "Useful bridge between ISO requirements and practical modelling decisions.",
+        },
+        {
             "source_id": "norsus_ccu_lca_guidelines_2022",
             "source_type": "report",
             "source_name": "Guidelines for Life Cycle Assessment (LCA) of CCU systems, NORSUS OR 28.22, 2022",
@@ -1225,6 +1245,15 @@ def lca_method_reference_register() -> list[dict[str, Any]]:
             "notes": "Especially useful for future shared network/hub cases.",
         },
         {
+            "source_id": "global_co2_initiative_guidelines",
+            "source_type": "guidance",
+            "source_name": "Global CO2 Initiative TEA and LCA Guidelines for CO2 Utilization",
+            "module": "lca_method",
+            "use_in_project": "harmonised and transparent TEA/LCA framing for CO2 systems",
+            "status": "method_reference",
+            "notes": "More CCU-focused than pipeline reuse but useful for transparent reporting.",
+        },
+        {
             "source_id": "supplied_lca_workbook_2023",
             "source_type": "supplementary_workbook",
             "source_name": "Supplementary LCA workbook with capture, auxiliary process, and Northern Lights storage inventories",
@@ -1241,6 +1270,42 @@ def lca_method_reference_register() -> list[dict[str, Any]]:
             "use_in_project": "background process data for steel, pipeline construction, electricity, diesel machinery, freight transport, and waste treatment",
             "status": "local_data_source",
             "notes": "Licensed data stay outside GitHub; commit only mapping metadata and scripts.",
+        },
+        {
+            "source_id": "brightway_framework",
+            "source_type": "software",
+            "source_name": "Brightway LCA Software Framework",
+            "module": "lca_calculation",
+            "use_in_project": "future Python calculation engine for local LCA runs",
+            "status": "future_reference",
+            "notes": "Fits our Python workflow and can work with local databases.",
+        },
+        {
+            "source_id": "openlca_software",
+            "source_type": "software",
+            "source_name": "openLCA",
+            "module": "lca_calculation",
+            "use_in_project": "future independent cross-check and reviewer-friendly LCA modelling environment",
+            "status": "future_reference",
+            "notes": "Useful for external review and comparison with a widely used LCA tool.",
+        },
+        {
+            "source_id": "prospective_lca_literature",
+            "source_type": "paper_group",
+            "source_name": "Prospective LCA literature",
+            "module": "lca_future_extension",
+            "use_in_project": "future 2030/2050 scenarios for electricity, steel, shipping, and background databases",
+            "status": "future_reference",
+            "notes": "Not part of version 1 conventional LCA.",
+        },
+        {
+            "source_id": "dynamic_lca_literature",
+            "source_type": "paper_group",
+            "source_name": "Dynamic LCA literature",
+            "module": "lca_future_extension",
+            "use_in_project": "future time-dependent climate effects and timing of emissions or storage benefits",
+            "status": "future_reference",
+            "notes": "Not part of version 1 conventional LCA.",
         },
     ]
 
@@ -1308,10 +1373,10 @@ def validation_status_dashboard(
         },
         {
             "module": "corrosion",
-            "status": "not_implemented",
-            "evidence": "current model only uses assumed future CO2 corrosion rate",
-            "remaining_limitation": "no NORSOK-style corrosion model is implemented yet",
-            "next_action": "implement only after benchmark cases or standard access are available",
+            "status": "review_required",
+            "evidence": "screening dry-CO2 corrosion risk module uses water evidence and low/base/high corrosion-rate ranges",
+            "remaining_limitation": "not a calibrated NORSOK/DNV corrosion model and does not model impurities, pH, shear stress, or local free water",
+            "next_action": "replace placeholder water/corrosion defaults with project stream-quality evidence and specialist model review",
         },
         {
             "module": "future_co2_integrity",
@@ -1336,10 +1401,10 @@ def validation_status_dashboard(
         },
         {
             "module": "lca",
-            "status": "validated_for_mapping" if ecoinvent_has_processes and lca_reference_has_template else "not_implemented",
-            "evidence": "method sources and local data mappings are available" if ecoinvent_has_processes and lca_reference_has_template else "LCA is planned but not coded",
-            "remaining_limitation": "no functional unit, inventory, or impact method in code yet",
-            "next_action": "create first inventory skeleton for reuse versus new-build",
+            "status": "validated_for_screening",
+            "evidence": "first proxy calculation estimates pipe steel mass and reuse versus new-build CO2e screening",
+            "remaining_limitation": "proxy factors are open screening assumptions, not final ecoinvent/Brightway impact results",
+            "next_action": "use the proxy for ranking, then run full ecoinvent/Brightway LCA for shortlisted pipelines",
         },
         {
             "module": "lca_data",
@@ -1350,10 +1415,10 @@ def validation_status_dashboard(
         },
         {
             "module": "lca_calculation",
-            "status": lca_calculation_status,
-            "evidence": lca_calculation_evidence,
-            "remaining_limitation": "no executable LCA calculation exists yet",
-            "next_action": "choose Brightway first, then cross-check with openLCA",
+            "status": "validated_for_screening",
+            "evidence": "executable open proxy exists; " + lca_calculation_evidence,
+            "remaining_limitation": "licensed-database calculation is not implemented yet",
+            "next_action": "choose Brightway first for ecoinvent calculation, then cross-check with openLCA",
         },
         {
             "module": "wells_repurposing",
@@ -1482,6 +1547,7 @@ def write_validation_report(
             _fmt(row["calculated_total_usd_2025"], 0),
             _fmt(row["reported_total_usd_2025"], 0),
             _fmt(row["difference_usd_2025"], 0),
+            row.get("netl_status", ""),
             row["status"],
         ]
         for row in cost_rows
@@ -1700,13 +1766,13 @@ Until this is resolved, integrity must remain `screening_unvalidated`.
 
 ## Cost Arithmetic Validation
 
-{_table(["Scenario", "Calculated total USD", "Reported total USD", "Diff USD", "Status"], cost_summary)}
+{_table(["Scenario", "Calculated total USD", "Reported total USD", "Diff USD", "NETL status", "Status"], cost_summary)}
 
 Plain meaning:
 
-The cost arithmetic is internally consistent. This only checks the sum and contingency. It does not yet validate whether the cost model itself is appropriate.
+The cost arithmetic is internally consistent. This only checks the sum and contingency. NETL validation is separate and will run only when a like-for-like NETL CO2_T_COM result is supplied.
 
-Next independent cost validation should use NETL CO2_T_COM.
+Next independent cost validation should use NETL CO2_T_COM and record the reference value in the assumption file or a dedicated benchmark input.
 
 ## Pre-LCA Gate Validation
 

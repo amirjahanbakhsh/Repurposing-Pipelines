@@ -9,14 +9,16 @@ from pathlib import Path
 from typing import Any
 
 from .assumptions import ScenarioAssumptions, read_scenario_assumptions
+from .corrosion import evaluate_corrosion
 from .costs import evaluate_cost
 from .gates import evaluate_pre_lca_gate
 from .hydraulics import evaluate_capacity
 from .integrity import evaluate_integrity
+from .lca import evaluate_lca_screening
 from .trace import ModuleResult, module_results_to_dicts
 
 
-MODEL_VERSION = "goldeneye_benchmark_v0.3"
+MODEL_VERSION = "goldeneye_benchmark_v0.4"
 
 FIELDNAMES = [
     "scenario",
@@ -37,8 +39,16 @@ FIELDNAMES = [
     "current_wall_thickness_mm",
     "minimum_wall_thickness_mm",
     "available_wall_thickness_mm",
+    "available_wall_low_mm",
+    "available_wall_high_mm",
+    "corrosion_risk_level",
     "future_co2_corrosion_rate_mm_per_year",
+    "corrosion_rate_low_mm_per_year",
+    "corrosion_rate_high_mm_per_year",
     "remaining_life_years",
+    "remaining_life_low_years",
+    "remaining_life_high_years",
+    "remaining_life_range_width_years",
     "reported_remaining_life_years",
     "remaining_life_delta_years",
     "cost_subtotal_usd_2025",
@@ -46,11 +56,23 @@ FIELDNAMES = [
     "cost_total_usd_2025",
     "reported_total_capex_usd_2025",
     "cost_delta_usd_2025",
+    "netl_reference_total_capex_usd_2025",
+    "netl_cost_delta_usd_2025",
+    "netl_cost_delta_percent",
+    "netl_cost_validation_status",
     "pre_lca_decision",
     "pre_lca_confidence",
     "pre_lca_reason_summary",
     "pre_lca_reasons",
     "pre_lca_next_data",
+    "lca_steel_mass_new_build_kg",
+    "lca_refurbishment_steel_kg",
+    "lca_avoided_steel_kg",
+    "lca_new_build_proxy_kgco2e",
+    "lca_reuse_proxy_kgco2e",
+    "lca_proxy_saving_kgco2e",
+    "lca_proxy_saving_percent",
+    "lca_screening_decision",
 ]
 
 
@@ -66,10 +88,15 @@ def benchmark_scenario_with_trace(
     scenario: ScenarioAssumptions,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     capacity = evaluate_capacity(scenario)
-    integrity = evaluate_integrity(scenario)
+    corrosion = evaluate_corrosion(scenario)
+    integrity = evaluate_integrity(scenario, corrosion=corrosion)
     cost = evaluate_cost(scenario)
     pre_lca_gate = evaluate_pre_lca_gate(capacity=capacity, integrity=integrity, cost=cost)
-    outputs = _outputs(capacity, integrity, cost, pre_lca_gate)
+    lca = evaluate_lca_screening(
+        scenario,
+        pre_lca_decision=pre_lca_gate.output_map()["pre_lca_decision"],
+    )
+    outputs = _outputs(capacity, corrosion, integrity, cost, pre_lca_gate, lca)
 
     row = {
         "scenario": name,
@@ -90,10 +117,18 @@ def benchmark_scenario_with_trace(
         "current_wall_thickness_mm": outputs["current_wall_thickness_mm"],
         "minimum_wall_thickness_mm": outputs["minimum_wall_thickness_mm"],
         "available_wall_thickness_mm": outputs["available_wall_thickness_mm"],
+        "available_wall_low_mm": outputs["available_wall_low_mm"],
+        "available_wall_high_mm": outputs["available_wall_high_mm"],
+        "corrosion_risk_level": outputs["corrosion_risk_level"],
         "future_co2_corrosion_rate_mm_per_year": outputs[
             "future_co2_corrosion_rate_mm_per_year"
         ],
+        "corrosion_rate_low_mm_per_year": outputs["corrosion_rate_low_mm_per_year"],
+        "corrosion_rate_high_mm_per_year": outputs["corrosion_rate_high_mm_per_year"],
         "remaining_life_years": outputs["remaining_life_years"],
+        "remaining_life_low_years": outputs["remaining_life_low_years"],
+        "remaining_life_high_years": outputs["remaining_life_high_years"],
+        "remaining_life_range_width_years": outputs["remaining_life_range_width_years"],
         "reported_remaining_life_years": outputs["reported_remaining_life_years"],
         "remaining_life_delta_years": outputs["remaining_life_delta_years"],
         "cost_subtotal_usd_2025": outputs["cost_subtotal_usd_2025"],
@@ -101,14 +136,28 @@ def benchmark_scenario_with_trace(
         "cost_total_usd_2025": outputs["cost_total_usd_2025"],
         "reported_total_capex_usd_2025": outputs["reported_total_capex_usd_2025"],
         "cost_delta_usd_2025": outputs["cost_delta_usd_2025"],
+        "netl_reference_total_capex_usd_2025": outputs[
+            "netl_reference_total_capex_usd_2025"
+        ],
+        "netl_cost_delta_usd_2025": outputs["netl_cost_delta_usd_2025"],
+        "netl_cost_delta_percent": outputs["netl_cost_delta_percent"],
+        "netl_cost_validation_status": outputs["netl_cost_validation_status"],
         "pre_lca_decision": outputs["pre_lca_decision"],
         "pre_lca_confidence": outputs["pre_lca_confidence"],
         "pre_lca_reason_summary": outputs["pre_lca_reason_summary"],
         "pre_lca_reasons": outputs["pre_lca_reasons"],
         "pre_lca_next_data": outputs["pre_lca_next_data"],
+        "lca_steel_mass_new_build_kg": outputs["lca_steel_mass_new_build_kg"],
+        "lca_refurbishment_steel_kg": outputs["lca_refurbishment_steel_kg"],
+        "lca_avoided_steel_kg": outputs["lca_avoided_steel_kg"],
+        "lca_new_build_proxy_kgco2e": outputs["lca_new_build_proxy_kgco2e"],
+        "lca_reuse_proxy_kgco2e": outputs["lca_reuse_proxy_kgco2e"],
+        "lca_proxy_saving_kgco2e": outputs["lca_proxy_saving_kgco2e"],
+        "lca_proxy_saving_percent": outputs["lca_proxy_saving_percent"],
+        "lca_screening_decision": outputs["lca_screening_decision"],
     }
 
-    module_results = [capacity, integrity, cost, pre_lca_gate]
+    module_results = [capacity, corrosion, integrity, cost, pre_lca_gate, lca]
     trace = {
         "scenario": name,
         "pipeline_name": scenario.raw("pipeline_name"),
@@ -172,6 +221,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
     integrity_rows = []
     cost_rows = []
     gate_rows = []
+    lca_rows = []
     for row in rows:
         summary_rows.append(
             [
@@ -189,9 +239,13 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
                 fmt(row["nominal_wall_thickness_mm"], 2),
                 fmt(row["historical_wall_loss_mm"], 2),
                 fmt(row["available_wall_thickness_mm"], 2),
-                fmt(row["future_co2_corrosion_rate_mm_per_year"], 2),
+                row["corrosion_risk_level"],
+                fmt(row["corrosion_rate_low_mm_per_year"], 3),
+                fmt(row["future_co2_corrosion_rate_mm_per_year"], 3),
+                fmt(row["corrosion_rate_high_mm_per_year"], 3),
+                fmt(row["remaining_life_low_years"], 2),
                 fmt(row["remaining_life_years"], 2),
-                fmt(row["reported_remaining_life_years"], 2),
+                fmt(row["remaining_life_high_years"], 2),
             ]
         )
         cost_rows.append(
@@ -201,6 +255,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
                 usd(row["cost_contingency_usd_2025"]),
                 usd(row["cost_total_usd_2025"]),
                 usd(row["reported_total_capex_usd_2025"]),
+                row["netl_cost_validation_status"],
             ]
         )
         gate_rows.append(
@@ -209,6 +264,17 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
                 row["pre_lca_decision"],
                 row["pre_lca_confidence"],
                 row["pre_lca_reason_summary"],
+            ]
+        )
+        lca_rows.append(
+            [
+                row["scenario"],
+                fmt(row["lca_steel_mass_new_build_kg"] / 1000, 0),
+                fmt(row["lca_refurbishment_steel_kg"] / 1000, 0),
+                fmt(row["lca_new_build_proxy_kgco2e"] / 1000, 0),
+                fmt(row["lca_reuse_proxy_kgco2e"] / 1000, 0),
+                fmt(row["lca_proxy_saving_percent"], 1),
+                row["lca_screening_decision"],
             ]
         )
 
@@ -254,11 +320,19 @@ The benchmark currently reproduces the headline capacity, remaining-life, and co
 
 ## Integrity / Lifetime Benchmark
 
-{markdown_table(["Scenario", "Nominal wall mm", "Wall loss mm", "Available wall mm", "Future corrosion mm/yr", "Calculated life years", "Reported life years"], integrity_rows)}
+{markdown_table(["Scenario", "Nominal wall mm", "Wall loss mm", "Available wall mm", "Corrosion risk", "Low corr.", "Base corr.", "High corr.", "Conservative life", "Base life", "Optimistic life"], integrity_rows)}
 
 ## Cost Benchmark
 
-{markdown_table(["Scenario", "Subtotal", "Contingency", "Calculated total", "Reported total"], cost_rows)}
+{markdown_table(["Scenario", "Subtotal", "Contingency", "Calculated total", "Reported total", "NETL status"], cost_rows)}
+
+## LCA Screening Proxy
+
+{markdown_table(["Scenario", "New steel t", "Refurb steel t", "New-build proxy tCO2e", "Reuse proxy tCO2e", "Saving %", "LCA screen"], lca_rows)}
+
+Plain meaning:
+
+This is the first calculated LCA-style screening result. It is useful for ranking and sensitivity, but it is not yet a final ecoinvent/Brightway result.
 
 ## Pre-LCA Gate
 
@@ -274,8 +348,9 @@ Plain meaning:
 ## Interpretation
 
 - The dissertation and poster use different Goldeneye wall-thickness assumptions.
-- The dissertation case uses a thicker nominal wall (`22.23 mm`) and lower future CO2 corrosion rate (`0.10 mm/year`), which gives a much longer remaining life.
-- The poster case uses a lower nominal wall (`14.28 mm`) and higher future CO2 corrosion rate (`0.20 mm/year`), which gives about `24.5 years`.
+- The dissertation case uses a thicker nominal wall (`22.23 mm`) and lower future CO2 corrosion rate (`0.10 mm/year`), which gives a much longer base remaining life.
+- The poster case uses a lower nominal wall (`14.28 mm`) and higher future CO2 corrosion rate (`0.20 mm/year`), which gives about `24.5 years` in the base case.
+- The uncertainty range is now reported separately because the Goldeneye wall basis is not cleanly resolved.
 - The capacity difference is mainly caused by the internal diameter/friction assumptions: `18.25 in` in the dissertation case versus about `18.876 in` in the poster case.
 - Cost is consistent between the two versions because both use the same Parker-style new-build cost breakdown.
 - Both Goldeneye cases are currently `marginal`, because the calculations pass but key assumptions still need independent validation before detailed LCA.
@@ -285,9 +360,11 @@ Plain meaning:
 Each scenario now has traceable module results for:
 
 - capacity;
+- corrosion;
 - integrity;
 - cost;
 - pre-LCA gate.
+- LCA screening proxy.
 
 The JSON trace records the inputs, outputs, assumptions, warnings, and formula notes used by each module. This is the first building block for the future web app evidence panel.
 
@@ -302,7 +379,7 @@ The project should not depend on Excel workbooks as the core engine. The profess
 
 ## Next Technical Step
 
-Add the first simple LCA screening module for reuse versus new-build pipeline emissions.
+Run the batch screening command for all model-ready NSTA pipelines, then prioritise the top candidates for data enrichment.
 """
     path.write_text(report, encoding="utf-8")
 

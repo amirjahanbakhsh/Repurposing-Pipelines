@@ -21,8 +21,21 @@ goldeneye_dissertation,reported_capacity_mtpa,9.125,MtCO2/year,dissertation,calc
 goldeneye_dissertation,historical_corrosion_years,22,years,dissertation,assumed,Years considered in dissertation corrosion calculation
 goldeneye_dissertation,historical_corrosion_rate_mm_per_year,0.373,mm/year,dissertation,calculated,Reported historical corrosion rate
 goldeneye_dissertation,minimum_wall_thickness_mm,6.23,mm,dissertation,calculated,Reported minimum safe wall thickness
+goldeneye_dissertation,nominal_wall_thickness_uncertainty_fraction,0.20,fraction,project_screening_assumption,assumed,Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified
+goldeneye_dissertation,minimum_wall_thickness_uncertainty_fraction,0.60,fraction,project_screening_assumption,assumed,Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed
+goldeneye_dissertation,historical_wall_loss_uncertainty_fraction,0.25,fraction,project_screening_assumption,assumed,Historical corrosion loss is uncertain without inspection records
 goldeneye_dissertation,future_co2_corrosion_rate_mm_per_year,0.10,mm/year,dissertation,assumed,Representative dense-phase CO2 corrosion rate used for future lifetime
+goldeneye_dissertation,future_co2_corrosion_rate_low_mm_per_year,0.02,mm/year,project_screening_assumption,assumed,Optimistic dry-CO2 corrosion sensitivity until stream quality is verified
+goldeneye_dissertation,future_co2_corrosion_rate_high_mm_per_year,0.20,mm/year,project_screening_assumption,assumed,Conservative dry-CO2 corrosion sensitivity until stream quality is verified
+goldeneye_dissertation,co2_water_content_ppmv,50,ppmv,project_screening_assumption,assumed,Placeholder dry CO2 water content for screening only
+goldeneye_dissertation,co2_water_spec_limit_ppmv,500,ppmv,project_screening_assumption,assumed,Placeholder water specification limit for screening; replace with project stream specification
+goldeneye_dissertation,water_dew_point_margin_c,10,degC,project_screening_assumption,assumed,Assumed positive margin to water dew point for dry-CO2 screening
 goldeneye_dissertation,reported_remaining_life_years,78.0,years,dissertation,calculated,Reported future CO2 transport lifetime
+goldeneye_dissertation,steel_density_kg_per_m3,7850,kg/m3,engineering_reference,assumed,Carbon steel density used for first LCA inventory calculation
+goldeneye_dissertation,lca_refurbishment_steel_fraction,0.05,fraction,project_screening_assumption,assumed,Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening
+goldeneye_dissertation,lca_pipeline_steel_factor_kgco2e_per_kg,2.0,kgCO2e/kg,screening_lca_proxy,assumed,Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result
+goldeneye_dissertation,lca_new_build_construction_factor_kgco2e_per_km,100000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result
+goldeneye_dissertation,lca_refurbishment_activity_factor_kgco2e_per_km,20000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data
 goldeneye_dissertation,cost_material_usd_2025,54181373,USD,dissertation_or_poster,calculated,Parker model cost component
 goldeneye_dissertation,cost_labor_usd_2025,109835004,USD,dissertation_or_poster,calculated,Parker model cost component
 goldeneye_dissertation,cost_row_damages_usd_2025,6688098,USD,dissertation_or_poster,calculated,Parker model cost component
@@ -55,8 +68,21 @@ goldeneye_poster,historical_corrosion_years,8,years,poster,assumed,Poster states
 goldeneye_poster,historical_corrosion_rate_mm_per_year,0.36625,mm/year,derived_from_poster,derived,2.93 mm wall loss divided by 8 years
 goldeneye_poster,reported_historical_wall_loss_mm,2.93,mm,poster,calculated,Poster key finding
 goldeneye_poster,minimum_wall_thickness_mm,6.44,mm,poster,calculated,Poster key finding
+goldeneye_poster,nominal_wall_thickness_uncertainty_fraction,0.20,fraction,project_screening_assumption,assumed,Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified
+goldeneye_poster,minimum_wall_thickness_uncertainty_fraction,0.60,fraction,project_screening_assumption,assumed,Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed
+goldeneye_poster,historical_wall_loss_uncertainty_fraction,0.25,fraction,project_screening_assumption,assumed,Historical corrosion loss is uncertain without inspection records
 goldeneye_poster,future_co2_corrosion_rate_mm_per_year,0.20,mm/year,poster,assumed,Input shown in poster app screenshot
+goldeneye_poster,future_co2_corrosion_rate_low_mm_per_year,0.05,mm/year,project_screening_assumption,assumed,Optimistic dry-CO2 corrosion sensitivity until stream quality is verified
+goldeneye_poster,future_co2_corrosion_rate_high_mm_per_year,0.40,mm/year,project_screening_assumption,assumed,Conservative dry-CO2 corrosion sensitivity until stream quality is verified
+goldeneye_poster,co2_water_content_ppmv,50,ppmv,project_screening_assumption,assumed,Placeholder dry CO2 water content for screening only
+goldeneye_poster,co2_water_spec_limit_ppmv,500,ppmv,project_screening_assumption,assumed,Placeholder water specification limit for screening; replace with project stream specification
+goldeneye_poster,water_dew_point_margin_c,10,degC,project_screening_assumption,assumed,Assumed positive margin to water dew point for dry-CO2 screening
 goldeneye_poster,reported_remaining_life_years,24.54,years,poster,calculated,Poster key finding
+goldeneye_poster,steel_density_kg_per_m3,7850,kg/m3,engineering_reference,assumed,Carbon steel density used for first LCA inventory calculation
+goldeneye_poster,lca_refurbishment_steel_fraction,0.05,fraction,project_screening_assumption,assumed,Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening
+goldeneye_poster,lca_pipeline_steel_factor_kgco2e_per_kg,2.0,kgCO2e/kg,screening_lca_proxy,assumed,Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result
+goldeneye_poster,lca_new_build_construction_factor_kgco2e_per_km,100000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result
+goldeneye_poster,lca_refurbishment_activity_factor_kgco2e_per_km,20000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data
 goldeneye_poster,cost_material_usd_2025,54181373,USD,poster,calculated,Parker model cost component
 goldeneye_poster,cost_labor_usd_2025,109835004,USD,poster,calculated,Parker model cost component
 goldeneye_poster,cost_row_damages_usd_2025,6688098,USD,poster,calculated,Parker model cost component

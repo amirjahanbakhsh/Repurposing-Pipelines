@@ -34,10 +34,15 @@ class GoldeneyeBenchmarkTest(unittest.TestCase):
         self.assertEqual(row["pre_lca_confidence"], "medium")
         self.assertEqual([result["module"] for result in trace["module_results"]], [
             "capacity",
+            "corrosion",
             "integrity",
             "cost",
             "pre_lca_gate",
+            "lca",
         ])
+        self.assertEqual(row["corrosion_risk_level"], "medium")
+        self.assertGreater(row["remaining_life_high_years"], row["remaining_life_years"])
+        self.assertGreater(row["lca_proxy_saving_percent"], 0)
 
     def test_poster_case_reproduces_headline_outputs(self) -> None:
         row, trace = benchmark_scenario_with_trace(
@@ -51,7 +56,10 @@ class GoldeneyeBenchmarkTest(unittest.TestCase):
         self.assertEqual(row["capacity_suitable"], "yes")
         self.assertEqual(row["pre_lca_decision"], "marginal")
         self.assertIn("assumptions", row["pre_lca_reason_summary"])
-        self.assertEqual(trace["model_version"], "goldeneye_benchmark_v0.3")
+        self.assertEqual(row["corrosion_risk_level"], "medium")
+        self.assertGreater(row["remaining_life_high_years"], row["remaining_life_years"])
+        self.assertGreater(row["lca_proxy_saving_percent"], 0)
+        self.assertEqual(trace["model_version"], "goldeneye_benchmark_v0.4")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,2 @@
-module,validation_type,sheet,title,functional_unit,technosphere_rows,biosphere_sections,useful_for_pipeline_lca,status,notes
-lca_reference,supplementary_workbook_review,B.1 HM Hannover,"Capture, HM Hannover {DE}",per t of captured CO2,55,3,functional_unit,pass,Reviewed sheet structure only; workbook data are not copied into the repo.
-lca_reference,supplementary_workbook_review,B.2 HM Gorazdze,"Capture, HM Gorazdze {PL}",per t of captured CO2,55,3,functional_unit,pass,Reviewed sheet structure only; workbook data are not copied into the repo.
-lca_reference,supplementary_workbook_review,B.3 SE Skutskar,"Capture, SE Skutskar {SE}",per t of captured CO2,54,3,functional_unit,pass,Reviewed sheet structure only; workbook data are not copied into the repo.
-lca_reference,supplementary_workbook_review,B.4 KVA Linth,"Capture, KVA Linth {CH}",per t of captured CO2,54,3,functional_unit,pass,Reviewed sheet structure only; workbook data are not copied into the repo.
-lca_reference,supplementary_workbook_review,B.5 Auxiliary processes,"Capture, Europe, AMP Production {RER}",per kg of AMP,14,1,limited,information,Reviewed sheet structure only; workbook data are not copied into the repo.
-lca_reference,supplementary_workbook_review,B.6 Permanent storage,Permanent storage of CO2 at Northern Lights (NL) {NO},per t of injected CO2,56,6,pipeline; injection_well; functional_unit; decommissioned_pipeline,pass,Reviewed sheet structure only; workbook data are not copied into the repo.
+module,validation_type,sheet,functional_unit,technosphere_rows,biosphere_rows,useful_for_pipeline_lca,status,notes
+lca_reference,supplementary_workbook_review,,,0,0,unknown,blocked_by_data_access,No LCA supplementary workbook was supplied.

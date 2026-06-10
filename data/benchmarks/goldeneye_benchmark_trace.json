@@ -2,7 +2,7 @@
   {
     "scenario": "goldeneye_dissertation",
     "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
-    "model_version": "goldeneye_benchmark_v0.3",
+    "model_version": "goldeneye_benchmark_v0.4",
     "source_parameters": [
       {
         "scenario": "goldeneye_dissertation",
@@ -204,6 +204,33 @@
       },
       {
         "scenario": "goldeneye_dissertation",
+        "parameter": "nominal_wall_thickness_uncertainty_fraction",
+        "value": "0.20",
+        "unit": "fraction",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "minimum_wall_thickness_uncertainty_fraction",
+        "value": "0.60",
+        "unit": "fraction",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "historical_wall_loss_uncertainty_fraction",
+        "value": "0.25",
+        "unit": "fraction",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Historical corrosion loss is uncertain without inspection records"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
         "parameter": "future_co2_corrosion_rate_mm_per_year",
         "value": "0.10",
         "unit": "mm/year",
@@ -213,12 +240,102 @@
       },
       {
         "scenario": "goldeneye_dissertation",
+        "parameter": "future_co2_corrosion_rate_low_mm_per_year",
+        "value": "0.02",
+        "unit": "mm/year",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Optimistic dry-CO2 corrosion sensitivity until stream quality is verified"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "future_co2_corrosion_rate_high_mm_per_year",
+        "value": "0.20",
+        "unit": "mm/year",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Conservative dry-CO2 corrosion sensitivity until stream quality is verified"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "co2_water_content_ppmv",
+        "value": "50",
+        "unit": "ppmv",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Placeholder dry CO2 water content for screening only"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "co2_water_spec_limit_ppmv",
+        "value": "500",
+        "unit": "ppmv",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Placeholder water specification limit for screening; replace with project stream specification"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "water_dew_point_margin_c",
+        "value": "10",
+        "unit": "degC",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
         "parameter": "reported_remaining_life_years",
         "value": "78.0",
         "unit": "years",
         "source": "dissertation",
         "quality": "calculated",
         "notes": "Reported future CO2 transport lifetime"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "steel_density_kg_per_m3",
+        "value": "7850",
+        "unit": "kg/m3",
+        "source": "engineering_reference",
+        "quality": "assumed",
+        "notes": "Carbon steel density used for first LCA inventory calculation"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "lca_refurbishment_steel_fraction",
+        "value": "0.05",
+        "unit": "fraction",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "lca_pipeline_steel_factor_kgco2e_per_kg",
+        "value": "2.0",
+        "unit": "kgCO2e/kg",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "lca_new_build_construction_factor_kgco2e_per_km",
+        "value": "100000",
+        "unit": "kgCO2e/km",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+      },
+      {
+        "scenario": "goldeneye_dissertation",
+        "parameter": "lca_refurbishment_activity_factor_kgco2e_per_km",
+        "value": "20000",
+        "unit": "kgCO2e/km",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
       },
       {
         "scenario": "goldeneye_dissertation",
@@ -592,8 +709,267 @@
         ]
       },
       {
+        "module": "corrosion",
+        "model_version": "corrosion_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "source": "dissertation",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Representative dense-phase CO2 corrosion rate used for future lifetime"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.02,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Optimistic dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Conservative dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Placeholder dry CO2 water content for screening only"
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Placeholder water specification limit for screening; replace with project stream specification"
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "corrosion_rate_low_mm_per_year",
+            "value": 0.02,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_rate_base_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_rate_high_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_risk_level",
+            "value": "medium",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_basis",
+            "value": "The high corrosion-rate case is material for remaining-life sensitivity.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "source": "dissertation",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Representative dense-phase CO2 corrosion rate used for future lifetime"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.02,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Optimistic dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Conservative dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Placeholder dry CO2 water content for screening only"
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Placeholder water specification limit for screening; replace with project stream specification"
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Corrosion model is a screening dry-CO2 risk check. A final model needs stream composition, water specification, operating envelope, inspection evidence, and specialist review.",
+            "affected_modules": [
+              "corrosion",
+              "integrity",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "corrosion_rate_range",
+            "formula": "low/base/high corrosion rates are read from scenario assumptions",
+            "inputs": [
+              "future_co2_corrosion_rate_low_mm_per_year",
+              "future_co2_corrosion_rate_mm_per_year",
+              "future_co2_corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "corrosion_rate_low/base/high_mm_per_year",
+            "notes": "Used for remaining-life uncertainty."
+          },
+          {
+            "name": "dry_co2_risk",
+            "formula": "high if water content exceeds limit or dew point margin is negative; medium if water evidence is missing or high corrosion rate is material; otherwise low",
+            "inputs": [
+              "co2_water_content_ppmv",
+              "co2_water_spec_limit_ppmv",
+              "water_dew_point_margin_c",
+              "corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "corrosion_risk_level",
+            "notes": "Screening rule, not a detailed corrosion prediction model."
+          }
+        ]
+      },
+      {
         "module": "integrity",
-        "model_version": "integrity_screening_v0.1",
+        "model_version": "integrity_screening_v0.2",
         "status": "pass",
         "inputs": [
           {
@@ -667,6 +1043,66 @@
               "integrity"
             ],
             "notes": "Years considered in dissertation corrosion calculation"
+          },
+          {
+            "name": "nominal_wall_thickness_uncertainty_fraction",
+            "value": 0.2,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified"
+          },
+          {
+            "name": "minimum_wall_thickness_uncertainty_fraction",
+            "value": 0.6,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed"
+          },
+          {
+            "name": "historical_wall_loss_uncertainty_fraction",
+            "value": 0.25,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Historical corrosion loss is uncertain without inspection records"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.02,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Optimistic dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Conservative dry-CO2 corrosion sensitivity until stream quality is verified"
           }
         ],
         "outputs": [
@@ -735,6 +1171,86 @@
             "notes": ""
           },
           {
+            "name": "remaining_life_low_years",
+            "value": 0,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": "Conservative wall-thickness and high-corrosion case."
+          },
+          {
+            "name": "remaining_life_base_years",
+            "value": 77.94,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_high_years",
+            "value": 901.4749999999999,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": "Optimistic wall-thickness and low-corrosion case."
+          },
+          {
+            "name": "remaining_life_range_width_years",
+            "value": 901.4749999999999,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "validation",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_low_mm",
+            "value": -2.4414999999999996,
+            "unit": "mm",
+            "quality": "screening_estimate",
+            "used_by": [
+              "integrity",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_high_mm",
+            "value": 18.0295,
+            "unit": "mm",
+            "quality": "screening_estimate",
+            "used_by": [
+              "integrity",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_risk_level",
+            "value": "medium",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
             "name": "reported_remaining_life_years",
             "value": 78.0,
             "unit": "years",
@@ -764,6 +1280,33 @@
             "quality": "assumed",
             "sensitivity_required": true,
             "notes": "Representative dense-phase CO2 corrosion rate used for future lifetime"
+          },
+          {
+            "name": "nominal_wall_thickness_uncertainty_fraction",
+            "value": 0.2,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified"
+          },
+          {
+            "name": "minimum_wall_thickness_uncertainty_fraction",
+            "value": 0.6,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed"
+          },
+          {
+            "name": "historical_wall_loss_uncertainty_fraction",
+            "value": 0.25,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Historical corrosion loss is uncertain without inspection records"
           }
         ],
         "warnings": [
@@ -773,6 +1316,14 @@
             "affected_modules": [
               "integrity",
               "pre_lca_gate"
+            ]
+          },
+          {
+            "level": "medium",
+            "message": "Conservative uncertainty case gives zero remaining life; wall-thickness basis needs targeted evidence.",
+            "affected_modules": [
+              "integrity",
+              "validation"
             ]
           }
         ],
@@ -817,12 +1368,25 @@
             ],
             "result_name": "remaining_life_years",
             "notes": ""
+          },
+          {
+            "name": "remaining_life_uncertainty",
+            "formula": "conservative life = low wall / high corrosion; optimistic life = high wall / low corrosion",
+            "inputs": [
+              "nominal_wall_thickness_uncertainty_fraction",
+              "minimum_wall_thickness_uncertainty_fraction",
+              "historical_wall_loss_uncertainty_fraction",
+              "corrosion_rate_low_mm_per_year",
+              "corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "remaining_life_low_years; remaining_life_high_years",
+            "notes": "Screening uncertainty band for limited or conflicting wall evidence."
           }
         ]
       },
       {
         "module": "cost",
-        "model_version": "cost_screening_v0.1",
+        "model_version": "cost_screening_v0.2",
         "status": "pass",
         "inputs": [
           {
@@ -987,6 +1551,47 @@
               "validation"
             ],
             "notes": ""
+          },
+          {
+            "name": "netl_reference_total_capex_usd_2025",
+            "value": null,
+            "unit": "USD 2025",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_delta_usd_2025",
+            "value": null,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_delta_percent",
+            "value": null,
+            "unit": "%",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_validation_status",
+            "value": "not_supplied",
+            "unit": "status",
+            "quality": "calculated",
+            "used_by": [
+              "validation",
+              "report"
+            ],
+            "notes": ""
           }
         ],
         "assumptions": [
@@ -1000,7 +1605,16 @@
             "notes": "Project contingency factor"
           }
         ],
-        "warnings": [],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "No NETL CO2_T_COM reference total is supplied for this scenario, so cost is internally checked but not externally validated.",
+            "affected_modules": [
+              "cost",
+              "validation"
+            ]
+          }
+        ],
         "trace": [
           {
             "name": "cost_subtotal",
@@ -1036,6 +1650,16 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
+          },
+          {
+            "name": "netl_cost_comparison",
+            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
+            "inputs": [
+              "cost_total_usd_2025",
+              "netl_reference_total_capex_usd_2025"
+            ],
+            "result_name": "netl_cost_delta_usd_2025",
+            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -1080,7 +1704,7 @@
           },
           {
             "name": "pre_lca_reasons",
-            "value": "Capacity passes: 9.13 MtCO2/year versus 5.88 MtCO2/year required.; Integrity passes at screening level: 77.94 years remaining life and 7.79 mm available wall.; Cost screen is positive: benchmark avoided new-build CAPEX is $228,500,811.; Some important values are assumed or sensitivity inputs: capacity_factor, contingency_fraction, future_co2_corrosion_rate_mm_per_year, historical_corrosion_years, inner_diameter_in.; Upstream modules still contain validation warnings.",
+            "value": "Capacity passes: 9.13 MtCO2/year versus 5.88 MtCO2/year required.; Integrity passes at screening level: 77.94 years remaining life and 7.79 mm available wall.; Cost screen is positive: benchmark avoided new-build CAPEX is $228,500,811.; Some important values are assumed or sensitivity inputs: capacity_factor, contingency_fraction, future_co2_corrosion_rate_high_mm_per_year, future_co2_corrosion_rate_low_mm_per_year, future_co2_corrosion_rate_mm_per_year, historical_corrosion_years, historical_wall_loss_uncertainty_fraction, inner_diameter_in, minimum_wall_thickness_uncertainty_fraction, nominal_wall_thickness_uncertainty_fraction.; Upstream modules still contain validation warnings.",
             "unit": "text",
             "quality": "calculated",
             "used_by": [
@@ -1127,13 +1751,276 @@
             "notes": "This is a screening gate, not an engineering approval decision."
           }
         ]
+      },
+      {
+        "module": "lca",
+        "model_version": "lca_screening_proxy_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "pipeline_length_km",
+            "value": 101.68,
+            "unit": "km",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Goldeneye pipeline length"
+          },
+          {
+            "name": "outer_diameter_in",
+            "value": 20.0,
+            "unit": "in",
+            "source": "dissertation",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Nominal outside diameter"
+          },
+          {
+            "name": "inner_diameter_in",
+            "value": 18.25,
+            "unit": "in",
+            "source": "dissertation",
+            "quality": "assumed_or_standard",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Standard inner diameter shown in dissertation app screenshot"
+          },
+          {
+            "name": "steel_density_kg_per_m3",
+            "value": 7850.0,
+            "unit": "kg/m3",
+            "source": "engineering_reference",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Carbon steel density used for first LCA inventory calculation"
+          },
+          {
+            "name": "lca_refurbishment_steel_fraction",
+            "value": 0.05,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+          },
+          {
+            "name": "lca_pipeline_steel_factor_kgco2e_per_kg",
+            "value": 2.0,
+            "unit": "kgCO2e/kg",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_new_build_construction_factor_kgco2e_per_km",
+            "value": 100000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_refurbishment_activity_factor_kgco2e_per_km",
+            "value": 20000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "lca_steel_mass_new_build_kg",
+            "value": 27072726.575500697,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_refurbishment_steel_kg",
+            "value": 1353636.328775035,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_avoided_steel_kg",
+            "value": 25719090.246725664,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_new_build_proxy_kgco2e",
+            "value": 64313453.151001394,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_reuse_proxy_kgco2e",
+            "value": 4740872.65755007,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy_saving_kgco2e",
+            "value": 59572580.49345133,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy_saving_percent",
+            "value": 92.62848995774029,
+            "unit": "%",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_screening_decision",
+            "value": "favour_reuse",
+            "unit": "decision",
+            "quality": "calculated",
+            "used_by": [
+              "final_gate",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "lca_refurbishment_steel_fraction",
+            "value": 0.05,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+          },
+          {
+            "name": "lca_pipeline_steel_factor_kgco2e_per_kg",
+            "value": 2.0,
+            "unit": "kgCO2e/kg",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_new_build_construction_factor_kgco2e_per_km",
+            "value": 100000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_refurbishment_activity_factor_kgco2e_per_km",
+            "value": 20000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "LCA result is a screening proxy only. It uses open factors from the assumption file, not final ecoinvent impact results.",
+            "affected_modules": [
+              "lca",
+              "final_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "pipeline_steel_mass",
+            "formula": "pi * (OD^2 - ID^2) / 4 * length * steel_density",
+            "inputs": [
+              "outer_diameter_in",
+              "inner_diameter_in",
+              "pipeline_length_km",
+              "steel_density_kg_per_m3"
+            ],
+            "result_name": "lca_steel_mass_new_build_kg",
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy",
+            "formula": "new-build proxy = steel mass * steel factor + length * construction factor; reuse proxy = refurbishment steel * steel factor + length * refurbishment factor",
+            "inputs": [
+              "lca_refurbishment_steel_fraction",
+              "lca_pipeline_steel_factor_kgco2e_per_kg",
+              "lca_new_build_construction_factor_kgco2e_per_km",
+              "lca_refurbishment_activity_factor_kgco2e_per_km"
+            ],
+            "result_name": "lca_proxy_saving_kgco2e",
+            "notes": "Screening proxy to be replaced by Brightway/openLCA ecoinvent calculation."
+          }
+        ]
       }
     ]
   },
   {
     "scenario": "goldeneye_poster",
     "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
-    "model_version": "goldeneye_benchmark_v0.3",
+    "model_version": "goldeneye_benchmark_v0.4",
     "source_parameters": [
       {
         "scenario": "goldeneye_poster",
@@ -1344,6 +2231,33 @@
       },
       {
         "scenario": "goldeneye_poster",
+        "parameter": "nominal_wall_thickness_uncertainty_fraction",
+        "value": "0.20",
+        "unit": "fraction",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "minimum_wall_thickness_uncertainty_fraction",
+        "value": "0.60",
+        "unit": "fraction",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "historical_wall_loss_uncertainty_fraction",
+        "value": "0.25",
+        "unit": "fraction",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Historical corrosion loss is uncertain without inspection records"
+      },
+      {
+        "scenario": "goldeneye_poster",
         "parameter": "future_co2_corrosion_rate_mm_per_year",
         "value": "0.20",
         "unit": "mm/year",
@@ -1353,12 +2267,102 @@
       },
       {
         "scenario": "goldeneye_poster",
+        "parameter": "future_co2_corrosion_rate_low_mm_per_year",
+        "value": "0.05",
+        "unit": "mm/year",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Optimistic dry-CO2 corrosion sensitivity until stream quality is verified"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "future_co2_corrosion_rate_high_mm_per_year",
+        "value": "0.40",
+        "unit": "mm/year",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Conservative dry-CO2 corrosion sensitivity until stream quality is verified"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "co2_water_content_ppmv",
+        "value": "50",
+        "unit": "ppmv",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Placeholder dry CO2 water content for screening only"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "co2_water_spec_limit_ppmv",
+        "value": "500",
+        "unit": "ppmv",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Placeholder water specification limit for screening; replace with project stream specification"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "water_dew_point_margin_c",
+        "value": "10",
+        "unit": "degC",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+      },
+      {
+        "scenario": "goldeneye_poster",
         "parameter": "reported_remaining_life_years",
         "value": "24.54",
         "unit": "years",
         "source": "poster",
         "quality": "calculated",
         "notes": "Poster key finding"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "steel_density_kg_per_m3",
+        "value": "7850",
+        "unit": "kg/m3",
+        "source": "engineering_reference",
+        "quality": "assumed",
+        "notes": "Carbon steel density used for first LCA inventory calculation"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "lca_refurbishment_steel_fraction",
+        "value": "0.05",
+        "unit": "fraction",
+        "source": "project_screening_assumption",
+        "quality": "assumed",
+        "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "lca_pipeline_steel_factor_kgco2e_per_kg",
+        "value": "2.0",
+        "unit": "kgCO2e/kg",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "lca_new_build_construction_factor_kgco2e_per_km",
+        "value": "100000",
+        "unit": "kgCO2e/km",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "parameter": "lca_refurbishment_activity_factor_kgco2e_per_km",
+        "value": "20000",
+        "unit": "kgCO2e/km",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
       },
       {
         "scenario": "goldeneye_poster",
@@ -1732,8 +2736,267 @@
         ]
       },
       {
+        "module": "corrosion",
+        "model_version": "corrosion_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "poster",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Input shown in poster app screenshot"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.05,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Optimistic dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.4,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Conservative dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Placeholder dry CO2 water content for screening only"
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Placeholder water specification limit for screening; replace with project stream specification"
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "corrosion_rate_low_mm_per_year",
+            "value": 0.05,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_rate_base_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_rate_high_mm_per_year",
+            "value": 0.4,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_risk_level",
+            "value": "medium",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_basis",
+            "value": "The high corrosion-rate case is material for remaining-life sensitivity.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "poster",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Input shown in poster app screenshot"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.05,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Optimistic dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.4,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Conservative dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Placeholder dry CO2 water content for screening only"
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Placeholder water specification limit for screening; replace with project stream specification"
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Corrosion model is a screening dry-CO2 risk check. A final model needs stream composition, water specification, operating envelope, inspection evidence, and specialist review.",
+            "affected_modules": [
+              "corrosion",
+              "integrity",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "corrosion_rate_range",
+            "formula": "low/base/high corrosion rates are read from scenario assumptions",
+            "inputs": [
+              "future_co2_corrosion_rate_low_mm_per_year",
+              "future_co2_corrosion_rate_mm_per_year",
+              "future_co2_corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "corrosion_rate_low/base/high_mm_per_year",
+            "notes": "Used for remaining-life uncertainty."
+          },
+          {
+            "name": "dry_co2_risk",
+            "formula": "high if water content exceeds limit or dew point margin is negative; medium if water evidence is missing or high corrosion rate is material; otherwise low",
+            "inputs": [
+              "co2_water_content_ppmv",
+              "co2_water_spec_limit_ppmv",
+              "water_dew_point_margin_c",
+              "corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "corrosion_risk_level",
+            "notes": "Screening rule, not a detailed corrosion prediction model."
+          }
+        ]
+      },
+      {
         "module": "integrity",
-        "model_version": "integrity_screening_v0.1",
+        "model_version": "integrity_screening_v0.2",
         "status": "pass",
         "inputs": [
           {
@@ -1795,6 +3058,66 @@
               "integrity"
             ],
             "notes": "Poster key finding"
+          },
+          {
+            "name": "nominal_wall_thickness_uncertainty_fraction",
+            "value": 0.2,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified"
+          },
+          {
+            "name": "minimum_wall_thickness_uncertainty_fraction",
+            "value": 0.6,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed"
+          },
+          {
+            "name": "historical_wall_loss_uncertainty_fraction",
+            "value": 0.25,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Historical corrosion loss is uncertain without inspection records"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.05,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Optimistic dry-CO2 corrosion sensitivity until stream quality is verified"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.4,
+            "unit": "mm/year",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Conservative dry-CO2 corrosion sensitivity until stream quality is verified"
           }
         ],
         "outputs": [
@@ -1863,6 +3186,86 @@
             "notes": ""
           },
           {
+            "name": "remaining_life_low_years",
+            "value": 0,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": "Conservative wall-thickness and high-corrosion case."
+          },
+          {
+            "name": "remaining_life_base_years",
+            "value": 24.549999999999994,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_high_years",
+            "value": 247.24999999999997,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": "Optimistic wall-thickness and low-corrosion case."
+          },
+          {
+            "name": "remaining_life_range_width_years",
+            "value": 247.24999999999997,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "validation",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_low_mm",
+            "value": -2.542500000000002,
+            "unit": "mm",
+            "quality": "screening_estimate",
+            "used_by": [
+              "integrity",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_high_mm",
+            "value": 12.362499999999999,
+            "unit": "mm",
+            "quality": "screening_estimate",
+            "used_by": [
+              "integrity",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_risk_level",
+            "value": "medium",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
             "name": "reported_remaining_life_years",
             "value": 24.54,
             "unit": "years",
@@ -1892,6 +3295,33 @@
             "quality": "assumed",
             "sensitivity_required": true,
             "notes": "Input shown in poster app screenshot"
+          },
+          {
+            "name": "nominal_wall_thickness_uncertainty_fraction",
+            "value": 0.2,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified"
+          },
+          {
+            "name": "minimum_wall_thickness_uncertainty_fraction",
+            "value": 0.6,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed"
+          },
+          {
+            "name": "historical_wall_loss_uncertainty_fraction",
+            "value": 0.25,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Historical corrosion loss is uncertain without inspection records"
           }
         ],
         "warnings": [
@@ -1901,6 +3331,14 @@
             "affected_modules": [
               "integrity",
               "pre_lca_gate"
+            ]
+          },
+          {
+            "level": "medium",
+            "message": "Conservative uncertainty case gives zero remaining life; wall-thickness basis needs targeted evidence.",
+            "affected_modules": [
+              "integrity",
+              "validation"
             ]
           }
         ],
@@ -1945,12 +3383,25 @@
             ],
             "result_name": "remaining_life_years",
             "notes": ""
+          },
+          {
+            "name": "remaining_life_uncertainty",
+            "formula": "conservative life = low wall / high corrosion; optimistic life = high wall / low corrosion",
+            "inputs": [
+              "nominal_wall_thickness_uncertainty_fraction",
+              "minimum_wall_thickness_uncertainty_fraction",
+              "historical_wall_loss_uncertainty_fraction",
+              "corrosion_rate_low_mm_per_year",
+              "corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "remaining_life_low_years; remaining_life_high_years",
+            "notes": "Screening uncertainty band for limited or conflicting wall evidence."
           }
         ]
       },
       {
         "module": "cost",
-        "model_version": "cost_screening_v0.1",
+        "model_version": "cost_screening_v0.2",
         "status": "pass",
         "inputs": [
           {
@@ -2115,6 +3566,47 @@
               "validation"
             ],
             "notes": ""
+          },
+          {
+            "name": "netl_reference_total_capex_usd_2025",
+            "value": null,
+            "unit": "USD 2025",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_delta_usd_2025",
+            "value": null,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_delta_percent",
+            "value": null,
+            "unit": "%",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_validation_status",
+            "value": "not_supplied",
+            "unit": "status",
+            "quality": "calculated",
+            "used_by": [
+              "validation",
+              "report"
+            ],
+            "notes": ""
           }
         ],
         "assumptions": [
@@ -2128,7 +3620,16 @@
             "notes": "Project contingency factor"
           }
         ],
-        "warnings": [],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "No NETL CO2_T_COM reference total is supplied for this scenario, so cost is internally checked but not externally validated.",
+            "affected_modules": [
+              "cost",
+              "validation"
+            ]
+          }
+        ],
         "trace": [
           {
             "name": "cost_subtotal",
@@ -2164,6 +3665,16 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
+          },
+          {
+            "name": "netl_cost_comparison",
+            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
+            "inputs": [
+              "cost_total_usd_2025",
+              "netl_reference_total_capex_usd_2025"
+            ],
+            "result_name": "netl_cost_delta_usd_2025",
+            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -2208,7 +3719,7 @@
           },
           {
             "name": "pre_lca_reasons",
-            "value": "Capacity passes: 9.97 MtCO2/year versus 5.88 MtCO2/year required.; Integrity passes at screening level: 24.55 years remaining life and 4.91 mm available wall.; Cost screen is positive: benchmark avoided new-build CAPEX is $228,500,811.; Some important values are assumed or sensitivity inputs: capacity_factor, contingency_fraction, future_co2_corrosion_rate_mm_per_year, inner_diameter_in.; Upstream modules still contain validation warnings.",
+            "value": "Capacity passes: 9.97 MtCO2/year versus 5.88 MtCO2/year required.; Integrity passes at screening level: 24.55 years remaining life and 4.91 mm available wall.; Cost screen is positive: benchmark avoided new-build CAPEX is $228,500,811.; Some important values are assumed or sensitivity inputs: capacity_factor, contingency_fraction, future_co2_corrosion_rate_high_mm_per_year, future_co2_corrosion_rate_low_mm_per_year, future_co2_corrosion_rate_mm_per_year, historical_wall_loss_uncertainty_fraction, inner_diameter_in, minimum_wall_thickness_uncertainty_fraction, nominal_wall_thickness_uncertainty_fraction.; Upstream modules still contain validation warnings.",
             "unit": "text",
             "quality": "calculated",
             "used_by": [
@@ -2253,6 +3764,269 @@
             ],
             "result_name": "pre_lca_decision",
             "notes": "This is a screening gate, not an engineering approval decision."
+          }
+        ]
+      },
+      {
+        "module": "lca",
+        "model_version": "lca_screening_proxy_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "pipeline_length_km",
+            "value": 101.68,
+            "unit": "km",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Goldeneye pipeline length"
+          },
+          {
+            "name": "outer_diameter_in",
+            "value": 20.0,
+            "unit": "in",
+            "source": "poster",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Nominal outside diameter"
+          },
+          {
+            "name": "inner_diameter_in",
+            "value": 18.876,
+            "unit": "in",
+            "source": "poster",
+            "quality": "assumed_or_standard",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Standard inner diameter shown in poster capacity output"
+          },
+          {
+            "name": "steel_density_kg_per_m3",
+            "value": 7850.0,
+            "unit": "kg/m3",
+            "source": "engineering_reference",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Carbon steel density used for first LCA inventory calculation"
+          },
+          {
+            "name": "lca_refurbishment_steel_fraction",
+            "value": 0.05,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+          },
+          {
+            "name": "lca_pipeline_steel_factor_kgco2e_per_kg",
+            "value": 2.0,
+            "unit": "kgCO2e/kg",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_new_build_construction_factor_kgco2e_per_km",
+            "value": 100000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_refurbishment_activity_factor_kgco2e_per_km",
+            "value": 20000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "lca_steel_mass_new_build_kg",
+            "value": 17673004.725668874,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_refurbishment_steel_kg",
+            "value": 883650.2362834438,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_avoided_steel_kg",
+            "value": 16789354.48938543,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_new_build_proxy_kgco2e",
+            "value": 45514009.45133775,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_reuse_proxy_kgco2e",
+            "value": 3800900.4725668877,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy_saving_kgco2e",
+            "value": 41713108.97877086,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy_saving_percent",
+            "value": 91.64894387819052,
+            "unit": "%",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_screening_decision",
+            "value": "favour_reuse",
+            "unit": "decision",
+            "quality": "calculated",
+            "used_by": [
+              "final_gate",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "lca_refurbishment_steel_fraction",
+            "value": 0.05,
+            "unit": "fraction",
+            "source": "project_screening_assumption",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+          },
+          {
+            "name": "lca_pipeline_steel_factor_kgco2e_per_kg",
+            "value": 2.0,
+            "unit": "kgCO2e/kg",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_new_build_construction_factor_kgco2e_per_km",
+            "value": 100000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_refurbishment_activity_factor_kgco2e_per_km",
+            "value": 20000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "LCA result is a screening proxy only. It uses open factors from the assumption file, not final ecoinvent impact results.",
+            "affected_modules": [
+              "lca",
+              "final_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "pipeline_steel_mass",
+            "formula": "pi * (OD^2 - ID^2) / 4 * length * steel_density",
+            "inputs": [
+              "outer_diameter_in",
+              "inner_diameter_in",
+              "pipeline_length_km",
+              "steel_density_kg_per_m3"
+            ],
+            "result_name": "lca_steel_mass_new_build_kg",
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy",
+            "formula": "new-build proxy = steel mass * steel factor + length * construction factor; reuse proxy = refurbishment steel * steel factor + length * refurbishment factor",
+            "inputs": [
+              "lca_refurbishment_steel_fraction",
+              "lca_pipeline_steel_factor_kgco2e_per_kg",
+              "lca_new_build_construction_factor_kgco2e_per_km",
+              "lca_refurbishment_activity_factor_kgco2e_per_km"
+            ],
+            "result_name": "lca_proxy_saving_kgco2e",
+            "notes": "Screening proxy to be replaced by Brightway/openLCA ecoinvent calculation."
           }
         ]
       }

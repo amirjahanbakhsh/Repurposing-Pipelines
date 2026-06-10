@@ -1,0 +1,2 @@
+module,validation_type,sheet,functional_unit,technosphere_rows,biosphere_rows,useful_for_pipeline_lca,status,notes
+lca_reference,supplementary_workbook_review,,,0,0,unknown,blocked_by_data_access,No LCA supplementary workbook was supplied.

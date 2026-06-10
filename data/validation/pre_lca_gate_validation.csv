@@ -1,5 +1,0 @@
-module,validation_type,case,observed,expected,status,reference,notes
-pre_lca_gate,engineered_logic_case,all_pass_strong_inputs,pass,pass,pass,manual engineered test case,Checks gate decision behaviour for expected pass/marginal/fail/insufficient_data cases.
-pre_lca_gate,engineered_logic_case,assumed_capacity_input,marginal,marginal,pass,manual engineered test case,Checks gate decision behaviour for expected pass/marginal/fail/insufficient_data cases.
-pre_lca_gate,engineered_logic_case,failed_capacity,fail,fail,pass,manual engineered test case,Checks gate decision behaviour for expected pass/marginal/fail/insufficient_data cases.
-pre_lca_gate,engineered_logic_case,missing_required_output,insufficient_data,insufficient_data,pass,manual engineered test case,Checks gate decision behaviour for expected pass/marginal/fail/insufficient_data cases.

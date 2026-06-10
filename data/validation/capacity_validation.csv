@@ -1,5 +1,0 @@
-scenario,module,validation_type,parameter,model_value,reference_value,unit,difference_percent,status,reference,notes
-goldeneye_dissertation,capacity,implementation_arithmetic_check,capacity_mtpa,9.13073,9.13073,MtCO2/year,0.0,pass,independent arithmetic repeat of the equation,"This checks code arithmetic, not the physical model choice."
-goldeneye_dissertation,capacity,independent_property_sensitivity,capacity_with_coolprop_z_mtpa,9.13073,9.152522,MtCO2/year,-0.2381,pass,CoolProp Z factor,This shows the capacity impact of replacing the student Z factor with CoolProp.
-goldeneye_poster,capacity,implementation_arithmetic_check,capacity_mtpa,9.968447,9.968447,MtCO2/year,0.0,pass,independent arithmetic repeat of the equation,"This checks code arithmetic, not the physical model choice."
-goldeneye_poster,capacity,independent_property_sensitivity,capacity_with_coolprop_z_mtpa,9.968447,9.992238,MtCO2/year,-0.2381,pass,CoolProp Z factor,This shows the capacity impact of replacing the student Z factor with CoolProp.

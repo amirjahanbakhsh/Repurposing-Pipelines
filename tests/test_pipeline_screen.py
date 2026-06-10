@@ -23,9 +23,11 @@ from repurposing_pipelines.pipeline_screen import (  # noqa: E402
 
 class PipelineScreenTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.assumptions_path = ROOT / "data" / "benchmarks" / "goldeneye_assumptions.csv"
-        self.nsta_candidates_path = ROOT / "data" / "processed" / "nsta_candidate_ranked.csv"
-        self.nsta_defaults_path = ROOT / "data" / "inputs" / "nsta_screening_defaults.csv"
+        screening_layer = ROOT / "model_layers" / "06_screening_and_decision"
+        data_layer = ROOT / "model_layers" / "01_data_foundation"
+        self.assumptions_path = screening_layer / "goldeneye_assumptions.csv"
+        self.nsta_candidates_path = data_layer / "nsta_candidate_ranked.csv"
+        self.nsta_defaults_path = screening_layer / "nsta_screening_defaults.csv"
 
     def test_available_scenarios_lists_goldeneye_cases(self) -> None:
         scenarios = available_scenarios(self.assumptions_path)

@@ -282,7 +282,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
 
 Generated: {dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
 
-Assumptions: `data/benchmarks/goldeneye_assumptions.csv`
+Assumptions: `model_layers/06_screening_and_decision/goldeneye_assumptions.csv`
 
 Runner script: `scripts/run_goldeneye_benchmark.py`
 
@@ -290,8 +290,8 @@ Core modules: `repurposing_pipelines/`
 
 Outputs:
 
-- `data/benchmarks/goldeneye_benchmark_outputs.csv`
-- `data/benchmarks/goldeneye_benchmark_trace.json`
+- `model_layers/06_screening_and_decision/goldeneye_benchmark_outputs.csv`
+- `model_layers/06_screening_and_decision/goldeneye_benchmark_trace.json`
 
 ## Purpose
 

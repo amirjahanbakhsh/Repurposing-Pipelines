@@ -1,0 +1,94 @@
+scenario,parameter,value,unit,source,quality,notes
+goldeneye_dissertation,pipeline_name,"20"" GAS GOLDENEYE - ST. FERGUS",text,dissertation,reported,Case-study pipeline name
+goldeneye_dissertation,pipeline_length_km,101.68,km,dissertation,reported,Goldeneye pipeline length
+goldeneye_dissertation,outer_diameter_in,20.0,in,dissertation,reported,Nominal outside diameter
+goldeneye_dissertation,inner_diameter_in,18.25,in,dissertation,assumed_or_standard,Standard inner diameter shown in dissertation app screenshot
+goldeneye_dissertation,nominal_wall_thickness_mm,22.23,mm,dissertation,reported,Pipeline information shown in dissertation
+goldeneye_dissertation,pipe_grade,X60,text,dissertation,reported,Pipeline information shown in dissertation
+goldeneye_dissertation,start_operation_year,2003,year,dissertation,reported,Pipeline information shown in dissertation
+goldeneye_dissertation,end_operation_year,2011,year,dissertation,reported,Goldeneye ceased production in 2011
+goldeneye_dissertation,inlet_pressure_psia,1740,psia,dissertation,reported,Pale Blue Dot / Acorn condition used in case study
+goldeneye_dissertation,outlet_pressure_psia,1100,psia,dissertation,reported,Pale Blue Dot / Acorn condition used in case study
+goldeneye_dissertation,transport_temperature_c,12,degC,dissertation,reported,Pale Blue Dot / Acorn condition used in case study
+goldeneye_dissertation,capacity_factor,0.85,fraction,dissertation,assumed,Used to convert project flow requirement to design flow
+goldeneye_dissertation,required_project_flow_mtpa,5.0,MtCO2/year,dissertation,reported,Maximum Acorn requirement used in case study
+goldeneye_dissertation,molecular_weight_co2_g_per_mol,44.01,g/mol,dissertation,reported,Input shown in app screenshot
+goldeneye_dissertation,compressibility_factor_z,0.204449,dimensionless,dissertation,calculated,Reported app output
+goldeneye_dissertation,density_kg_per_m3,904.0128,kg/m3,dissertation,calculated,Reported app output
+goldeneye_dissertation,viscosity_micro_pa_s,92.6516,microPa.s,dissertation,calculated,Reported app output
+goldeneye_dissertation,fanning_friction_factor,0.003042,dimensionless,dissertation,calculated,Reported app output
+goldeneye_dissertation,reported_capacity_mtpa,9.125,MtCO2/year,dissertation,calculated,Reported max capacity around 9.1 MtCO2/year
+goldeneye_dissertation,historical_corrosion_years,22,years,dissertation,assumed,Years considered in dissertation corrosion calculation
+goldeneye_dissertation,historical_corrosion_rate_mm_per_year,0.373,mm/year,dissertation,calculated,Reported historical corrosion rate
+goldeneye_dissertation,minimum_wall_thickness_mm,6.23,mm,dissertation,calculated,Reported minimum safe wall thickness
+goldeneye_dissertation,nominal_wall_thickness_uncertainty_fraction,0.20,fraction,project_screening_assumption,assumed,Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified
+goldeneye_dissertation,minimum_wall_thickness_uncertainty_fraction,0.60,fraction,project_screening_assumption,assumed,Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed
+goldeneye_dissertation,historical_wall_loss_uncertainty_fraction,0.25,fraction,project_screening_assumption,assumed,Historical corrosion loss is uncertain without inspection records
+goldeneye_dissertation,future_co2_corrosion_rate_mm_per_year,0.10,mm/year,dissertation,assumed,Representative dense-phase CO2 corrosion rate used for future lifetime
+goldeneye_dissertation,future_co2_corrosion_rate_low_mm_per_year,0.02,mm/year,project_screening_assumption,assumed,Optimistic dry-CO2 corrosion sensitivity until stream quality is verified
+goldeneye_dissertation,future_co2_corrosion_rate_high_mm_per_year,0.20,mm/year,project_screening_assumption,assumed,Conservative dry-CO2 corrosion sensitivity until stream quality is verified
+goldeneye_dissertation,co2_water_content_ppmv,50,ppmv,project_screening_assumption,assumed,Placeholder dry CO2 water content for screening only
+goldeneye_dissertation,co2_water_spec_limit_ppmv,500,ppmv,project_screening_assumption,assumed,Placeholder water specification limit for screening; replace with project stream specification
+goldeneye_dissertation,water_dew_point_margin_c,10,degC,project_screening_assumption,assumed,Assumed positive margin to water dew point for dry-CO2 screening
+goldeneye_dissertation,reported_remaining_life_years,78.0,years,dissertation,calculated,Reported future CO2 transport lifetime
+goldeneye_dissertation,steel_density_kg_per_m3,7850,kg/m3,engineering_reference,assumed,Carbon steel density used for first LCA inventory calculation
+goldeneye_dissertation,lca_refurbishment_steel_fraction,0.05,fraction,project_screening_assumption,assumed,Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening
+goldeneye_dissertation,lca_pipeline_steel_factor_kgco2e_per_kg,2.0,kgCO2e/kg,screening_lca_proxy,assumed,Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result
+goldeneye_dissertation,lca_new_build_construction_factor_kgco2e_per_km,100000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result
+goldeneye_dissertation,lca_refurbishment_activity_factor_kgco2e_per_km,20000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data
+goldeneye_dissertation,cost_material_usd_2025,54181373,USD,dissertation_or_poster,calculated,Parker model cost component
+goldeneye_dissertation,cost_labor_usd_2025,109835004,USD,dissertation_or_poster,calculated,Parker model cost component
+goldeneye_dissertation,cost_row_damages_usd_2025,6688098,USD,dissertation_or_poster,calculated,Parker model cost component
+goldeneye_dissertation,cost_misc_usd_2025,34355862,USD,dissertation_or_poster,calculated,Parker model cost component
+goldeneye_dissertation,cost_surge_tank_usd_2025,2447622,USD,dissertation_or_poster,calculated,Additional CO2 pipeline component
+goldeneye_dissertation,cost_control_system_usd_2025,220051,USD,dissertation_or_poster,calculated,Additional CO2 pipeline component
+goldeneye_dissertation,cost_booster_station_usd_2025,0,USD,dissertation_or_poster,calculated,No booster station in Goldeneye case
+goldeneye_dissertation,contingency_fraction,0.10,fraction,dissertation_or_poster,assumed,Project contingency factor
+goldeneye_dissertation,reported_total_capex_usd_2025,228500812,USD,dissertation_or_poster,calculated,Reported avoided new-build CAPEX
+goldeneye_poster,pipeline_name,"20"" GAS GOLDENEYE - ST. FERGUS",text,poster,reported,Case-study pipeline name
+goldeneye_poster,pipeline_length_km,101.68,km,poster,reported,Goldeneye pipeline length
+goldeneye_poster,outer_diameter_in,20.0,in,poster,reported,Nominal outside diameter
+goldeneye_poster,inner_diameter_in,18.876,in,poster,assumed_or_standard,Standard inner diameter shown in poster capacity output
+goldeneye_poster,nominal_wall_thickness_mm,14.28,mm,poster,reported,Pipeline information shown in poster
+goldeneye_poster,pipe_grade,X60,text,poster,reported,Pipeline information shown in poster
+goldeneye_poster,start_operation_year,2003,year,poster,reported,Pipeline information shown in poster
+goldeneye_poster,end_operation_year,2011,year,poster,reported,Pipeline information shown in poster
+goldeneye_poster,inlet_pressure_psia,1740,psia,poster,reported,Goldeneye capacity assessment input
+goldeneye_poster,outlet_pressure_psia,1100,psia,poster,reported,Goldeneye capacity assessment input
+goldeneye_poster,transport_temperature_c,12,degC,poster,reported,Goldeneye capacity assessment input
+goldeneye_poster,capacity_factor,0.85,fraction,poster,assumed,Used to convert project flow requirement to design flow
+goldeneye_poster,required_project_flow_mtpa,5.0,MtCO2/year,poster,reported,Initial Acorn requirement used in poster
+goldeneye_poster,molecular_weight_co2_g_per_mol,44.01,g/mol,poster,reported,Input shown in app screenshot
+goldeneye_poster,compressibility_factor_z,0.204449,dimensionless,poster,calculated,Reported app output
+goldeneye_poster,density_kg_per_m3,904.0128,kg/m3,poster,calculated,Reported app output
+goldeneye_poster,viscosity_micro_pa_s,92.6516,microPa.s,poster,calculated,Reported app output
+goldeneye_poster,fanning_friction_factor,0.003021,dimensionless,poster,calculated,Reported app output
+goldeneye_poster,reported_capacity_mtpa,9.961,MtCO2/year,poster,calculated,Poster reports approximately 10 MtCO2/year
+goldeneye_poster,historical_corrosion_years,8,years,poster,assumed,Poster states years considered for corrosion: 8 years (2003-2011)
+goldeneye_poster,historical_corrosion_rate_mm_per_year,0.36625,mm/year,derived_from_poster,derived,2.93 mm wall loss divided by 8 years
+goldeneye_poster,reported_historical_wall_loss_mm,2.93,mm,poster,calculated,Poster key finding
+goldeneye_poster,minimum_wall_thickness_mm,6.44,mm,poster,calculated,Poster key finding
+goldeneye_poster,nominal_wall_thickness_uncertainty_fraction,0.20,fraction,project_screening_assumption,assumed,Goldeneye wall thickness has conflicting reported values; use sensitivity range until source is verified
+goldeneye_poster,minimum_wall_thickness_uncertainty_fraction,0.60,fraction,project_screening_assumption,assumed,Minimum wall basis is uncertain and Barlow sanity check suggests a higher value may be needed
+goldeneye_poster,historical_wall_loss_uncertainty_fraction,0.25,fraction,project_screening_assumption,assumed,Historical corrosion loss is uncertain without inspection records
+goldeneye_poster,future_co2_corrosion_rate_mm_per_year,0.20,mm/year,poster,assumed,Input shown in poster app screenshot
+goldeneye_poster,future_co2_corrosion_rate_low_mm_per_year,0.05,mm/year,project_screening_assumption,assumed,Optimistic dry-CO2 corrosion sensitivity until stream quality is verified
+goldeneye_poster,future_co2_corrosion_rate_high_mm_per_year,0.40,mm/year,project_screening_assumption,assumed,Conservative dry-CO2 corrosion sensitivity until stream quality is verified
+goldeneye_poster,co2_water_content_ppmv,50,ppmv,project_screening_assumption,assumed,Placeholder dry CO2 water content for screening only
+goldeneye_poster,co2_water_spec_limit_ppmv,500,ppmv,project_screening_assumption,assumed,Placeholder water specification limit for screening; replace with project stream specification
+goldeneye_poster,water_dew_point_margin_c,10,degC,project_screening_assumption,assumed,Assumed positive margin to water dew point for dry-CO2 screening
+goldeneye_poster,reported_remaining_life_years,24.54,years,poster,calculated,Poster key finding
+goldeneye_poster,steel_density_kg_per_m3,7850,kg/m3,engineering_reference,assumed,Carbon steel density used for first LCA inventory calculation
+goldeneye_poster,lca_refurbishment_steel_fraction,0.05,fraction,project_screening_assumption,assumed,Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening
+goldeneye_poster,lca_pipeline_steel_factor_kgco2e_per_kg,2.0,kgCO2e/kg,screening_lca_proxy,assumed,Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result
+goldeneye_poster,lca_new_build_construction_factor_kgco2e_per_km,100000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result
+goldeneye_poster,lca_refurbishment_activity_factor_kgco2e_per_km,20000,kgCO2e/km,screening_lca_proxy,assumed,Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data
+goldeneye_poster,cost_material_usd_2025,54181373,USD,poster,calculated,Parker model cost component
+goldeneye_poster,cost_labor_usd_2025,109835004,USD,poster,calculated,Parker model cost component
+goldeneye_poster,cost_row_damages_usd_2025,6688098,USD,poster,calculated,Parker model cost component
+goldeneye_poster,cost_misc_usd_2025,34355862,USD,poster,calculated,Parker model cost component
+goldeneye_poster,cost_surge_tank_usd_2025,2447622,USD,poster,calculated,Additional CO2 pipeline component
+goldeneye_poster,cost_control_system_usd_2025,220051,USD,poster,calculated,Additional CO2 pipeline component
+goldeneye_poster,cost_booster_station_usd_2025,0,USD,poster,calculated,No booster station in Goldeneye case
+goldeneye_poster,contingency_fraction,0.10,fraction,poster,assumed,Project contingency factor
+goldeneye_poster,reported_total_capex_usd_2025,228500812,USD,poster,calculated,Reported avoided new-build CAPEX

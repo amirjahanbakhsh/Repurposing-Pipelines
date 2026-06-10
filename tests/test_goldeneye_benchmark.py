@@ -17,7 +17,12 @@ from repurposing_pipelines.goldeneye import benchmark_scenario_with_trace  # noq
 class GoldeneyeBenchmarkTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        assumptions_path = ROOT / "data" / "benchmarks" / "goldeneye_assumptions.csv"
+        assumptions_path = (
+            ROOT
+            / "model_layers"
+            / "06_screening_and_decision"
+            / "goldeneye_assumptions.csv"
+        )
         cls.scenarios = read_scenario_assumptions(assumptions_path)
 
     def test_dissertation_case_reproduces_headline_outputs(self) -> None:

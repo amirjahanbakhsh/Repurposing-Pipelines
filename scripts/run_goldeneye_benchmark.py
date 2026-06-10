@@ -2,13 +2,13 @@
 
 Inputs:
 
-- data/benchmarks/goldeneye_assumptions.csv
+- model_layers/06_screening_and_decision/goldeneye_assumptions.csv
 
 Outputs:
 
-- data/benchmarks/goldeneye_benchmark_outputs.csv
-- data/benchmarks/goldeneye_benchmark_trace.json
-- reports/goldeneye_benchmark.md
+- model_layers/06_screening_and_decision/goldeneye_benchmark_outputs.csv
+- model_layers/06_screening_and_decision/goldeneye_benchmark_trace.json
+- model_layers/06_screening_and_decision/goldeneye_benchmark.md
 
 The runner stays deliberately small. The engineering calculations live in
 the reusable `repurposing_pipelines` package.
@@ -27,10 +27,11 @@ from repurposing_pipelines.goldeneye import run_from_paths  # noqa: E402
 
 
 def main() -> int:
-    assumptions_path = ROOT / "data" / "benchmarks" / "goldeneye_assumptions.csv"
-    output_path = ROOT / "data" / "benchmarks" / "goldeneye_benchmark_outputs.csv"
-    trace_path = ROOT / "data" / "benchmarks" / "goldeneye_benchmark_trace.json"
-    report_path = ROOT / "reports" / "goldeneye_benchmark.md"
+    layer_dir = ROOT / "model_layers" / "06_screening_and_decision"
+    assumptions_path = layer_dir / "goldeneye_assumptions.csv"
+    output_path = layer_dir / "goldeneye_benchmark_outputs.csv"
+    trace_path = layer_dir / "goldeneye_benchmark_trace.json"
+    report_path = layer_dir / "goldeneye_benchmark.md"
 
     count = run_from_paths(
         assumptions_path=assumptions_path,

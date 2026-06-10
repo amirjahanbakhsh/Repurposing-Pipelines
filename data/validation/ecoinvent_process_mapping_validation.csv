@@ -1,2 +1,0 @@
-module,validation_type,category,required_for,matches,selected_activity,location,reference_product,status,reference,notes
-lca_data,ecoinvent_availability,ecoinvent_export,LCA data mapping,0,,,,blocked_by_data_access,ecoinvent APOS 3.8 local export,No ecoinvent directory was supplied to the validation command.

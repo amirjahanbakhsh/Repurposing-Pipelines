@@ -1,0 +1,14 @@
+inventory_item,scenario_role,quantity_parameter,unit,calculated_from,ecoinvent_mapping_key,default_status,notes
+transported_co2,functional_unit,co2_transported_tonne,tonne CO2,user/project scenario,not_applicable,required,Functional unit amount; first model can use 1 tonne CO2.
+pipeline_length,reuse_and_new_build,pipeline_length_km,km,pipeline data,not_applicable,required,Comes from NSTA or project-specific pipeline data.
+pipeline_steel_mass,new_build,steel_mass_kg,kg,"length, diameter, wall thickness, steel density",pipeline_steel,to_calculate,Main material burden for a new equivalent pipeline.
+avoided_new_pipeline_steel,reuse,avoided_steel_mass_kg,kg,"new-build steel mass minus refurbishment steel",pipeline_steel,to_calculate,Avoided burden or sensitivity item; allocation choice must be explicit.
+refurbishment_steel,reuse,refurbishment_steel_kg,kg,project assumption,pipeline_steel,assumed,Repairs or modifications before reuse.
+offshore_pipeline_construction,new_build,pipeline_construction_km,km,pipeline length,offshore_pipeline_construction,to_calculate,Proxy for offshore long-distance pipeline construction where appropriate.
+decommissioned_pipeline,reuse_or_end_of_life,decommissioned_pipeline_kg,kg,project scenario,decommissioned_pipeline,scenario_choice,Used for decommissioning or reuse credit/burden sensitivity.
+electricity_operation,reuse_and_new_build,electricity_kwh,kWh,"compression, pumping, monitoring, auxiliary loads",electricity,to_calculate,Needs link to hydraulics/operation assumptions.
+diesel_machinery,construction_refurbishment,diesel_or_machine_energy_mj,MJ,construction/refurbishment assumption,diesel_machinery,assumed,Proxy for construction vessels/equipment until better data are available.
+freight_transport,construction_refurbishment,freight_tkm,tonne-km,"material mass and transport distance",freight_transport,assumed,Used for transport of material/waste to site or shore.
+scrap_steel,end_of_life,scrap_steel_kg,kg,steel waste or replacement material,scrap_steel,scenario_choice,Use carefully because recycling/allocation choices strongly affect results.
+storage_pipeline,full_ccs_chain,storage_pipeline_km,km,storage scenario,offshore_pipeline_construction,optional,Needed when pipeline screening is linked to transport and storage system LCA.
+injection_well,full_ccs_chain,injection_well_m,m,storage/well scenario,to_be_mapped,optional,Relevant for future well reuse module and storage LCA.

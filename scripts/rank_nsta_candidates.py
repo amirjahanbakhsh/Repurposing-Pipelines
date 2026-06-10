@@ -2,12 +2,12 @@
 
 Inputs:
 
-- data/processed/nsta_pipeline_attributes.csv
+- model_layers/01_data_foundation/nsta_pipeline_attributes.csv
 
 Outputs:
 
-- data/processed/nsta_candidate_ranked.csv
-- reports/nsta_candidate_ranking.md
+- model_layers/01_data_foundation/nsta_candidate_ranked.csv
+- model_layers/01_data_foundation/nsta_candidate_ranking.md
 
 This is a screening helper, not an engineering suitability model. It only ranks
 pipelines that already have usable NSTA values for internal diameter, max
@@ -281,7 +281,7 @@ def write_report(path: Path, rows: list[dict[str, str]], ranked: list[dict[str, 
 
 Generated: {dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
 
-Input data: `data/processed/nsta_pipeline_attributes.csv`
+Input data: `model_layers/01_data_foundation/nsta_pipeline_attributes.csv`
 
 Ranking script: `scripts/rank_nsta_candidates.py`
 
@@ -337,9 +337,10 @@ The score favours larger internal diameter, higher operating pressure, thicker w
 
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
-    input_path = root / "data" / "processed" / "nsta_pipeline_attributes.csv"
-    output_path = root / "data" / "processed" / "nsta_candidate_ranked.csv"
-    report_path = root / "reports" / "nsta_candidate_ranking.md"
+    data_layer = root / "model_layers" / "01_data_foundation"
+    input_path = data_layer / "nsta_pipeline_attributes.csv"
+    output_path = data_layer / "nsta_candidate_ranked.csv"
+    report_path = data_layer / "nsta_candidate_ranking.md"
 
     rows = read_rows(input_path)
     ranked = enrich_and_score(rows)

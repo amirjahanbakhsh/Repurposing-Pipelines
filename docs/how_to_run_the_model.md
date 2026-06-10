@@ -260,6 +260,14 @@ python -m pip install CoolProp
 
 Then run the validation command again.
 
+Optional: include local LCA evidence from ecoinvent and the supplied LCA workbook:
+
+```powershell
+python scripts\run_independent_validation.py --ecoinvent-dir "D:\Amir\Heriot-Watt University Team Dropbox\RES_EPS_RCCS_Susana_Garcia\RCCS_Capture_Amir Jahanbakhsh\3. USorb-DAC Work\Ecoinvent_data_exported\Ecoinvent_apos_38" --lca-workbook "C:\Users\aj52\OneDrive - Heriot-Watt University\USorb-DAC\1-s2.0-S1750583623002098-mmc2.xlsx"
+```
+
+This does not copy ecoinvent data into GitHub. It only checks which useful process names are available.
+
 ### Step 2: Read The Validation Report
 
 Open this file:

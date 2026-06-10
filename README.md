@@ -26,6 +26,7 @@ Current work includes:
 - short project positioning note explaining novelty and selling points.
 - first executable independent validation checks for CO2 properties, capacity arithmetic, integrity wall thickness, and cost arithmetic.
 - LCA data strategy for using local ecoinvent data without committing licensed datasets to GitHub.
+- defensible conventional LCA basis, with prospective and dynamic LCA kept as future extensions.
 
 ## Repository Structure
 
@@ -170,6 +171,8 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `data/validation/cost_arithmetic_validation.csv`: cost component and contingency arithmetic check.
 - `docs/novelty_and_selling_points.md`: simple explanation of what is novel and competitive about the project.
 - `docs/lca_data_strategy.md`: how to use ecoinvent and LCA references safely for future modelling.
+- `docs/lca_model_defensibility_basis.md`: the plain-language method basis for building a defendable conventional LCA module.
+- `data/validation/lca_literature_register.csv`: source register for LCA standards, reports, software, local data, and future LCA extensions.
 - `docs/similar_tools_and_data_sources.md`: notes on similar tools such as NETL REPACT, NETL CO2 Transport Cost Model, SimCCS, and Sequestrix.
 
 ## Optional Full Geometry Download

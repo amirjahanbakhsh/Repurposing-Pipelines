@@ -110,6 +110,14 @@ The supplied PDFs are useful for method validation:
 - NORSUS, `Guidelines for Life Cycle Assessment (LCA) of CCU systems`, OR 28.22, 2022.
 - IOGP Report 672, `Overview of lifecycle assessment for carbon capture and storage projects`, March 2024.
 
+The wider method basis is now tracked in:
+
+```text
+docs/lca_model_defensibility_basis.md
+data/validation/lca_literature_register.csv
+data/validation/lca_method_reference_register.csv
+```
+
 They support decisions on:
 
 - functional unit;
@@ -119,6 +127,8 @@ They support decisions on:
 - shared transport and storage networks;
 - allocation or proportional treatment;
 - reporting across the CCS project life cycle.
+
+The first LCA module should stay conventional and process-based. Prospective LCA and dynamic LCA are useful future extensions, but adding them too early would make the first model harder to validate.
 
 ## Recommended Future Data Flow
 

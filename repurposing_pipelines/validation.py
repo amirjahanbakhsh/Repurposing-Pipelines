@@ -102,6 +102,20 @@ LCA_MAPPING_REQUIRED_COLUMNS = [
     "notes",
 ]
 
+LCA_IMPACT_FACTOR_REQUIRED_COLUMNS = [
+    "mapping_key",
+    "impact_method",
+    "impact_category",
+    "activity_name",
+    "location",
+    "reference_product",
+    "unit",
+    "impact_factor_kgco2e_per_unit",
+    "source",
+    "quality",
+    "notes",
+]
+
 ECOSPOLD_LOOKUP_NAME = "FilenameToActivtiyLookup.csv"
 
 ECOINVENT_PROCESS_QUERIES = [
@@ -802,33 +816,44 @@ def validate_lca_model_input_csvs(
     *,
     inventory_template_path: Path,
     process_mapping_path: Path,
+    impact_factor_template_path: Path,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    if not inventory_template_path.exists() or not process_mapping_path.exists():
+    if (
+        not inventory_template_path.exists()
+        or not process_mapping_path.exists()
+        or not impact_factor_template_path.exists()
+    ):
         return [
             {
                 "module": "lca_model_inputs",
                 "validation_type": "lca_csv_availability",
-                "check": "LCA inventory and process mapping CSV files exist",
+                "check": "LCA inventory, process mapping, and impact factor template CSV files exist",
                 "observed": "missing file",
-                "expected": "both files present",
+                "expected": "all three files present",
                 "status": "review_required",
                 "notes": (
                     "Create model_layers/05_lca/lca_inventory_template.csv and "
-                    "model_layers/05_lca/lca_process_mapping.csv."
+                    "model_layers/05_lca/lca_process_mapping.csv and "
+                    "model_layers/05_lca/lca_impact_factors_template.csv."
                 ),
             }
         ]
 
     inventory_rows = _read_csv_rows(inventory_template_path)
     mapping_rows = _read_csv_rows(process_mapping_path)
+    factor_rows = _read_csv_rows(impact_factor_template_path)
     inventory_columns = set(inventory_rows[0]) if inventory_rows else set()
     mapping_columns = set(mapping_rows[0]) if mapping_rows else set()
+    factor_columns = set(factor_rows[0]) if factor_rows else set()
     missing_inventory_columns = [
         column for column in LCA_INVENTORY_REQUIRED_COLUMNS if column not in inventory_columns
     ]
     missing_mapping_columns = [
         column for column in LCA_MAPPING_REQUIRED_COLUMNS if column not in mapping_columns
+    ]
+    missing_factor_columns = [
+        column for column in LCA_IMPACT_FACTOR_REQUIRED_COLUMNS if column not in factor_columns
     ]
     rows.append(
         {
@@ -850,6 +875,17 @@ def validate_lca_model_input_csvs(
             "expected": "all required columns",
             "status": "pass" if not missing_mapping_columns else "review_required",
             "notes": "Checks the shareable process mapping metadata file.",
+        }
+    )
+    rows.append(
+        {
+            "module": "lca_model_inputs",
+            "validation_type": "impact_factor_template_csv_columns",
+            "check": "impact factor template has required columns",
+            "observed": "; ".join(missing_factor_columns) if missing_factor_columns else "none missing",
+            "expected": "all required columns",
+            "status": "pass" if not missing_factor_columns else "review_required",
+            "notes": "Checks the blank template used for the private ecoinvent-derived factor file.",
         }
     )
 
@@ -1866,6 +1902,7 @@ def run_independent_validation(
     report_path: Path,
     lca_inventory_template_path: Path,
     lca_process_mapping_path: Path,
+    lca_impact_factor_template_path: Path,
     output_paths: dict[str, Path] | None = None,
     ecoinvent_dir: Path | None = None,
     lca_workbook_path: Path | None = None,
@@ -1892,6 +1929,7 @@ def run_independent_validation(
     lca_model_input_rows = validate_lca_model_input_csvs(
         inventory_template_path=lca_inventory_template_path,
         process_mapping_path=lca_process_mapping_path,
+        impact_factor_template_path=lca_impact_factor_template_path,
     )
     dashboard_rows = validation_status_dashboard(
         ecoinvent_rows=ecoinvent_rows,

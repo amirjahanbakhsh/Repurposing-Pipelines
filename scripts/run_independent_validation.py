@@ -55,6 +55,7 @@ def main() -> int:
         report_path=VALIDATION_LAYER / "independent_validation_report.md",
         lca_inventory_template_path=LCA_LAYER / "lca_inventory_template.csv",
         lca_process_mapping_path=LCA_LAYER / "lca_process_mapping.csv",
+        lca_impact_factor_template_path=LCA_LAYER / "lca_impact_factors_template.csv",
         output_paths={
             "data": DATA_LAYER / "data_extraction_validation.csv",
             "property": CAPACITY_LAYER / "co2_property_validation.csv",

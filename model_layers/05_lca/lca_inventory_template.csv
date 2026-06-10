@@ -4,6 +4,7 @@ pipeline_length,reuse_and_new_build,pipeline_length_km,km,pipeline data,not_appl
 pipeline_steel_mass,new_build,steel_mass_kg,kg,"length, diameter, wall thickness, steel density",pipeline_steel,to_calculate,Main material burden for a new equivalent pipeline.
 avoided_new_pipeline_steel,reuse,avoided_steel_mass_kg,kg,"new-build steel mass minus refurbishment steel",pipeline_steel,to_calculate,Avoided burden or sensitivity item; allocation choice must be explicit.
 refurbishment_steel,reuse,refurbishment_steel_kg,kg,project assumption,pipeline_steel,assumed,Repairs or modifications before reuse.
+pipeline_refurbishment_activity,reuse,pipeline_refurbishment_km,km,pipeline length,refurbishment_activity,assumed,"Inspection, cleaning, repair, recommissioning, and preparation activity for reuse."
 offshore_pipeline_construction,new_build,pipeline_construction_km,km,pipeline length,offshore_pipeline_construction,to_calculate,Proxy for offshore long-distance pipeline construction where appropriate.
 decommissioned_pipeline,reuse_or_end_of_life,decommissioned_pipeline_kg,kg,project scenario,decommissioned_pipeline,scenario_choice,Used for decommissioning or reuse credit/burden sensitivity.
 electricity_operation,reuse_and_new_build,electricity_kwh,kWh,"compression, pumping, monitoring, auxiliary loads",electricity,to_calculate,Needs link to hydraulics/operation assumptions.

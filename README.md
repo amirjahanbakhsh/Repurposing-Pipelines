@@ -17,7 +17,7 @@ The model screens pipeline candidates using:
 - simple integrity screening;
 - cost comparison;
 - pre-LCA decision logic;
-- LCA inventory mapping and first proxy results;
+- LCA inventory, ecoinvent-linked conditional reports, and first proxy results;
 - independent validation checks.
 
 This is still a screening tool. A `pass` or `marginal` result means a pipeline is worth studying further. It is not engineering approval.
@@ -78,6 +78,18 @@ Run the Goldeneye benchmark:
 python scripts\run_goldeneye_benchmark.py
 ```
 
+Create the private LCA factor template:
+
+```powershell
+python scripts\run_ecoinvent_lca.py --create-factor-template
+```
+
+Run the ecoinvent-linked LCA workflow for one pipeline:
+
+```powershell
+python scripts\run_ecoinvent_lca.py --nsta-id PL774
+```
+
 Run independent validation:
 
 ```powershell
@@ -96,6 +108,9 @@ The LCA files are now together:
 
 - `model_layers/05_lca/lca_inventory_template.csv`
 - `model_layers/05_lca/lca_process_mapping.csv`
+- `model_layers/05_lca/lca_impact_factors_template.csv`
+- `model_layers/05_lca/lca_report_goldeneye_poster.md`
+- `model_layers/05_lca/lca_report_nsta_pl774.md`
 - `model_layers/05_lca/lca_model_input_csv_validation.csv`
 - `model_layers/05_lca/lca_literature_register.csv`
 - `model_layers/05_lca/lca_method_reference_register.csv`
@@ -114,14 +129,14 @@ Implemented so far:
 - batch screening of 155 NSTA records;
 - general wall-thickness uncertainty for all screened pipelines;
 - first corrosion screening module;
-- first LCA proxy module;
+- first LCA proxy module and ecoinvent-linked conditional LCA workflow;
 - NETL cost-reference template;
 - independent validation reports and registers.
 
 Next technical priorities:
 
+- fill private ecoinvent/openLCA/Brightway impact factors for LCA;
 - improve the wall-thickness/minimum-wall basis;
 - validate capacity against an external CO2 transport model;
 - compare costs against NETL CO2_T_COM;
-- replace the LCA proxy with a proper ecoinvent/openLCA/Brightway workflow;
 - keep wells as Phase 2 after pipeline screening is stable.

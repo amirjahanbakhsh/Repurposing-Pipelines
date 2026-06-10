@@ -1,6 +1,6 @@
 # Independent Validation Report
 
-Generated: 2026-06-10T09:39:17+00:00
+Generated: 2026-06-10T14:56:08+00:00
 
 Model validation version: `independent_validation_v0.2`
 
@@ -29,7 +29,7 @@ It separates three things:
 | ecoinvent data mapping | `blocked_by_data_access: 1` |
 | LCA workbook review | `blocked_by_data_access: 1` |
 | LCA method references | `future_reference: 4, inventory_template: 1, local_data_source: 1, method_reference: 5` |
-| LCA model input CSVs | `pass: 4` |
+| LCA model input CSVs | `pass: 5` |
 | Overall module status | `arithmetic_pass_external_pending: 2, automated_pass: 1, blocked_by_data_access: 1, first_independent_pass: 1, not_implemented: 2, review_required: 3, validated_for_screening: 4` |
 
 Main finding:
@@ -242,6 +242,7 @@ These sources define how the LCA should be built. They support system boundary, 
 | --- | --- | --- | --- |
 | inventory_csv_columns | none missing | all required columns | pass |
 | process_mapping_csv_columns | none missing | all required columns | pass |
+| impact_factor_template_csv_columns | none missing | all required columns | pass |
 | inventory_mapping_keys | none missing | all mapping keys covered | pass |
 | mapping_metadata_shareable | 0 | 0 | pass |
 

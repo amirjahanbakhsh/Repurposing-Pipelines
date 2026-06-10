@@ -34,19 +34,35 @@ But it should not copy the full ecoinvent process inventories into the repositor
 
 ## CSV Files The Model Can Use
 
-Two shareable CSV files have been added:
+Three shareable CSV files have been added:
 
 ```text
 model_layers/05_lca/lca_inventory_template.csv
 model_layers/05_lca/lca_process_mapping.csv
+model_layers/05_lca/lca_impact_factors_template.csv
 ```
 
 How they should be used:
 
 - `lca_inventory_template.csv` lists the quantities our model must calculate or request from the user.
 - `lca_process_mapping.csv` links each inventory item to a candidate ecoinvent process name, location, reference product, and unit.
+- `lca_impact_factors_template.csv` shows the private impact factors needed, but leaves the values blank.
 
-These files are safe to keep in GitHub because they contain mapping metadata only. They do not contain licensed ecoinvent impact factors or unit-process inventories.
+These files are safe to keep in GitHub because they contain model structure and mapping metadata only. They do not contain licensed ecoinvent impact factors or unit-process inventories.
+
+The private factor file should be kept here:
+
+```text
+model_layers/05_lca/private/lca_impact_factors_private.csv
+```
+
+Create it with:
+
+```powershell
+python scripts\run_ecoinvent_lca.py --create-factor-template
+```
+
+This private file is ignored by Git.
 
 ## What We Need For Pipeline Reuse LCA
 
@@ -130,13 +146,28 @@ They support decisions on:
 
 The first LCA module should stay conventional and process-based. Prospective LCA and dynamic LCA are useful future extensions, but adding them too early would make the first model harder to validate.
 
-## Recommended Future Data Flow
+## Current Data Flow
 
 1. Pipeline model calculates engineering quantities.
 2. LCA inventory builder converts those quantities into LCA inputs.
 3. Dataset mapper links each input to an ecoinvent process.
-4. Brightway or openLCA calculates impacts locally.
-5. GitHub stores only the model code, mapping, and derived report.
+4. A private factor CSV provides ecoinvent/openLCA/Brightway-derived climate factors.
+5. The script writes inventory, impact, result, report, and trace files.
+6. GitHub stores only the model code, mapping, blank templates, and shareable reports.
+
+Run one example:
+
+```powershell
+python scripts\run_ecoinvent_lca.py --nsta-id PL774
+```
+
+If the private factors are not filled, the report status is:
+
+```text
+blocked_missing_impact_factors
+```
+
+This is deliberate. It prevents the model from pretending that proxy values are final ecoinvent results.
 
 ## First Functional Unit
 

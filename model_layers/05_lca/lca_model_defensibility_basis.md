@@ -160,14 +160,14 @@ Use sources in this order:
 
 ## Immediate Implementation Decision
 
-The next LCA coding step should not be an impact result yet. It should be an inventory builder:
+The first LCA coding step is now an ecoinvent-linked conditional workflow:
 
 ```text
 pipeline engineering outputs
   -> LCA inventory quantities
   -> ecoinvent process mapping
-  -> sensitivity cases
-  -> local LCA calculation later
+  -> private impact-factor CSV
+  -> conditional LCA report and trace
 ```
 
-This keeps the model modular, transparent, and easier to validate.
+If the private impact factors are missing, the report is marked `blocked_missing_impact_factors`. This keeps the model modular, transparent, and easier to validate.

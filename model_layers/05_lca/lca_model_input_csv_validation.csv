@@ -1,5 +1,6 @@
 module,validation_type,check,observed,expected,status,notes
 lca_model_inputs,inventory_csv_columns,inventory template has required columns,none missing,all required columns,pass,Checks the shareable project inventory template.
 lca_model_inputs,process_mapping_csv_columns,process mapping file has required columns,none missing,all required columns,pass,Checks the shareable process mapping metadata file.
+lca_model_inputs,impact_factor_template_csv_columns,impact factor template has required columns,none missing,all required columns,pass,Checks the blank template used for the private ecoinvent-derived factor file.
 lca_model_inputs,inventory_mapping_keys,every inventory mapping key exists in process mapping CSV,none missing,all mapping keys covered,pass,This lets the future LCA model join quantities to process choices.
 lca_model_inputs,mapping_metadata_shareable,process mapping contains shareable metadata only,0,0,pass,All rows are labelled as shareable metadata.

@@ -13,6 +13,7 @@ If you are new to the repository, do not start by opening every folder. Start wi
 | See the latest all-pipeline screening result | `model_layers/06_screening_and_decision/pipeline_screen_nsta_all.md` |
 | See the PL774 / CATS example result | `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.md` |
 | See the Goldeneye benchmark result | `model_layers/06_screening_and_decision/goldeneye_benchmark.md` |
+| See the first ecoinvent-linked LCA reports | `model_layers/05_lca/lca_report_nsta_pl774.md` |
 | See validation status | `model_layers/07_independent_validation/independent_validation_report.md` |
 | Find LCA CSV files | `model_layers/05_lca/` |
 | Understand the modular model design | `model_layers/00_project_overview/system_architecture.md` |
@@ -43,6 +44,18 @@ python scripts\run_pipeline_screen.py --nsta-id PL774
 
 ```text
 model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.md
+```
+
+7. Optional: run the ecoinvent-linked LCA report for the same pipeline:
+
+```powershell
+python scripts\run_ecoinvent_lca.py --nsta-id PL774
+```
+
+8. Open:
+
+```text
+model_layers/05_lca/lca_report_nsta_pl774.md
 ```
 
 ## What The Folders Mean

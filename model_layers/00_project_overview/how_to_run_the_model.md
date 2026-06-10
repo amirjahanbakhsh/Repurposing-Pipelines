@@ -304,7 +304,67 @@ python scripts\run_pipeline_screen.py --list-nsta --top 20
 
 Then copy the `PL...` number exactly.
 
-## Option 4: Run The Independent Validation Checks
+## Option 4: Run The LCA Report
+
+Use this after you have selected one pipeline.
+
+### Step 1: Create The Private Factor Template
+
+Run this once:
+
+```powershell
+python scripts\run_ecoinvent_lca.py --create-factor-template
+```
+
+This creates a private CSV file here:
+
+```text
+model_layers/05_lca/private/lca_impact_factors_private.csv
+```
+
+This file is not uploaded to GitHub because it will contain ecoinvent-derived values.
+
+### Step 2: Run LCA For One NSTA Pipeline
+
+Example:
+
+```powershell
+python scripts\run_ecoinvent_lca.py --nsta-id PL774
+```
+
+You can replace `PL774` with another NSTA pipeline number.
+
+After you press Enter, expect PowerShell to print something like:
+
+```text
+Scenario: nsta_pl774
+LCA status: blocked_missing_impact_factors
+Report: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\05_lca\lca_report_nsta_pl774.md
+```
+
+The key line is:
+
+```text
+LCA status: blocked_missing_impact_factors
+```
+
+This is not an error. It means the model has built the inventory, but final kg CO2e values need the private impact factors.
+
+### Step 3: Read The LCA Report
+
+For `PL774`, open:
+
+```text
+model_layers/05_lca/lca_report_nsta_pl774.md
+```
+
+Start with:
+
+- `Status`
+- `Required Inventory Rows`
+- `Missing factor keys`
+
+## Option 5: Run The Independent Validation Checks
 
 Use this when you want to check whether the model is technically credible.
 

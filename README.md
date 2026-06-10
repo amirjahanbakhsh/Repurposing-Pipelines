@@ -27,6 +27,10 @@ Current work includes:
 - first executable independent validation checks for CO2 properties, capacity arithmetic, integrity wall thickness, and cost arithmetic.
 - LCA data strategy for using local ecoinvent data without committing licensed datasets to GitHub.
 - defensible conventional LCA basis, with prospective and dynamic LCA kept as future extensions.
+- batch screening of all model-ready NSTA hydrocarbon pipeline candidates.
+- general wall-thickness uncertainty ranges for every screened pipeline, not only Goldeneye.
+- first corrosion screening and LCA proxy modules for early decision support.
+- NETL cost-reference input template, ready for comparison once official benchmark values are added.
 
 ## Repository Structure
 
@@ -62,7 +66,7 @@ Run the Goldeneye benchmark:
 python scripts\run_goldeneye_benchmark.py
 ```
 
-This reads the Goldeneye assumptions, recalculates capacity, lifetime, cost, and the pre-LCA decision, then updates the report and trace files.
+This reads the Goldeneye assumptions, recalculates capacity, corrosion risk, lifetime uncertainty, cost, LCA proxy, and the pre-LCA decision, then updates the report and trace files.
 
 Run the independent validation checks:
 
@@ -108,11 +112,12 @@ For now, available scenarios come from `data/benchmarks/goldeneye_assumptions.cs
 Choose and run one NSTA candidate:
 
 ```powershell
+python scripts\run_pipeline_screen.py --screen-all-nsta
 python scripts\run_pipeline_screen.py --list-nsta --top 5
 python scripts\run_pipeline_screen.py --nsta-id PL774
 ```
 
-The first command shows the top ranked NSTA candidates. The second command runs one selected NSTA pipeline using NSTA data plus simple default assumptions from `data/inputs/nsta_screening_defaults.csv`.
+The first command screens all model-ready NSTA hydrocarbon candidates and creates `reports/pipeline_screen_nsta_all.md`. The second command shows the top ranked NSTA candidates. The third command runs one selected NSTA pipeline using NSTA data plus simple default assumptions from `data/inputs/nsta_screening_defaults.csv`.
 
 For `PL774`, the command creates:
 
@@ -152,10 +157,13 @@ This ranks the hydrocarbon pipelines that have enough basic data for early scree
 - `reports/nsta_candidate_ranking.md`: first-pass ranking of model-ready hydrocarbon pipeline candidates and checks for known CCS/reuse names such as Goldeneye, Atlantic, Cromarty, SAGE, and others.
 - `reports/goldeneye_benchmark.md`: benchmark reproduction of the Goldeneye dissertation and poster cases, now including the pre-LCA gate decision.
 - `reports/independent_validation_report.md`: first independent validation report, including CoolProp property checks and wall-thickness review flags.
+- `reports/pipeline_screen_nsta_all.md`: batch screening report for all model-ready NSTA hydrocarbon pipeline candidates.
 - `reports/pipeline_screen_goldeneye_poster.md`: example report for running one selected pipeline scenario.
 - `reports/pipeline_screen_nsta_pl774.md`: example report for running one selected NSTA candidate.
+- `data/processed/pipeline_screen_nsta_all.csv`: full batch-screening table for all screened NSTA records.
 - `data/benchmarks/goldeneye_benchmark_trace.json`: traceable inputs, outputs, assumptions, warnings, and formula notes for each Goldeneye module.
 - `data/inputs/nsta_screening_defaults.csv`: simple assumptions used when NSTA does not provide all model inputs.
+- `data/inputs/netl_cost_reference_template.csv`: placeholder table for adding official NETL cost-model comparison values.
 - `data/inputs/lca_inventory_template.csv`: shareable list of LCA inventory quantities the model should calculate or request.
 - `data/inputs/lca_process_mapping.csv`: shareable ecoinvent process-mapping metadata; does not contain licensed impact factors.
 - `docs/system_architecture.md`: proposed modular architecture, traceability design, and pre-/post-LCA decision gates.

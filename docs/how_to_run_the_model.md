@@ -63,7 +63,55 @@ The most important lines are:
 - `Why This Decision?`
 - `Next Data To Check`
 
-## Option 2: Run One NSTA Pipeline
+## Option 2: Screen All NSTA Pipelines
+
+Use this as the normal first step when you want to compare many pipeline candidates.
+
+### Step 1: Run The Full Screening
+
+```powershell
+python scripts\run_pipeline_screen.py --screen-all-nsta
+```
+
+This screens all model-ready NSTA hydrocarbon pipeline candidates using:
+
+- the public NSTA pipeline data;
+- simple shared screening assumptions;
+- uncertainty ranges for wall thickness and corrosion.
+
+### Step 2: Read The Batch Report
+
+Open this file:
+
+```text
+reports/pipeline_screen_nsta_all.md
+```
+
+Start with:
+
+- `Candidate Count`
+- `Pre-LCA Decisions`
+- `Top 30 Strategic Screened Pipelines`
+
+The report focuses on strategic pipelines at least 1 km long. Very short connecting segments are still kept in the CSV file, but they are not the main screening priority.
+
+### Step 3: Choose One Pipeline Number
+
+In the report table, copy the NSTA number, for example:
+
+```text
+PL774
+```
+
+Then run that pipeline using Option 3 below.
+
+The full table is also saved here:
+
+```text
+data/processed/pipeline_screen_nsta_all.csv
+```
+
+## Option 3: Run One NSTA Pipeline
 
 Use this when you want to choose one pipeline from the ranked NSTA candidate list.
 
@@ -185,6 +233,20 @@ Start with the report file. It is written for humans.
 
 The CSV and JSON files are mainly for checking, debugging, or later use in the web app.
 
+## Wall Thickness Uncertainty
+
+Wall thickness is uncertain for any pipeline, not only Goldeneye.
+
+For early screening, the model therefore uses a range:
+
+| Case | Plain meaning |
+| --- | --- |
+| `low` | Conservative case. Less usable wall is available. |
+| `base` | Main estimate. |
+| `high` | Optimistic case. More usable wall is available. |
+
+Goldeneye has a wider uncertainty range because the available information is less clear. Other NSTA pipelines still have uncertainty, but the default range is narrower unless better evidence says otherwise.
+
 ## What The Decision Means
 
 | Decision | Plain meaning |
@@ -242,7 +304,7 @@ python scripts\run_pipeline_screen.py --list-nsta --top 20
 
 Then copy the `PL...` number exactly.
 
-## Option 3: Run The Independent Validation Checks
+## Option 4: Run The Independent Validation Checks
 
 Use this when you want to check whether the model is technically credible.
 

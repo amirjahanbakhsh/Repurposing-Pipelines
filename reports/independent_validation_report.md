@@ -1,6 +1,6 @@
 # Independent Validation Report
 
-Generated: 2026-06-10T07:39:44+00:00
+Generated: 2026-06-10T08:49:11+00:00
 
 Model validation version: `independent_validation_v0.2`
 
@@ -20,17 +20,17 @@ It separates three things:
 | --- | --- |
 | NSTA data extraction | `data_gap_confirmed: 1, pass: 6` |
 | Assumption traceability | `pass: 3` |
-| Assumption evidence register | `external_benchmark_needed: 2, first_independent_pass: 1, not_implemented: 2, review_required: 1, validated_for_mapping: 1, visible_but_needs_source_upgrade: 1` |
+| Assumption evidence register | `external_benchmark_needed: 2, first_independent_pass: 1, not_implemented: 1, review_required: 2, validated_for_screening: 1, visible_but_needs_source_upgrade: 1` |
 | CO2 properties | `information: 2, pass: 6` |
 | Capacity | `pass: 4` |
 | Integrity wall thickness | `review_required: 2` |
 | Cost arithmetic | `pass: 2` |
 | Pre-LCA gate | `pass: 4` |
-| ecoinvent data mapping | `pass: 8` |
-| LCA workbook review | `information: 1, pass: 5` |
-| LCA method references | `inventory_template: 1, local_data_source: 1, method_reference: 3` |
+| ecoinvent data mapping | `blocked_by_data_access: 1` |
+| LCA workbook review | `blocked_by_data_access: 1` |
+| LCA method references | `future_reference: 4, inventory_template: 1, local_data_source: 1, method_reference: 5` |
 | LCA model input CSVs | `pass: 4` |
-| Overall module status | `arithmetic_pass_external_pending: 2, automated_pass: 1, first_independent_pass: 1, not_implemented: 3, review_required: 2, validated_for_mapping: 3, validated_for_screening: 2` |
+| Overall module status | `arithmetic_pass_external_pending: 2, automated_pass: 1, blocked_by_data_access: 1, first_independent_pass: 1, not_implemented: 2, review_required: 3, validated_for_screening: 4` |
 
 Main finding:
 
@@ -49,13 +49,13 @@ Important boundary:
 | co2_properties | first_independent_pass | REFPROP and impurity/mixture validation still needed | add REFPROP or NIST table cross-check when available |
 | hydraulics_capacity | arithmetic_pass_external_pending | external transport model comparison still needed | build like-for-like SCO2T or NETL case |
 | integrity_wall_thickness | review_required | not a full requalification calculation | confirm correct design code, pressure basis, diameter basis, SMYS, and design factor |
-| corrosion | not_implemented | no NORSOK-style corrosion model is implemented yet | implement only after benchmark cases or standard access are available |
+| corrosion | review_required | not a calibrated NORSOK/DNV corrosion model and does not model impurities, pH, shear stress, or local free water | replace placeholder water/corrosion defaults with project stream-quality evidence and specialist model review |
 | future_co2_integrity | review_required | free water, impurities, fracture, defects, and weld condition are not modelled | define stream-quality and inspection-data gates before allowing pass |
 | cost | arithmetic_pass_external_pending | NETL CO2_T_COM and original literature examples still needed | build NETL CO2_T_COM 2024 benchmark input sheet |
 | pre_lca_gate | automated_pass | gate thresholds may evolve when LCA and integrity modules mature | keep gate tests updated as modules are added |
-| lca | validated_for_mapping | no functional unit, inventory, or impact method in code yet | create first inventory skeleton for reuse versus new-build |
-| lca_data | validated_for_mapping | final dataset choice needs LCA review and licensed database access on the modelling machine | use mapping file to build a Brightway/openLCA inventory skeleton |
-| lca_calculation | validated_for_mapping | no executable LCA calculation exists yet | choose Brightway first, then cross-check with openLCA |
+| lca | validated_for_screening | proxy factors are open screening assumptions, not final ecoinvent/Brightway impact results | use the proxy for ranking, then run full ecoinvent/Brightway LCA for shortlisted pipelines |
+| lca_data | blocked_by_data_access | final dataset choice needs LCA review and licensed database access on the modelling machine | use mapping file to build a Brightway/openLCA inventory skeleton |
+| lca_calculation | validated_for_screening | licensed-database calculation is not implemented yet | choose Brightway first for ecoinvent calculation, then cross-check with openLCA |
 | wells_repurposing | not_implemented | well data and integrity rules are not loaded | define well fields and a separate well integrity gate |
 | interface | not_implemented | UI cannot be validated until it is built | when UI starts, test that app outputs equal CLI/report outputs |
 
@@ -85,7 +85,7 @@ The extraction is reproducible and the ranked candidates keep only pipelines wit
 | --- | --- | --- | --- |
 | required_trace_fields | 0 | 0 | pass |
 | quality_labels | 0 | 0 | pass |
-| assumption_visibility | 26 | explicitly labelled | pass |
+| assumption_visibility | 65 | explicitly labelled | pass |
 
 Plain meaning:
 
@@ -99,9 +99,9 @@ The assumption files are traceable enough for screening: values have units, sour
 | co2_properties | first_independent_pass | CoolProp; NIST REFPROP; NIST tables; peer-reviewed CO2 mixture EOS papers |
 | hydraulics_capacity | external_benchmark_needed | NETL transport tools; SCO2T; McCoy and Rubin-style published examples; project basis documents |
 | integrity_wall_thickness | review_required | DNV submarine pipeline/integrity standards; ISO 27913; ASME/API pipeline rules; operator inspection records |
-| corrosion_and_co2_stream_quality | not_implemented | NORSOK M-506; ISO 27913; DNV guidance; CO2 stream-quality literature |
+| corrosion_and_co2_stream_quality | review_required | NORSOK M-506; ISO 27913; DNV guidance; CO2 stream-quality literature |
 | cost | external_benchmark_needed | NETL CO2_T_COM; Parker; Rui; Brown; McCoy and Rubin; project cost reports |
-| lca_inventory | validated_for_mapping | ISO 14040/14044; ecoinvent; Brightway; openLCA; supplied LCA workbook; CCS LCA papers |
+| lca_inventory | validated_for_screening | ISO 14040/14044; ecoinvent; Brightway; openLCA; supplied LCA workbook; CCS LCA papers |
 | wells | not_implemented | NSTA wells data; operator well files; well integrity guidance; storage permit documents |
 
 Plain meaning:
@@ -172,16 +172,16 @@ Until this is resolved, integrity must remain `screening_unvalidated`.
 
 ## Cost Arithmetic Validation
 
-| Scenario | Calculated total USD | Reported total USD | Diff USD | Status |
-| --- | --- | --- | --- | --- |
-| goldeneye_dissertation | 228,500,811 | 228,500,812 | -1 | pass |
-| goldeneye_poster | 228,500,811 | 228,500,812 | -1 | pass |
+| Scenario | Calculated total USD | Reported total USD | Diff USD | NETL status | Status |
+| --- | --- | --- | --- | --- | --- |
+| goldeneye_dissertation | 228,500,811 | 228,500,812 | -1 | not_supplied | pass |
+| goldeneye_poster | 228,500,811 | 228,500,812 | -1 | not_supplied | pass |
 
 Plain meaning:
 
-The cost arithmetic is internally consistent. This only checks the sum and contingency. It does not yet validate whether the cost model itself is appropriate.
+The cost arithmetic is internally consistent. This only checks the sum and contingency. NETL validation is separate and will run only when a like-for-like NETL CO2_T_COM result is supplied.
 
-Next independent cost validation should use NETL CO2_T_COM.
+Next independent cost validation should use NETL CO2_T_COM and record the reference value in the assumption file or a dedicated benchmark input.
 
 ## Pre-LCA Gate Validation
 
@@ -200,14 +200,7 @@ The decision gate behaves as intended for simple engineered examples. This helps
 
 | Category | Matches | Selected candidate | Location | Status |
 | --- | --- | --- | --- | --- |
-| ecoinvent_export | 19727 | lookup CSV available | local | pass |
-| pipeline_steel | 13 | steel production, low-alloyed, hot rolled | RER | pass |
-| offshore_pipeline_construction | 2 | market for pipeline, natural gas, long distance, high capacity, offshore | GLO | pass |
-| decommissioned_pipeline | 4 | market for decommissioned pipeline, natural gas | RoW | pass |
-| electricity | 439 | electricity voltage transformation from high to medium voltage | GB | pass |
-| diesel_machinery | 55 | market for diesel, low-sulfur | Europe without Switzerland | pass |
-| freight_transport | 240 | market for transport, freight, lorry 16-32 metric ton, EURO4 | RER | pass |
-| scrap_steel | 15 | treatment of scrap steel, inert material landfill | Europe without Switzerland | pass |
+| ecoinvent_export | 0 |  |  | blocked_by_data_access |
 
 Plain meaning:
 
@@ -217,12 +210,7 @@ The local ecoinvent APOS 3.8 export can support the future LCA mapping. The mode
 
 | Sheet | Functional unit | Useful for our LCA | Status |
 | --- | --- | --- | --- |
-| B.1 HM Hannover | per t of captured CO2 | functional_unit | pass |
-| B.2 HM Gorazdze | per t of captured CO2 | functional_unit | pass |
-| B.3 SE Skutskar | per t of captured CO2 | functional_unit | pass |
-| B.4 KVA Linth | per t of captured CO2 | functional_unit | pass |
-| B.5 Auxiliary processes | per kg of AMP | limited | information |
-| B.6 Permanent storage | per t of injected CO2 | pipeline; injection_well; functional_unit; decommissioned_pipeline | pass |
+|  |  | unknown | blocked_by_data_access |
 
 Plain meaning:
 
@@ -233,10 +221,16 @@ The supplied workbook is useful as a structure/template. The Northern Lights sto
 | Source | Module | Status | Use in project |
 | --- | --- | --- | --- |
 | ISO 14040/14044 | lca_method | method_reference | overall LCA structure, goal and scope, inventory, impact assessment, interpretation, reporting |
+| International Reference Life Cycle Data System (ILCD) Handbook, 2011 | lca_method | method_reference | practical quality, consistency, and documentation guidance for LCA studies |
 | Guidelines for Life Cycle Assessment (LCA) of CCU systems, NORSUS OR 28.22, 2022 | lca_method | method_reference | system expansion, reference system comparison, fossil/non-fossil CO2 handling, CCU/CCS boundary thinking |
 | Overview of lifecycle assessment for carbon capture and storage projects, IOGP Report 672, 2024 | lca_method | method_reference | CCS project lifecycle, baseline methodology, shared transport and storage networks, hub allocation, project-stage reporting |
+| Global CO2 Initiative TEA and LCA Guidelines for CO2 Utilization | lca_method | method_reference | harmonised and transparent TEA/LCA framing for CO2 systems |
 | Supplementary LCA workbook with capture, auxiliary process, and Northern Lights storage inventories | lca_inventory | inventory_template | example inventory structure per tonne of captured/injected CO2; storage pipeline and injection-well entries |
 | ecoinvent APOS 3.8 local export | lca_data | local_data_source | background process data for steel, pipeline construction, electricity, diesel machinery, freight transport, and waste treatment |
+| Brightway LCA Software Framework | lca_calculation | future_reference | future Python calculation engine for local LCA runs |
+| openLCA | lca_calculation | future_reference | future independent cross-check and reviewer-friendly LCA modelling environment |
+| Prospective LCA literature | lca_future_extension | future_reference | future 2030/2050 scenarios for electricity, steel, shipping, and background databases |
+| Dynamic LCA literature | lca_future_extension | future_reference | future time-dependent climate effects and timing of emissions or storage benefits |
 
 Plain meaning:
 

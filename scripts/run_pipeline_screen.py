@@ -5,6 +5,7 @@ Examples:
     python scripts/run_pipeline_screen.py --list-scenarios
     python scripts/run_pipeline_screen.py --scenario goldeneye_poster
     python scripts/run_pipeline_screen.py --list-nsta --top 10
+    python scripts/run_pipeline_screen.py --screen-all-nsta
     python scripts/run_pipeline_screen.py --nsta-id PL774
 
 At this stage, scenarios come from:
@@ -31,6 +32,7 @@ from repurposing_pipelines.pipeline_screen import (  # noqa: E402
     available_nsta_candidates,
     available_scenarios,
     safe_filename,
+    screen_all_nsta_pipelines,
     screen_nsta_pipeline,
     screen_one_pipeline,
 )
@@ -74,6 +76,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="Run one NSTA candidate by unique name search text.",
     )
     parser.add_argument(
+        "--screen-all-nsta",
+        action="store_true",
+        help="Run the screening model for all ranked NSTA candidate pipelines.",
+    )
+    parser.add_argument(
+        "--screen-limit",
+        type=int,
+        help="Optional limit for --screen-all-nsta, useful for a quick test run.",
+    )
+    parser.add_argument(
         "--assumptions",
         default=str(ROOT / "data" / "benchmarks" / "goldeneye_assumptions.csv"),
         help="Path to the assumptions CSV file.",
@@ -115,6 +127,24 @@ def main() -> int:
             )
         return 0
 
+    if args.screen_all_nsta:
+        output_csv_path = ROOT / "data" / "processed" / "pipeline_screen_nsta_all.csv"
+        trace_path = ROOT / "data" / "processed" / "pipeline_screen_nsta_all_trace.json"
+        report_path = ROOT / "reports" / "pipeline_screen_nsta_all.md"
+        rows = screen_all_nsta_pipelines(
+            candidates_path=candidates_path,
+            defaults_path=defaults_path,
+            output_csv_path=output_csv_path,
+            trace_path=trace_path,
+            report_path=report_path,
+            limit=args.screen_limit,
+        )
+        print(f"Screened pipelines: {len(rows)}")
+        print(f"Report: {report_path}")
+        print(f"CSV: {output_csv_path}")
+        print(f"Trace: {trace_path}")
+        return 0
+
     if args.nsta_id or args.nsta_rank or args.nsta_name:
         if args.nsta_id:
             selector = args.nsta_id
@@ -153,7 +183,7 @@ def main() -> int:
     if not args.scenario:
         parser.error(
             "Please provide --scenario, --nsta-id, --nsta-rank, --nsta-name, "
-            "or use --list-scenarios / --list-nsta."
+            "--screen-all-nsta, or use --list-scenarios / --list-nsta."
         )
 
     safe_name = safe_filename(args.scenario)

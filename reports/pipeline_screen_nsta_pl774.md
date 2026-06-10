@@ -1,6 +1,6 @@
 # Pipeline Screen: nsta_pl774
 
-Generated: 2026-06-09T17:09:21+00:00
+Generated: 2026-06-10T08:48:47+00:00
 
 Input assumptions: `data/inputs/nsta_screening_defaults.csv`
 
@@ -30,8 +30,13 @@ Meaning: Do not move to LCA until failed technical or cost checks are resolved.
 | CO2 capacity | 37.75 MtCO2/year |
 | Required design flow | 5.88 MtCO2/year |
 | Remaining life | 0.00 years |
+| Remaining life range | 0.00 to 531.44 years |
 | Available wall thickness | -0.93 mm |
+| Corrosion risk | medium |
 | Benchmark avoided new-build CAPEX | $910,078,962 |
+| NETL cost check | not_supplied |
+| LCA proxy saving | 93.9% |
+| LCA screen | needs_data |
 
 ## Why This Decision?
 

@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT))
 from repurposing_pipelines.pipeline_screen import (  # noqa: E402
     available_nsta_candidates,
     available_scenarios,
+    screen_all_nsta_pipelines,
     screen_nsta_pipeline,
     safe_filename,
     screen_one_pipeline,
@@ -47,6 +48,8 @@ class PipelineScreenTest(unittest.TestCase):
 
             self.assertEqual(row["scenario"], "goldeneye_poster")
             self.assertEqual(row["pre_lca_decision"], "marginal")
+            self.assertEqual(row["corrosion_risk_level"], "medium")
+            self.assertGreater(row["lca_proxy_saving_percent"], 0)
             self.assertTrue((temp / "screen.csv").exists())
             self.assertTrue((temp / "trace.json").exists())
             self.assertIn("Pipeline Screen", (temp / "report.md").read_text(encoding="utf-8"))
@@ -84,9 +87,30 @@ class PipelineScreenTest(unittest.TestCase):
             self.assertEqual(row["nsta_pipeline_number"], "PL774")
             self.assertEqual(row["pipeline_name"], "CATS PIPELINE")
             self.assertIn(row["pre_lca_decision"], {"pass", "marginal", "fail"})
+            self.assertIn(row["corrosion_risk_level"], {"low", "medium", "high"})
+            self.assertIn("lca_proxy_saving_percent", row)
             self.assertTrue((temp / "screen.csv").exists())
             self.assertTrue((temp / "trace.json").exists())
             self.assertIn("NSTA pipeline number", (temp / "report.md").read_text(encoding="utf-8"))
+
+    def test_screen_all_nsta_pipelines_writes_batch_outputs(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            temp = Path(temp_dir)
+            rows = screen_all_nsta_pipelines(
+                candidates_path=self.nsta_candidates_path,
+                defaults_path=self.nsta_defaults_path,
+                output_csv_path=temp / "batch.csv",
+                trace_path=temp / "batch_trace.json",
+                report_path=temp / "batch.md",
+                limit=3,
+            )
+
+            self.assertEqual(len(rows), 3)
+            self.assertTrue((temp / "batch.csv").exists())
+            self.assertTrue((temp / "batch_trace.json").exists())
+            report = (temp / "batch.md").read_text(encoding="utf-8")
+            self.assertIn("NSTA Pipeline Batch Screening", report)
+            self.assertIn("Screened pipelines: `3`", report)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # System Architecture
 
-Date: 2026-06-09
+Date: 2026-06-10
 
 ## Purpose
 
@@ -43,10 +43,11 @@ This is why the project uses objects such as `ModuleResult`, `InputRecord`, and 
 Pipeline data
   -> Data quality module
   -> Capacity module
-  -> Integrity module
+  -> Corrosion screening module
+  -> Integrity module with uncertainty ranges
   -> Cost module
   -> Pre-LCA gate
-  -> LCA module
+  -> LCA screening proxy
   -> Final decision gate
   -> Exportable report
 ```
@@ -281,12 +282,17 @@ Estimate whether the pipeline has enough wall/integrity margin for reuse screeni
 Inputs:
 
 - wall thickness;
+- wall thickness uncertainty range;
 - diameter;
 - grade/SMYS;
 - historical corrosion assumptions;
+- historical corrosion uncertainty range;
 - operating history;
 - minimum wall thickness model;
+- minimum wall uncertainty range;
 - future CO2 corrosion rate;
+- future CO2 corrosion uncertainty range;
+- dry-CO2 water/dew-point screening result;
 - inspection information, when available.
 
 Outputs:
@@ -295,7 +301,7 @@ Outputs:
 - current wall thickness;
 - minimum required wall thickness;
 - available wall thickness;
-- remaining life;
+- remaining life low/base/high;
 - integrity status;
 - data confidence.
 
@@ -307,7 +313,31 @@ Used by:
 
 Important rule:
 
-The integrity module is a screening tool until inspection data and requalification checks are available.
+The integrity module is a screening tool until inspection data and requalification checks are available. Wall thickness uncertainty is applied to every screened pipeline, not only Goldeneye. Goldeneye uses a wider range because its source information is less clear.
+
+### 3a. Corrosion Screening Module
+
+Purpose:
+
+Flag whether the assumed CO2 service is low, medium, or high corrosion risk at screening level.
+
+Inputs:
+
+- future CO2 corrosion rate low/base/high;
+- CO2 water content, if known;
+- dry-CO2 water specification;
+- water dew-point margin.
+
+Outputs:
+
+- corrosion risk level;
+- corrosion rate range;
+- warnings for missing water/dew-point evidence;
+- notes for specialist corrosion review.
+
+Important rule:
+
+This is not a detailed NORSOK/DNV corrosion model yet. It is a conservative screening layer so uncertain candidates are not treated as approved.
 
 ### 4. Cost Module
 
@@ -415,6 +445,10 @@ Important rule:
 
 Do not commit the ecoinvent database to GitHub. Commit only scripts, process names, assumptions, and derived results allowed by the licence.
 
+Current implementation:
+
+The repo now includes a transparent LCA screening proxy. It estimates the steel and simple activity savings from reuse versus new-build. This is useful for ranking, but it is not yet the final ecoinvent/openLCA/Brightway LCA.
+
 ### 7. Final Decision Gate
 
 Purpose:
@@ -445,7 +479,8 @@ Outputs:
 | `wall_thickness` | data | integrity, LCA |
 | `max_capacity` | capacity | pre-LCA gate |
 | `phase_warning` | capacity | pre-LCA gate, final gate |
-| `remaining_life` | integrity | pre-LCA gate, LCA, final gate |
+| `corrosion_risk` | corrosion | integrity, pre-LCA gate |
+| `remaining_life_low/base/high` | integrity | pre-LCA gate, LCA, final gate |
 | `available_wall_thickness` | integrity | pre-LCA gate |
 | `new_build_cost` | cost | pre-LCA gate, final gate |
 | `reuse_cost` | cost | pre-LCA gate, LCA, final gate |
@@ -536,10 +571,15 @@ Completed first:
 - Simple pre-LCA gate added for deciding whether a case is ready for LCA screening.
 - Simple one-scenario runner added so a user can choose a scenario from an assumptions file.
 - First NSTA candidate runner added using NSTA data plus a simple defaults file.
+- Batch NSTA screening added for all model-ready hydrocarbon pipeline candidates.
+- Corrosion screening module added.
+- General wall-thickness uncertainty ranges added for all screened pipelines.
+- Simple LCA screening proxy added.
+- NETL cost-reference input template added.
 
 Next implementation steps:
 
 1. Add a clearer user override file so default NSTA assumptions can be edited per pipeline.
-2. Add a simple LCA screening module using transparent assumptions.
+2. Add external benchmark comparisons with REPACT and NETL CO2_T_COM.
 3. Later connect LCA to ecoinvent/openLCA/Brightway workflow.
-4. Add external benchmark comparisons with REPACT and NETL CO2_T_COM.
+4. Replace corrosion screening assumptions with literature-backed dry-CO2 corrosion checks where data are available.

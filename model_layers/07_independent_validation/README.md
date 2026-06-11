@@ -13,5 +13,6 @@ Independent model-validation plans, registers, dashboards, and reports.
 | `assumption_evidence_register.csv` | Evidence status for key assumptions. |
 | `model_validation_review.md` | Technical validation review. |
 | `student_code_critical_review.md` | Critical review of the received student code. |
+| `student_dnv_claim_checklist.md` | Checklist for auditing the claim that the student followed a DNV approach. |
 
 For project-wide reference acquisition and literature tracking, use `../../references/source_acquisition_guide.md`.

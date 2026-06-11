@@ -34,11 +34,12 @@ But it should not copy the full ecoinvent process inventories into the repositor
 
 ## CSV Files The Model Can Use
 
-Three shareable CSV files have been added:
+Four shareable CSV files have been added:
 
 ```text
 model_layers/05_lca/lca_inventory_template.csv
 model_layers/05_lca/lca_process_mapping.csv
+model_layers/05_lca/lca_activity_query_terms.csv
 model_layers/05_lca/lca_impact_factors_template.csv
 ```
 
@@ -46,6 +47,7 @@ How they should be used:
 
 - `lca_inventory_template.csv` lists the quantities our model must calculate or request from the user.
 - `lca_process_mapping.csv` links each inventory item to a candidate ecoinvent process name, location, reference product, and unit.
+- `lca_activity_query_terms.csv` defines the boundary-driven activities, search terms, and whether each item is a direct database candidate or a project-defined package.
 - `lca_impact_factors_template.csv` shows the private impact factors needed, but leaves the values blank.
 
 These files are safe to keep in GitHub because they contain model structure and mapping metadata only. They do not contain licensed ecoinvent impact factors or unit-process inventories.
@@ -101,6 +103,22 @@ datasets/
 ```
 
 It checks whether suitable process candidates exist. It does not copy `.spold` files into the repository.
+
+The standalone extractor is:
+
+```powershell
+python scripts\extract_lca_activity_data.py --ecoinvent-dir "D:\path\to\Ecoinvent_apos_38"
+```
+
+It writes shareable metadata only:
+
+```text
+model_layers/05_lca/lca_activity_candidates.csv
+model_layers/05_lca/lca_activity_preferred_mapping.csv
+model_layers/05_lca/lca_activity_extraction_report.md
+```
+
+The extractor is general because the query CSV can be edited. It is not boundary-free. The system boundary defines which activities should be searched. For example, refurbishment is treated as a project package because cleaning, drying, inspection, repair, vessel time and replacement steel cannot be represented by one single ecoinvent row without review.
 
 ## Useful LCA Workbook
 
@@ -171,7 +189,7 @@ This is deliberate. It prevents the model from pretending that proxy values are 
 
 ## First Functional Unit
 
-Recommended first functional unit:
+Recommended future full-chain functional unit:
 
 > Transport and store 1 tonne of CO2 through a selected pipeline route over the selected project lifetime.
 

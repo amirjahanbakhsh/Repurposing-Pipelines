@@ -512,6 +512,7 @@ def evaluate_lca_screening(
     scenario: ScenarioAssumptions,
     *,
     pre_lca_decision: str,
+    repurposing_gate: ModuleResult | None = None,
 ) -> ModuleResult:
     """Calculate a first open LCA screening proxy.
 
@@ -526,6 +527,19 @@ def evaluate_lca_screening(
         "lca_refurbishment_steel_fraction",
         0.05,
     )
+    gate_refurbishment_fraction = None
+    gate_work_scope = ""
+    if repurposing_gate is not None:
+        gate_outputs = repurposing_gate.output_map()
+        gate_refurbishment_fraction = gate_outputs.get(
+            "lca_refurbishment_steel_fraction_recommended"
+        )
+        gate_work_scope = str(gate_outputs.get("repurposing_lca_work_scope_items") or "")
+        if gate_refurbishment_fraction is not None:
+            refurbishment_fraction = max(
+                refurbishment_fraction,
+                float(gate_refurbishment_fraction),
+            )
     steel_factor = _optional_number(
         scenario,
         "lca_pipeline_steel_factor_kgco2e_per_kg",
@@ -625,6 +639,20 @@ def evaluate_lca_screening(
         outputs=[
             OutputRecord("lca_steel_mass_new_build_kg", new_build_steel, "kg", used_by=["lca"]),
             OutputRecord("lca_refurbishment_steel_kg", refurbishment_steel, "kg", used_by=["lca"]),
+            OutputRecord(
+                "lca_refurbishment_steel_fraction_used",
+                refurbishment_fraction,
+                "fraction",
+                quality="screening_placeholder",
+                used_by=["lca", "report"],
+                notes="Uses the larger of the scenario value and repurposing-gate recommendation.",
+            ),
+            OutputRecord(
+                "lca_gate_work_scope_items",
+                gate_work_scope,
+                "text",
+                used_by=["lca", "report"],
+            ),
             OutputRecord("lca_avoided_steel_kg", avoided_steel, "kg", used_by=["lca"]),
             OutputRecord(
                 "lca_new_build_proxy_kgco2e",
@@ -682,12 +710,17 @@ def evaluate_lca_screening(
                 ),
                 inputs=[
                     "lca_refurbishment_steel_fraction",
+                    "lca_refurbishment_steel_fraction_recommended",
                     "lca_pipeline_steel_factor_kgco2e_per_kg",
                     "lca_new_build_construction_factor_kgco2e_per_km",
                     "lca_refurbishment_activity_factor_kgco2e_per_km",
                 ],
                 result_name="lca_proxy_saving_kgco2e",
-                notes="Screening proxy to be replaced by Brightway/openLCA ecoinvent calculation.",
+                notes=(
+                    "Screening proxy to be replaced by Brightway/openLCA ecoinvent calculation. "
+                    "The refurbishment fraction may be increased by the repurposing gate when "
+                    "evidence gaps suggest additional validation or replacement work."
+                ),
             ),
         ],
     )

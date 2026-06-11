@@ -42,6 +42,7 @@ class GoldeneyeBenchmarkTest(unittest.TestCase):
             "corrosion",
             "integrity",
             "cost",
+            "repurposing_gate",
             "pre_lca_gate",
             "lca",
         ])
@@ -64,7 +65,8 @@ class GoldeneyeBenchmarkTest(unittest.TestCase):
         self.assertEqual(row["corrosion_risk_level"], "medium")
         self.assertGreater(row["remaining_life_high_years"], row["remaining_life_years"])
         self.assertGreater(row["lca_proxy_saving_percent"], 0)
-        self.assertEqual(trace["model_version"], "goldeneye_benchmark_v0.4")
+        self.assertEqual(row["repurposing_gate_status"], "marginal")
+        self.assertEqual(trace["model_version"], "goldeneye_benchmark_v0.5")
 
 
 if __name__ == "__main__":

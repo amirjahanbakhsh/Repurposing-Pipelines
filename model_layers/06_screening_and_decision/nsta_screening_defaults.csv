@@ -23,6 +23,13 @@ historical_wall_loss_uncertainty_fraction,0.25,fraction,screening_default,assume
 co2_water_content_ppmv,50,ppmv,screening_default,assumed,Placeholder dry CO2 water content for corrosion screening
 co2_water_spec_limit_ppmv,500,ppmv,screening_default,assumed,Placeholder water specification limit for corrosion screening
 water_dew_point_margin_c,10,degC,screening_default,assumed,Assumed positive margin to water dew point for dry-CO2 screening
+target_co2_phase,dense_phase,text,screening_default,assumed,Default CO2 phase for first screening; replace with project-specific gas/dense phase decision
+co2_composition_known,no,yes/no,screening_default,assumed,Assume detailed CO2 composition is not yet known until source-stream data are supplied
+material_certificates_available,unknown,status,screening_default,assumed,Assume material certificates are not yet verified for public-data screening
+fracture_toughness_basis,unknown,status,screening_default,assumed,Assume fracture toughness basis is not yet verified for public-data screening
+ili_mfl_available,unknown,status,screening_default,assumed,Assume latest ILI/MFL evidence is not yet available for public-data screening
+component_compatibility_screened,no,yes/no,screening_default,assumed,Assume valves seals coatings and equipment have not yet been screened for CO2 compatibility
+section_replacement_fraction,0,fraction,screening_default,assumed,No specific pipe replacement fraction is assumed until inspection or requalification evidence requires it
 steel_density_kg_per_m3,7850,kg/m3,engineering_reference,assumed,Carbon steel density used for first LCA inventory calculation
 lca_refurbishment_steel_fraction,0.05,fraction,screening_default,assumed,Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening
 lca_pipeline_steel_factor_kgco2e_per_kg,2.0,kgCO2e/kg,screening_lca_proxy,assumed,Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result

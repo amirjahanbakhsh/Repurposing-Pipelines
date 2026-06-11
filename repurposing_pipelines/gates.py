@@ -39,6 +39,7 @@ def evaluate_pre_lca_gate(
     capacity: ModuleResult,
     integrity: ModuleResult,
     cost: ModuleResult,
+    repurposing: ModuleResult | None = None,
 ) -> ModuleResult:
     """Decide whether a pipeline should move into LCA screening.
 
@@ -47,6 +48,8 @@ def evaluate_pre_lca_gate(
     technical modules warn that validation is still needed.
     """
     module_results = [capacity, integrity, cost]
+    if repurposing is not None:
+        module_results.append(repurposing)
     outputs = {}
     for result in module_results:
         outputs.update(result.output_map())
@@ -99,6 +102,14 @@ def evaluate_pre_lca_gate(
                 )
             if "cost" in failing_modules:
                 next_data.append("check cost assumptions and reuse/new-build cost basis")
+            if "repurposing_gate" in failing_modules:
+                next_data.extend(
+                    [
+                        "resolve repurposing showstoppers",
+                        "collect missing requalification evidence",
+                        "define cleaning, drying, inspection, repair, and monitoring work scope",
+                    ]
+                )
         else:
             capacity_mtpa = float(outputs["capacity_mtpa"])
             required_design_mtpa = float(outputs["required_design_mtpa"])
@@ -121,6 +132,9 @@ def evaluate_pre_lca_gate(
             weak_inputs = _weak_input_names(module_results)
             warning_levels = _warning_levels(module_results)
             has_module_warnings = bool(warning_levels)
+            repurposing_outputs = repurposing.output_map() if repurposing is not None else {}
+            repurposing_status = repurposing_outputs.get("repurposing_gate_status")
+            repurposing_summary = repurposing_outputs.get("repurposing_gate_reason_summary")
 
             if weak_inputs:
                 reasons.append(
@@ -129,8 +143,12 @@ def evaluate_pre_lca_gate(
                 )
             if has_module_warnings:
                 reasons.append("Upstream modules still contain validation warnings.")
+            if repurposing_status:
+                reasons.append(
+                    f"Repurposing gate is {repurposing_status}: {repurposing_summary}."
+                )
 
-            if weak_inputs or has_module_warnings:
+            if weak_inputs or has_module_warnings or repurposing_status == "marginal":
                 decision = "marginal"
                 confidence = "medium"
                 warnings.append(
@@ -151,8 +169,9 @@ def evaluate_pre_lca_gate(
                 [
                     "verify wall thickness and inspection records",
                     "validate CO2 density, viscosity, compressibility, and phase behaviour",
+                    "complete the repurposing gate evidence checklist",
                     "compare cost with NETL CO2_T_COM or another external benchmark",
-                    "define reuse modification cost before detailed LCA",
+                    "define itemised reuse modification cost before detailed LCA",
                 ]
             )
 
@@ -205,7 +224,8 @@ def evaluate_pre_lca_gate(
                 name="pre_lca_gate",
                 formula=(
                     "fail if any upstream module fails; insufficient_data if key outputs are missing; "
-                    "marginal if outputs pass but key assumptions or validation warnings remain; "
+                    "marginal if outputs pass but key assumptions, repurposing-gate gaps, "
+                    "or validation warnings remain; "
                     "otherwise pass"
                 ),
                 inputs=required_outputs,

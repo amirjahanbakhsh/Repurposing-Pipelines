@@ -10,4 +10,5 @@ Goldeneye benchmark cases, NSTA batch screening outputs, and pre-LCA decision fi
 | `pipeline_screen_nsta_all.csv` | Full all-NSTA batch screening output table. |
 | `pipeline_screen_nsta_pl774.md` | CATS / PL774 example screening report. |
 | `nsta_screening_defaults.csv` | Default assumptions for NSTA screening. |
+| `repurposing_gate_model.md` | Plain-language explanation of the repurposing gate. |
 | `pre_lca_gate_validation.csv` | Automated checks for the pre-LCA decision gate. |

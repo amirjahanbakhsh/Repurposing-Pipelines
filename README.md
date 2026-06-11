@@ -128,6 +128,7 @@ Implemented so far:
 - ranking of model-ready hydrocarbon pipeline candidates;
 - Goldeneye dissertation/poster benchmark cases;
 - batch screening of 155 NSTA records;
+- first evidence-based repurposing gate with cited references and work-scope outputs;
 - general wall-thickness uncertainty for all screened pipelines;
 - first corrosion screening module;
 - first LCA proxy module and ecoinvent-linked conditional LCA workflow;
@@ -136,8 +137,7 @@ Implemented so far:
 
 Next technical priorities:
 
-- add a formal repurposing gate based on the newest requalification references;
-- connect gate work-scope items to cost and LCA;
+- turn repurposing-gate work-scope items into itemised cost and LCA quantities;
 - fill private ecoinvent/openLCA/Brightway impact factors for LCA;
 - improve the wall-thickness/minimum-wall basis;
 - validate capacity and cost against external tools such as CO2 transport models and NETL CO2_T_COM;

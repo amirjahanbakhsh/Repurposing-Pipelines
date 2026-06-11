@@ -15,10 +15,11 @@ from .gates import evaluate_pre_lca_gate
 from .hydraulics import evaluate_capacity
 from .integrity import evaluate_integrity
 from .lca import evaluate_lca_screening
+from .repurposing_gate import evaluate_repurposing_gate
 from .trace import ModuleResult, module_results_to_dicts
 
 
-MODEL_VERSION = "goldeneye_benchmark_v0.4"
+MODEL_VERSION = "goldeneye_benchmark_v0.5"
 
 FIELDNAMES = [
     "scenario",
@@ -60,6 +61,19 @@ FIELDNAMES = [
     "netl_cost_delta_usd_2025",
     "netl_cost_delta_percent",
     "netl_cost_validation_status",
+    "repurposing_gate_status",
+    "repurposing_gate_confidence",
+    "repurposing_gate_reason_summary",
+    "repurposing_gate_reasons",
+    "repurposing_gate_next_data",
+    "repurposing_phase_status",
+    "repurposing_evidence_score",
+    "repurposing_evidence_gaps",
+    "repurposing_showstoppers",
+    "repurposing_work_scope_items",
+    "repurposing_lca_work_scope_items",
+    "lca_refurbishment_steel_fraction_recommended",
+    "repurposing_gate_cited_references",
     "pre_lca_decision",
     "pre_lca_confidence",
     "pre_lca_reason_summary",
@@ -67,6 +81,8 @@ FIELDNAMES = [
     "pre_lca_next_data",
     "lca_steel_mass_new_build_kg",
     "lca_refurbishment_steel_kg",
+    "lca_refurbishment_steel_fraction_used",
+    "lca_gate_work_scope_items",
     "lca_avoided_steel_kg",
     "lca_new_build_proxy_kgco2e",
     "lca_reuse_proxy_kgco2e",
@@ -91,12 +107,24 @@ def benchmark_scenario_with_trace(
     corrosion = evaluate_corrosion(scenario)
     integrity = evaluate_integrity(scenario, corrosion=corrosion)
     cost = evaluate_cost(scenario)
-    pre_lca_gate = evaluate_pre_lca_gate(capacity=capacity, integrity=integrity, cost=cost)
+    repurposing_gate = evaluate_repurposing_gate(
+        scenario,
+        capacity=capacity,
+        corrosion=corrosion,
+        integrity=integrity,
+    )
+    pre_lca_gate = evaluate_pre_lca_gate(
+        capacity=capacity,
+        integrity=integrity,
+        cost=cost,
+        repurposing=repurposing_gate,
+    )
     lca = evaluate_lca_screening(
         scenario,
         pre_lca_decision=pre_lca_gate.output_map()["pre_lca_decision"],
+        repurposing_gate=repurposing_gate,
     )
-    outputs = _outputs(capacity, corrosion, integrity, cost, pre_lca_gate, lca)
+    outputs = _outputs(capacity, corrosion, integrity, cost, repurposing_gate, pre_lca_gate, lca)
 
     row = {
         "scenario": name,
@@ -142,6 +170,21 @@ def benchmark_scenario_with_trace(
         "netl_cost_delta_usd_2025": outputs["netl_cost_delta_usd_2025"],
         "netl_cost_delta_percent": outputs["netl_cost_delta_percent"],
         "netl_cost_validation_status": outputs["netl_cost_validation_status"],
+        "repurposing_gate_status": outputs["repurposing_gate_status"],
+        "repurposing_gate_confidence": outputs["repurposing_gate_confidence"],
+        "repurposing_gate_reason_summary": outputs["repurposing_gate_reason_summary"],
+        "repurposing_gate_reasons": outputs["repurposing_gate_reasons"],
+        "repurposing_gate_next_data": outputs["repurposing_gate_next_data"],
+        "repurposing_phase_status": outputs["repurposing_phase_status"],
+        "repurposing_evidence_score": outputs["repurposing_evidence_score"],
+        "repurposing_evidence_gaps": outputs["repurposing_evidence_gaps"],
+        "repurposing_showstoppers": outputs["repurposing_showstoppers"],
+        "repurposing_work_scope_items": outputs["repurposing_work_scope_items"],
+        "repurposing_lca_work_scope_items": outputs["repurposing_lca_work_scope_items"],
+        "lca_refurbishment_steel_fraction_recommended": outputs[
+            "lca_refurbishment_steel_fraction_recommended"
+        ],
+        "repurposing_gate_cited_references": outputs["repurposing_gate_cited_references"],
         "pre_lca_decision": outputs["pre_lca_decision"],
         "pre_lca_confidence": outputs["pre_lca_confidence"],
         "pre_lca_reason_summary": outputs["pre_lca_reason_summary"],
@@ -149,6 +192,10 @@ def benchmark_scenario_with_trace(
         "pre_lca_next_data": outputs["pre_lca_next_data"],
         "lca_steel_mass_new_build_kg": outputs["lca_steel_mass_new_build_kg"],
         "lca_refurbishment_steel_kg": outputs["lca_refurbishment_steel_kg"],
+        "lca_refurbishment_steel_fraction_used": outputs[
+            "lca_refurbishment_steel_fraction_used"
+        ],
+        "lca_gate_work_scope_items": outputs["lca_gate_work_scope_items"],
         "lca_avoided_steel_kg": outputs["lca_avoided_steel_kg"],
         "lca_new_build_proxy_kgco2e": outputs["lca_new_build_proxy_kgco2e"],
         "lca_reuse_proxy_kgco2e": outputs["lca_reuse_proxy_kgco2e"],
@@ -157,7 +204,7 @@ def benchmark_scenario_with_trace(
         "lca_screening_decision": outputs["lca_screening_decision"],
     }
 
-    module_results = [capacity, corrosion, integrity, cost, pre_lca_gate, lca]
+    module_results = [capacity, corrosion, integrity, cost, repurposing_gate, pre_lca_gate, lca]
     trace = {
         "scenario": name,
         "pipeline_name": scenario.raw("pipeline_name"),
@@ -221,6 +268,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
     integrity_rows = []
     cost_rows = []
     gate_rows = []
+    repurposing_rows = []
     lca_rows = []
     for row in rows:
         summary_rows.append(
@@ -266,11 +314,22 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
                 row["pre_lca_reason_summary"],
             ]
         )
+        repurposing_rows.append(
+            [
+                row["scenario"],
+                row["repurposing_gate_status"],
+                row["repurposing_gate_confidence"],
+                fmt(row["repurposing_evidence_score"], 1),
+                row["repurposing_phase_status"],
+                row["repurposing_gate_reason_summary"],
+            ]
+        )
         lca_rows.append(
             [
                 row["scenario"],
                 fmt(row["lca_steel_mass_new_build_kg"] / 1000, 0),
                 fmt(row["lca_refurbishment_steel_kg"] / 1000, 0),
+                fmt(row["lca_refurbishment_steel_fraction_used"] * 100, 1),
                 fmt(row["lca_new_build_proxy_kgco2e"] / 1000, 0),
                 fmt(row["lca_reuse_proxy_kgco2e"] / 1000, 0),
                 fmt(row["lca_proxy_saving_percent"], 1),
@@ -326,9 +385,17 @@ The benchmark currently reproduces the headline capacity, remaining-life, and co
 
 {markdown_table(["Scenario", "Subtotal", "Contingency", "Calculated total", "Reported total", "NETL status"], cost_rows)}
 
+## Repurposing Gate
+
+{markdown_table(["Scenario", "Gate", "Confidence", "Evidence score", "CO2 phase screen", "Meaning"], repurposing_rows)}
+
+Plain meaning:
+
+This gate checks whether the case has enough evidence for repurposing, not only whether the capacity and lifetime calculations run. It follows the DNV-style requalification themes recorded in the project literature register.
+
 ## LCA Screening Proxy
 
-{markdown_table(["Scenario", "New steel t", "Refurb steel t", "New-build proxy tCO2e", "Reuse proxy tCO2e", "Saving %", "LCA screen"], lca_rows)}
+{markdown_table(["Scenario", "New steel t", "Refurb steel t", "Refurb steel % used", "New-build proxy tCO2e", "Reuse proxy tCO2e", "Saving %", "LCA screen"], lca_rows)}
 
 Plain meaning:
 

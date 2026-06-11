@@ -43,6 +43,40 @@ class EcoinventLcaTest(unittest.TestCase):
         self.assertIn("refurbishment_steel", row_names)
         self.assertIn("pipeline_refurbishment_activity", row_names)
 
+    def test_inventory_can_use_quantified_work_scope_rows(self) -> None:
+        rows = build_pipeline_lca_inventory(
+            self.scenario,
+            process_mapping=self.process_mapping,
+            work_scope_rows=[
+                {
+                    "work_item_id": "replacement_or_refurbishment_steel",
+                    "quantity_low": 90,
+                    "quantity_base": 100,
+                    "quantity_high": 110,
+                    "data_quality": "test_work_scope",
+                },
+                {
+                    "work_item_id": "refurbishment_activity_package",
+                    "quantity_low": 8,
+                    "quantity_base": 10,
+                    "quantity_high": 12,
+                    "data_quality": "test_package",
+                },
+            ],
+        )
+
+        by_item = {row["inventory_item"]: row for row in rows}
+        self.assertEqual(by_item["refurbishment_steel"]["quantity_base"], 100)
+        self.assertEqual(by_item["refurbishment_steel"]["data_quality"], "test_work_scope")
+        self.assertEqual(
+            by_item["pipeline_refurbishment_activity"]["quantity_base"],
+            10,
+        )
+        self.assertEqual(
+            by_item["pipeline_refurbishment_activity"]["data_quality"],
+            "test_package",
+        )
+
     def test_missing_private_factors_blocks_final_lca_claim(self) -> None:
         inventory_rows = build_pipeline_lca_inventory(
             self.scenario,

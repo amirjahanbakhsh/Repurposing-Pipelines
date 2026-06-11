@@ -86,8 +86,13 @@ def _load_scenario(args: argparse.Namespace):
             available = ", ".join(sorted(scenarios))
             raise ValueError(f"Unknown scenario '{args.scenario}'. Available: {available}")
         scenario = scenarios[args.scenario]
-        row, _trace = benchmark_scenario_with_trace(args.scenario, scenario)
-        return args.scenario, scenario, row["pre_lca_decision"]
+        row, trace = benchmark_scenario_with_trace(args.scenario, scenario)
+        return (
+            args.scenario,
+            scenario,
+            row["pre_lca_decision"],
+            trace.get("refurbishment_work_scope_rows", []),
+        )
 
     if args.nsta_id or args.nsta_rank or args.nsta_name:
         candidates = read_csv_rows(DATA_LAYER / "nsta_candidate_ranked.csv")
@@ -99,8 +104,13 @@ def _load_scenario(args: argparse.Namespace):
             name=args.nsta_name,
         )
         scenario = build_nsta_scenario(nsta_row=nsta_row, defaults=defaults)
-        row, _trace = benchmark_scenario_with_trace(scenario.name, scenario)
-        return scenario.name, scenario, row["pre_lca_decision"]
+        row, trace = benchmark_scenario_with_trace(scenario.name, scenario)
+        return (
+            scenario.name,
+            scenario,
+            row["pre_lca_decision"],
+            trace.get("refurbishment_work_scope_rows", []),
+        )
 
     raise ValueError("Choose --scenario or one of --nsta-id, --nsta-rank, --nsta-name.")
 
@@ -128,13 +138,14 @@ def main() -> int:
         if not (args.scenario or args.nsta_id or args.nsta_rank or args.nsta_name):
             return 0
 
-    scenario_name, scenario, pre_lca_decision = _load_scenario(args)
+    scenario_name, scenario, pre_lca_decision, work_scope_rows = _load_scenario(args)
     safe_name = safe_filename(scenario_name)
     process_mapping = read_process_mapping(process_mapping_path)
     impact_factors = read_impact_factors(impact_factor_path)
     inventory_rows = build_pipeline_lca_inventory(
         scenario,
         process_mapping=process_mapping,
+        work_scope_rows=work_scope_rows,
     )
     impact_rows, summary = calculate_ecoinvent_impacts(
         inventory_rows,

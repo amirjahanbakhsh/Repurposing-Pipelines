@@ -11,6 +11,7 @@ from typing import Any
 from .assumptions import AssumptionValue, ScenarioAssumptions, read_scenario_assumptions
 from .constants import BAR_TO_PSI
 from .goldeneye import benchmark_scenario_with_trace, write_trace
+from .work_scope import collect_refurbishment_work_scope_rows, write_refurbishment_work_scope_csv
 
 
 def safe_filename(value: str) -> str:
@@ -106,6 +107,7 @@ def write_single_pipeline_report(
     assumptions_path: Path,
     output_csv_path: Path,
     trace_path: Path,
+    work_scope_csv_path: Path | None = None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     report = f"""# Pipeline Screen: {row["scenario"]}
@@ -118,6 +120,7 @@ Outputs:
 
 - `{_path_text(output_csv_path)}`
 - `{_path_text(trace_path)}`
+{f"- `{_path_text(work_scope_csv_path)}`" if work_scope_csv_path is not None else ""}
 
 ## Plain Result
 
@@ -162,6 +165,16 @@ Evidence gaps:
 Work scope:
 
 {_bullet_lines(row["repurposing_work_scope_items"])}
+
+Quantified work-scope summary:
+
+| Item | Value |
+| --- | --- |
+| Work-scope rows | {row.get("refurbishment_work_scope_item_count", "not calculated")} |
+| Cost-driver rows | {row.get("refurbishment_cost_item_count", "not calculated")} |
+| LCA-driver rows | {row.get("refurbishment_lca_item_count", "not calculated")} |
+| Replacement/refurbishment steel | {float(row.get("refurbishment_replacement_steel_kg") or 0) / 1000:.1f} t |
+| Refurbishment activity package | {float(row.get("refurbishment_activity_package_km") or 0):.1f} km |
 
 References used by the gate:
 
@@ -469,6 +482,7 @@ def screen_one_pipeline(
     output_csv_path: Path,
     trace_path: Path,
     report_path: Path,
+    work_scope_csv_path: Path | None = None,
 ) -> dict[str, Any]:
     scenarios = read_scenario_assumptions(assumptions_path)
     if scenario_name not in scenarios:
@@ -479,6 +493,11 @@ def screen_one_pipeline(
     row["input_mode"] = "scenario_assumptions"
     row["nsta_pipeline_number"] = "not applicable"
     write_pipeline_outputs(output_csv_path, row)
+    if work_scope_csv_path is not None:
+        write_refurbishment_work_scope_csv(
+            work_scope_csv_path,
+            trace.get("refurbishment_work_scope_rows", []),
+        )
     write_trace(trace_path, [trace])
     write_single_pipeline_report(
         report_path,
@@ -486,6 +505,7 @@ def screen_one_pipeline(
         assumptions_path=assumptions_path,
         output_csv_path=output_csv_path,
         trace_path=trace_path,
+        work_scope_csv_path=work_scope_csv_path,
     )
     return row
 
@@ -543,6 +563,7 @@ def write_batch_screening_report(
     defaults_path: Path,
     output_csv_path: Path,
     trace_path: Path,
+    work_scope_csv_path: Path | None = None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     strategic_rows = [row for row in rows if _row_length_km(row) >= 1]
@@ -582,6 +603,7 @@ Outputs:
 
 - `{_path_text(output_csv_path)}`
 - `{_path_text(trace_path)}`
+{f"- `{_path_text(work_scope_csv_path)}`" if work_scope_csv_path is not None else ""}
 
 ## Plain Result
 
@@ -613,6 +635,12 @@ Unique strategic NSTA pipeline numbers after keeping the longest record per numb
 
 {_counts_table(_status_counts(rows, "corrosion_risk_level"))}
 
+## Refurbishment Work-Scope Rows
+
+Total work-scope rows: `{sum(int(float(row.get("refurbishment_work_scope_item_count") or 0)) for row in rows)}`
+
+These rows are written to the work-scope CSV. They are quantity drivers for future itemised cost and LCA, not final contractor estimates.
+
 ## Top 30 Strategic Screened Pipelines
 
 {markdown_table(["NSTA rank", "NSTA no.", "Pipeline", "Fluid", "Status", "Length km", "Decision", "Capacity Mtpa", "Life low", "Life base", "Life high", "Corr. risk", "Reuse gate", "Evidence score", "LCA saving %"], top_rows)}
@@ -641,6 +669,7 @@ def screen_all_nsta_pipelines(
     output_csv_path: Path,
     trace_path: Path,
     report_path: Path,
+    work_scope_csv_path: Path | None = None,
     limit: int | None = None,
 ) -> list[dict[str, Any]]:
     candidates = read_csv_rows(candidates_path)
@@ -681,6 +710,12 @@ def screen_all_nsta_pipelines(
                 "repurposing_lca_work_scope_items": "not available",
                 "lca_refurbishment_steel_fraction_recommended": 0,
                 "repurposing_gate_cited_references": "",
+                "refurbishment_work_scope_status": "not_calculated",
+                "refurbishment_work_scope_item_count": 0,
+                "refurbishment_cost_item_count": 0,
+                "refurbishment_lca_item_count": 0,
+                "refurbishment_replacement_steel_kg": 0,
+                "refurbishment_activity_package_km": 0,
                 "lca_proxy_saving_percent": 0,
                 "pre_lca_decision": "insufficient_data",
                 "pre_lca_confidence": "low",
@@ -718,6 +753,11 @@ def screen_all_nsta_pipelines(
             writer.writeheader()
             writer.writerows(rows)
     write_trace(trace_path, traces)
+    if work_scope_csv_path is not None:
+        write_refurbishment_work_scope_csv(
+            work_scope_csv_path,
+            collect_refurbishment_work_scope_rows(traces),
+        )
     write_batch_screening_report(
         report_path,
         rows=rows,
@@ -725,6 +765,7 @@ def screen_all_nsta_pipelines(
         defaults_path=defaults_path,
         output_csv_path=output_csv_path,
         trace_path=trace_path,
+        work_scope_csv_path=work_scope_csv_path,
     )
     return rows
 
@@ -736,6 +777,7 @@ def screen_nsta_pipeline(
     output_csv_path: Path,
     trace_path: Path,
     report_path: Path,
+    work_scope_csv_path: Path | None = None,
     nsta_id: str | None = None,
     rank: int | None = None,
     name: str | None = None,
@@ -756,6 +798,11 @@ def screen_nsta_pipeline(
     trace["defaults_path"] = _path_text(defaults_path)
 
     write_pipeline_outputs(output_csv_path, row)
+    if work_scope_csv_path is not None:
+        write_refurbishment_work_scope_csv(
+            work_scope_csv_path,
+            trace.get("refurbishment_work_scope_rows", []),
+        )
     write_trace(trace_path, [trace])
     write_single_pipeline_report(
         report_path,
@@ -763,5 +810,6 @@ def screen_nsta_pipeline(
         assumptions_path=defaults_path,
         output_csv_path=output_csv_path,
         trace_path=trace_path,
+        work_scope_csv_path=work_scope_csv_path,
     )
     return row

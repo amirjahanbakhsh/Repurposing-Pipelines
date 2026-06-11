@@ -4,6 +4,8 @@ LCA inventory templates, ecoinvent process mapping, conditional LCA reports, and
 
 The current LCA workflow is ecoinvent-linked but not yet decision-grade. It creates the pipeline inventory and checks which private impact factors are missing. Final kg CO2e numbers need a private ecoinvent/openLCA/Brightway factor file.
 
+The quantified refurbishment work-scope CSVs are stored in `model_layers/06_screening_and_decision/`. They provide the current activity drivers for the refurbishment package, such as inspection length, cleaning/drying length, study counts, and replacement steel. The ecoinvent-linked LCA inventory can now use those work-scope rows for refurbishment steel and the aggregate refurbishment activity package.
+
 ## Simple Commands
 
 Create the private factor template:

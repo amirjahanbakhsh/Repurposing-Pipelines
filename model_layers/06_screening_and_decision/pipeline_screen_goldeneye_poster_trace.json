@@ -2,7 +2,7 @@
   {
     "scenario": "goldeneye_poster",
     "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
-    "model_version": "goldeneye_benchmark_v0.5",
+    "model_version": "goldeneye_benchmark_v0.6",
     "source_parameters": [
       {
         "scenario": "goldeneye_poster",
@@ -489,6 +489,239 @@
         "source": "poster",
         "quality": "calculated",
         "notes": "Reported avoided new-build CAPEX"
+      }
+    ],
+    "refurbishment_work_scope_rows": [
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "confirm_co2_composition_and_impurities",
+        "work_item_name": "Confirm CO2 composition and impurities",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "study",
+        "cost_include": "yes",
+        "cost_driver": "engineering_study_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Required before corrosion, phase, material and operating checks can be finalised.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "confirm_water_limit_and_dew_point",
+        "work_item_name": "Confirm water limit and dew-point basis",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "study",
+        "cost_include": "yes",
+        "cost_driver": "engineering_study_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Dry CO2 specification and water-dew-point margin control corrosion risk.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "cleaning_drying_and_debris_assessment",
+        "work_item_name": "Cleaning, drying and debris assessment",
+        "work_stage": "field_execution",
+        "quantity_low": 101.68,
+        "quantity_base": 101.68,
+        "quantity_high": 101.68,
+        "unit": "km",
+        "cost_include": "yes",
+        "cost_driver": "cleaning_drying_per_km",
+        "lca_include": "included_in_refurbishment_package",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "screening_driver",
+        "basis": "Pipeline preparation is needed where corrosion, debris or dry-CO2 readiness remains uncertain.",
+        "reference_ids": "REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "ili_mfl_or_equivalent_inspection",
+        "work_item_name": "ILI/MFL or equivalent inspection campaign",
+        "work_stage": "inspection",
+        "quantity_low": 101.68,
+        "quantity_base": 101.68,
+        "quantity_high": 101.68,
+        "unit": "km",
+        "cost_include": "yes",
+        "cost_driver": "inspection_per_km",
+        "lca_include": "included_in_refurbishment_package",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "screening_driver",
+        "basis": "Inspection evidence is needed before reuse can be treated as a serious option.",
+        "reference_ids": "REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR; REF_BURKINSHAW_GALLON_CARVELL_HUSSAIN_2024_HYDROGEN_DATA_EVIDENCE",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "material_certificates_or_testing",
+        "work_item_name": "Material certificates or material testing",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "campaign",
+        "cost_include": "yes",
+        "cost_driver": "material_testing_campaign",
+        "lca_include": "included_in_refurbishment_package",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "screening_driver",
+        "basis": "Material evidence is needed for pipe, weld and fracture checks.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "component_compatibility_review",
+        "work_item_name": "Component compatibility review",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "review",
+        "cost_include": "yes",
+        "cost_driver": "compatibility_review_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Valves, seals, coatings and equipment exposed to CO2 service need compatibility review.",
+        "reference_ids": "REF_KASS_ET_AL_2023_MATERIAL_COMPATIBILITY",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "fracture_and_decompression_screen",
+        "work_item_name": "Fracture and decompression screen",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "study",
+        "cost_include": "yes",
+        "cost_driver": "fracture_decompression_study_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Dense-phase or high-pressure CO2 reuse needs fracture and decompression evidence.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "wall_thickness_verification",
+        "work_item_name": "Wall-thickness verification",
+        "work_stage": "inspection",
+        "quantity_low": 101.68,
+        "quantity_base": 101.68,
+        "quantity_high": 101.68,
+        "unit": "km",
+        "cost_include": "yes",
+        "cost_driver": "wall_thickness_verification_per_km",
+        "lca_include": "included_in_refurbishment_package",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "screening_driver",
+        "basis": "Wall-thickness uncertainty must be reduced before detailed reuse decisions.",
+        "reference_ids": "REF_BURKINSHAW_GALLON_CARVELL_HUSSAIN_2024_HYDROGEN_DATA_EVIDENCE; REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "co2_leak_detection_isolation_and_imr_plan",
+        "work_item_name": "CO2 leak detection, isolation and IMR plan",
+        "work_stage": "operations_readiness",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "plan",
+        "cost_include": "yes",
+        "cost_driver": "imr_plan_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Reuse needs an operating integrity, leak detection and repair plan before operation.",
+        "reference_ids": "REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "replacement_or_refurbishment_steel",
+        "work_item_name": "Replacement or refurbishment steel allowance",
+        "work_stage": "field_execution",
+        "quantity_low": 703094.416685,
+        "quantity_base": 883981.441046,
+        "quantity_high": 1066913.833483,
+        "unit": "kg",
+        "cost_include": "yes",
+        "cost_driver": "replacement_steel_kg",
+        "lca_include": "yes",
+        "lca_mapping_key": "pipeline_steel",
+        "data_quality": "screening_calculation",
+        "basis": "Calculated as new-build pipe steel mass multiplied by the gate-recommended refurbishment steel fraction.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING",
+        "notes": "Uses refurbishment fraction 0.0500; replace with inspection-based repair quantities when available. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "goldeneye_poster",
+        "pipeline_name": "20\" GAS GOLDENEYE - ST. FERGUS",
+        "gate_status": "marginal",
+        "gate_confidence": "low",
+        "work_item_id": "refurbishment_activity_package",
+        "work_item_name": "Refurbishment activity package",
+        "work_stage": "aggregate_lca_package",
+        "quantity_low": 101.68,
+        "quantity_base": 101.68,
+        "quantity_high": 101.68,
+        "unit": "km",
+        "cost_include": "no",
+        "cost_driver": "not_for_direct_cost_sum",
+        "lca_include": "yes",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "aggregate_screening_package",
+        "basis": "Aggregate LCA package for inspection, cleaning, drying, repair and recommissioning until detailed process factors are split.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR",
+        "notes": "Use this as the current LCA package row. Individual work items show what the package should later be split into. Conservative remaining life is non-positive; review before reuse."
       }
     ],
     "module_results": [
@@ -2216,6 +2449,118 @@
             ],
             "result_name": "repurposing_work_scope_items",
             "notes": "Cites REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR, REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR, REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING and REF_KASS_ET_AL_2023_MATERIAL_COMPATIBILITY."
+          }
+        ]
+      },
+      {
+        "module": "work_scope",
+        "model_version": "refurbishment_work_scope_v0.1",
+        "status": "ready_for_screening",
+        "inputs": [],
+        "outputs": [
+          {
+            "name": "refurbishment_work_scope_status",
+            "value": "ready_for_screening",
+            "unit": "status",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "lca",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_work_scope_item_count",
+            "value": 11,
+            "unit": "count",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "lca",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_cost_item_count",
+            "value": 10,
+            "unit": "count",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_lca_item_count",
+            "value": 2,
+            "unit": "count",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_replacement_steel_kg",
+            "value": 883981.441046,
+            "unit": "kg",
+            "quality": "screening_calculation",
+            "used_by": [
+              "cost",
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_activity_package_km",
+            "value": 101.68,
+            "unit": "km",
+            "quality": "aggregate_screening_package",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_work_scope_row_ids",
+            "value": "confirm_co2_composition_and_impurities; confirm_water_limit_and_dew_point; cleaning_drying_and_debris_assessment; ili_mfl_or_equivalent_inspection; material_certificates_or_testing; component_compatibility_review; fracture_and_decompression_screen; wall_thickness_verification; co2_leak_detection_isolation_and_imr_plan; replacement_or_refurbishment_steel; refurbishment_activity_package",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Refurbishment work-scope quantities are screening drivers. They are not contractor method statements, vendor quotes, or final LCA factors.",
+            "affected_modules": [
+              "work_scope",
+              "cost",
+              "lca"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "gate_items_to_work_scope_rows",
+            "formula": "map repurposing_work_scope_items to quantity drivers; add replacement steel and aggregate refurbishment activity package",
+            "inputs": [
+              "repurposing_work_scope_items",
+              "pipeline_length_km",
+              "nominal_wall_thickness_mm",
+              "inner_diameter_in",
+              "lca_refurbishment_steel_fraction_recommended"
+            ],
+            "result_name": "refurbishment_work_scope_item_count",
+            "notes": "Rows cite requalification, IMR, dense-phase, data quality and material compatibility source IDs. They are designed to feed cost and LCA modules."
           }
         ]
       },

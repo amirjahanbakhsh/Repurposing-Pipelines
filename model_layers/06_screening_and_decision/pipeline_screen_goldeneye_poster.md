@@ -1,6 +1,6 @@
 # Pipeline Screen: goldeneye_poster
 
-Generated: 2026-06-11T12:54:38+00:00
+Generated: 2026-06-11T16:36:55+00:00
 
 Input assumptions: `model_layers/06_screening_and_decision/goldeneye_assumptions.csv`
 
@@ -8,6 +8,7 @@ Outputs:
 
 - `model_layers/06_screening_and_decision/pipeline_screen_goldeneye_poster.csv`
 - `model_layers/06_screening_and_decision/pipeline_screen_goldeneye_poster_trace.json`
+- `model_layers/06_screening_and_decision/refurbishment_work_scope_goldeneye_poster.csv`
 
 ## Plain Result
 
@@ -69,6 +70,16 @@ Work scope:
 - fracture_and_decompression_screen
 - wall_thickness_verification
 - co2_leak_detection_isolation_and_imr_plan
+
+Quantified work-scope summary:
+
+| Item | Value |
+| --- | --- |
+| Work-scope rows | 11 |
+| Cost-driver rows | 10 |
+| LCA-driver rows | 2 |
+| Replacement/refurbishment steel | 884.0 t |
+| Refurbishment activity package | 101.7 km |
 
 References used by the gate:
 

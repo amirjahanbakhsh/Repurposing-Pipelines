@@ -175,7 +175,32 @@ The gate is based on requalification themes from DNV/PTC and related practical c
 
 The gate does not approve reuse. It identifies what must be checked next. This is a key methodological point: the model turns uncertainty into an explicit output instead of hiding uncertainty inside a final score.
 
-## 9. Cost Screening
+## 9. Quantified Refurbishment Work-Scope
+
+The refurbishment work-scope module converts repurposing-gate outputs into quantified activity rows. This is required because cost and LCA calculations cannot use qualitative statements alone. They need quantity drivers such as pipeline length, steel mass, number of studies, number of inspection campaigns, or number of operating plans.
+
+The module uses three inputs:
+
+- the named work items from the repurposing gate;
+- pipeline geometry and length;
+- the gate-recommended refurbishment steel fraction.
+
+Each gate item is mapped to a quantity rule. For example, an inspection requirement is mapped to pipeline length in kilometres, while a fracture/decompression check is mapped to one study. Replacement or refurbishment steel is calculated from the estimated new-build pipe steel mass multiplied by the recommended refurbishment steel fraction.
+
+The main outputs are:
+
+- `refurbishment_work_scope_item_count`;
+- `refurbishment_cost_item_count`;
+- `refurbishment_lca_item_count`;
+- `refurbishment_replacement_steel_kg`;
+- `refurbishment_activity_package_km`;
+- detailed CSV rows named `refurbishment_work_scope_*.csv`.
+
+Each row states whether it should feed cost, LCA, or both. The table also includes LCA mapping keys such as `pipeline_steel` and `refurbishment_activity`, so the same work-scope table can later connect to ecoinvent factors.
+
+This module is a screening bridge, not a final work pack. It does not yet estimate vessel days, contractor unit rates, drying energy, repair method statements, or final ecoinvent impacts. Those values should be added when project-specific engineering and LCA data are available.
+
+## 10. Cost Screening
 
 The cost module currently estimates a screening-level new-build benchmark and avoided capital cost. The first implementation uses cost components inherited from the Goldeneye/student benchmark and scales default NSTA cases by length.
 
@@ -191,9 +216,9 @@ Current outputs include:
 - contingency;
 - total cost.
 
-At this stage, cost is useful for relative screening but is not yet externally validated. The next cost-method step is to compare selected cases with NETL CO2 transport cost tools and to convert repurposing-gate work-scope items into itemised reuse costs.
+At this stage, cost is useful for relative screening but is not yet externally validated. The next cost-method step is to compare selected cases with NETL CO2 transport cost tools and to attach project-specific unit costs to the quantified refurbishment work-scope table.
 
-## 10. LCA Method
+## 11. LCA Method
 
 The LCA method is currently designed as a conventional process-based LCA. Conventional means it uses current process data, current background datasets, and clearly stated assumptions. Prospective and dynamic LCA are planned as later extensions.
 
@@ -219,9 +244,9 @@ The current repository includes two LCA routes:
 
 Licensed ecoinvent database files and private impact factors are not committed to GitHub. Only shareable mappings, templates, scripts, and conditional reports are stored.
 
-The repurposing gate feeds LCA by listing work-scope items such as cleaning, drying, inspection, material testing, fracture study, and monitoring. The next LCA improvement is to turn those items into itemised quantities.
+The repurposing gate and work-scope module feed LCA by listing and quantifying items such as cleaning, drying, inspection, material testing, fracture study, monitoring, refurbishment steel, and the aggregate refurbishment package. The next LCA improvement is to attach private ecoinvent/openLCA/Brightway impact factors to those quantities.
 
-## 11. Decision Gates
+## 12. Decision Gates
 
 The method uses decision gates to prevent weak cases from looking stronger than they are.
 
@@ -236,7 +261,7 @@ The pre-LCA gate checks whether a pipeline should move into LCA:
 
 LCA should not be used to rescue a technically weak pipeline. If the technical or evidence gate fails, the LCA result is marked as sensitivity-only or blocked.
 
-## 12. Validation Strategy
+## 13. Validation Strategy
 
 The validation strategy separates reproduction from independent validation.
 
@@ -256,7 +281,7 @@ Current validation status:
 - NSTA batch screening runs for 155 candidate records;
 - independent validation against REFPROP/CoolProp, NETL, and final ecoinvent/openLCA/Brightway results is still pending.
 
-## 13. Outputs And Traceability
+## 14. Outputs And Traceability
 
 Each run produces three output types:
 
@@ -274,10 +299,11 @@ The trace file records:
 - formula notes;
 - model version;
 - cited references where relevant.
+- detailed refurbishment work-scope rows where relevant.
 
 This traceability is part of the methodology, not just a coding convenience. It allows another person to see how each result was produced.
 
-## 14. Current Limitations
+## 15. Current Limitations
 
 The current methodology has important limits:
 
@@ -287,12 +313,12 @@ The current methodology has important limits:
 - Fracture/decompression is flagged by the repurposing gate but not yet calculated.
 - Cost is not yet fully validated against NETL.
 - LCA has an ecoinvent-linked workflow, but final kg CO2e needs private impact factors.
-- Work-scope items are listed, but detailed cost and LCA quantities are not yet calculated.
+- Work-scope quantity drivers are calculated, but detailed unit costs, vessel durations, repair methods and final LCA factors are not yet supplied.
 - Wells and storage integration are not yet implemented.
 
 These limitations are visible by design. The model is intended to show what is known, what is assumed, and what must be checked next.
 
-## 15. Key Sources Used
+## 16. Key Sources Used
 
 The methodology currently uses the following project source IDs. Full reference details are stored in `references/literature_index.csv`.
 
@@ -312,7 +338,7 @@ The methodology currently uses the following project source IDs. Full reference 
 | `REF_ANVARI_ET_AL_2026_CO2_NETWORK_SIMULATION` | Future extension to source-sink and physical network simulation. |
 | `REF_KUMAR_ROSEN_ESQUIVEL_2025_CO2_RICH_MIXTURE_TRANSPORT` | Future extension to advanced CO2-rich mixture modelling. |
 
-## 16. Next Methodology Work
+## 17. Next Methodology Work
 
 The next writing tasks are:
 
@@ -320,4 +346,3 @@ The next writing tasks are:
 2. Add a data-processing subsection for the NSTA extraction and completeness check.
 3. Add a validation-results subsection once REFPROP/CoolProp, NETL, and LCA checks are completed.
 4. Convert source IDs into the final reference style required by the target report or paper.
-

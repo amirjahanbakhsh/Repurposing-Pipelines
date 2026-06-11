@@ -59,16 +59,16 @@
       "alternative": "reuse",
       "inventory_item": "refurbishment_steel",
       "mapping_key": "pipeline_steel",
-      "quantity_low": 703094.4166848361,
-      "quantity_base": 883981.4410457388,
-      "quantity_high": 1066913.833482523,
+      "quantity_low": 703094.416685,
+      "quantity_base": 883981.441046,
+      "quantity_high": 1066913.833483,
       "unit": "kg",
       "include_in_total": "yes",
-      "data_quality": "assumed_fraction",
+      "data_quality": "screening_calculation",
       "ecoinvent_activity_name": "steel production, low-alloyed, hot rolled",
       "ecoinvent_location": "RER",
       "ecoinvent_reference_product": "steel, low-alloyed, hot rolled",
-      "notes": "Assumed replacement/refurbishment steel before reuse."
+      "notes": "Replacement/refurbishment steel from quantified work-scope table."
     },
     {
       "scenario": "goldeneye_poster",
@@ -80,11 +80,11 @@
       "quantity_high": 101.68,
       "unit": "km",
       "include_in_total": "yes",
-      "data_quality": "needs_private_lca_factor",
+      "data_quality": "aggregate_screening_package",
       "ecoinvent_activity_name": "user-defined pipeline refurbishment package",
       "ecoinvent_location": "project",
       "ecoinvent_reference_product": "pipeline refurbishment activity",
-      "notes": "Inspection, cleaning, repair, and recommissioning package per km."
+      "notes": "Refurbishment activity package from quantified work-scope table."
     },
     {
       "scenario": "goldeneye_poster",
@@ -171,16 +171,16 @@
       "alternative": "reuse",
       "inventory_item": "refurbishment_steel",
       "mapping_key": "pipeline_steel",
-      "quantity_low": 703094.4166848361,
-      "quantity_base": 883981.4410457388,
-      "quantity_high": 1066913.833482523,
+      "quantity_low": 703094.416685,
+      "quantity_base": 883981.441046,
+      "quantity_high": 1066913.833483,
       "unit": "kg",
       "include_in_total": "yes",
-      "data_quality": "assumed_fraction",
+      "data_quality": "screening_calculation",
       "ecoinvent_activity_name": "steel production, low-alloyed, hot rolled",
       "ecoinvent_location": "RER",
       "ecoinvent_reference_product": "steel, low-alloyed, hot rolled",
-      "notes": "Assumed replacement/refurbishment steel before reuse.",
+      "notes": "Replacement/refurbishment steel from quantified work-scope table.",
       "impact_method": "",
       "impact_category": "",
       "impact_factor_kgco2e_per_unit": "",
@@ -199,11 +199,11 @@
       "quantity_high": 101.68,
       "unit": "km",
       "include_in_total": "yes",
-      "data_quality": "needs_private_lca_factor",
+      "data_quality": "aggregate_screening_package",
       "ecoinvent_activity_name": "user-defined pipeline refurbishment package",
       "ecoinvent_location": "project",
       "ecoinvent_reference_product": "pipeline refurbishment activity",
-      "notes": "Inspection, cleaning, repair, and recommissioning package per km.",
+      "notes": "Refurbishment activity package from quantified work-scope table.",
       "impact_method": "",
       "impact_category": "",
       "impact_factor_kgco2e_per_unit": "",
@@ -259,5 +259,5 @@
       "impact_high_kgco2e": 0.0
     }
   ],
-  "generated_utc": "2026-06-11T12:55:19+00:00"
+  "generated_utc": "2026-06-11T16:39:29+00:00"
 }

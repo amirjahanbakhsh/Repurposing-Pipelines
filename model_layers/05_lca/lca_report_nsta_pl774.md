@@ -1,6 +1,6 @@
 # Ecoinvent-Based Conditional LCA: nsta_pl774
 
-Generated: 2026-06-10T14:57:11+00:00
+Generated: 2026-06-11T16:39:29+00:00
 
 ## Plain Result
 

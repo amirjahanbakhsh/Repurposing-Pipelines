@@ -11,4 +11,5 @@ __all__ = [
     "pipeline_screen",
     "repurposing_gate",
     "trace",
+    "work_scope",
 ]

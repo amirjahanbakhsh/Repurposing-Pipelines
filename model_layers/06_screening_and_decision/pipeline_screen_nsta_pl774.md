@@ -1,6 +1,6 @@
 # Pipeline Screen: nsta_pl774
 
-Generated: 2026-06-11T12:54:39+00:00
+Generated: 2026-06-11T16:36:54+00:00
 
 Input assumptions: `model_layers/06_screening_and_decision/nsta_screening_defaults.csv`
 
@@ -8,6 +8,7 @@ Outputs:
 
 - `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.csv`
 - `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774_trace.json`
+- `model_layers/06_screening_and_decision/refurbishment_work_scope_nsta_pl774.csv`
 
 ## Plain Result
 
@@ -70,6 +71,16 @@ Work scope:
 - fracture_and_decompression_screen
 - wall_thickness_verification
 - co2_leak_detection_isolation_and_imr_plan
+
+Quantified work-scope summary:
+
+| Item | Value |
+| --- | --- |
+| Work-scope rows | 11 |
+| Cost-driver rows | 10 |
+| LCA-driver rows | 2 |
+| Replacement/refurbishment steel | 12565.2 t |
+| Refurbishment activity package | 405.0 km |
 
 References used by the gate:
 

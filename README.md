@@ -136,8 +136,9 @@ Implemented so far:
 
 Next technical priorities:
 
+- add a formal repurposing gate based on the newest requalification references;
+- connect gate work-scope items to cost and LCA;
 - fill private ecoinvent/openLCA/Brightway impact factors for LCA;
 - improve the wall-thickness/minimum-wall basis;
-- validate capacity against an external CO2 transport model;
-- compare costs against NETL CO2_T_COM;
+- validate capacity and cost against external tools such as CO2 transport models and NETL CO2_T_COM;
 - keep wells as Phase 2 after pipeline screening is stable.

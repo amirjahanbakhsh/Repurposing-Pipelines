@@ -40,6 +40,7 @@ The repository is now organised by model layer rather than by file type.
 | `repurposing_pipelines/` | Reusable Python model code. |
 | `scripts/` | PowerShell/Python commands to run the model. |
 | `tests/` | Automated checks. |
+| `write_up/` | Draft report text, starting with the methodology. |
 
 ## Simple Commands
 

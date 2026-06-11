@@ -46,6 +46,7 @@ class PipelineScreenTest(unittest.TestCase):
                 output_csv_path=temp / "screen.csv",
                 trace_path=temp / "trace.json",
                 report_path=temp / "report.md",
+                work_scope_csv_path=temp / "work_scope.csv",
             )
 
             self.assertEqual(row["scenario"], "goldeneye_poster")
@@ -54,6 +55,7 @@ class PipelineScreenTest(unittest.TestCase):
             self.assertGreater(row["lca_proxy_saving_percent"], 0)
             self.assertTrue((temp / "screen.csv").exists())
             self.assertTrue((temp / "trace.json").exists())
+            self.assertTrue((temp / "work_scope.csv").exists())
             self.assertIn("Pipeline Screen", (temp / "report.md").read_text(encoding="utf-8"))
 
     def test_unknown_scenario_gives_clear_error(self) -> None:
@@ -84,6 +86,7 @@ class PipelineScreenTest(unittest.TestCase):
                 output_csv_path=temp / "screen.csv",
                 trace_path=temp / "trace.json",
                 report_path=temp / "report.md",
+                work_scope_csv_path=temp / "work_scope.csv",
             )
 
             self.assertEqual(row["nsta_pipeline_number"], "PL774")
@@ -93,6 +96,7 @@ class PipelineScreenTest(unittest.TestCase):
             self.assertIn("lca_proxy_saving_percent", row)
             self.assertTrue((temp / "screen.csv").exists())
             self.assertTrue((temp / "trace.json").exists())
+            self.assertTrue((temp / "work_scope.csv").exists())
             self.assertIn("NSTA pipeline number", (temp / "report.md").read_text(encoding="utf-8"))
 
     def test_screen_all_nsta_pipelines_writes_batch_outputs(self) -> None:
@@ -104,12 +108,14 @@ class PipelineScreenTest(unittest.TestCase):
                 output_csv_path=temp / "batch.csv",
                 trace_path=temp / "batch_trace.json",
                 report_path=temp / "batch.md",
+                work_scope_csv_path=temp / "batch_work_scope.csv",
                 limit=3,
             )
 
             self.assertEqual(len(rows), 3)
             self.assertTrue((temp / "batch.csv").exists())
             self.assertTrue((temp / "batch_trace.json").exists())
+            self.assertTrue((temp / "batch_work_scope.csv").exists())
             report = (temp / "batch.md").read_text(encoding="utf-8")
             self.assertIn("NSTA Pipeline Batch Screening", report)
             self.assertIn("Screened pipelines: `3`", report)

@@ -133,18 +133,21 @@ def main() -> int:
         output_csv_path = SCREENING_LAYER / "pipeline_screen_nsta_all.csv"
         trace_path = SCREENING_LAYER / "pipeline_screen_nsta_all_trace.json"
         report_path = SCREENING_LAYER / "pipeline_screen_nsta_all.md"
+        work_scope_csv_path = SCREENING_LAYER / "refurbishment_work_scope_nsta_all.csv"
         rows = screen_all_nsta_pipelines(
             candidates_path=candidates_path,
             defaults_path=defaults_path,
             output_csv_path=output_csv_path,
             trace_path=trace_path,
             report_path=report_path,
+            work_scope_csv_path=work_scope_csv_path,
             limit=args.screen_limit,
         )
         print(f"Screened pipelines: {len(rows)}")
         print(f"Report: {report_path}")
         print(f"CSV: {output_csv_path}")
         print(f"Trace: {trace_path}")
+        print(f"Work scope: {work_scope_csv_path}")
         return 0
 
     if args.nsta_id or args.nsta_rank or args.nsta_name:
@@ -158,6 +161,7 @@ def main() -> int:
         output_csv_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}.csv"
         trace_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}_trace.json"
         report_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}.md"
+        work_scope_csv_path = SCREENING_LAYER / f"refurbishment_work_scope_{safe_name}.csv"
         try:
             row = screen_nsta_pipeline(
                 candidates_path=candidates_path,
@@ -168,6 +172,7 @@ def main() -> int:
                 output_csv_path=output_csv_path,
                 trace_path=trace_path,
                 report_path=report_path,
+                work_scope_csv_path=work_scope_csv_path,
             )
         except ValueError as exc:
             print(exc)
@@ -180,6 +185,7 @@ def main() -> int:
         print(f"Report: {report_path}")
         print(f"CSV: {output_csv_path}")
         print(f"Trace: {trace_path}")
+        print(f"Work scope: {work_scope_csv_path}")
         return 0
 
     if not args.scenario:
@@ -192,6 +198,7 @@ def main() -> int:
     output_csv_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}.csv"
     trace_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}_trace.json"
     report_path = SCREENING_LAYER / f"pipeline_screen_{safe_name}.md"
+    work_scope_csv_path = SCREENING_LAYER / f"refurbishment_work_scope_{safe_name}.csv"
 
     try:
         row = screen_one_pipeline(
@@ -200,6 +207,7 @@ def main() -> int:
             output_csv_path=output_csv_path,
             trace_path=trace_path,
             report_path=report_path,
+            work_scope_csv_path=work_scope_csv_path,
         )
     except ValueError as exc:
         print(exc)
@@ -211,6 +219,7 @@ def main() -> int:
     print(f"Report: {report_path}")
     print(f"CSV: {output_csv_path}")
     print(f"Trace: {trace_path}")
+    print(f"Work scope: {work_scope_csv_path}")
     return 0
 
 

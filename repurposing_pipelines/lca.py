@@ -125,6 +125,7 @@ def build_pipeline_lca_inventory(
     scenario: ScenarioAssumptions,
     *,
     process_mapping: dict[str, dict[str, str]],
+    work_scope_rows: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     length_km = scenario.number("pipeline_length_km")
     inner_diameter_in = scenario.number("inner_diameter_in")
@@ -164,6 +165,45 @@ def build_pipeline_lca_inventory(
     refurb_steel_low = new_steel_low * refurbishment_fraction
     refurb_steel_base = new_steel_base * refurbishment_fraction
     refurb_steel_high = new_steel_high * refurbishment_fraction
+    refurb_steel_quality = "assumed_fraction"
+    refurb_steel_notes = "Assumed replacement/refurbishment steel before reuse."
+    refurbishment_activity_low = length_km
+    refurbishment_activity_base = length_km
+    refurbishment_activity_high = length_km
+    refurbishment_activity_quality = "needs_private_lca_factor"
+    refurbishment_activity_notes = "Inspection, cleaning, repair, and recommissioning package per km."
+
+    if work_scope_rows:
+        replacement_rows = [
+            row
+            for row in work_scope_rows
+            if row.get("work_item_id") == "replacement_or_refurbishment_steel"
+        ]
+        if replacement_rows:
+            replacement = replacement_rows[0]
+            refurb_steel_low = float(replacement.get("quantity_low") or 0)
+            refurb_steel_base = float(replacement.get("quantity_base") or 0)
+            refurb_steel_high = float(replacement.get("quantity_high") or 0)
+            refurb_steel_quality = str(replacement.get("data_quality") or "work_scope")
+            refurb_steel_notes = (
+                "Replacement/refurbishment steel from quantified work-scope table."
+            )
+        package_rows = [
+            row
+            for row in work_scope_rows
+            if row.get("work_item_id") == "refurbishment_activity_package"
+        ]
+        if package_rows:
+            package = package_rows[0]
+            refurbishment_activity_low = float(package.get("quantity_low") or 0)
+            refurbishment_activity_base = float(package.get("quantity_base") or 0)
+            refurbishment_activity_high = float(package.get("quantity_high") or 0)
+            refurbishment_activity_quality = str(
+                package.get("data_quality") or "work_scope_package"
+            )
+            refurbishment_activity_notes = (
+                "Refurbishment activity package from quantified work-scope table."
+            )
 
     return [
         _inventory_row(
@@ -204,23 +244,23 @@ def build_pipeline_lca_inventory(
             quantity_high=refurb_steel_high,
             unit="kg",
             include_in_total=True,
-            data_quality="assumed_fraction",
+            data_quality=refurb_steel_quality,
             process_mapping=process_mapping,
-            notes="Assumed replacement/refurbishment steel before reuse.",
+            notes=refurb_steel_notes,
         ),
         _inventory_row(
             scenario=scenario.name,
             alternative="reuse",
             inventory_item="pipeline_refurbishment_activity",
             mapping_key="refurbishment_activity",
-            quantity_low=length_km,
-            quantity_base=length_km,
-            quantity_high=length_km,
+            quantity_low=refurbishment_activity_low,
+            quantity_base=refurbishment_activity_base,
+            quantity_high=refurbishment_activity_high,
             unit="km",
             include_in_total=True,
-            data_quality="needs_private_lca_factor",
+            data_quality=refurbishment_activity_quality,
             process_mapping=process_mapping,
-            notes="Inspection, cleaning, repair, and recommissioning package per km.",
+            notes=refurbishment_activity_notes,
         ),
         _inventory_row(
             scenario=scenario.name,

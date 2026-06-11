@@ -60,6 +60,7 @@ The most important lines are:
 - `Decision`
 - `Confidence`
 - `Main Numbers`
+- `Quantified work-scope summary`
 - `Why This Decision?`
 - `Next Data To Check`
 
@@ -109,6 +110,12 @@ The full table is also saved here:
 
 ```text
 model_layers/06_screening_and_decision/pipeline_screen_nsta_all.csv
+```
+
+The quantified refurbishment work-scope table is saved here:
+
+```text
+model_layers/06_screening_and_decision/refurbishment_work_scope_nsta_all.csv
 ```
 
 ## Option 3: Run One NSTA Pipeline
@@ -199,6 +206,7 @@ Decision: fail
 Report: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\06_screening_and_decision\pipeline_screen_nsta_pl774.md
 CSV: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\06_screening_and_decision\pipeline_screen_nsta_pl774.csv
 Trace: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\06_screening_and_decision\pipeline_screen_nsta_pl774_trace.json
+Work scope: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\06_screening_and_decision\refurbishment_work_scope_nsta_pl774.csv
 ```
 
 The key line is:
@@ -215,6 +223,12 @@ For `PL774`, open:
 
 ```text
 model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.md
+```
+
+The quantified work-scope table is:
+
+```text
+model_layers/06_screening_and_decision/refurbishment_work_scope_nsta_pl774.csv
 ```
 
 For another pipeline, the file name will follow the same pattern:

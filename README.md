@@ -16,6 +16,7 @@ The model screens pipeline candidates using:
 - corrosion and wall-thickness uncertainty;
 - simple integrity screening;
 - cost comparison;
+- quantified refurbishment work-scope drivers;
 - pre-LCA decision logic;
 - LCA inventory, ecoinvent-linked conditional reports, and first proxy results;
 - independent validation checks.
@@ -130,6 +131,7 @@ Implemented so far:
 - Goldeneye dissertation/poster benchmark cases;
 - batch screening of 155 NSTA records;
 - first evidence-based repurposing gate with cited references and work-scope outputs;
+- quantified refurbishment work-scope CSVs for cost and LCA drivers;
 - general wall-thickness uncertainty for all screened pipelines;
 - first corrosion screening module;
 - first LCA proxy module and ecoinvent-linked conditional LCA workflow;
@@ -138,7 +140,7 @@ Implemented so far:
 
 Next technical priorities:
 
-- turn repurposing-gate work-scope items into itemised cost and LCA quantities;
+- add project-specific unit costs, vessel durations, repair methods and LCA factors to the work-scope table;
 - fill private ecoinvent/openLCA/Brightway impact factors for LCA;
 - improve the wall-thickness/minimum-wall basis;
 - validate capacity and cost against external tools such as CO2 transport models and NETL CO2_T_COM;

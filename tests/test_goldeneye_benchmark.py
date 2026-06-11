@@ -43,9 +43,13 @@ class GoldeneyeBenchmarkTest(unittest.TestCase):
             "integrity",
             "cost",
             "repurposing_gate",
+            "work_scope",
             "pre_lca_gate",
             "lca",
         ])
+        self.assertGreater(row["refurbishment_work_scope_item_count"], 0)
+        self.assertGreater(row["refurbishment_replacement_steel_kg"], 0)
+        self.assertIn("refurbishment_work_scope_rows", trace)
         self.assertEqual(row["corrosion_risk_level"], "medium")
         self.assertGreater(row["remaining_life_high_years"], row["remaining_life_years"])
         self.assertGreater(row["lca_proxy_saving_percent"], 0)
@@ -66,7 +70,8 @@ class GoldeneyeBenchmarkTest(unittest.TestCase):
         self.assertGreater(row["remaining_life_high_years"], row["remaining_life_years"])
         self.assertGreater(row["lca_proxy_saving_percent"], 0)
         self.assertEqual(row["repurposing_gate_status"], "marginal")
-        self.assertEqual(trace["model_version"], "goldeneye_benchmark_v0.5")
+        self.assertEqual(row["refurbishment_activity_package_km"], 101.68)
+        self.assertEqual(trace["model_version"], "goldeneye_benchmark_v0.6")
 
 
 if __name__ == "__main__":

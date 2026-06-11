@@ -34,6 +34,21 @@ It does not approve a pipeline. It tells us what is missing before approval coul
 | `repurposing_work_scope_items` | work items that should feed cost and LCA. |
 | `repurposing_gate_cited_references` | reference IDs used by the gate logic. |
 
+## Link To Quantified Work Scope
+
+The gate produces named work items. The next module, `work_scope`, converts those names into quantity drivers.
+
+For example:
+
+| Gate item | Quantity driver |
+| --- | --- |
+| `ili_mfl_or_equivalent_inspection` | pipeline length in km |
+| `cleaning_drying_and_debris_assessment` | pipeline length in km |
+| `fracture_and_decompression_screen` | one study |
+| `replacement_or_refurbishment_steel` | calculated kg of steel |
+
+The detailed table is written to files named `refurbishment_work_scope_*.csv`.
+
 ## References Used In The Code
 
 The code cites source IDs from `references/literature_index.csv`, including:
@@ -49,5 +64,4 @@ The code cites source IDs from `references/literature_index.csv`, including:
 
 ## Current Limitation
 
-The gate is a screening model. It converts evidence gaps into work-scope items, but it does not yet calculate detailed inspection cost, cleaning cost, drying energy, section replacement quantities, or final engineering approval.
-
+The gate is a screening model. It does not approve reuse. The new work-scope module calculates first quantity drivers, but it still does not provide detailed inspection cost, cleaning cost, drying energy, vessel duration, contractor quotation, or final engineering approval.

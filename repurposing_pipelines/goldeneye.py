@@ -17,9 +17,15 @@ from .integrity import evaluate_integrity
 from .lca import evaluate_lca_screening
 from .repurposing_gate import evaluate_repurposing_gate
 from .trace import ModuleResult, module_results_to_dicts
+from .work_scope import (
+    build_refurbishment_work_scope_rows,
+    collect_refurbishment_work_scope_rows,
+    evaluate_refurbishment_work_scope,
+    write_refurbishment_work_scope_csv,
+)
 
 
-MODEL_VERSION = "goldeneye_benchmark_v0.5"
+MODEL_VERSION = "goldeneye_benchmark_v0.6"
 
 FIELDNAMES = [
     "scenario",
@@ -74,6 +80,12 @@ FIELDNAMES = [
     "repurposing_lca_work_scope_items",
     "lca_refurbishment_steel_fraction_recommended",
     "repurposing_gate_cited_references",
+    "refurbishment_work_scope_status",
+    "refurbishment_work_scope_item_count",
+    "refurbishment_cost_item_count",
+    "refurbishment_lca_item_count",
+    "refurbishment_replacement_steel_kg",
+    "refurbishment_activity_package_km",
     "pre_lca_decision",
     "pre_lca_confidence",
     "pre_lca_reason_summary",
@@ -113,6 +125,16 @@ def benchmark_scenario_with_trace(
         corrosion=corrosion,
         integrity=integrity,
     )
+    work_scope = evaluate_refurbishment_work_scope(
+        scenario,
+        repurposing_gate=repurposing_gate,
+        integrity=integrity,
+    )
+    work_scope_rows = build_refurbishment_work_scope_rows(
+        scenario,
+        repurposing_gate=repurposing_gate,
+        integrity=integrity,
+    )
     pre_lca_gate = evaluate_pre_lca_gate(
         capacity=capacity,
         integrity=integrity,
@@ -124,7 +146,16 @@ def benchmark_scenario_with_trace(
         pre_lca_decision=pre_lca_gate.output_map()["pre_lca_decision"],
         repurposing_gate=repurposing_gate,
     )
-    outputs = _outputs(capacity, corrosion, integrity, cost, repurposing_gate, pre_lca_gate, lca)
+    outputs = _outputs(
+        capacity,
+        corrosion,
+        integrity,
+        cost,
+        repurposing_gate,
+        work_scope,
+        pre_lca_gate,
+        lca,
+    )
 
     row = {
         "scenario": name,
@@ -185,6 +216,12 @@ def benchmark_scenario_with_trace(
             "lca_refurbishment_steel_fraction_recommended"
         ],
         "repurposing_gate_cited_references": outputs["repurposing_gate_cited_references"],
+        "refurbishment_work_scope_status": outputs["refurbishment_work_scope_status"],
+        "refurbishment_work_scope_item_count": outputs["refurbishment_work_scope_item_count"],
+        "refurbishment_cost_item_count": outputs["refurbishment_cost_item_count"],
+        "refurbishment_lca_item_count": outputs["refurbishment_lca_item_count"],
+        "refurbishment_replacement_steel_kg": outputs["refurbishment_replacement_steel_kg"],
+        "refurbishment_activity_package_km": outputs["refurbishment_activity_package_km"],
         "pre_lca_decision": outputs["pre_lca_decision"],
         "pre_lca_confidence": outputs["pre_lca_confidence"],
         "pre_lca_reason_summary": outputs["pre_lca_reason_summary"],
@@ -204,12 +241,22 @@ def benchmark_scenario_with_trace(
         "lca_screening_decision": outputs["lca_screening_decision"],
     }
 
-    module_results = [capacity, corrosion, integrity, cost, repurposing_gate, pre_lca_gate, lca]
+    module_results = [
+        capacity,
+        corrosion,
+        integrity,
+        cost,
+        repurposing_gate,
+        work_scope,
+        pre_lca_gate,
+        lca,
+    ]
     trace = {
         "scenario": name,
         "pipeline_name": scenario.raw("pipeline_name"),
         "model_version": MODEL_VERSION,
         "source_parameters": scenario.to_dicts(),
+        "refurbishment_work_scope_rows": work_scope_rows,
         "module_results": module_results_to_dicts(module_results),
     }
     return row, trace
@@ -269,6 +316,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
     cost_rows = []
     gate_rows = []
     repurposing_rows = []
+    work_scope_rows = []
     lca_rows = []
     for row in rows:
         summary_rows.append(
@@ -324,6 +372,17 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
                 row["repurposing_gate_reason_summary"],
             ]
         )
+        work_scope_rows.append(
+            [
+                row["scenario"],
+                row["refurbishment_work_scope_status"],
+                row["refurbishment_work_scope_item_count"],
+                row["refurbishment_cost_item_count"],
+                row["refurbishment_lca_item_count"],
+                fmt(row["refurbishment_replacement_steel_kg"] / 1000, 0),
+                fmt(row["refurbishment_activity_package_km"], 1),
+            ]
+        )
         lca_rows.append(
             [
                 row["scenario"],
@@ -351,6 +410,7 @@ Outputs:
 
 - `model_layers/06_screening_and_decision/goldeneye_benchmark_outputs.csv`
 - `model_layers/06_screening_and_decision/goldeneye_benchmark_trace.json`
+- `model_layers/06_screening_and_decision/refurbishment_work_scope_goldeneye_benchmark.csv`
 
 ## Purpose
 
@@ -393,6 +453,14 @@ Plain meaning:
 
 This gate checks whether the case has enough evidence for repurposing, not only whether the capacity and lifetime calculations run. It follows the DNV-style requalification themes recorded in the project literature register.
 
+## Quantified Refurbishment Work Scope
+
+{markdown_table(["Scenario", "Status", "Total rows", "Cost rows", "LCA rows", "Replacement steel t", "Activity package km"], work_scope_rows)}
+
+Plain meaning:
+
+The work-scope table converts gate findings into quantity drivers. It does not yet assign contractor unit rates or final ecoinvent factors. It tells the cost and LCA modules what must be priced or modelled next.
+
 ## LCA Screening Proxy
 
 {markdown_table(["Scenario", "New steel t", "Refurb steel t", "Refurb steel % used", "New-build proxy tCO2e", "Reuse proxy tCO2e", "Saving %", "LCA screen"], lca_rows)}
@@ -431,6 +499,7 @@ Each scenario now has traceable module results for:
 - integrity;
 - cost;
 - pre-LCA gate.
+- quantified refurbishment work scope.
 - LCA screening proxy.
 
 The JSON trace records the inputs, outputs, assumptions, warnings, and formula notes used by each module. This is the first building block for the future web app evidence panel.
@@ -457,9 +526,15 @@ def run_from_paths(
     output_path: Path,
     trace_path: Path,
     report_path: Path,
+    work_scope_path: Path | None = None,
 ) -> int:
     rows, traces = run_benchmarks(assumptions_path)
     write_outputs(output_path, rows)
     write_trace(trace_path, traces)
+    if work_scope_path is not None:
+        write_refurbishment_work_scope_csv(
+            work_scope_path,
+            collect_refurbishment_work_scope_rows(traces),
+        )
     write_report(report_path, rows)
     return len(rows)

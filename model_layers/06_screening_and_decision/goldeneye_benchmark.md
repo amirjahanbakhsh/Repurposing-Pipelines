@@ -1,6 +1,6 @@
 # Goldeneye Benchmark
 
-Generated: 2026-06-11T12:54:38+00:00
+Generated: 2026-06-11T16:36:54+00:00
 
 Assumptions: `model_layers/06_screening_and_decision/goldeneye_assumptions.csv`
 
@@ -12,6 +12,7 @@ Outputs:
 
 - `model_layers/06_screening_and_decision/goldeneye_benchmark_outputs.csv`
 - `model_layers/06_screening_and_decision/goldeneye_benchmark_trace.json`
+- `model_layers/06_screening_and_decision/refurbishment_work_scope_goldeneye_benchmark.csv`
 
 ## Purpose
 
@@ -66,6 +67,17 @@ Plain meaning:
 
 This gate checks whether the case has enough evidence for repurposing, not only whether the capacity and lifetime calculations run. It follows the DNV-style requalification themes recorded in the project literature register.
 
+## Quantified Refurbishment Work Scope
+
+| Scenario | Status | Total rows | Cost rows | LCA rows | Replacement steel t | Activity package km |
+| --- | --- | --- | --- | --- | --- | --- |
+| goldeneye_dissertation | ready_for_screening | 11 | 10 | 2 | 1,354 | 101.7 |
+| goldeneye_poster | ready_for_screening | 11 | 10 | 2 | 884 | 101.7 |
+
+Plain meaning:
+
+The work-scope table converts gate findings into quantity drivers. It does not yet assign contractor unit rates or final ecoinvent factors. It tells the cost and LCA modules what must be priced or modelled next.
+
 ## LCA Screening Proxy
 
 | Scenario | New steel t | Refurb steel t | Refurb steel % used | New-build proxy tCO2e | Reuse proxy tCO2e | Saving % | LCA screen |
@@ -110,6 +122,7 @@ Each scenario now has traceable module results for:
 - integrity;
 - cost;
 - pre-LCA gate.
+- quantified refurbishment work scope.
 - LCA screening proxy.
 
 The JSON trace records the inputs, outputs, assumptions, warnings, and formula notes used by each module. This is the first building block for the future web app evidence panel.

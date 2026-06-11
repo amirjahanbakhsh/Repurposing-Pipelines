@@ -1,6 +1,6 @@
 # NSTA Pipeline Batch Screening
 
-Generated: 2026-06-11T12:54:51+00:00
+Generated: 2026-06-11T16:37:11+00:00
 
 Candidate file: `model_layers/01_data_foundation/nsta_candidate_ranked.csv`
 
@@ -10,6 +10,7 @@ Outputs:
 
 - `model_layers/06_screening_and_decision/pipeline_screen_nsta_all.csv`
 - `model_layers/06_screening_and_decision/pipeline_screen_nsta_all_trace.json`
+- `model_layers/06_screening_and_decision/refurbishment_work_scope_nsta_all.csv`
 
 ## Plain Result
 
@@ -50,6 +51,12 @@ Unique strategic NSTA pipeline numbers after keeping the longest record per numb
 | --- | --- |
 | medium | 154 |
 | not_assessed | 1 |
+
+## Refurbishment Work-Scope Rows
+
+Total work-scope rows: `1593`
+
+These rows are written to the work-scope CSV. They are quantity drivers for future itemised cost and LCA, not final contractor estimates.
 
 ## Top 30 Strategic Screened Pipelines
 

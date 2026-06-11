@@ -8,3 +8,4 @@ This folder contains report-style text for the project.
 
 The writing should stay readable for non-programmers while still being technically defensible.
 
+When a model layer changes, update `methodology.md` in the same work cycle so the write-up stays live with the code.

@@ -24,12 +24,22 @@ Run one NSTA pipeline:
 python scripts\run_ecoinvent_lca.py --nsta-id PL774
 ```
 
+Extract shareable activity metadata from local ecoinvent:
+
+```powershell
+python scripts\extract_lca_activity_data.py --ecoinvent-dir "D:\path\to\Ecoinvent_apos_38"
+```
+
 If the report says `blocked_missing_impact_factors`, that is expected until the private factor CSV is filled.
 
 | File | Purpose |
 | --- | --- |
 | `lca_inventory_template.csv` | Main LCA inventory input template. |
 | `lca_process_mapping.csv` | Shareable ecoinvent process-mapping metadata. |
+| `lca_activity_query_terms.csv` | Editable boundary/activity list; includes direct database searches and project-defined packages. |
+| `lca_activity_candidates.csv` | Extracted candidate activity metadata from local/private sources; shareable metadata only. |
+| `lca_activity_preferred_mapping.csv` | Rank-1 activity candidate per mapping key; still requires LCA review. |
+| `lca_activity_extraction_report.md` | Report from the standalone activity extractor. |
 | `lca_impact_factors_template.csv` | Blank template showing the private factors needed. |
 | `lca_report_goldeneye_poster.md` | Current Goldeneye conditional LCA report. |
 | `lca_report_nsta_pl774.md` | Current PL774 conditional LCA report. |
@@ -43,6 +53,7 @@ If the report says `blocked_missing_impact_factors`, that is expected until the 
 | `lca_method_reference_register.csv` | LCA method reference table used in validation. |
 | `lca_reference_workbook_review.csv` | Review of the supplied LCA workbook. |
 | `lca_data_strategy.md` | How to use ecoinvent safely without committing licensed data. |
+| `lca_boundary_and_activity_definition.md` | Plain-language definition of LCA boundary and activity-selection basis. |
 | `lca_model_defensibility_basis.md` | Basis for a defendable conventional LCA model. |
 
 Private impact factors belong in:

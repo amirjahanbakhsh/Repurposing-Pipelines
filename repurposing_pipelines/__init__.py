@@ -8,5 +8,6 @@ __all__ = [
     "hydraulics",
     "integrity",
     "pipeline_screen",
+    "repurposing_gate",
     "trace",
 ]

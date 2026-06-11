@@ -143,10 +143,29 @@ Meaning: {row["pre_lca_reason_summary"]}
 | Remaining life range | {row["remaining_life_low_years"]:.2f} to {row["remaining_life_high_years"]:.2f} years |
 | Available wall thickness | {row["available_wall_thickness_mm"]:.2f} mm |
 | Corrosion risk | {row["corrosion_risk_level"]} |
+| Repurposing gate | {row["repurposing_gate_status"]} |
+| Repurposing evidence score | {row["repurposing_evidence_score"]:.1f} / 100 |
+| CO2 phase screen | {row["repurposing_phase_status"]} |
 | Benchmark avoided new-build CAPEX | {_money(row["cost_total_usd_2025"])} |
 | NETL cost check | {row["netl_cost_validation_status"]} |
 | LCA proxy saving | {row["lca_proxy_saving_percent"]:.1f}% |
 | LCA screen | {row["lca_screening_decision"]} |
+
+## Repurposing Gate
+
+Meaning: {row["repurposing_gate_reason_summary"]}
+
+Evidence gaps:
+
+{_bullet_lines(row["repurposing_evidence_gaps"])}
+
+Work scope:
+
+{_bullet_lines(row["repurposing_work_scope_items"])}
+
+References used by the gate:
+
+{_bullet_lines(row["repurposing_gate_cited_references"])}
 
 ## Why This Decision?
 
@@ -408,6 +427,13 @@ def build_nsta_scenario(
         "co2_water_content_ppmv",
         "co2_water_spec_limit_ppmv",
         "water_dew_point_margin_c",
+        "target_co2_phase",
+        "co2_composition_known",
+        "material_certificates_available",
+        "fracture_toughness_basis",
+        "ili_mfl_available",
+        "component_compatibility_screened",
+        "section_replacement_fraction",
         "steel_density_kg_per_m3",
         "lca_refurbishment_steel_fraction",
         "lca_pipeline_steel_factor_kgco2e_per_kg",
@@ -538,6 +564,8 @@ def write_batch_screening_report(
                 f"{float(row.get('remaining_life_years') or 0):.1f}",
                 f"{float(row.get('remaining_life_high_years') or 0):.1f}",
                 row.get("corrosion_risk_level", ""),
+                row.get("repurposing_gate_status", ""),
+                f"{float(row.get('repurposing_evidence_score') or 0):.1f}",
                 f"{float(row.get('lca_proxy_saving_percent') or 0):.1f}",
             ]
         )
@@ -587,7 +615,7 @@ Unique strategic NSTA pipeline numbers after keeping the longest record per numb
 
 ## Top 30 Strategic Screened Pipelines
 
-{markdown_table(["NSTA rank", "NSTA no.", "Pipeline", "Fluid", "Status", "Length km", "Decision", "Capacity Mtpa", "Life low", "Life base", "Life high", "Corr. risk", "LCA saving %"], top_rows)}
+{markdown_table(["NSTA rank", "NSTA no.", "Pipeline", "Fluid", "Status", "Length km", "Decision", "Capacity Mtpa", "Life low", "Life base", "Life high", "Corr. risk", "Reuse gate", "Evidence score", "LCA saving %"], top_rows)}
 
 ## How To Use This
 
@@ -642,6 +670,17 @@ def screen_all_nsta_pipelines(
                 "remaining_life_years": 0,
                 "remaining_life_high_years": 0,
                 "corrosion_risk_level": "not_assessed",
+                "repurposing_gate_status": "insufficient_data",
+                "repurposing_gate_confidence": "low",
+                "repurposing_gate_reason_summary": "Repurposing gate could not run because upstream screening failed.",
+                "repurposing_phase_status": "unknown",
+                "repurposing_evidence_score": 0,
+                "repurposing_evidence_gaps": str(exc),
+                "repurposing_showstoppers": str(exc),
+                "repurposing_work_scope_items": "collect missing screening inputs",
+                "repurposing_lca_work_scope_items": "not available",
+                "lca_refurbishment_steel_fraction_recommended": 0,
+                "repurposing_gate_cited_references": "",
                 "lca_proxy_saving_percent": 0,
                 "pre_lca_decision": "insufficient_data",
                 "pre_lca_confidence": "low",

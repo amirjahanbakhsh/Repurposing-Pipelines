@@ -1,6 +1,6 @@
 # Goldeneye Benchmark
 
-Generated: 2026-06-10T09:38:53+00:00
+Generated: 2026-06-11T12:54:38+00:00
 
 Assumptions: `model_layers/06_screening_and_decision/goldeneye_assumptions.csv`
 
@@ -55,12 +55,23 @@ The benchmark currently reproduces the headline capacity, remaining-life, and co
 | goldeneye_dissertation | $207,728,010 | $20,772,801 | $228,500,811 | $228,500,812 | not_supplied |
 | goldeneye_poster | $207,728,010 | $20,772,801 | $228,500,811 | $228,500,812 | not_supplied |
 
+## Repurposing Gate
+
+| Scenario | Gate | Confidence | Evidence score | CO2 phase screen | Meaning |
+| --- | --- | --- | --- | --- | --- |
+| goldeneye_dissertation | marginal | low | 29.5 | dense_phase_selected | Promising only as a screening case, but important evidence is missing. |
+| goldeneye_poster | marginal | low | 29.5 | dense_phase_selected | Promising only as a screening case, but important evidence is missing. |
+
+Plain meaning:
+
+This gate checks whether the case has enough evidence for repurposing, not only whether the capacity and lifetime calculations run. It follows the DNV-style requalification themes recorded in the project literature register.
+
 ## LCA Screening Proxy
 
-| Scenario | New steel t | Refurb steel t | New-build proxy tCO2e | Reuse proxy tCO2e | Saving % | LCA screen |
-| --- | --- | --- | --- | --- | --- | --- |
-| goldeneye_dissertation | 27,073 | 1,354 | 64,313 | 4,741 | 92.6 | favour_reuse |
-| goldeneye_poster | 17,673 | 884 | 45,514 | 3,801 | 91.6 | favour_reuse |
+| Scenario | New steel t | Refurb steel t | Refurb steel % used | New-build proxy tCO2e | Reuse proxy tCO2e | Saving % | LCA screen |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| goldeneye_dissertation | 27,073 | 1,354 | 5.0 | 64,313 | 4,741 | 92.6 | favour_reuse |
+| goldeneye_poster | 17,673 | 884 | 5.0 | 45,514 | 3,801 | 91.6 | favour_reuse |
 
 Plain meaning:
 

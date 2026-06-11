@@ -267,6 +267,69 @@
       },
       {
         "scenario": "nsta_pl774",
+        "parameter": "target_co2_phase",
+        "value": "dense_phase",
+        "unit": "text",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Default CO2 phase for first screening; replace with project-specific gas/dense phase decision"
+      },
+      {
+        "scenario": "nsta_pl774",
+        "parameter": "co2_composition_known",
+        "value": "no",
+        "unit": "yes/no",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume detailed CO2 composition is not yet known until source-stream data are supplied"
+      },
+      {
+        "scenario": "nsta_pl774",
+        "parameter": "material_certificates_available",
+        "value": "unknown",
+        "unit": "status",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume material certificates are not yet verified for public-data screening"
+      },
+      {
+        "scenario": "nsta_pl774",
+        "parameter": "fracture_toughness_basis",
+        "value": "unknown",
+        "unit": "status",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume fracture toughness basis is not yet verified for public-data screening"
+      },
+      {
+        "scenario": "nsta_pl774",
+        "parameter": "ili_mfl_available",
+        "value": "unknown",
+        "unit": "status",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume latest ILI/MFL evidence is not yet available for public-data screening"
+      },
+      {
+        "scenario": "nsta_pl774",
+        "parameter": "component_compatibility_screened",
+        "value": "no",
+        "unit": "yes/no",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume valves seals coatings and equipment have not yet been screened for CO2 compatibility"
+      },
+      {
+        "scenario": "nsta_pl774",
+        "parameter": "section_replacement_fraction",
+        "value": "0",
+        "unit": "fraction",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "No specific pipe replacement fraction is assumed until inspection or requalification evidence requires it"
+      },
+      {
+        "scenario": "nsta_pl774",
         "parameter": "steel_density_kg_per_m3",
         "value": "7850",
         "unit": "kg/m3",
@@ -1604,6 +1667,510 @@
         ]
       },
       {
+        "module": "repurposing_gate",
+        "model_version": "repurposing_gate_v0.1",
+        "status": "fail",
+        "inputs": [
+          {
+            "name": "pipeline_length_km",
+            "value": 404.9737438559,
+            "unit": "km",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "NSTA LENGTH_M converted to km in the ranked candidate file"
+          },
+          {
+            "name": "inner_diameter_in",
+            "value": 33.76377952755906,
+            "unit": "in",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "NSTA internal diameter converted from mm to inches"
+          },
+          {
+            "name": "nominal_wall_thickness_mm",
+            "value": 28.4,
+            "unit": "mm",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "NSTA wall thickness"
+          },
+          {
+            "name": "minimum_wall_thickness_mm",
+            "value": 27.67679810248973,
+            "unit": "mm",
+            "source": "simple_barlow_screening",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Approximate t = P * OD / (2 * SMYS * design factor); screening only"
+          },
+          {
+            "name": "pipe_grade",
+            "value": "X60",
+            "unit": "text",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Default grade used only to estimate minimum wall thickness"
+          },
+          {
+            "name": "inlet_pressure_psia",
+            "value": 2615.2225862743926,
+            "unit": "psia",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "NSTA max operating pressure in barg converted to approximate psia"
+          },
+          {
+            "name": "outlet_pressure_psia",
+            "value": 1100.0,
+            "unit": "psia",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Default outlet pressure; clipped to 80 percent of inlet if needed"
+          },
+          {
+            "name": "target_co2_phase",
+            "value": "dense_phase",
+            "unit": "text",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Default CO2 phase for first screening; replace with project-specific gas/dense phase decision"
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Placeholder dry CO2 water content for corrosion screening"
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Placeholder water specification limit for corrosion screening"
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+          },
+          {
+            "name": "co2_composition_known",
+            "value": "no",
+            "unit": "yes/no",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume detailed CO2 composition is not yet known until source-stream data are supplied"
+          },
+          {
+            "name": "material_certificates_available",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume material certificates are not yet verified for public-data screening"
+          },
+          {
+            "name": "fracture_toughness_basis",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume fracture toughness basis is not yet verified for public-data screening"
+          },
+          {
+            "name": "ili_mfl_available",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume latest ILI/MFL evidence is not yet available for public-data screening"
+          },
+          {
+            "name": "component_compatibility_screened",
+            "value": "no",
+            "unit": "yes/no",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume valves seals coatings and equipment have not yet been screened for CO2 compatibility"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "repurposing_gate_status",
+            "value": "fail",
+            "unit": "decision",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_gate_confidence",
+            "value": "low",
+            "unit": "quality",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_gate_reason_summary",
+            "value": "Do not proceed until the showstoppers are resolved.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_gate_reasons",
+            "value": "Target CO2 phase is stated as dense/liquid/supercritical.; Evidence gaps remain: pipe_grade quality is assumed; outlet_pressure_psia quality is assumed; target_co2_phase quality is assumed; co2_water_content_ppmv quality is assumed; co2_water_spec_limit_ppmv quality is assumed; water_dew_point_margin_c quality is assumed; co2_composition_known is no; material_certificates_available is unknown; fracture_toughness_basis quality is assumed; ili_mfl_available is unknown; component_compatibility_screened is no.; Required work scope: confirm_co2_composition_and_impurities; confirm_water_limit_and_dew_point; cleaning_drying_and_debris_assessment; ili_mfl_or_equivalent_inspection; material_certificates_or_testing; component_compatibility_review; fracture_and_decompression_screen; wall_thickness_verification; co2_leak_detection_isolation_and_imr_plan.; Showstoppers: integrity module failed; available wall thickness is zero or negative.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_gate_next_data",
+            "value": "CO2 composition and impurity specification; water content, water limit and dew-point basis; cleaning, drying and residual debris evidence; latest ILI/MFL or equivalent inspection report; mill certificates or material testing plan; valve, seal, coating and equipment compatibility review; fracture toughness, decompression and blowdown evidence; verified wall thickness and minimum-wall basis; CO2 leak detection, isolation philosophy and IMR plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_phase_status",
+            "value": "dense_phase_selected",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "capacity",
+              "integrity",
+              "cost",
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_evidence_score",
+            "value": 23.5,
+            "unit": "0-100 score",
+            "quality": "calculated",
+            "used_by": [
+              "validation",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_evidence_gaps",
+            "value": "pipe_grade quality is assumed; outlet_pressure_psia quality is assumed; target_co2_phase quality is assumed; co2_water_content_ppmv quality is assumed; co2_water_spec_limit_ppmv quality is assumed; water_dew_point_margin_c quality is assumed; co2_composition_known is no; material_certificates_available is unknown; fracture_toughness_basis quality is assumed; ili_mfl_available is unknown; component_compatibility_screened is no",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "validation",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_showstoppers",
+            "value": "integrity module failed; available wall thickness is zero or negative",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_work_scope_items",
+            "value": "confirm_co2_composition_and_impurities; confirm_water_limit_and_dew_point; cleaning_drying_and_debris_assessment; ili_mfl_or_equivalent_inspection; material_certificates_or_testing; component_compatibility_review; fracture_and_decompression_screen; wall_thickness_verification; co2_leak_detection_isolation_and_imr_plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "lca",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_cost_work_scope_items",
+            "value": "confirm_co2_composition_and_impurities; confirm_water_limit_and_dew_point; cleaning_drying_and_debris_assessment; ili_mfl_or_equivalent_inspection; material_certificates_or_testing; component_compatibility_review; fracture_and_decompression_screen; wall_thickness_verification; co2_leak_detection_isolation_and_imr_plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "cost"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_lca_work_scope_items",
+            "value": "CO2 specification review; dew-point and water-specification study; cleaning and drying activity; inspection campaign; material verification/testing; component compatibility review; fracture/decompression study; targeted wall-thickness validation; IMR and monitoring plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_refurbishment_steel_fraction_recommended",
+            "value": 0.05,
+            "unit": "fraction",
+            "quality": "screening_placeholder",
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Not a standard value; a transparent screening bridge until itemised quantities exist."
+          },
+          {
+            "name": "repurposing_gate_cited_references",
+            "value": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_TORBERGSEN_LEINUM_RONEID_2025_GAS_PHASE_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR; REF_BURKINSHAW_GALLON_CARVELL_HUSSAIN_2024_HYDROGEN_DATA_EVIDENCE; REF_KASS_ET_AL_2023_MATERIAL_COMPATIBILITY",
+            "unit": "source_id_list",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "target_co2_phase",
+            "value": "dense_phase",
+            "unit": "text",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Default CO2 phase for first screening; replace with project-specific gas/dense phase decision"
+          },
+          {
+            "name": "co2_composition_known",
+            "value": "no",
+            "unit": "yes/no",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume detailed CO2 composition is not yet known until source-stream data are supplied"
+          },
+          {
+            "name": "material_certificates_available",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume material certificates are not yet verified for public-data screening"
+          },
+          {
+            "name": "fracture_toughness_basis",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume fracture toughness basis is not yet verified for public-data screening"
+          },
+          {
+            "name": "ili_mfl_available",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume latest ILI/MFL evidence is not yet available for public-data screening"
+          },
+          {
+            "name": "component_compatibility_screened",
+            "value": "no",
+            "unit": "yes/no",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume valves seals coatings and equipment have not yet been screened for CO2 compatibility"
+          },
+          {
+            "name": "section_replacement_fraction",
+            "value": 0.0,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "No specific pipe replacement fraction is assumed until inspection or requalification evidence requires it"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Repurposing gate is a screening/requalification checklist. It is not final engineering approval.",
+            "affected_modules": [
+              "repurposing_gate",
+              "cost",
+              "lca",
+              "final_gate"
+            ]
+          },
+          {
+            "level": "medium",
+            "message": "Repurposing evidence gaps: pipe_grade quality is assumed; outlet_pressure_psia quality is assumed; target_co2_phase quality is assumed; co2_water_content_ppmv quality is assumed; co2_water_spec_limit_ppmv quality is assumed; water_dew_point_margin_c quality is assumed; co2_composition_known is no; material_certificates_available is unknown; fracture_toughness_basis quality is assumed; ili_mfl_available is unknown; component_compatibility_screened is no.",
+            "affected_modules": [
+              "repurposing_gate",
+              "validation"
+            ]
+          },
+          {
+            "level": "high",
+            "message": "Repurposing showstoppers: integrity module failed; available wall thickness is zero or negative.",
+            "affected_modules": [
+              "repurposing_gate",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "repurposing_phase_screen",
+            "formula": "use target_co2_phase when stated; otherwise compare average pressure with CO2 critical pressure as a screening flag",
+            "inputs": [
+              "target_co2_phase",
+              "average_pressure_mpa",
+              "transport_temperature_c"
+            ],
+            "result_name": "repurposing_phase_status",
+            "notes": "Screening logic only; detailed phase behaviour needs validated EOS/mixture modelling. Cites REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION and REF_TORBERGSEN_LEINUM_RONEID_2025_GAS_PHASE_CO2_REQUALIFICATION."
+          },
+          {
+            "name": "repurposing_evidence_score",
+            "formula": "start at 100; subtract weighted penalties for missing, assumed, unknown or weak requalification evidence",
+            "inputs": [
+              "pipeline_length_km",
+              "inner_diameter_in",
+              "nominal_wall_thickness_mm",
+              "minimum_wall_thickness_mm",
+              "pipe_grade",
+              "inlet_pressure_psia",
+              "outlet_pressure_psia",
+              "target_co2_phase",
+              "co2_water_content_ppmv",
+              "co2_water_spec_limit_ppmv",
+              "water_dew_point_margin_c",
+              "co2_composition_known",
+              "material_certificates_available",
+              "fracture_toughness_basis",
+              "ili_mfl_available",
+              "component_compatibility_screened"
+            ],
+            "result_name": "repurposing_evidence_score",
+            "notes": "Cites REF_BURKINSHAW_GALLON_CARVELL_HUSSAIN_2024_HYDROGEN_DATA_EVIDENCE for data confidence discipline."
+          },
+          {
+            "name": "repurposing_work_scope",
+            "formula": "convert evidence gaps and CO2-service risks into named work items for cost and LCA",
+            "inputs": [
+              "co2_composition_known",
+              "co2_water_content_ppmv",
+              "co2_water_spec_limit_ppmv",
+              "ili_mfl_available",
+              "material_certificates_available",
+              "component_compatibility_screened",
+              "repurposing_phase_status"
+            ],
+            "result_name": "repurposing_work_scope_items",
+            "notes": "Cites REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR, REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR, REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING and REF_KASS_ET_AL_2023_MATERIAL_COMPATIBILITY."
+          }
+        ]
+      },
+      {
         "module": "pre_lca_gate",
         "model_version": "pre_lca_gate_v0.1",
         "status": "fail",
@@ -1644,7 +2211,7 @@
           },
           {
             "name": "pre_lca_reasons",
-            "value": "One or more upstream modules failed: integrity.",
+            "value": "One or more upstream modules failed: integrity; repurposing_gate.",
             "unit": "text",
             "quality": "calculated",
             "used_by": [
@@ -1655,7 +2222,7 @@
           },
           {
             "name": "pre_lca_next_data",
-            "value": "verify wall thickness and inspection records; check pipe grade, design factor, defects, and pressure basis; replace simple Barlow screening with a proper requalification method",
+            "value": "verify wall thickness and inspection records; check pipe grade, design factor, defects, and pressure basis; replace simple Barlow screening with a proper requalification method; resolve repurposing showstoppers; collect missing requalification evidence; define cleaning, drying, inspection, repair, and monitoring work scope",
             "unit": "text",
             "quality": "calculated",
             "used_by": [
@@ -1670,7 +2237,7 @@
         "trace": [
           {
             "name": "pre_lca_gate",
-            "formula": "fail if any upstream module fails; insufficient_data if key outputs are missing; marginal if outputs pass but key assumptions or validation warnings remain; otherwise pass",
+            "formula": "fail if any upstream module fails; insufficient_data if key outputs are missing; marginal if outputs pass but key assumptions, repurposing-gate gaps, or validation warnings remain; otherwise pass",
             "inputs": [
               "capacity_mtpa",
               "required_design_mtpa",
@@ -1803,6 +2370,28 @@
             "quality": "calculated",
             "used_by": [
               "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_refurbishment_steel_fraction_used",
+            "value": 0.05,
+            "unit": "fraction",
+            "quality": "screening_placeholder",
+            "used_by": [
+              "lca",
+              "report"
+            ],
+            "notes": "Uses the larger of the scenario value and repurposing-gate recommendation."
+          },
+          {
+            "name": "lca_gate_work_scope_items",
+            "value": "CO2 specification review; dew-point and water-specification study; cleaning and drying activity; inspection campaign; material verification/testing; component compatibility review; fracture/decompression study; targeted wall-thickness validation; IMR and monitoring plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "report"
             ],
             "notes": ""
           },
@@ -1945,12 +2534,13 @@
             "formula": "new-build proxy = steel mass * steel factor + length * construction factor; reuse proxy = refurbishment steel * steel factor + length * refurbishment factor",
             "inputs": [
               "lca_refurbishment_steel_fraction",
+              "lca_refurbishment_steel_fraction_recommended",
               "lca_pipeline_steel_factor_kgco2e_per_kg",
               "lca_new_build_construction_factor_kgco2e_per_km",
               "lca_refurbishment_activity_factor_kgco2e_per_km"
             ],
             "result_name": "lca_proxy_saving_kgco2e",
-            "notes": "Screening proxy to be replaced by Brightway/openLCA ecoinvent calculation."
+            "notes": "Screening proxy to be replaced by Brightway/openLCA ecoinvent calculation. The refurbishment fraction may be increased by the repurposing gate when evidence gaps suggest additional validation or replacement work."
           }
         ]
       }

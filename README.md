@@ -36,6 +36,7 @@ The repository is now organised by model layer rather than by file type.
 | `model_layers/05_lca/` | LCA inventory CSVs, ecoinvent mapping, LCA method notes. |
 | `model_layers/06_screening_and_decision/` | Goldeneye benchmark, NSTA screening results, pre-LCA gate outputs. |
 | `model_layers/07_independent_validation/` | Validation plan, source register, dashboard, validation report. |
+| `references/` | Project-wide literature, standards, source acquisition notes, and citation tracking. |
 | `repurposing_pipelines/` | Reusable Python model code. |
 | `scripts/` | PowerShell/Python commands to run the model. |
 | `tests/` | Automated checks. |

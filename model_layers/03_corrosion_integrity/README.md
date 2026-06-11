@@ -8,4 +8,4 @@ Wall-thickness, corrosion, and remaining-life screening files.
 | `pipeline_repurposing_practice_review.md` | Plain-language review of defensible pipeline repurposing practice. |
 | `pipeline_repurposing_source_register.csv` | Source register for standards, regulator guidance, reports, and papers used in the repurposing review. |
 
-For the broader source-acquisition list, use `../07_independent_validation/source_acquisition_guide.md`.
+For the broader source-acquisition list, use `../../references/source_acquisition_guide.md`.

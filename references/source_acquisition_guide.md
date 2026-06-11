@@ -28,7 +28,7 @@ Use the exact titles and search terms below in:
 | 8 | `DNV-RP-F101` Corroded pipelines | DNV Veracity / Rules and Standards Explorer+ | Needed for corrosion defect assessment and remaining strength checks. |
 | 9 | `ASME B31G-2023` Manual for Determining the Remaining Strength of Corroded Pipelines | ASME store or university standards access | Main ASME method for checking remaining strength where metal loss/corrosion defects exist. |
 | 10 | `API 579-1/ASME FFS-1-2021` Fitness-For-Service | API Webstore, ASME store, or university standards access | Broader fitness-for-service method for pressure equipment. Useful for defect assessment beyond simple wall-thickness screening. |
-| 11 | Spence, Horan and Tucker, `The Peterhead-Goldeneye Gas Post-combustion CCS Project`, Energy Procedia, 2014 | ScienceDirect, DOI, Google Scholar, university library | Public paper for Goldeneye context. Useful because we should not rely only on the student dissertation for Goldeneye assumptions. |
+| 11 | Spence, Horan and Tucker, `The Peterhead-Goldeneye Gas Post-combustion CCS Project`, Energy Procedia, 2014 | Obtained locally; ScienceDirect, DOI, Google Scholar, or university library for re-download | Public paper for Goldeneye context. Useful because we should not rely only on the student dissertation for Goldeneye assumptions. |
 
 ## Search Details
 
@@ -153,6 +153,9 @@ Use the exact titles and search terms below in:
 - Pages: `6258-6266`
 - DOI: `10.1016/j.egypro.2014.11.657`
 - DOI link: <https://doi.org/10.1016/j.egypro.2014.11.657>
+- Local status: PDF received locally on 2026-06-11.
+- Licence shown in PDF: open access under `CC BY-NC-ND 3.0`.
+- GitHub status: PDF not committed; only citation and extraction notes should be committed.
 - Search terms: `The Peterhead-Goldeneye Gas Post-combustion CCS Project Energy Procedia 63 6258 6266`
 - Why it matters: this is a public Goldeneye project source and can help us reduce dependence on dissertation-only assumptions.
 

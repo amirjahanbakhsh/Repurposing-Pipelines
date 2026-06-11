@@ -1,0 +1,6 @@
+# Keep licensed or copyrighted reference files local by default.
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx

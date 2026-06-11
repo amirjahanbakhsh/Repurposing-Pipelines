@@ -13,4 +13,5 @@ Independent model-validation plans, registers, dashboards, and reports.
 | `assumption_evidence_register.csv` | Evidence status for key assumptions. |
 | `model_validation_review.md` | Technical validation review. |
 | `student_code_critical_review.md` | Critical review of the received student code. |
-| `source_acquisition_guide.md` | Exact titles, identifiers, links, and search terms for standards and papers we still need to obtain. |
+
+For project-wide reference acquisition and literature tracking, use `../../references/source_acquisition_guide.md`.

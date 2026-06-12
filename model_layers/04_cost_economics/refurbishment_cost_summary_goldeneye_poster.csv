@@ -1,0 +1,2 @@
+scenario,pipeline_name,refurbishment_cost_status,gate_status,cost_low_usd_2025,cost_base_usd_2025,cost_high_usd_2025,included_factor_count,missing_factor_count,missing_cost_drivers,model_version
+goldeneye_poster,"20"" GAS GOLDENEYE - ST. FERGUS",blocked_missing_unit_costs,marginal,0.0,0.0,0.0,0,9,cleaning_drying_per_km; compatibility_review_each; engineering_study_each; fracture_decompression_study_each; imr_plan_each; inspection_per_km; material_testing_campaign; replacement_steel_kg; wall_thickness_verification_per_km,refurbishment_unit_cost_v0.1

@@ -218,6 +218,10 @@ Current outputs include:
 
 At this stage, cost is useful for relative screening but is not yet externally validated. The next cost-method step is to compare selected cases with NETL CO2 transport cost tools and to attach project-specific unit costs to the quantified refurbishment work-scope table.
 
+The unit-cost factor workflow has now been added as a conditional calculation. Each work-scope row has a `cost_driver`, such as `inspection_per_km`, `cleaning_drying_per_km`, `engineering_study_each`, or `replacement_steel_kg`. A private unit-cost CSV provides low, base and high factors in USD 2025 per unit. The module multiplies work-scope quantities by these factors and reports low, base and high refurbishment costs.
+
+The public repository stores only a blank unit-cost template and blocked reports. Private contractor rates, supplier quotes, commercial estimates or confidential project rates are stored locally in an ignored private CSV. If factors are missing, the model reports `blocked_missing_unit_costs` rather than producing a false final cost.
+
 ## 11. LCA Method
 
 The LCA method is currently designed as a conventional process-based LCA. Conventional means it uses current process data, current background datasets, and clearly stated assumptions. Prospective and dynamic LCA are planned as later extensions.
@@ -244,7 +248,7 @@ The current repository includes two LCA routes:
 
 Licensed ecoinvent database files and private impact factors are not committed to GitHub. Only shareable mappings, templates, scripts, and conditional reports are stored.
 
-The repurposing gate and work-scope module feed LCA by listing and quantifying items such as cleaning, drying, inspection, material testing, fracture study, monitoring, refurbishment steel, and the aggregate refurbishment package. The next LCA improvement is to attach private ecoinvent/openLCA/Brightway impact factors to those quantities.
+The repurposing gate and work-scope module feed LCA by listing and quantifying items such as cleaning, drying, inspection, material testing, fracture study, monitoring, refurbishment steel, and the aggregate refurbishment package. The private LCA factor workflow then links these quantities to impact factors derived in openLCA or Brightway from ecoinvent. If factors are missing, the model reports `blocked_missing_impact_factors` rather than producing a false kg CO2e result.
 
 ## 12. Decision Gates
 
@@ -313,7 +317,7 @@ The current methodology has important limits:
 - Fracture/decompression is flagged by the repurposing gate but not yet calculated.
 - Cost is not yet fully validated against NETL.
 - LCA has an ecoinvent-linked workflow, but final kg CO2e needs private impact factors.
-- Work-scope quantity drivers are calculated, but detailed unit costs, vessel durations, repair methods and final LCA factors are not yet supplied.
+- Work-scope quantity drivers are calculated, and unit-cost factor templates exist, but detailed private unit costs, vessel durations, repair methods and final LCA factors are not yet supplied.
 - Wells and storage integration are not yet implemented.
 
 These limitations are visible by design. The model is intended to show what is known, what is assumed, and what must be checked next.

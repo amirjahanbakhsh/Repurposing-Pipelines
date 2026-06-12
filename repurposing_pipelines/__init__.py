@@ -9,6 +9,7 @@ __all__ = [
     "integrity",
     "lca_activity_extraction",
     "pipeline_screen",
+    "refurbishment_cost",
     "repurposing_gate",
     "trace",
     "work_scope",

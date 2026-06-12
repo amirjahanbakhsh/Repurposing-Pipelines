@@ -8,6 +8,10 @@ model_layers/01_data_foundation/nsta_pipeline_linear.geojson
 model_layers/05_lca/private/
 model_layers/05_lca/*private*.csv
 
+# Private unit-cost factors and commercial estimates.
+model_layers/04_cost_economics/private/
+model_layers/04_cost_economics/*private*.csv
+
 # Python cache files.
 __pycache__/
 *.py[cod]

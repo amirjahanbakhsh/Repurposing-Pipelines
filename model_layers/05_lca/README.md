@@ -43,6 +43,7 @@ If the report says `blocked_missing_impact_factors`, that is expected until the 
 | `lca_activity_preferred_mapping.csv` | Rank-1 activity candidate per mapping key; still requires LCA review. |
 | `lca_activity_extraction_report.md` | Report from the standalone activity extractor. |
 | `lca_impact_factors_template.csv` | Blank template showing the private factors needed. |
+| `lca_factor_fill_guide.md` | Simple guide for filling private LCA impact factors safely. |
 | `lca_report_goldeneye_poster.md` | Current Goldeneye conditional LCA report. |
 | `lca_report_nsta_pl774.md` | Current PL774 conditional LCA report. |
 | `lca_inventory_*.csv` | Calculated inventory quantities for a run. |

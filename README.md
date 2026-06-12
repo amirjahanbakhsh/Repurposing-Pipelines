@@ -93,6 +93,18 @@ Run the ecoinvent-linked LCA workflow for one pipeline:
 python scripts\run_ecoinvent_lca.py --nsta-id PL774
 ```
 
+Create the private refurbishment unit-cost template:
+
+```powershell
+python scripts\run_refurbishment_cost.py --create-factor-template
+```
+
+Run refurbishment cost factors for one pipeline:
+
+```powershell
+python scripts\run_refurbishment_cost.py --case nsta_pl774
+```
+
 Run independent validation:
 
 ```powershell
@@ -112,6 +124,7 @@ The LCA files are now together:
 - `model_layers/05_lca/lca_inventory_template.csv`
 - `model_layers/05_lca/lca_process_mapping.csv`
 - `model_layers/05_lca/lca_impact_factors_template.csv`
+- `model_layers/05_lca/lca_factor_fill_guide.md`
 - `model_layers/05_lca/lca_report_goldeneye_poster.md`
 - `model_layers/05_lca/lca_report_nsta_pl774.md`
 - `model_layers/05_lca/lca_model_input_csv_validation.csv`
@@ -132,6 +145,7 @@ Implemented so far:
 - batch screening of 155 NSTA records;
 - first evidence-based repurposing gate with cited references and work-scope outputs;
 - quantified refurbishment work-scope CSVs for cost and LCA drivers;
+- private unit-cost factor workflow for refurbishment work-scope rows;
 - general wall-thickness uncertainty for all screened pipelines;
 - first corrosion screening module;
 - first LCA proxy module and ecoinvent-linked conditional LCA workflow;
@@ -140,7 +154,7 @@ Implemented so far:
 
 Next technical priorities:
 
-- add project-specific unit costs, vessel durations, repair methods and LCA factors to the work-scope table;
+- fill project-specific private unit costs and ecoinvent/openLCA/Brightway LCA factors;
 - fill private ecoinvent/openLCA/Brightway impact factors for LCA;
 - improve the wall-thickness/minimum-wall basis;
 - validate capacity and cost against external tools such as CO2 transport models and NETL CO2_T_COM;

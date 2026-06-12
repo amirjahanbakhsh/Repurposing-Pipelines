@@ -378,7 +378,43 @@ Start with:
 - `Required Inventory Rows`
 - `Missing factor keys`
 
-## Option 5: Run The Independent Validation Checks
+## Option 5: Run Refurbishment Unit-Cost Factors
+
+Use this when you want to turn the quantified work-scope table into a cost table.
+
+### Step 1: Create The Private Unit-Cost Template
+
+Run this once:
+
+```powershell
+python scripts\run_refurbishment_cost.py --create-factor-template
+```
+
+This creates:
+
+```text
+model_layers/04_cost_economics/private/refurbishment_unit_costs_private.csv
+```
+
+Fill this private file with unit rates when you have them. Do not upload it to GitHub.
+
+### Step 2: Run One Pipeline
+
+```powershell
+python scripts\run_refurbishment_cost.py --case nsta_pl774
+```
+
+### Step 3: Read The Result
+
+Open:
+
+```text
+model_layers/04_cost_economics/refurbishment_cost_report_nsta_pl774.md
+```
+
+If the status is `blocked_missing_unit_costs`, the model has quantities but still needs private unit rates.
+
+## Option 6: Run The Independent Validation Checks
 
 Use this when you want to check whether the model is technically credible.
 

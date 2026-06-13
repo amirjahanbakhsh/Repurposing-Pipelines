@@ -218,9 +218,9 @@ Current outputs include:
 
 At this stage, cost is useful for relative screening but is not yet externally validated. The next cost-method step is to compare selected cases with NETL CO2 transport cost tools and to attach project-specific unit costs to the quantified refurbishment work-scope table.
 
-The unit-cost factor workflow has now been added as a conditional calculation. Each work-scope row has a `cost_driver`, such as `inspection_per_km`, `cleaning_drying_per_km`, `engineering_study_each`, or `replacement_steel_kg`. A private unit-cost CSV provides low, base and high factors in USD 2025 per unit. The module multiplies work-scope quantities by these factors and reports low, base and high refurbishment costs.
+The unit-cost factor workflow has now been added as a conditional calculation. Each work-scope row has a `cost_driver`, such as `inspection_per_km`, `cleaning_drying_per_km`, `engineering_study_each`, or `replacement_steel_kg`. A factor CSV provides low, base and high factors in USD 2025 per unit. The module multiplies work-scope quantities by these factors and reports low, base and high refurbishment costs.
 
-The public repository stores only a blank unit-cost template and blocked reports. Private contractor rates, supplier quotes, commercial estimates or confidential project rates are stored locally in an ignored private CSV. If factors are missing, the model reports `blocked_missing_unit_costs` rather than producing a false final cost.
+The public repository now includes a screening-default unit-cost CSV. This allows complete early screening and comparison of candidate pipelines. These values are labelled `screening_default_unvalidated` and must not be treated as contractor estimates. Private contractor rates, supplier quotes, commercial estimates or confidential project rates are still stored locally in an ignored private CSV. If factors are missing, the model reports `blocked_missing_unit_costs` rather than producing a false final cost.
 
 ## 11. LCA Method
 
@@ -241,14 +241,15 @@ The first functional unit should be:
 transport 1 tonne of CO2 through the selected pipeline route
 ```
 
-The current repository includes two LCA routes:
+The current repository includes three LCA routes:
 
 1. A screening proxy that estimates steel and simple construction/refurbishment impacts.
 2. An ecoinvent-linked conditional workflow that creates inventory and mapping files, but requires private ecoinvent-derived impact factors before final kg CO2e values can be claimed.
+3. A public screening-factor mode that fills the same ecoinvent-linked structure with open screening defaults, so the workflow can produce complete early results while private factors are still missing.
 
 Licensed ecoinvent database files and private impact factors are not committed to GitHub. Only shareable mappings, templates, scripts, and conditional reports are stored.
 
-The repurposing gate and work-scope module feed LCA by listing and quantifying items such as cleaning, drying, inspection, material testing, fracture study, monitoring, refurbishment steel, and the aggregate refurbishment package. The private LCA factor workflow then links these quantities to impact factors derived in openLCA or Brightway from ecoinvent. If factors are missing, the model reports `blocked_missing_impact_factors` rather than producing a false kg CO2e result.
+The repurposing gate and work-scope module feed LCA by listing and quantifying items such as cleaning, drying, inspection, material testing, fracture study, monitoring, refurbishment steel, and the aggregate refurbishment package. The LCA factor workflow then links these quantities to either public screening factors or private factors derived in openLCA or Brightway from ecoinvent. If factors are missing, the model reports `blocked_missing_impact_factors` rather than producing a false kg CO2e result.
 
 ## 12. Decision Gates
 
@@ -293,7 +294,7 @@ Each run produces three output types:
 - Markdown reports for human reading;
 - JSON trace files for audit and future web-app evidence panels.
 
-A first Streamlit dashboard has been added as a visual review layer. It reads the saved CSV, Markdown and JSON outputs, allows the user to select an NSTA pipeline number, highlights the route on a map, and displays the screening decision, technical checks, work-scope, cost status, LCA status and references. The dashboard is not a separate calculation method. It is a clearer interface to the same traceable model outputs.
+A first Streamlit dashboard has been added as a visual review and run layer. It reads the saved CSV, Markdown and JSON outputs, allows the user to select an NSTA pipeline number, highlights the route on a map, runs the selected pipeline through screening/cost/LCA, and displays the screening decision, technical checks, work-scope, cost status, LCA status and references. The dashboard is not a separate calculation method. It is a clearer interface to the same traceable model outputs.
 
 The trace file records:
 
@@ -318,8 +319,8 @@ The current methodology has important limits:
 - Integrity is a wall-thickness screening calculation, not full requalification.
 - Fracture/decompression is flagged by the repurposing gate but not yet calculated.
 - Cost is not yet fully validated against NETL.
-- LCA has an ecoinvent-linked workflow, but final kg CO2e needs private impact factors.
-- Work-scope quantity drivers are calculated, and unit-cost factor templates exist, but detailed private unit costs, vessel durations, repair methods and final LCA factors are not yet supplied.
+- LCA has public screening factors and an ecoinvent-linked workflow, but final publishable kg CO2e needs private impact factors.
+- Work-scope quantity drivers and screening unit-cost factors are calculated, but detailed private unit costs, vessel durations, repair methods and final LCA factors are not yet supplied.
 - Wells and storage integration are not yet implemented.
 
 These limitations are visible by design. The model is intended to show what is known, what is assumed, and what must be checked next.

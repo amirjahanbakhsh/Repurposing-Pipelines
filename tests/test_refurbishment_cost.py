@@ -12,7 +12,10 @@ sys.path.insert(0, str(ROOT))
 
 from repurposing_pipelines.refurbishment_cost import (  # noqa: E402
     calculate_refurbishment_costs,
+    read_unit_costs,
+    screening_unit_cost_rows,
     unit_cost_template_rows,
+    write_csv_rows,
 )
 
 
@@ -89,6 +92,39 @@ class RefurbishmentCostTest(unittest.TestCase):
         self.assertIn("inspection_per_km", drivers)
         self.assertIn("cleaning_drying_per_km", drivers)
         self.assertIn("replacement_steel_kg", drivers)
+
+    def test_screening_defaults_enable_screening_result(self) -> None:
+        work_scope_rows = [
+            {
+                "scenario": "test",
+                "pipeline_name": "Test pipeline",
+                "gate_status": "marginal",
+                "work_item_id": "inspection",
+                "quantity_low": 8,
+                "quantity_base": 10,
+                "quantity_high": 12,
+                "unit": "km",
+                "cost_include": "yes",
+                "cost_driver": "inspection_per_km",
+            }
+        ]
+        factors = {row["cost_driver"]: row for row in screening_unit_cost_rows()}
+
+        _rows, summary = calculate_refurbishment_costs(work_scope_rows, factors)
+
+        self.assertEqual(summary[0]["refurbishment_cost_status"], "screening_result")
+        self.assertEqual(summary[0]["missing_factor_count"], 0)
+        self.assertGreater(summary[0]["cost_base_usd_2025"], 0)
+
+    def test_screening_defaults_can_round_trip_through_csv(self) -> None:
+        path = ROOT / "model_layers" / "04_cost_economics" / "refurbishment_unit_cost_screening_defaults.csv"
+        if not path.exists():
+            write_csv_rows(path, screening_unit_cost_rows())
+
+        rows = read_unit_costs(path)
+
+        self.assertIn("inspection_per_km", rows)
+        self.assertEqual(rows["inspection_per_km"]["quality"], "screening_default_unvalidated")
 
 
 if __name__ == "__main__":

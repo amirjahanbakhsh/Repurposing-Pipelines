@@ -5,11 +5,13 @@ applies private ecoinvent-derived impact factors when they are available.
 
 Examples:
 
-    python scripts/run_ecoinvent_lca.py --nsta-id PL774
+    python scripts/run_ecoinvent_lca.py --nsta-id PL774 --factor-mode screening
     python scripts/run_ecoinvent_lca.py --scenario goldeneye_poster
     python scripts/run_ecoinvent_lca.py --create-factor-template
 
 The private factor CSV is intentionally ignored by Git.
+
+The public screening-factor CSV is committed for early screening runs.
 """
 
 from __future__ import annotations
@@ -34,6 +36,7 @@ from repurposing_pipelines.lca import (  # noqa: E402
     impact_factor_template_rows,
     read_impact_factors,
     read_process_mapping,
+    screening_impact_factor_rows,
     write_csv_rows,
     write_ecoinvent_lca_report,
     write_lca_trace,
@@ -49,6 +52,7 @@ from repurposing_pipelines.goldeneye import benchmark_scenario_with_trace  # noq
 
 
 DEFAULT_FACTOR_PATH = LCA_LAYER / "private" / "lca_impact_factors_private.csv"
+SCREENING_FACTOR_PATH = LCA_LAYER / "lca_impact_factors_screening_defaults.csv"
 
 
 def _repo_path_text(path: Path) -> str:
@@ -66,8 +70,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--nsta-name", help="Unique text in the NSTA pipeline name.")
     parser.add_argument(
         "--impact-factors",
-        default=str(DEFAULT_FACTOR_PATH),
-        help="Private ecoinvent/openLCA/Brightway impact factor CSV.",
+        help="Explicit impact-factor CSV path. Overrides --factor-mode.",
+    )
+    parser.add_argument(
+        "--factor-mode",
+        choices=["screening", "private"],
+        default="screening",
+        help="Use public screening defaults or the ignored private ecoinvent/openLCA/Brightway factor file.",
     )
     parser.add_argument(
         "--create-factor-template",
@@ -127,10 +136,22 @@ def _create_private_factor_template(path: Path, mapping_path: Path) -> None:
     write_csv_rows(path, impact_factor_template_rows(process_mapping))
 
 
+def _ensure_screening_defaults(path: Path) -> None:
+    if not path.exists():
+        write_csv_rows(path, screening_impact_factor_rows())
+
+
 def main() -> int:
     args = build_parser().parse_args()
     process_mapping_path = LCA_LAYER / "lca_process_mapping.csv"
-    impact_factor_path = Path(args.impact_factors)
+    if args.impact_factors:
+        impact_factor_path = Path(args.impact_factors)
+    elif args.create_factor_template:
+        impact_factor_path = DEFAULT_FACTOR_PATH
+    else:
+        impact_factor_path = DEFAULT_FACTOR_PATH if args.factor_mode == "private" else SCREENING_FACTOR_PATH
+    if args.factor_mode == "screening" and not args.impact_factors and not args.create_factor_template:
+        _ensure_screening_defaults(impact_factor_path)
 
     if args.create_factor_template:
         _create_private_factor_template(impact_factor_path, process_mapping_path)

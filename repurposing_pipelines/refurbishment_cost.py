@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 
-MODEL_VERSION = "refurbishment_unit_cost_v0.1"
+MODEL_VERSION = "refurbishment_unit_cost_v0.2"
 
 UNIT_COST_TEMPLATE_ROWS = [
     {
@@ -119,6 +119,109 @@ UNIT_COST_TEMPLATE_ROWS = [
     },
 ]
 
+SCREENING_UNIT_COST_ROWS = [
+    {
+        "cost_driver": "engineering_study_each",
+        "unit": "study",
+        "unit_cost_low_usd_2025": "100000",
+        "unit_cost_base_usd_2025": "250000",
+        "unit_cost_high_usd_2025": "500000",
+        "source": "screening estimate from engineering work-package judgement; replace with project quote",
+        "quality": "screening_default_unvalidated",
+        "notes": "Used for early CO2 composition, impurity and water/dew-point studies.",
+    },
+    {
+        "cost_driver": "cleaning_drying_per_km",
+        "unit": "km",
+        "unit_cost_low_usd_2025": "25000",
+        "unit_cost_base_usd_2025": "75000",
+        "unit_cost_high_usd_2025": "150000",
+        "source": "screening estimate for offshore cleaning/drying activity; replace with contractor estimate",
+        "quality": "screening_default_unvalidated",
+        "notes": "Pipeline cleaning, drying and debris assessment per km.",
+    },
+    {
+        "cost_driver": "inspection_per_km",
+        "unit": "km",
+        "unit_cost_low_usd_2025": "10000",
+        "unit_cost_base_usd_2025": "25000",
+        "unit_cost_high_usd_2025": "60000",
+        "source": "screening estimate for ILI/MFL or equivalent inspection; replace with ILI quote",
+        "quality": "screening_default_unvalidated",
+        "notes": "Inspection campaign per km.",
+    },
+    {
+        "cost_driver": "material_testing_campaign",
+        "unit": "campaign",
+        "unit_cost_low_usd_2025": "100000",
+        "unit_cost_base_usd_2025": "300000",
+        "unit_cost_high_usd_2025": "750000",
+        "source": "screening estimate for material verification campaign; replace with laboratory/project estimate",
+        "quality": "screening_default_unvalidated",
+        "notes": "Material certificates, sampling, testing and verification campaign.",
+    },
+    {
+        "cost_driver": "compatibility_review_each",
+        "unit": "review",
+        "unit_cost_low_usd_2025": "50000",
+        "unit_cost_base_usd_2025": "150000",
+        "unit_cost_high_usd_2025": "300000",
+        "source": "screening estimate for component compatibility engineering review",
+        "quality": "screening_default_unvalidated",
+        "notes": "Valve, seal, coating and equipment compatibility review.",
+    },
+    {
+        "cost_driver": "fracture_decompression_study_each",
+        "unit": "study",
+        "unit_cost_low_usd_2025": "150000",
+        "unit_cost_base_usd_2025": "350000",
+        "unit_cost_high_usd_2025": "800000",
+        "source": "screening estimate for dense-phase fracture/decompression engineering study",
+        "quality": "screening_default_unvalidated",
+        "notes": "Dense-phase fracture, decompression and blowdown study.",
+    },
+    {
+        "cost_driver": "wall_thickness_verification_per_km",
+        "unit": "km",
+        "unit_cost_low_usd_2025": "5000",
+        "unit_cost_base_usd_2025": "15000",
+        "unit_cost_high_usd_2025": "35000",
+        "source": "screening estimate for targeted wall-thickness validation",
+        "quality": "screening_default_unvalidated",
+        "notes": "Targeted wall-thickness verification per km.",
+    },
+    {
+        "cost_driver": "imr_plan_each",
+        "unit": "plan",
+        "unit_cost_low_usd_2025": "100000",
+        "unit_cost_base_usd_2025": "250000",
+        "unit_cost_high_usd_2025": "500000",
+        "source": "screening estimate for CO2 monitoring, isolation and response plan",
+        "quality": "screening_default_unvalidated",
+        "notes": "CO2 leak detection, isolation and IMR plan.",
+    },
+    {
+        "cost_driver": "replacement_steel_kg",
+        "unit": "kg",
+        "unit_cost_low_usd_2025": "1.25",
+        "unit_cost_base_usd_2025": "2.50",
+        "unit_cost_high_usd_2025": "5.00",
+        "source": "screening estimate for supplied/fabricated replacement steel; replace with supplier quote",
+        "quality": "screening_default_unvalidated",
+        "notes": "Replacement or refurbishment steel allowance per kg.",
+    },
+    {
+        "cost_driver": "unmapped_work_item",
+        "unit": "item",
+        "unit_cost_low_usd_2025": "0",
+        "unit_cost_base_usd_2025": "0",
+        "unit_cost_high_usd_2025": "0",
+        "source": "screening fallback",
+        "quality": "screening_default_unvalidated",
+        "notes": "Fallback is zero so future unmapped rows are visible but not silently costed.",
+    },
+]
+
 
 def read_csv_rows(path: Path) -> list[dict[str, str]]:
     if not path.exists():
@@ -142,6 +245,10 @@ def write_csv_rows(path: Path, rows: list[dict[str, Any]]) -> None:
 
 def unit_cost_template_rows() -> list[dict[str, str]]:
     return [dict(row) for row in UNIT_COST_TEMPLATE_ROWS]
+
+
+def screening_unit_cost_rows() -> list[dict[str, str]]:
+    return [dict(row) for row in SCREENING_UNIT_COST_ROWS]
 
 
 def read_unit_costs(path: Path | None) -> dict[str, dict[str, str]]:
@@ -179,6 +286,7 @@ def calculate_refurbishment_costs(
     totals: dict[str, dict[str, Any]] = {}
     missing: dict[str, set[str]] = {}
     included: dict[str, int] = {}
+    quality_flags: dict[str, set[str]] = {}
 
     for row in work_scope_rows:
         scenario = str(row.get("scenario", "unknown"))
@@ -195,6 +303,7 @@ def calculate_refurbishment_costs(
         )
         missing.setdefault(scenario, set())
         included.setdefault(scenario, 0)
+        quality_flags.setdefault(scenario, set())
 
         include = _as_yes(row.get("cost_include"))
         driver = str(row.get("cost_driver", ""))
@@ -217,6 +326,7 @@ def calculate_refurbishment_costs(
             else:
                 factor_status = "available"
                 included[scenario] += 1
+                quality_flags[scenario].add(str(factor_row.get("quality") or "unknown"))
                 low_cost = _quantity(row, "quantity_low") * float(low_factor)
                 base_cost = _quantity(row, "quantity_base") * float(base_factor)
                 high_cost = _quantity(row, "quantity_high") * float(high_factor)
@@ -246,6 +356,10 @@ def calculate_refurbishment_costs(
             status = "blocked_missing_unit_costs"
         elif str(total.get("gate_status")) == "fail":
             status = "sensitivity_only"
+        elif quality_flags[scenario] and all(
+            "screening_default" in quality for quality in quality_flags[scenario]
+        ):
+            status = "screening_result"
         else:
             status = "conditional_result"
         summary_rows.append(
@@ -260,6 +374,7 @@ def calculate_refurbishment_costs(
                 "included_factor_count": included[scenario],
                 "missing_factor_count": len(missing_drivers),
                 "missing_cost_drivers": "; ".join(missing_drivers),
+                "factor_quality_summary": "; ".join(sorted(quality_flags[scenario])),
                 "model_version": MODEL_VERSION,
             }
         )
@@ -311,7 +426,9 @@ Model version: `{MODEL_VERSION}`
 
 This report applies unit-cost factors to the quantified refurbishment work-scope table.
 
-If the status is `blocked_missing_unit_costs`, the model has quantities but the private unit-cost CSV still needs rates.
+If the status is `screening_result`, public screening defaults were used. This is useful for comparing cases, but it is not a contractor estimate.
+
+If the status is `blocked_missing_unit_costs`, the model has quantities but the chosen unit-cost CSV still needs rates.
 
 ## Summary
 
@@ -329,6 +446,6 @@ If the status is `blocked_missing_unit_costs`, the model has quantities but the 
 
 ## Important Caveat
 
-Public GitHub files must not contain confidential contractor rates, commercial estimates, or restricted cost data. Fill the private unit-cost CSV locally, then rerun the command.
+Public GitHub files must not contain confidential contractor rates, commercial estimates, or restricted cost data. Use public screening defaults for early ranking, then replace them with private project estimates before making publishable cost claims.
 """
     path.write_text(report, encoding="utf-8")

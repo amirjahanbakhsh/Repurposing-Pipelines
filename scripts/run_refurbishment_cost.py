@@ -3,13 +3,17 @@
 Examples:
 
     python scripts/run_refurbishment_cost.py --create-factor-template
-    python scripts/run_refurbishment_cost.py --case nsta_pl774
+    python scripts/run_refurbishment_cost.py --case nsta_pl774 --factor-mode screening
     python scripts/run_refurbishment_cost.py --case goldeneye_poster
     python scripts/run_refurbishment_cost.py --case nsta_all
 
 Real unit-cost values belong in:
 
     model_layers/04_cost_economics/private/refurbishment_unit_costs_private.csv
+
+Public screening defaults are stored in:
+
+    model_layers/04_cost_economics/refurbishment_unit_cost_screening_defaults.csv
 """
 
 from __future__ import annotations
@@ -30,6 +34,7 @@ from repurposing_pipelines.refurbishment_cost import (  # noqa: E402
     calculate_refurbishment_costs,
     read_csv_rows,
     read_unit_costs,
+    screening_unit_cost_rows,
     unit_cost_template_rows,
     write_csv_rows,
     write_refurbishment_cost_report,
@@ -40,6 +45,7 @@ DEFAULT_PRIVATE_COST_PATH = (
     COST_LAYER / "private" / "refurbishment_unit_costs_private.csv"
 )
 PUBLIC_TEMPLATE_PATH = COST_LAYER / "refurbishment_unit_cost_template.csv"
+SCREENING_COST_PATH = COST_LAYER / "refurbishment_unit_cost_screening_defaults.csv"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -58,8 +64,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--unit-costs",
-        default=str(DEFAULT_PRIVATE_COST_PATH),
-        help="Private unit-cost CSV path.",
+        help="Explicit unit-cost CSV path. Overrides --factor-mode.",
+    )
+    parser.add_argument(
+        "--factor-mode",
+        choices=["screening", "private"],
+        default="screening",
+        help="Use public screening defaults or the ignored private unit-cost file.",
     )
     parser.add_argument(
         "--create-factor-template",
@@ -102,9 +113,21 @@ def _create_private_template(path: Path) -> None:
         write_csv_rows(path, unit_cost_template_rows())
 
 
+def _ensure_screening_defaults(path: Path) -> None:
+    if not path.exists():
+        write_csv_rows(path, screening_unit_cost_rows())
+
+
 def main() -> int:
     args = build_parser().parse_args()
-    unit_cost_path = Path(args.unit_costs)
+    if args.unit_costs:
+        unit_cost_path = Path(args.unit_costs)
+    elif args.create_factor_template:
+        unit_cost_path = DEFAULT_PRIVATE_COST_PATH
+    else:
+        unit_cost_path = DEFAULT_PRIVATE_COST_PATH if args.factor_mode == "private" else SCREENING_COST_PATH
+    if args.factor_mode == "screening" and not args.unit_costs:
+        _ensure_screening_defaults(unit_cost_path)
 
     if args.create_factor_template:
         _create_private_template(unit_cost_path)

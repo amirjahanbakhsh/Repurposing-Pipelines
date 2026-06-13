@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import json
+import re
+import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -49,6 +52,17 @@ def clean_text(value: Any, fallback: str = "Not available") -> str:
         return fallback
     text = str(value).strip()
     return text if text else fallback
+
+
+def safe_filename(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    text = re.sub(r"[^a-z0-9]+", "_", text)
+    text = text.strip("_")
+    return text or "scenario"
+
+
+def nsta_scenario_name(pipeline_id: str) -> str:
+    return f"nsta_{safe_filename(pipeline_id)}"
 
 
 def as_float(value: Any) -> float | None:
@@ -342,6 +356,48 @@ def render_metric_row(row: pd.Series | None, ranked_row: pd.Series | None) -> No
     columns[5].metric("LCA proxy saving", fmt_number(row.get("lca_proxy_saving_percent") if row is not None else None, 1, "%"))
 
 
+def run_model_command(args: list[str]) -> tuple[bool, str]:
+    completed = subprocess.run(
+        [sys.executable, *args],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    output = "\n".join(
+        part.strip()
+        for part in [completed.stdout, completed.stderr]
+        if part and part.strip()
+    )
+    return completed.returncode == 0, output
+
+
+def run_selected_pipeline_workflow(selected_pipeline_id: str, factor_mode: str) -> list[tuple[str, bool, str]]:
+    scenario = nsta_scenario_name(selected_pipeline_id)
+    commands = [
+        (
+            "Screening",
+            ["scripts\\run_pipeline_screen.py", "--nsta-id", selected_pipeline_id],
+        ),
+        (
+            "Refurbishment cost",
+            ["scripts\\run_refurbishment_cost.py", "--case", scenario, "--factor-mode", factor_mode],
+        ),
+        (
+            "LCA",
+            ["scripts\\run_ecoinvent_lca.py", "--nsta-id", selected_pipeline_id, "--factor-mode", factor_mode],
+        ),
+    ]
+    results: list[tuple[str, bool, str]] = []
+    for label, args in commands:
+        ok, output = run_model_command(args)
+        results.append((label, ok, output))
+        if not ok:
+            break
+    st.cache_data.clear()
+    return results
+
+
 def render_overview(
     route_payload: dict[str, Any],
     row: pd.Series | None,
@@ -418,6 +474,9 @@ def render_technical(row: pd.Series | None, ranked_row: pd.Series | None) -> Non
 
 
 def render_work_scope(work_scope_df: pd.DataFrame, scenario: str) -> None:
+    selected_path = SCREENING_DIR / f"refurbishment_work_scope_{scenario}.csv"
+    if selected_path.exists():
+        work_scope_df = load_csv(str(selected_path))
     if work_scope_df.empty:
         st.warning("No work-scope CSV was found.")
         return
@@ -432,7 +491,7 @@ def render_work_scope(work_scope_df: pd.DataFrame, scenario: str) -> None:
 
     count_cols = st.columns(4)
     replacement_steel = pd.to_numeric(
-        selected.loc[selected["work_item_id"] == "replacement_steel_allowance", "quantity_base"],
+        selected.loc[selected["work_item_id"] == "replacement_or_refurbishment_steel", "quantity_base"],
         errors="coerce",
     ).sum()
     count_cols[0].metric("Work items", f"{len(selected):,}")
@@ -463,13 +522,22 @@ def render_cost_lca(row: pd.Series | None, cost_df: pd.DataFrame, scenario: str)
     with left:
         st.subheader("Refurbishment Cost")
         cost_row = None
+        selected_cost_path = COST_DIR / f"refurbishment_cost_summary_{scenario}.csv"
+        if selected_cost_path.exists():
+            selected_cost_df = load_csv(str(selected_cost_path))
+            if not selected_cost_df.empty:
+                cost_row = selected_cost_df.iloc[0]
         if not cost_df.empty:
             match = cost_df[cost_df["scenario"].astype(str) == scenario]
-            if not match.empty:
+            if cost_row is None and not match.empty:
                 cost_row = match.iloc[0]
         status_pill("Cost status", cost_row.get("refurbishment_cost_status") if cost_row is not None else "not run")
         if cost_row is not None and "blocked" not in clean_text(cost_row.get("refurbishment_cost_status"), "").lower():
             st.metric("Base refurbishment cost", fmt_money(cost_row.get("cost_base_usd_2025")))
+            range_cols = st.columns(2)
+            range_cols[0].metric("Low case", fmt_money(cost_row.get("cost_low_usd_2025")))
+            range_cols[1].metric("High case", fmt_money(cost_row.get("cost_high_usd_2025")))
+            st.caption(f"Factor quality: {clean_text(cost_row.get('factor_quality_summary'))}")
         if cost_row is not None:
             st.write("Missing cost drivers")
             missing = split_items(cost_row.get("missing_cost_drivers"))
@@ -494,6 +562,10 @@ def render_cost_lca(row: pd.Series | None, cost_df: pd.DataFrame, scenario: str)
         if not lca_result.empty:
             lca_row = lca_result.iloc[0]
             status_pill("ecoinvent-linked LCA", lca_row.get("lca_status"))
+            if "blocked" not in clean_text(lca_row.get("lca_status"), "").lower():
+                st.metric("Base ecoinvent-linked saving", fmt_number(lca_row.get("saving_percent_base"), 1, "%"))
+                st.metric("Reuse base impact", fmt_number(as_float(lca_row.get("reuse_kgco2e_base")) / 1000 if as_float(lca_row.get("reuse_kgco2e_base")) is not None else None, 1, " tCO2e"))
+                st.caption(f"Factor quality: {clean_text(lca_row.get('factor_quality_summary'))}")
             missing = split_items(lca_row.get("missing_mapping_keys"))
             if missing:
                 st.write("Missing LCA factors")
@@ -528,6 +600,31 @@ def render_traceability(row: pd.Series | None, selected_pipeline_id: str, scenar
             st.code(str(path), language="text")
         st.write("Run command")
         st.code(f"python scripts\\run_pipeline_screen.py --nsta-id {selected_pipeline_id}", language="powershell")
+
+        report_path = SCREENING_DIR / f"pipeline_screen_{scenario}.md"
+        if report_path.exists():
+            st.download_button(
+                "Download screening report",
+                data=report_path.read_text(encoding="utf-8"),
+                file_name=report_path.name,
+                mime="text/markdown",
+            )
+        cost_report_path = COST_DIR / f"refurbishment_cost_report_{scenario}.md"
+        if cost_report_path.exists():
+            st.download_button(
+                "Download cost report",
+                data=cost_report_path.read_text(encoding="utf-8"),
+                file_name=cost_report_path.name,
+                mime="text/markdown",
+            )
+        lca_report_path = LCA_DIR / f"lca_report_{scenario}.md"
+        if lca_report_path.exists():
+            st.download_button(
+                "Download LCA report",
+                data=lca_report_path.read_text(encoding="utf-8"),
+                file_name=lca_report_path.name,
+                mime="text/markdown",
+            )
 
     with right:
         st.subheader("References Cited By Gate")
@@ -580,7 +677,7 @@ def main() -> None:
         )
         selected_pipeline_id = selected_label.split("|")[1].strip().upper()
         ranked_row = selected_ranked_row(candidate_df, selected_pipeline_id)
-        scenario = f"nsta_{selected_pipeline_id.lower()}"
+        scenario = nsta_scenario_name(selected_pipeline_id)
 
         decision_filter = st.multiselect(
             "Decision filter",
@@ -591,6 +688,31 @@ def main() -> None:
             filtered = candidate_df[candidate_df["pre_lca_decision"].isin(decision_filter)]
         else:
             filtered = candidate_df
+        st.subheader("Run")
+        if "last_run_results" in st.session_state:
+            last_results = st.session_state["last_run_results"]
+            if all(ok for _, ok, _ in last_results):
+                st.success("Last selected-pipeline run completed")
+            else:
+                st.error("Last selected-pipeline run stopped early")
+            with st.expander("Last run output"):
+                for label, ok, output in last_results:
+                    st.write(f"**{label}:** {'completed' if ok else 'failed'}")
+                    st.code(output or "No output", language="text")
+        factor_mode = st.radio(
+            "Cost/LCA factors",
+            ["screening", "private"],
+            captions=[
+                "Uses public screening defaults so the model can complete now.",
+                "Uses ignored private factor files if you have filled them.",
+            ],
+        )
+        if st.button("Run selected pipeline", type="primary"):
+            results = run_selected_pipeline_workflow(selected_pipeline_id, factor_mode)
+            st.session_state["last_run_results"] = results
+            if all(ok for _, ok, _ in results):
+                st.rerun()
+            st.rerun()
         st.dataframe(
             filtered[["rank", "pipeline_id", "PIPE_NAME", "FLUID", "STATUS", "LENGTH_KM", "pre_lca_decision"]].head(30),
             hide_index=True,

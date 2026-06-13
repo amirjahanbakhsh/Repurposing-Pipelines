@@ -15,7 +15,114 @@ from .trace import ModuleResult, OutputRecord, TraceStep, WarningRecord
 
 
 MODEL_VERSION = "lca_screening_proxy_v0.1"
-ECOINVENT_MODEL_VERSION = "ecoinvent_factor_lca_v0.1"
+ECOINVENT_MODEL_VERSION = "ecoinvent_factor_lca_v0.2"
+
+SCREENING_IMPACT_FACTOR_ROWS = [
+    {
+        "mapping_key": "pipeline_steel",
+        "impact_method": "screening GWP100 proxy",
+        "impact_category": "climate change",
+        "activity_name": "steel production, low-alloyed, hot rolled",
+        "location": "screening",
+        "reference_product": "pipeline steel",
+        "unit": "kg",
+        "impact_factor_kgco2e_per_unit": "2.0",
+        "source": "open screening proxy used in project assumptions; replace with private ecoinvent result",
+        "quality": "screening_default_unvalidated",
+        "notes": "Matches the existing open LCA proxy factor in the screening assumptions.",
+    },
+    {
+        "mapping_key": "offshore_pipeline_construction",
+        "impact_method": "screening GWP100 proxy",
+        "impact_category": "climate change",
+        "activity_name": "offshore pipeline construction package",
+        "location": "screening",
+        "reference_product": "offshore pipeline construction",
+        "unit": "km",
+        "impact_factor_kgco2e_per_unit": "100000",
+        "source": "open screening proxy used in project assumptions; replace with private ecoinvent result",
+        "quality": "screening_default_unvalidated",
+        "notes": "Represents construction activity beyond steel mass for early screening.",
+    },
+    {
+        "mapping_key": "refurbishment_activity",
+        "impact_method": "screening GWP100 proxy",
+        "impact_category": "climate change",
+        "activity_name": "pipeline refurbishment activity package",
+        "location": "screening",
+        "reference_product": "pipeline refurbishment package",
+        "unit": "km",
+        "impact_factor_kgco2e_per_unit": "20000",
+        "source": "open screening proxy used in project assumptions; replace with private project/ecoinvent model",
+        "quality": "screening_default_unvalidated",
+        "notes": "Covers aggregate cleaning, inspection, repair readiness and recommissioning activity per km.",
+    },
+    {
+        "mapping_key": "decommissioned_pipeline",
+        "impact_method": "screening GWP100 proxy",
+        "impact_category": "climate change",
+        "activity_name": "decommissioned pipeline sensitivity",
+        "location": "screening",
+        "reference_product": "decommissioned pipeline",
+        "unit": "kg",
+        "impact_factor_kgco2e_per_unit": "0",
+        "source": "not included in default boundary",
+        "quality": "screening_default_unvalidated",
+        "notes": "Zero because decommissioning is outside the default comparison boundary.",
+    },
+    {
+        "mapping_key": "electricity",
+        "impact_method": "screening GWP100 proxy",
+        "impact_category": "climate change",
+        "activity_name": "UK medium-voltage electricity sensitivity",
+        "location": "GB",
+        "reference_product": "electricity",
+        "unit": "kWh",
+        "impact_factor_kgco2e_per_unit": "0.20",
+        "source": "screening placeholder; replace with ecoinvent/openLCA/Brightway electricity factor",
+        "quality": "screening_default_unvalidated",
+        "notes": "Not included in current default totals because compression electricity is not yet modelled.",
+    },
+    {
+        "mapping_key": "diesel_machinery",
+        "impact_method": "screening GWP100 proxy",
+        "impact_category": "climate change",
+        "activity_name": "diesel machinery sensitivity",
+        "location": "screening",
+        "reference_product": "diesel energy",
+        "unit": "MJ",
+        "impact_factor_kgco2e_per_unit": "0.075",
+        "source": "screening placeholder; replace with ecoinvent diesel process",
+        "quality": "screening_default_unvalidated",
+        "notes": "Prepared for later vessel/machinery activity modelling.",
+    },
+    {
+        "mapping_key": "freight_transport",
+        "impact_method": "screening GWP100 proxy",
+        "impact_category": "climate change",
+        "activity_name": "freight transport sensitivity",
+        "location": "screening",
+        "reference_product": "freight transport",
+        "unit": "tonne-km",
+        "impact_factor_kgco2e_per_unit": "0.10",
+        "source": "screening placeholder; replace with ecoinvent freight process",
+        "quality": "screening_default_unvalidated",
+        "notes": "Prepared for later replacement-material logistics modelling.",
+    },
+    {
+        "mapping_key": "scrap_steel",
+        "impact_method": "screening GWP100 proxy",
+        "impact_category": "climate change",
+        "activity_name": "scrap steel sensitivity",
+        "location": "screening",
+        "reference_product": "scrap steel treatment",
+        "unit": "kg",
+        "impact_factor_kgco2e_per_unit": "0.02",
+        "source": "screening placeholder; replace with ecoinvent scrap treatment process",
+        "quality": "screening_default_unvalidated",
+        "notes": "Prepared for end-of-life sensitivity only.",
+    },
+]
 
 
 def _optional_number(
@@ -74,6 +181,10 @@ def read_impact_factors(path: Path | None) -> dict[str, dict[str, Any]]:
                 "impact_factor_kgco2e_per_unit": float(raw_factor),
             }
     return factors
+
+
+def screening_impact_factor_rows() -> list[dict[str, Any]]:
+    return [dict(row) for row in SCREENING_IMPACT_FACTOR_ROWS]
 
 
 def _mapping_value(
@@ -310,6 +421,7 @@ def calculate_ecoinvent_impacts(
     }
     missing_keys: list[str] = []
     included_count = 0
+    quality_flags: set[str] = set()
 
     for row in inventory_rows:
         include = _as_bool(row["include_in_total"]) and float(row["quantity_base"]) != 0
@@ -329,6 +441,7 @@ def calculate_ecoinvent_impacts(
             else:
                 factor_status = "available"
                 included_count += 1
+                quality_flags.add(str(factor_row.get("quality") or "unknown"))
                 impacts = {
                     "low": float(row["quantity_low"]) * float(factor),
                     "base": float(row["quantity_base"]) * float(factor),
@@ -368,6 +481,8 @@ def calculate_ecoinvent_impacts(
         status = "blocked_missing_impact_factors"
     elif pre_lca_decision in {"fail", "insufficient_data"}:
         status = "sensitivity_only"
+    elif quality_flags and all("screening_default" in quality for quality in quality_flags):
+        status = "screening_result"
     else:
         status = "conditional_result"
 
@@ -388,6 +503,7 @@ def calculate_ecoinvent_impacts(
         "included_factor_count": included_count,
         "missing_factor_count": len(missing_keys),
         "missing_mapping_keys": "; ".join(missing_keys),
+        "factor_quality_summary": "; ".join(sorted(quality_flags)),
     }
     return detailed_rows, summary
 
@@ -507,7 +623,7 @@ Generated: {dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
 
 Status: `{summary["lca_status"]}`
 
-This is an ecoinvent-linked conditional LCA workflow. It needs private ecoinvent-derived impact factors before final kg CO2e results can be trusted.
+This is an ecoinvent-linked conditional LCA workflow. If the status is `screening_result`, public screening factors were used. This gives a complete early estimate, but final publishable kg CO2e results still need private ecoinvent/openLCA/Brightway-derived impact factors.
 
 ## Main Numbers
 
@@ -519,6 +635,7 @@ This is an ecoinvent-linked conditional LCA workflow. It needs private ecoinvent
 | Base saving | {_fmt(summary["saving_kgco2e_base"] / 1000, 2)} tCO2e |
 | Base saving percent | {_fmt(summary["saving_percent_base"], 1)}% |
 | Missing factor keys | {summary["missing_mapping_keys"] or "none"} |
+| Factor quality | {summary.get("factor_quality_summary") or "none"} |
 
 ## Required Inventory Rows
 

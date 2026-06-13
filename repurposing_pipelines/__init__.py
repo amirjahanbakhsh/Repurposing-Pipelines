@@ -3,6 +3,7 @@
 __all__ = [
     "assumptions",
     "costs",
+    "dashboard_assets",
     "gates",
     "goldeneye",
     "hydraulics",

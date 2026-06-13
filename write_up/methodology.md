@@ -293,6 +293,8 @@ Each run produces three output types:
 - Markdown reports for human reading;
 - JSON trace files for audit and future web-app evidence panels.
 
+A first Streamlit dashboard has been added as a visual review layer. It reads the saved CSV, Markdown and JSON outputs, allows the user to select an NSTA pipeline number, highlights the route on a map, and displays the screening decision, technical checks, work-scope, cost status, LCA status and references. The dashboard is not a separate calculation method. It is a clearer interface to the same traceable model outputs.
+
 The trace file records:
 
 - source parameters;

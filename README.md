@@ -38,6 +38,7 @@ The repository is now organised by model layer rather than by file type.
 | `model_layers/06_screening_and_decision/` | Goldeneye benchmark, NSTA screening results, pre-LCA gate outputs. |
 | `model_layers/07_independent_validation/` | Validation plan, source register, dashboard, validation report. |
 | `references/` | Project-wide literature, standards, source acquisition notes, and citation tracking. |
+| `app/` | Streamlit dashboard for visual pipeline selection and result review. |
 | `repurposing_pipelines/` | Reusable Python model code. |
 | `scripts/` | PowerShell/Python commands to run the model. |
 | `tests/` | Automated checks. |
@@ -49,6 +50,26 @@ Open PowerShell in the project folder:
 
 ```powershell
 cd "C:\Users\aj52\Documents\Repurposing Pipelines"
+```
+
+Install dashboard packages once:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+Open the visual dashboard:
+
+```powershell
+python -m streamlit run app\streamlit_app.py
+```
+
+Then choose a pipeline number from the left panel, for example `PL774`.
+
+If the NSTA geometry is updated, rebuild the dashboard route file:
+
+```powershell
+python scripts\build_dashboard_assets.py
 ```
 
 Screen all model-ready NSTA hydrocarbon pipelines:

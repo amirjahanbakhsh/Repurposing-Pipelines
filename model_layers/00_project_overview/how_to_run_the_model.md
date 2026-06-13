@@ -16,6 +16,57 @@ cd "C:\Users\aj52\Documents\Repurposing Pipelines"
 
 You only need to do this once when you open a new PowerShell window.
 
+## Option 0: Open The Visual Dashboard
+
+Use this when you want to choose a pipeline visually and read the current model outputs without opening many CSV files.
+
+### Step 1: Install The Dashboard Packages
+
+Run this once:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+### Step 2: Start The Dashboard
+
+```powershell
+python -m streamlit run app\streamlit_app.py
+```
+
+PowerShell should show a local web address, usually:
+
+```text
+http://localhost:8501
+```
+
+Open that address in your browser.
+
+### Step 3: Choose A Pipeline
+
+Use the left panel to choose an NSTA pipeline number, for example:
+
+```text
+PL774
+```
+
+The dashboard shows:
+
+- the selected route on a map;
+- the main screening decision;
+- pipeline data and technical checks;
+- quantified refurbishment work-scope;
+- cost and LCA factor status;
+- traceability files and references.
+
+Important: the dashboard reads the saved model outputs. It does not replace the command-line scripts below. If you change assumptions or data, rerun the relevant model script, then refresh the dashboard.
+
+If the NSTA geometry file is updated and the map needs to be rebuilt, run:
+
+```powershell
+python scripts\build_dashboard_assets.py
+```
+
 ## Option 1: Run A Known Goldeneye Case
 
 Use this when you want to run one of the Goldeneye benchmark cases from the dissertation/poster.

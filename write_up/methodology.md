@@ -61,15 +61,15 @@ All values are labelled by source and data quality. Typical quality labels are:
 
 This is important because a value from a certificate or inspection record is not the same as a value assumed for screening.
 
-## 4. Benchmark And Reference Cases
+## 4. Development Checks And Scientific Reference Cases
 
-The methodology uses three types of reference case.
+The scientific methodology does not use student/dissertation outputs as validation evidence.
 
-First, Goldeneye dissertation and poster cases are used for reproduction. Reproduction means our model can reproduce the student/dissertation outputs. This is useful, but it is not independent validation because those outputs came from the student code.
+Earlier Goldeneye dissertation and poster outputs were used only during software development to check that the new implementation was not grossly inconsistent with the project starting point. This is an internal implementation check, similar to a regression check. It is not used to prove model validity, accuracy, novelty, or scientific correctness.
 
-Second, the broader literature is used to shape the model structure. The DNV/PTC requalification papers support treating CO2 pipeline reuse as a staged requalification process rather than a simple reuse calculation. These sources support the repurposing gate, phase screening, CO2 specification checks, corrosion warnings, fracture evidence needs, and work-scope outputs.
+The scientific basis comes from traceable public data, broader literature, industrial requalification practice, independent tools, sensitivity analysis and expert review. The DNV/PTC requalification papers support treating CO2 pipeline reuse as a staged requalification process rather than a simple reuse calculation. These sources support the repurposing gate, phase screening, CO2 specification checks, corrosion warnings, fracture evidence needs, and work-scope outputs.
 
-Third, independent tools and external references are planned for validation. These include REFPROP or CoolProp for CO2 properties, NETL CO2 transport cost tools for cost comparison, and ecoinvent/openLCA/Brightway for LCA.
+Independent tools and external references are planned for validation. These include REFPROP or CoolProp for CO2 properties, NETL CO2 transport cost tools for cost comparison, and ecoinvent/openLCA/Brightway for LCA.
 
 ## 5. Capacity Screening
 
@@ -88,7 +88,7 @@ Inputs include:
 - friction factor;
 - required annual CO2 flow.
 
-The current capacity model reproduces the equation form used in the student dissertation/poster workflow. It calculates an average pressure, estimates maximum mass flow rate, converts the flow to MtCO2/year, and compares it with the required design flow.
+The current capacity model uses a transparent steady-state screening equation. It calculates an average pressure, estimates maximum mass flow rate, converts the flow to MtCO2/year, and compares it with the required design flow.
 
 The average pressure is calculated as:
 
@@ -102,7 +102,7 @@ The design flow is calculated as:
 required_design_flow = required_project_flow / capacity_factor
 ```
 
-The current model uses supplied CO2 property values rather than a fully validated property package. Therefore, capacity results are suitable for screening and reproduction, but they still need independent validation against REFPROP, CoolProp, or another trusted CO2 property source.
+The current model uses supplied CO2 property values rather than a fully validated property package. Therefore, capacity results are suitable for screening, but they still need independent validation against REFPROP, CoolProp, or another trusted CO2 property source.
 
 ## 6. Corrosion Screening
 
@@ -202,7 +202,7 @@ This module is a screening bridge, not a final work pack. It does not yet estima
 
 ## 10. Cost Screening
 
-The cost module currently estimates a screening-level new-build benchmark and avoided capital cost. The first implementation uses cost components inherited from the Goldeneye/student benchmark and scales default NSTA cases by length.
+The cost module currently estimates a screening-level new-build benchmark and avoided capital cost. The first implementation uses an initial Goldeneye benchmark cost structure and scales default NSTA cases by length.
 
 Current outputs include:
 
@@ -268,21 +268,21 @@ LCA should not be used to rescue a technically weak pipeline. If the technical o
 
 ## 13. Validation Strategy
 
-The validation strategy separates reproduction from independent validation.
+The validation strategy separates internal software checks from scientific validation.
 
 | Level | Meaning |
 | --- | --- |
 | Level 0 | The code runs and unit tests pass. |
-| Level 1 | The model reproduces the dissertation/poster outputs. |
-| Level 2 | The model agrees with external references, tools, or published examples. |
+| Level 1 | Arithmetic, units and trace files are checked for internal consistency. |
+| Level 2 | The model agrees with external references, tools, or published examples within stated limits. |
 | Level 3 | A domain expert reviews the assumptions, limits, and interpretation. |
 
-This distinction is essential. Matching the student's dissertation result does not prove the model is correct, because the dissertation result came from student code. Independent validation is needed before making strong accuracy claims.
+Earlier dissertation/poster comparisons are retained only as development checks. They are useful for detecting transcription errors or large implementation differences from the initial project starting point, but they do not prove that the model is scientifically correct. Independent validation is needed before making strong accuracy claims.
 
 Current validation status:
 
 - unit tests are implemented for the main modules;
-- Goldeneye dissertation/poster reproduction is implemented;
+- Goldeneye dissertation/poster comparison exists as an internal development check only;
 - NSTA batch screening runs for 155 candidate records;
 - independent validation against REFPROP/CoolProp, NETL, and final ecoinvent/openLCA/Brightway results is still pending.
 
@@ -353,3 +353,4 @@ The next writing tasks are:
 2. Add a data-processing subsection for the NSTA extraction and completeness check.
 3. Add a validation-results subsection once REFPROP/CoolProp, NETL, and LCA checks are completed.
 4. Convert source IDs into the final reference style required by the target report or paper.
+5. Continue developing `write_up/journal_paper_draft.md` as the submission-facing manuscript text.

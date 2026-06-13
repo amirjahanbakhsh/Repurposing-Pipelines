@@ -1,10 +1,10 @@
-# Ecoinvent-Based Conditional LCA: nsta_pl774
+# Ecoinvent-Based Conditional LCA: goldeneye_dissertation
 
-Generated: 2026-06-13T14:40:23+00:00
+Generated: 2026-06-13T14:30:38+00:00
 
 ## Plain Result
 
-Status: `sensitivity_only`
+Status: `screening_result`
 
 This is an ecoinvent-linked conditional LCA workflow. If the status is `screening_result`, public screening factors were used. This gives a complete early estimate, but final publishable kg CO2e results still need private ecoinvent/openLCA/Brightway-derived impact factors.
 
@@ -12,11 +12,11 @@ This is an ecoinvent-linked conditional LCA workflow. If the status is `screenin
 
 | Item | Value |
 | --- | --- |
-| Pre-LCA decision | fail |
-| New-build base impact | 543,104.28 tCO2e |
-| Reuse base impact | 33,229.82 tCO2e |
-| Base saving | 509,874.46 tCO2e |
-| Base saving percent | 93.9% |
+| Pre-LCA decision | marginal |
+| New-build base impact | 64,326.19 tCO2e |
+| Reuse base impact | 4,741.51 tCO2e |
+| Base saving | 59,584.68 tCO2e |
+| Base saving percent | 92.6% |
 | Missing factor keys | none |
 | Factor quality | screening_default_unvalidated |
 
@@ -24,17 +24,17 @@ This is an ecoinvent-linked conditional LCA workflow. If the status is `screenin
 
 | Alternative | Inventory item | Mapping key | Base quantity | Unit | Factor status |
 | --- | --- | --- | --- | --- | --- |
-| new_build | pipeline_steel_mass | pipeline_steel | 251,303,454.37 | kg | available |
-| new_build | offshore_pipeline_construction | offshore_pipeline_construction | 404.97 | km | available |
-| reuse | refurbishment_steel | pipeline_steel | 12,565,172.72 | kg | available |
-| reuse | pipeline_refurbishment_activity | refurbishment_activity | 404.97 | km | available |
+| new_build | pipeline_steel_mass | pipeline_steel | 27,079,095.90 | kg | available |
+| new_build | offshore_pipeline_construction | offshore_pipeline_construction | 101.68 | km | available |
+| reuse | refurbishment_steel | pipeline_steel | 1,353,954.79 | kg | available |
+| reuse | pipeline_refurbishment_activity | refurbishment_activity | 101.68 | km | available |
 
 ## Output Files
 
-- `model_layers/05_lca/lca_inventory_nsta_pl774.csv`
-- `model_layers/05_lca/lca_impacts_nsta_pl774.csv`
-- `model_layers/05_lca/lca_results_nsta_pl774.csv`
-- `model_layers/05_lca/lca_trace_nsta_pl774.json`
+- `model_layers/05_lca/lca_inventory_goldeneye_dissertation.csv`
+- `model_layers/05_lca/lca_impacts_goldeneye_dissertation.csv`
+- `model_layers/05_lca/lca_results_goldeneye_dissertation.csv`
+- `model_layers/05_lca/lca_trace_goldeneye_dissertation.json`
 
 ## Private Factor File
 

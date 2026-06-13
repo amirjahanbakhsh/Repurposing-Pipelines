@@ -15,6 +15,7 @@ from repurposing_pipelines.lca import (  # noqa: E402
     build_pipeline_lca_inventory,
     calculate_ecoinvent_impacts,
     read_process_mapping,
+    screening_impact_factor_rows,
 )
 
 
@@ -120,6 +121,29 @@ class EcoinventLcaTest(unittest.TestCase):
         self.assertGreater(summary["new_build_kgco2e_base"], 0)
         self.assertGreater(summary["reuse_kgco2e_base"], 0)
         self.assertGreater(summary["saving_kgco2e_base"], 0)
+
+    def test_screening_factors_enable_screening_lca_result(self) -> None:
+        inventory_rows = build_pipeline_lca_inventory(
+            self.scenario,
+            process_mapping=self.process_mapping,
+        )
+        factors = {
+            row["mapping_key"]: {
+                **row,
+                "impact_factor_kgco2e_per_unit": float(row["impact_factor_kgco2e_per_unit"]),
+            }
+            for row in screening_impact_factor_rows()
+        }
+
+        _impact_rows, summary = calculate_ecoinvent_impacts(
+            inventory_rows,
+            factors,
+            pre_lca_decision="marginal",
+        )
+
+        self.assertEqual(summary["lca_status"], "screening_result")
+        self.assertEqual(summary["missing_factor_count"], 0)
+        self.assertEqual(summary["factor_quality_summary"], "screening_default_unvalidated")
 
 
 if __name__ == "__main__":

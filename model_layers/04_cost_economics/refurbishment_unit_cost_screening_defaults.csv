@@ -1,0 +1,11 @@
+cost_driver,unit,unit_cost_low_usd_2025,unit_cost_base_usd_2025,unit_cost_high_usd_2025,source,quality,notes
+engineering_study_each,study,100000,250000,500000,screening estimate from engineering work-package judgement; replace with project quote,screening_default_unvalidated,"Used for early CO2 composition, impurity and water/dew-point studies."
+cleaning_drying_per_km,km,25000,75000,150000,screening estimate for offshore cleaning/drying activity; replace with contractor estimate,screening_default_unvalidated,"Pipeline cleaning, drying and debris assessment per km."
+inspection_per_km,km,10000,25000,60000,screening estimate for ILI/MFL or equivalent inspection; replace with ILI quote,screening_default_unvalidated,Inspection campaign per km.
+material_testing_campaign,campaign,100000,300000,750000,screening estimate for material verification campaign; replace with laboratory/project estimate,screening_default_unvalidated,"Material certificates, sampling, testing and verification campaign."
+compatibility_review_each,review,50000,150000,300000,screening estimate for component compatibility engineering review,screening_default_unvalidated,"Valve, seal, coating and equipment compatibility review."
+fracture_decompression_study_each,study,150000,350000,800000,screening estimate for dense-phase fracture/decompression engineering study,screening_default_unvalidated,"Dense-phase fracture, decompression and blowdown study."
+wall_thickness_verification_per_km,km,5000,15000,35000,screening estimate for targeted wall-thickness validation,screening_default_unvalidated,Targeted wall-thickness verification per km.
+imr_plan_each,plan,100000,250000,500000,"screening estimate for CO2 monitoring, isolation and response plan",screening_default_unvalidated,"CO2 leak detection, isolation and IMR plan."
+replacement_steel_kg,kg,1.25,2.50,5.00,screening estimate for supplied/fabricated replacement steel; replace with supplier quote,screening_default_unvalidated,Replacement or refurbishment steel allowance per kg.
+unmapped_work_item,item,0,0,0,screening fallback,screening_default_unvalidated,Fallback is zero so future unmapped rows are visible but not silently costed.

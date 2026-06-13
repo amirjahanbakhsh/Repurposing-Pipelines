@@ -59,6 +59,13 @@ The dashboard shows:
 - cost and LCA factor status;
 - traceability files and references.
 
+To run the model from the dashboard:
+
+1. Choose an NSTA pipeline number in the left panel.
+2. Keep `Cost/LCA factors` as `screening` for a complete early estimate.
+3. Click `Run selected pipeline`.
+4. Wait until the dashboard says the selected-pipeline run completed.
+
 Important: the dashboard reads the saved model outputs. It does not replace the command-line scripts below. If you change assumptions or data, rerun the relevant model script, then refresh the dashboard.
 
 If the NSTA geometry file is updated and the map needs to be rebuilt, run:
@@ -391,10 +398,10 @@ This file is not uploaded to GitHub because it will contain ecoinvent-derived va
 
 ### Step 2: Run LCA For One NSTA Pipeline
 
-Example:
+Example using public screening factors:
 
 ```powershell
-python scripts\run_ecoinvent_lca.py --nsta-id PL774
+python scripts\run_ecoinvent_lca.py --nsta-id PL774 --factor-mode screening
 ```
 
 You can replace `PL774` with another NSTA pipeline number.
@@ -403,17 +410,25 @@ After you press Enter, expect PowerShell to print something like:
 
 ```text
 Scenario: nsta_pl774
-LCA status: blocked_missing_impact_factors
+LCA status: sensitivity_only
 Report: C:\Users\aj52\Documents\Repurposing Pipelines\model_layers\05_lca\lca_report_nsta_pl774.md
 ```
 
 The key line is:
 
 ```text
+LCA status: sensitivity_only
+```
+
+This is not an error. For `PL774`, it means the LCA has calculated with screening factors, but the upstream technical gate failed, so the result is only a sensitivity result.
+
+If you run with private factors and they are missing, you may see:
+
+```text
 LCA status: blocked_missing_impact_factors
 ```
 
-This is not an error. It means the model has built the inventory, but final kg CO2e values need the private impact factors.
+That means the model has built the inventory, but final kg CO2e values need the private impact factors.
 
 ### Step 3: Read The LCA Report
 
@@ -452,7 +467,7 @@ Fill this private file with unit rates when you have them. Do not upload it to G
 ### Step 2: Run One Pipeline
 
 ```powershell
-python scripts\run_refurbishment_cost.py --case nsta_pl774
+python scripts\run_refurbishment_cost.py --case nsta_pl774 --factor-mode screening
 ```
 
 ### Step 3: Read The Result
@@ -463,7 +478,15 @@ Open:
 model_layers/04_cost_economics/refurbishment_cost_report_nsta_pl774.md
 ```
 
-If the status is `blocked_missing_unit_costs`, the model has quantities but still needs private unit rates.
+If the status is `sensitivity_only`, the cost has calculated but the upstream technical gate failed.
+
+If the status is `screening_result`, the cost has calculated using public screening defaults.
+
+To use private project rates after filling the private CSV, run:
+
+```powershell
+python scripts\run_refurbishment_cost.py --case nsta_pl774 --factor-mode private
+```
 
 ## Option 6: Run The Independent Validation Checks
 

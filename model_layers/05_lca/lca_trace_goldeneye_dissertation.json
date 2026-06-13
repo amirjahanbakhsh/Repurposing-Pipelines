@@ -1,36 +1,36 @@
 {
-  "scenario": "goldeneye_poster",
+  "scenario": "goldeneye_dissertation",
   "model_version": "ecoinvent_factor_lca_v0.2",
   "summary": {
     "lca_model_version": "ecoinvent_factor_lca_v0.2",
     "lca_status": "screening_result",
     "pre_lca_decision": "marginal",
-    "new_build_kgco2e_low": 38291776.667393446,
-    "new_build_kgco2e_base": 45527257.64182955,
-    "new_build_kgco2e_high": 52844553.339300916,
-    "reuse_kgco2e_low": 3439788.83337,
-    "reuse_kgco2e_base": 3801562.882092,
-    "reuse_kgco2e_high": 4167427.6669660006,
-    "saving_kgco2e_low": 34124349.00042745,
-    "saving_kgco2e_base": 41725694.75973755,
-    "saving_kgco2e_high": 49404764.505930915,
-    "saving_percent_base": 91.64991901774641,
+    "new_build_kgco2e_low": 53098016.20055153,
+    "new_build_kgco2e_base": 64326191.79068986,
+    "new_build_kgco2e_high": 75752635.99682836,
+    "reuse_kgco2e_low": 4180100.810028,
+    "reuse_kgco2e_base": 4741509.5895340005,
+    "reuse_kgco2e_high": 5312831.799842,
+    "saving_kgco2e_low": 47785184.40070953,
+    "saving_kgco2e_base": 59584682.20115586,
+    "saving_kgco2e_high": 71572535.18680036,
+    "saving_percent_base": 92.62895959244356,
     "included_factor_count": 4,
     "missing_factor_count": 0,
     "missing_mapping_keys": "",
     "factor_quality_summary": "screening_default_unvalidated",
-    "scenario": "goldeneye_poster",
+    "scenario": "goldeneye_dissertation",
     "impact_factor_file": "model_layers/05_lca/lca_impact_factors_screening_defaults.csv"
   },
   "inventory_rows": [
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "new_build",
       "inventory_item": "pipeline_steel_mass",
       "mapping_key": "pipeline_steel",
-      "quantity_low": 14061888.333696723,
-      "quantity_base": 17679628.820914775,
-      "quantity_high": 21338276.669650458,
+      "quantity_low": 21465008.100275766,
+      "quantity_base": 27079095.89534493,
+      "quantity_high": 32792317.99841418,
       "unit": "kg",
       "include_in_total": "yes",
       "data_quality": "conditional_wall_thickness",
@@ -40,7 +40,7 @@
       "notes": "Steel mass for a new equivalent pipeline; wall-thickness uncertainty is included."
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "new_build",
       "inventory_item": "offshore_pipeline_construction",
       "mapping_key": "offshore_pipeline_construction",
@@ -56,13 +56,13 @@
       "notes": "New offshore pipeline construction activity."
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "reuse",
       "inventory_item": "refurbishment_steel",
       "mapping_key": "pipeline_steel",
-      "quantity_low": 703094.416685,
-      "quantity_base": 883981.441046,
-      "quantity_high": 1066913.833483,
+      "quantity_low": 1073250.405014,
+      "quantity_base": 1353954.794767,
+      "quantity_high": 1639615.899921,
       "unit": "kg",
       "include_in_total": "yes",
       "data_quality": "screening_calculation",
@@ -72,7 +72,7 @@
       "notes": "Replacement/refurbishment steel from quantified work-scope table."
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "reuse",
       "inventory_item": "pipeline_refurbishment_activity",
       "mapping_key": "refurbishment_activity",
@@ -88,7 +88,7 @@
       "notes": "Refurbishment activity package from quantified work-scope table."
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "reuse",
       "inventory_item": "decommissioned_pipeline",
       "mapping_key": "decommissioned_pipeline",
@@ -104,7 +104,7 @@
       "notes": "Not included by default; use for decommissioning or end-of-life sensitivity."
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "operation",
       "inventory_item": "electricity_operation",
       "mapping_key": "electricity",
@@ -122,13 +122,13 @@
   ],
   "impact_rows": [
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "new_build",
       "inventory_item": "pipeline_steel_mass",
       "mapping_key": "pipeline_steel",
-      "quantity_low": 14061888.333696723,
-      "quantity_base": 17679628.820914775,
-      "quantity_high": 21338276.669650458,
+      "quantity_low": 21465008.100275766,
+      "quantity_base": 27079095.89534493,
+      "quantity_high": 32792317.99841418,
       "unit": "kg",
       "include_in_total": "yes",
       "data_quality": "conditional_wall_thickness",
@@ -140,12 +140,12 @@
       "impact_category": "climate change",
       "impact_factor_kgco2e_per_unit": 2.0,
       "impact_factor_status": "available",
-      "impact_low_kgco2e": 28123776.667393446,
-      "impact_base_kgco2e": 35359257.64182955,
-      "impact_high_kgco2e": 42676553.339300916
+      "impact_low_kgco2e": 42930016.20055153,
+      "impact_base_kgco2e": 54158191.79068986,
+      "impact_high_kgco2e": 65584635.99682836
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "new_build",
       "inventory_item": "offshore_pipeline_construction",
       "mapping_key": "offshore_pipeline_construction",
@@ -168,13 +168,13 @@
       "impact_high_kgco2e": 10168000.0
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "reuse",
       "inventory_item": "refurbishment_steel",
       "mapping_key": "pipeline_steel",
-      "quantity_low": 703094.416685,
-      "quantity_base": 883981.441046,
-      "quantity_high": 1066913.833483,
+      "quantity_low": 1073250.405014,
+      "quantity_base": 1353954.794767,
+      "quantity_high": 1639615.899921,
       "unit": "kg",
       "include_in_total": "yes",
       "data_quality": "screening_calculation",
@@ -186,12 +186,12 @@
       "impact_category": "climate change",
       "impact_factor_kgco2e_per_unit": 2.0,
       "impact_factor_status": "available",
-      "impact_low_kgco2e": 1406188.83337,
-      "impact_base_kgco2e": 1767962.882092,
-      "impact_high_kgco2e": 2133827.666966
+      "impact_low_kgco2e": 2146500.810028,
+      "impact_base_kgco2e": 2707909.589534,
+      "impact_high_kgco2e": 3279231.799842
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "reuse",
       "inventory_item": "pipeline_refurbishment_activity",
       "mapping_key": "refurbishment_activity",
@@ -214,7 +214,7 @@
       "impact_high_kgco2e": 2033600.0000000002
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "reuse",
       "inventory_item": "decommissioned_pipeline",
       "mapping_key": "decommissioned_pipeline",
@@ -237,7 +237,7 @@
       "impact_high_kgco2e": 0.0
     },
     {
-      "scenario": "goldeneye_poster",
+      "scenario": "goldeneye_dissertation",
       "alternative": "operation",
       "inventory_item": "electricity_operation",
       "mapping_key": "electricity",

@@ -44,29 +44,33 @@ Open that address in your browser.
 
 ### Step 3: Choose A Pipeline
 
-Use the left panel to choose an NSTA pipeline number, for example:
+Use the dropdown to choose an NSTA pipeline number, for example:
 
 ```text
 PL774
 ```
 
+You can also switch to `Known CCS benchmark cases` and choose Goldeneye.
+
 The dashboard shows:
 
 - the selected route on a map;
 - the main screening decision;
-- pipeline data and technical checks;
+- pipeline data and missing-data warnings;
+- the input data and equation notes for each model layer;
+- gate-by-gate outcomes;
 - quantified refurbishment work-scope;
 - cost and LCA factor status;
 - traceability files and references.
 
 To run the model from the dashboard:
 
-1. Choose an NSTA pipeline number in the left panel.
+1. Choose a pipeline from the dropdown, or click a route on the map when available.
 2. Keep `Cost/LCA factors` as `screening` for a complete early estimate.
-3. Click `Run selected pipeline`.
-4. Wait until the dashboard says the selected-pipeline run completed.
+3. Click a layer button, such as `Run / refresh capacity layer`, `Run cost layer`, or `Run LCA layer`.
+4. Use `Run all layers` only when you want to refresh the full workflow.
 
-Important: the dashboard reads the saved model outputs. It does not replace the command-line scripts below. If you change assumptions or data, rerun the relevant model script, then refresh the dashboard.
+Important: the dashboard reads and updates saved model outputs. The command-line scripts below remain the auditable way to run the same workflow.
 
 If the NSTA geometry file is updated and the map needs to be rebuilt, run:
 

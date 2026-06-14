@@ -38,7 +38,7 @@ The repository is now organised by model layer rather than by file type.
 | `model_layers/06_screening_and_decision/` | Goldeneye benchmark, NSTA screening results, pre-LCA gate outputs. |
 | `model_layers/07_independent_validation/` | Validation plan, source register, dashboard, validation report. |
 | `references/` | Project-wide literature, standards, source acquisition notes, and citation tracking. |
-| `app/` | Streamlit dashboard for visual pipeline selection and result review. |
+| `app/` | Streamlit interface for visual pipeline selection and gate-by-gate model review. |
 | `repurposing_pipelines/` | Reusable Python model code. |
 | `scripts/` | PowerShell/Python commands to run the model. |
 | `tests/` | Automated checks. |
@@ -64,9 +64,9 @@ Open the visual dashboard:
 python -m streamlit run app\streamlit_app.py
 ```
 
-Then choose a pipeline number from the left panel, for example `PL774`.
+Then choose a pipeline from the dropdown or click a route on the map when map selection is available.
 
-In the dashboard you can also click `Run selected pipeline`. This runs screening, refurbishment cost, and LCA for the selected NSTA number.
+The dashboard shows the selected pipeline information, missing-data warnings, equations, input tables, and separate run buttons for the technical screening, cost, and LCA layers.
 
 If the NSTA geometry is updated, rebuild the dashboard route file:
 
@@ -172,7 +172,7 @@ Implemented so far:
 - quantified refurbishment work-scope CSVs for cost and LCA drivers;
 - private unit-cost factor workflow for refurbishment work-scope rows;
 - public screening unit-cost and LCA factor defaults for complete early runs;
-- first Streamlit working dashboard with selected-pipeline run button;
+- professional Streamlit MVP with map/dropdown selection and gate-by-gate layer panels;
 - general wall-thickness uncertainty for all screened pipelines;
 - first corrosion screening module;
 - first LCA proxy module and ecoinvent-linked conditional LCA workflow;

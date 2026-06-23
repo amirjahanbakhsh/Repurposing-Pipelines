@@ -160,6 +160,12 @@ The LCA files are now together:
 
 Important: licensed ecoinvent data are not committed to GitHub. The repo stores only shareable mapping metadata, templates, and model outputs.
 
+## Data Storage Rule
+
+All shareable project data and generated CSV, JSON, GeoJSON, and Markdown outputs should be kept locally and committed to GitHub. The full public NSTA route GeoJSON is stored with Git LFS because it is too large for normal GitHub file storage.
+
+The exception is licensed ecoinvent/openLCA/Brightway source data and private ecoinvent-derived impact factors. Those files stay local only; the repository stores shareable process mappings, blank templates, screening defaults, and reports instead.
+
 ## Current Status
 
 Implemented so far:

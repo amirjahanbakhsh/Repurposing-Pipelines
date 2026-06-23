@@ -1,16 +1,11 @@
-# Large generated geospatial extract.
-# Regenerate with:
-#   python scripts/extract_nsta_pipeline_data.py --include-geometry
-data/raw/nsta_pipeline_linear.geojson
-model_layers/01_data_foundation/nsta_pipeline_linear.geojson
-
-# Private LCA impact factors derived from licensed ecoinvent/openLCA/Brightway data.
+# Licensed ecoinvent/openLCA/Brightway data and private LCA impact factors.
+data/raw/ecoinvent*/
+data/raw/Ecoinvent*/
+model_layers/05_lca/ecoinvent*/
+model_layers/05_lca/Ecoinvent*/
 model_layers/05_lca/private/
 model_layers/05_lca/*private*.csv
-
-# Private unit-cost factors and commercial estimates.
-model_layers/04_cost_economics/private/
-model_layers/04_cost_economics/*private*.csv
+*.spold
 
 # Python cache files.
 __pycache__/

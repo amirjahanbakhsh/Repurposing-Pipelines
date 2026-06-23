@@ -1,0 +1,11 @@
+cost_driver,unit,unit_cost_low_usd_2025,unit_cost_base_usd_2025,unit_cost_high_usd_2025,source,quality,notes
+engineering_study_each,study,,,,private project estimate or literature benchmark,to_be_filled,"Used for CO2 composition, impurity and water/dew-point studies."
+cleaning_drying_per_km,km,,,,private project estimate or contractor benchmark,to_be_filled,"Pipeline cleaning, drying and debris assessment per km."
+inspection_per_km,km,,,,private project estimate or ILI benchmark,to_be_filled,ILI/MFL or equivalent inspection campaign per km.
+material_testing_campaign,campaign,,,,private project estimate or testing benchmark,to_be_filled,"Material certificates, sampling, testing and verification campaign."
+compatibility_review_each,review,,,,private project estimate or engineering benchmark,to_be_filled,"Valve, seal, coating and equipment compatibility review."
+fracture_decompression_study_each,study,,,,private project estimate or engineering benchmark,to_be_filled,"Dense-phase fracture, decompression and blowdown study."
+wall_thickness_verification_per_km,km,,,,private project estimate or inspection benchmark,to_be_filled,Targeted wall-thickness validation per km.
+imr_plan_each,plan,,,,private project estimate or operations benchmark,to_be_filled,"CO2 leak detection, isolation and IMR plan."
+replacement_steel_kg,kg,,,,private project estimate supplier quote or cost index,to_be_filled,Replacement or refurbishment steel allowance per kg.
+unmapped_work_item,item,,,,private project estimate,to_be_filled,Fallback for future work-scope items not yet mapped to a specific cost driver.

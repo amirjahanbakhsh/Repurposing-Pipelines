@@ -1,6 +1,6 @@
 # Refurbishment Unit-Cost Report
 
-Generated: 2026-06-13T14:30:24+00:00
+Generated: 2026-06-14T22:03:15+00:00
 
 Model version: `refurbishment_unit_cost_v0.2`
 

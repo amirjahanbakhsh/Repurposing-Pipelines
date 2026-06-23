@@ -1,0 +1,2944 @@
+[
+  {
+    "scenario": "nsta_pl762",
+    "pipeline_name": "SAGE PIPELINE",
+    "model_version": "pipeline_screen_nsta_v0.1",
+    "source_parameters": [
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "pipeline_name",
+        "value": "SAGE PIPELINE",
+        "unit": "text",
+        "source": "NSTA ranked candidate dataset",
+        "quality": "reported",
+        "notes": "NSTA pipeline number PL762; rank 3"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "pipeline_length_km",
+        "value": "323.73767187498",
+        "unit": "km",
+        "source": "NSTA ranked candidate dataset",
+        "quality": "reported",
+        "notes": "NSTA LENGTH_M converted to km in the ranked candidate file"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "outer_diameter_in",
+        "value": "29.996062992125985",
+        "unit": "in",
+        "source": "NSTA ranked candidate dataset",
+        "quality": "derived",
+        "notes": "Estimated as internal diameter plus two times wall thickness"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "inner_diameter_in",
+        "value": "28.208661417322837",
+        "unit": "in",
+        "source": "NSTA ranked candidate dataset",
+        "quality": "derived",
+        "notes": "NSTA internal diameter converted from mm to inches"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "nominal_wall_thickness_mm",
+        "value": "22.7",
+        "unit": "mm",
+        "source": "NSTA ranked candidate dataset",
+        "quality": "reported",
+        "notes": "NSTA wall thickness"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "inlet_pressure_psia",
+        "value": "2513.6961698633927",
+        "unit": "psia",
+        "source": "NSTA ranked candidate dataset",
+        "quality": "derived",
+        "notes": "NSTA max operating pressure in barg converted to approximate psia"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "outlet_pressure_psia",
+        "value": "1100.0",
+        "unit": "psia",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Default outlet pressure; clipped to 80 percent of inlet if needed"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "historical_corrosion_years",
+        "value": "34",
+        "unit": "years",
+        "source": "NSTA ranked candidate dataset",
+        "quality": "derived",
+        "notes": "Assessment year minus NSTA start year, or fallback if start date is missing"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "minimum_wall_thickness_mm",
+        "value": "22.165714080083532",
+        "unit": "mm",
+        "source": "simple_barlow_screening",
+        "quality": "derived",
+        "notes": "Approximate t = P * OD / (2 * SMYS * design factor); screening only"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "start_operation_year",
+        "value": "1992",
+        "unit": "year",
+        "source": "NSTA ranked candidate dataset",
+        "quality": "reported",
+        "notes": "Year parsed from NSTA start date"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "transport_temperature_c",
+        "value": "12",
+        "unit": "degC",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Default CO2 transport temperature used until project-specific temperature is known"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "capacity_factor",
+        "value": "0.85",
+        "unit": "fraction",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Used to convert annual project flow into design flow"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "required_project_flow_mtpa",
+        "value": "5.0",
+        "unit": "MtCO2/year",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Default target flow for early CCS screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "molecular_weight_co2_g_per_mol",
+        "value": "44.01",
+        "unit": "g/mol",
+        "source": "CO2_reference",
+        "quality": "reported",
+        "notes": "Molecular weight of pure CO2"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "compressibility_factor_z",
+        "value": "0.204449",
+        "unit": "dimensionless",
+        "source": "goldeneye_benchmark_default",
+        "quality": "assumed",
+        "notes": "Goldeneye benchmark value reused for first NSTA screening until properties module is added"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "density_kg_per_m3",
+        "value": "904.0128",
+        "unit": "kg/m3",
+        "source": "goldeneye_benchmark_default",
+        "quality": "assumed",
+        "notes": "Not currently used directly by the capacity equation but retained for traceability"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "viscosity_micro_pa_s",
+        "value": "92.6516",
+        "unit": "microPa.s",
+        "source": "goldeneye_benchmark_default",
+        "quality": "assumed",
+        "notes": "Goldeneye benchmark value reused for first NSTA screening until properties module is added"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "fanning_friction_factor",
+        "value": "0.003",
+        "unit": "dimensionless",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Simple default friction factor for early screening only"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "pipe_grade",
+        "value": "X60",
+        "unit": "text",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Default grade used only to estimate minimum wall thickness"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "historical_corrosion_rate_mm_per_year",
+        "value": "0.05",
+        "unit": "mm/year",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Simple historical corrosion placeholder for first screening only"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "future_co2_corrosion_rate_mm_per_year",
+        "value": "0.10",
+        "unit": "mm/year",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Simple future CO2 corrosion placeholder for first screening only"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "future_co2_corrosion_rate_low_mm_per_year",
+        "value": "0.02",
+        "unit": "mm/year",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Optimistic dry-CO2 corrosion sensitivity for batch screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "future_co2_corrosion_rate_high_mm_per_year",
+        "value": "0.20",
+        "unit": "mm/year",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Conservative dry-CO2 corrosion sensitivity for batch screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "nominal_wall_thickness_uncertainty_fraction",
+        "value": "0.10",
+        "unit": "fraction",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Wall thickness uncertainty range for NSTA records before inspection evidence is available"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "minimum_wall_thickness_uncertainty_fraction",
+        "value": "0.30",
+        "unit": "fraction",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Minimum wall uncertainty range for screening until design-code basis is verified"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "historical_wall_loss_uncertainty_fraction",
+        "value": "0.25",
+        "unit": "fraction",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Historical wall loss uncertainty range for screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "co2_water_content_ppmv",
+        "value": "50",
+        "unit": "ppmv",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Placeholder dry CO2 water content for corrosion screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "co2_water_spec_limit_ppmv",
+        "value": "500",
+        "unit": "ppmv",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Placeholder water specification limit for corrosion screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "water_dew_point_margin_c",
+        "value": "10",
+        "unit": "degC",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "target_co2_phase",
+        "value": "dense_phase",
+        "unit": "text",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Default CO2 phase for first screening; replace with project-specific gas/dense phase decision"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "co2_composition_known",
+        "value": "no",
+        "unit": "yes/no",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume detailed CO2 composition is not yet known until source-stream data are supplied"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "material_certificates_available",
+        "value": "unknown",
+        "unit": "status",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume material certificates are not yet verified for public-data screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "fracture_toughness_basis",
+        "value": "unknown",
+        "unit": "status",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume fracture toughness basis is not yet verified for public-data screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "ili_mfl_available",
+        "value": "unknown",
+        "unit": "status",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume latest ILI/MFL evidence is not yet available for public-data screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "component_compatibility_screened",
+        "value": "no",
+        "unit": "yes/no",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume valves seals coatings and equipment have not yet been screened for CO2 compatibility"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "section_replacement_fraction",
+        "value": "0",
+        "unit": "fraction",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "No specific pipe replacement fraction is assumed until inspection or requalification evidence requires it"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "steel_density_kg_per_m3",
+        "value": "7850",
+        "unit": "kg/m3",
+        "source": "engineering_reference",
+        "quality": "assumed",
+        "notes": "Carbon steel density used for first LCA inventory calculation"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "lca_refurbishment_steel_fraction",
+        "value": "0.05",
+        "unit": "fraction",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "lca_pipeline_steel_factor_kgco2e_per_kg",
+        "value": "2.0",
+        "unit": "kgCO2e/kg",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "lca_new_build_construction_factor_kgco2e_per_km",
+        "value": "100000",
+        "unit": "kgCO2e/km",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "lca_refurbishment_activity_factor_kgco2e_per_km",
+        "value": "20000",
+        "unit": "kgCO2e/km",
+        "source": "screening_lca_proxy",
+        "quality": "assumed",
+        "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "contingency_fraction",
+        "value": "0.10",
+        "unit": "fraction",
+        "source": "screening_default",
+        "quality": "assumed",
+        "notes": "Project contingency factor"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "cost_material_usd_2025",
+        "value": "172507391.36516422",
+        "unit": "USD",
+        "source": "scaled_from_goldeneye_benchmark",
+        "quality": "estimated",
+        "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "cost_labor_usd_2025",
+        "value": "349702286.44117934",
+        "unit": "USD",
+        "source": "scaled_from_goldeneye_benchmark",
+        "quality": "estimated",
+        "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "cost_row_damages_usd_2025",
+        "value": "21294151.02076819",
+        "unit": "USD",
+        "source": "scaled_from_goldeneye_benchmark",
+        "quality": "estimated",
+        "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "cost_misc_usd_2025",
+        "value": "109385196.49034317",
+        "unit": "USD",
+        "source": "scaled_from_goldeneye_benchmark",
+        "quality": "estimated",
+        "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "cost_surge_tank_usd_2025",
+        "value": "7792952.870869219",
+        "unit": "USD",
+        "source": "scaled_from_goldeneye_benchmark",
+        "quality": "estimated",
+        "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "cost_control_system_usd_2025",
+        "value": "700617.6085145675",
+        "unit": "USD",
+        "source": "scaled_from_goldeneye_benchmark",
+        "quality": "estimated",
+        "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+      },
+      {
+        "scenario": "nsta_pl762",
+        "parameter": "cost_booster_station_usd_2025",
+        "value": "0.0",
+        "unit": "USD",
+        "source": "scaled_from_goldeneye_benchmark",
+        "quality": "estimated",
+        "notes": "No booster station assumed in the first screening default; scaled by NSTA length/reference length only (scale factor 3.184)"
+      }
+    ],
+    "refurbishment_work_scope_rows": [
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "confirm_co2_composition_and_impurities",
+        "work_item_name": "Confirm CO2 composition and impurities",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "study",
+        "cost_include": "yes",
+        "cost_driver": "engineering_study_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Required before corrosion, phase, material and operating checks can be finalised.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "confirm_water_limit_and_dew_point",
+        "work_item_name": "Confirm water limit and dew-point basis",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "study",
+        "cost_include": "yes",
+        "cost_driver": "engineering_study_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Dry CO2 specification and water-dew-point margin control corrosion risk.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "cleaning_drying_and_debris_assessment",
+        "work_item_name": "Cleaning, drying and debris assessment",
+        "work_stage": "field_execution",
+        "quantity_low": 323.737672,
+        "quantity_base": 323.737672,
+        "quantity_high": 323.737672,
+        "unit": "km",
+        "cost_include": "yes",
+        "cost_driver": "cleaning_drying_per_km",
+        "lca_include": "included_in_refurbishment_package",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "screening_driver",
+        "basis": "Pipeline preparation is needed where corrosion, debris or dry-CO2 readiness remains uncertain.",
+        "reference_ids": "REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "ili_mfl_or_equivalent_inspection",
+        "work_item_name": "ILI/MFL or equivalent inspection campaign",
+        "work_stage": "inspection",
+        "quantity_low": 323.737672,
+        "quantity_base": 323.737672,
+        "quantity_high": 323.737672,
+        "unit": "km",
+        "cost_include": "yes",
+        "cost_driver": "inspection_per_km",
+        "lca_include": "included_in_refurbishment_package",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "screening_driver",
+        "basis": "Inspection evidence is needed before reuse can be treated as a serious option.",
+        "reference_ids": "REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR; REF_BURKINSHAW_GALLON_CARVELL_HUSSAIN_2024_HYDROGEN_DATA_EVIDENCE",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "material_certificates_or_testing",
+        "work_item_name": "Material certificates or material testing",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "campaign",
+        "cost_include": "yes",
+        "cost_driver": "material_testing_campaign",
+        "lca_include": "included_in_refurbishment_package",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "screening_driver",
+        "basis": "Material evidence is needed for pipe, weld and fracture checks.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "component_compatibility_review",
+        "work_item_name": "Component compatibility review",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "review",
+        "cost_include": "yes",
+        "cost_driver": "compatibility_review_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Valves, seals, coatings and equipment exposed to CO2 service need compatibility review.",
+        "reference_ids": "REF_KASS_ET_AL_2023_MATERIAL_COMPATIBILITY",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "fracture_and_decompression_screen",
+        "work_item_name": "Fracture and decompression screen",
+        "work_stage": "requalification_study",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "study",
+        "cost_include": "yes",
+        "cost_driver": "fracture_decompression_study_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Dense-phase or high-pressure CO2 reuse needs fracture and decompression evidence.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "wall_thickness_verification",
+        "work_item_name": "Wall-thickness verification",
+        "work_stage": "inspection",
+        "quantity_low": 323.737672,
+        "quantity_base": 323.737672,
+        "quantity_high": 323.737672,
+        "unit": "km",
+        "cost_include": "yes",
+        "cost_driver": "wall_thickness_verification_per_km",
+        "lca_include": "included_in_refurbishment_package",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "screening_driver",
+        "basis": "Wall-thickness uncertainty must be reduced before detailed reuse decisions.",
+        "reference_ids": "REF_BURKINSHAW_GALLON_CARVELL_HUSSAIN_2024_HYDROGEN_DATA_EVIDENCE; REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "co2_leak_detection_isolation_and_imr_plan",
+        "work_item_name": "CO2 leak detection, isolation and IMR plan",
+        "work_stage": "operations_readiness",
+        "quantity_low": 1.0,
+        "quantity_base": 1.0,
+        "quantity_high": 1.0,
+        "unit": "plan",
+        "cost_include": "yes",
+        "cost_driver": "imr_plan_each",
+        "lca_include": "no",
+        "lca_mapping_key": "not_applicable",
+        "data_quality": "screening_driver",
+        "basis": "Reuse needs an operating integrity, leak detection and repair plan before operation.",
+        "reference_ids": "REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR",
+        "notes": "Quantity is a work driver for cost/LCA scoping, not a contractor estimate. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "replacement_or_refurbishment_steel",
+        "work_item_name": "Replacement or refurbishment steel allowance",
+        "work_stage": "field_execution",
+        "quantity_low": 6010040.192473,
+        "quantity_base": 6698392.44535,
+        "quantity_high": 7390858.700079,
+        "unit": "kg",
+        "cost_include": "yes",
+        "cost_driver": "replacement_steel_kg",
+        "lca_include": "yes",
+        "lca_mapping_key": "pipeline_steel",
+        "data_quality": "screening_calculation",
+        "basis": "Calculated as new-build pipe steel mass multiplied by the gate-recommended refurbishment steel fraction.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING",
+        "notes": "Uses refurbishment fraction 0.0500; replace with inspection-based repair quantities when available. Conservative remaining life is non-positive; review before reuse."
+      },
+      {
+        "scenario": "nsta_pl762",
+        "pipeline_name": "SAGE PIPELINE",
+        "gate_status": "fail",
+        "gate_confidence": "low",
+        "work_item_id": "refurbishment_activity_package",
+        "work_item_name": "Refurbishment activity package",
+        "work_stage": "aggregate_lca_package",
+        "quantity_low": 323.737672,
+        "quantity_base": 323.737672,
+        "quantity_high": 323.737672,
+        "unit": "km",
+        "cost_include": "no",
+        "cost_driver": "not_for_direct_cost_sum",
+        "lca_include": "yes",
+        "lca_mapping_key": "refurbishment_activity",
+        "data_quality": "aggregate_screening_package",
+        "basis": "Aggregate LCA package for inspection, cleaning, drying, repair and recommissioning until detailed process factors are split.",
+        "reference_ids": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR",
+        "notes": "Use this as the current LCA package row. Individual work items show what the package should later be split into. Conservative remaining life is non-positive; review before reuse."
+      }
+    ],
+    "module_results": [
+      {
+        "module": "capacity",
+        "model_version": "capacity_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "pipeline_length_km",
+            "value": 323.73767187498,
+            "unit": "km",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "NSTA LENGTH_M converted to km in the ranked candidate file"
+          },
+          {
+            "name": "inner_diameter_in",
+            "value": 28.208661417322837,
+            "unit": "in",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "NSTA internal diameter converted from mm to inches"
+          },
+          {
+            "name": "inlet_pressure_psia",
+            "value": 2513.6961698633927,
+            "unit": "psia",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "NSTA max operating pressure in barg converted to approximate psia"
+          },
+          {
+            "name": "outlet_pressure_psia",
+            "value": 1100.0,
+            "unit": "psia",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Default outlet pressure; clipped to 80 percent of inlet if needed"
+          },
+          {
+            "name": "transport_temperature_c",
+            "value": 12.0,
+            "unit": "degC",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Default CO2 transport temperature used until project-specific temperature is known"
+          },
+          {
+            "name": "molecular_weight_co2_g_per_mol",
+            "value": 44.01,
+            "unit": "g/mol",
+            "source": "CO2_reference",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Molecular weight of pure CO2"
+          },
+          {
+            "name": "compressibility_factor_z",
+            "value": 0.204449,
+            "unit": "dimensionless",
+            "source": "goldeneye_benchmark_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Goldeneye benchmark value reused for first NSTA screening until properties module is added"
+          },
+          {
+            "name": "viscosity_micro_pa_s",
+            "value": 92.6516,
+            "unit": "microPa.s",
+            "source": "goldeneye_benchmark_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Goldeneye benchmark value reused for first NSTA screening until properties module is added"
+          },
+          {
+            "name": "fanning_friction_factor",
+            "value": 0.003,
+            "unit": "dimensionless",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Simple default friction factor for early screening only"
+          },
+          {
+            "name": "required_project_flow_mtpa",
+            "value": 5.0,
+            "unit": "MtCO2/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "capacity"
+            ],
+            "notes": "Default target flow for early CCS screening"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "inner_diameter_m",
+            "value": 0.7165,
+            "unit": "m",
+            "quality": "calculated",
+            "used_by": [
+              "capacity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "average_pressure_mpa",
+            "value": 13.093297602544949,
+            "unit": "MPa",
+            "quality": "calculated",
+            "used_by": [
+              "capacity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_kg_per_s",
+            "value": 813.1026478060799,
+            "unit": "kg/s",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_mtpa",
+            "value": 25.659568118405147,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_capacity_mtpa",
+            "value": null,
+            "unit": "MtCO2/year",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_delta_mtpa",
+            "value": null,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "required_design_mtpa",
+            "value": 5.882352941176471,
+            "unit": "MtCO2/year",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "capacity_suitable",
+            "value": "yes",
+            "unit": "yes/no",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reynolds_number",
+            "value": 15595035.785752364,
+            "unit": "dimensionless",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "capacity_factor",
+            "value": 0.85,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Used to convert annual project flow into design flow"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "CO2 properties are currently supplied by the benchmark assumptions; CoolProp/REFPROP validation is still required.",
+            "affected_modules": [
+              "capacity"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "average_pressure",
+            "formula": "(2/3) * (P_in + P_out - P_in * P_out / (P_in + P_out))",
+            "inputs": [
+              "inlet_pressure_psia",
+              "outlet_pressure_psia"
+            ],
+            "result_name": "average_pressure_mpa",
+            "notes": ""
+          },
+          {
+            "name": "capacity",
+            "formula": "sqrt((pi^2 * D^5 * MW * (P_in^2 - P_out^2)) / (64 * f * Z * R * T * L))",
+            "inputs": [
+              "inner_diameter_in",
+              "pipeline_length_km",
+              "inlet_pressure_psia",
+              "outlet_pressure_psia",
+              "transport_temperature_c",
+              "compressibility_factor_z",
+              "fanning_friction_factor",
+              "molecular_weight_co2_g_per_mol"
+            ],
+            "result_name": "capacity_mtpa",
+            "notes": "This reproduces the dissertation/poster equation form."
+          },
+          {
+            "name": "required_design_flow",
+            "formula": "required_project_flow_mtpa / capacity_factor",
+            "inputs": [
+              "required_project_flow_mtpa",
+              "capacity_factor"
+            ],
+            "result_name": "required_design_mtpa",
+            "notes": ""
+          },
+          {
+            "name": "reynolds_number",
+            "formula": "4 * mass_flow / (pi * viscosity * inner_diameter)",
+            "inputs": [
+              "capacity_kg_per_s",
+              "viscosity_micro_pa_s",
+              "inner_diameter_m"
+            ],
+            "result_name": "reynolds_number",
+            "notes": ""
+          }
+        ]
+      },
+      {
+        "module": "corrosion",
+        "model_version": "corrosion_screening_v0.1",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Simple future CO2 corrosion placeholder for first screening only"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.02,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Optimistic dry-CO2 corrosion sensitivity for batch screening"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Conservative dry-CO2 corrosion sensitivity for batch screening"
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Placeholder dry CO2 water content for corrosion screening"
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Placeholder water specification limit for corrosion screening"
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "corrosion"
+            ],
+            "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "corrosion_rate_low_mm_per_year",
+            "value": 0.02,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_rate_base_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_rate_high_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "quality": "assumed",
+            "used_by": [
+              "corrosion",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_risk_level",
+            "value": "medium",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_basis",
+            "value": "The high corrosion-rate case is material for remaining-life sensitivity.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Simple future CO2 corrosion placeholder for first screening only"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.02,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Optimistic dry-CO2 corrosion sensitivity for batch screening"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Conservative dry-CO2 corrosion sensitivity for batch screening"
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Placeholder dry CO2 water content for corrosion screening"
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Placeholder water specification limit for corrosion screening"
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Corrosion model is a screening dry-CO2 risk check. A final model needs stream composition, water specification, operating envelope, inspection evidence, and specialist review.",
+            "affected_modules": [
+              "corrosion",
+              "integrity",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "corrosion_rate_range",
+            "formula": "low/base/high corrosion rates are read from scenario assumptions",
+            "inputs": [
+              "future_co2_corrosion_rate_low_mm_per_year",
+              "future_co2_corrosion_rate_mm_per_year",
+              "future_co2_corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "corrosion_rate_low/base/high_mm_per_year",
+            "notes": "Used for remaining-life uncertainty."
+          },
+          {
+            "name": "dry_co2_risk",
+            "formula": "high if water content exceeds limit or dew point margin is negative; medium if water evidence is missing or high corrosion rate is material; otherwise low",
+            "inputs": [
+              "co2_water_content_ppmv",
+              "co2_water_spec_limit_ppmv",
+              "water_dew_point_margin_c",
+              "corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "corrosion_risk_level",
+            "notes": "Screening rule, not a detailed corrosion prediction model."
+          }
+        ]
+      },
+      {
+        "module": "integrity",
+        "model_version": "integrity_screening_v0.2",
+        "status": "fail",
+        "inputs": [
+          {
+            "name": "nominal_wall_thickness_mm",
+            "value": 22.7,
+            "unit": "mm",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "NSTA wall thickness"
+          },
+          {
+            "name": "minimum_wall_thickness_mm",
+            "value": 22.165714080083532,
+            "unit": "mm",
+            "source": "simple_barlow_screening",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Approximate t = P * OD / (2 * SMYS * design factor); screening only"
+          },
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Simple future CO2 corrosion placeholder for first screening only"
+          },
+          {
+            "name": "historical_corrosion_rate_mm_per_year",
+            "value": 0.05,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Simple historical corrosion placeholder for first screening only"
+          },
+          {
+            "name": "historical_corrosion_years",
+            "value": 34.0,
+            "unit": "years",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Assessment year minus NSTA start year, or fallback if start date is missing"
+          },
+          {
+            "name": "nominal_wall_thickness_uncertainty_fraction",
+            "value": 0.1,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Wall thickness uncertainty range for NSTA records before inspection evidence is available"
+          },
+          {
+            "name": "minimum_wall_thickness_uncertainty_fraction",
+            "value": 0.3,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Minimum wall uncertainty range for screening until design-code basis is verified"
+          },
+          {
+            "name": "historical_wall_loss_uncertainty_fraction",
+            "value": 0.25,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Historical wall loss uncertainty range for screening"
+          },
+          {
+            "name": "future_co2_corrosion_rate_low_mm_per_year",
+            "value": 0.02,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Optimistic dry-CO2 corrosion sensitivity for batch screening"
+          },
+          {
+            "name": "future_co2_corrosion_rate_high_mm_per_year",
+            "value": 0.2,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "integrity"
+            ],
+            "notes": "Conservative dry-CO2 corrosion sensitivity for batch screening"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "historical_wall_loss_mm",
+            "value": 1.7000000000000002,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": "Calculated from historical corrosion rate and historical years."
+          },
+          {
+            "name": "current_wall_thickness_mm",
+            "value": 21.0,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "minimum_wall_thickness_mm",
+            "value": 22.165714080083532,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_thickness_mm",
+            "value": -1.1657140800835322,
+            "unit": "mm",
+            "quality": "calculated",
+            "used_by": [
+              "integrity",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "quality": "assumed",
+            "used_by": [
+              "integrity"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_years",
+            "value": 0,
+            "unit": "years",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_low_years",
+            "value": 0,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": "Conservative wall-thickness and high-corrosion case."
+          },
+          {
+            "name": "remaining_life_base_years",
+            "value": 0,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_high_years",
+            "value": 408.9500071970766,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "validation"
+            ],
+            "notes": "Optimistic wall-thickness and low-corrosion case."
+          },
+          {
+            "name": "remaining_life_range_width_years",
+            "value": 408.9500071970766,
+            "unit": "years",
+            "quality": "screening_estimate",
+            "used_by": [
+              "validation",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_low_mm",
+            "value": -10.510428304108594,
+            "unit": "mm",
+            "quality": "screening_estimate",
+            "used_by": [
+              "integrity",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "available_wall_high_mm",
+            "value": 8.179000143941533,
+            "unit": "mm",
+            "quality": "screening_estimate",
+            "used_by": [
+              "integrity",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "corrosion_risk_level",
+            "value": "medium",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_remaining_life_years",
+            "value": null,
+            "unit": "years",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_delta_years",
+            "value": null,
+            "unit": "years",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "future_co2_corrosion_rate_mm_per_year",
+            "value": 0.1,
+            "unit": "mm/year",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Simple future CO2 corrosion placeholder for first screening only"
+          },
+          {
+            "name": "nominal_wall_thickness_uncertainty_fraction",
+            "value": 0.1,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Wall thickness uncertainty range for NSTA records before inspection evidence is available"
+          },
+          {
+            "name": "minimum_wall_thickness_uncertainty_fraction",
+            "value": 0.3,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Minimum wall uncertainty range for screening until design-code basis is verified"
+          },
+          {
+            "name": "historical_wall_loss_uncertainty_fraction",
+            "value": 0.25,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Historical wall loss uncertainty range for screening"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Integrity result is a screening estimate only; inspection records, material grade checks, defects, and requalification are still needed.",
+            "affected_modules": [
+              "integrity",
+              "pre_lca_gate"
+            ]
+          },
+          {
+            "level": "high",
+            "message": "Available wall thickness is zero or negative.",
+            "affected_modules": [
+              "integrity",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "historical_wall_loss",
+            "formula": "reported_historical_wall_loss_mm, if available; otherwise historical_corrosion_rate_mm_per_year * historical_corrosion_years",
+            "inputs": [
+              "reported_historical_wall_loss_mm",
+              "historical_corrosion_rate_mm_per_year",
+              "historical_corrosion_years"
+            ],
+            "result_name": "historical_wall_loss_mm",
+            "notes": ""
+          },
+          {
+            "name": "current_wall_thickness",
+            "formula": "nominal_wall_thickness_mm - historical_wall_loss_mm",
+            "inputs": [
+              "nominal_wall_thickness_mm",
+              "historical_wall_loss_mm"
+            ],
+            "result_name": "current_wall_thickness_mm",
+            "notes": ""
+          },
+          {
+            "name": "available_wall_thickness",
+            "formula": "current_wall_thickness_mm - minimum_wall_thickness_mm",
+            "inputs": [
+              "current_wall_thickness_mm",
+              "minimum_wall_thickness_mm"
+            ],
+            "result_name": "available_wall_thickness_mm",
+            "notes": ""
+          },
+          {
+            "name": "remaining_life",
+            "formula": "available_wall_thickness_mm / future_co2_corrosion_rate_mm_per_year",
+            "inputs": [
+              "available_wall_thickness_mm",
+              "future_co2_corrosion_rate_mm_per_year"
+            ],
+            "result_name": "remaining_life_years",
+            "notes": ""
+          },
+          {
+            "name": "remaining_life_uncertainty",
+            "formula": "conservative life = low wall / high corrosion; optimistic life = high wall / low corrosion",
+            "inputs": [
+              "nominal_wall_thickness_uncertainty_fraction",
+              "minimum_wall_thickness_uncertainty_fraction",
+              "historical_wall_loss_uncertainty_fraction",
+              "corrosion_rate_low_mm_per_year",
+              "corrosion_rate_high_mm_per_year"
+            ],
+            "result_name": "remaining_life_low_years; remaining_life_high_years",
+            "notes": "Screening uncertainty band for limited or conflicting wall evidence."
+          }
+        ]
+      },
+      {
+        "module": "cost",
+        "model_version": "cost_screening_v0.2",
+        "status": "pass",
+        "inputs": [
+          {
+            "name": "cost_material_usd_2025",
+            "value": 172507391.36516422,
+            "unit": "USD",
+            "source": "scaled_from_goldeneye_benchmark",
+            "quality": "estimated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+          },
+          {
+            "name": "cost_labor_usd_2025",
+            "value": 349702286.44117934,
+            "unit": "USD",
+            "source": "scaled_from_goldeneye_benchmark",
+            "quality": "estimated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+          },
+          {
+            "name": "cost_row_damages_usd_2025",
+            "value": 21294151.02076819,
+            "unit": "USD",
+            "source": "scaled_from_goldeneye_benchmark",
+            "quality": "estimated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+          },
+          {
+            "name": "cost_misc_usd_2025",
+            "value": 109385196.49034317,
+            "unit": "USD",
+            "source": "scaled_from_goldeneye_benchmark",
+            "quality": "estimated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+          },
+          {
+            "name": "cost_surge_tank_usd_2025",
+            "value": 7792952.870869219,
+            "unit": "USD",
+            "source": "scaled_from_goldeneye_benchmark",
+            "quality": "estimated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+          },
+          {
+            "name": "cost_control_system_usd_2025",
+            "value": 700617.6085145675,
+            "unit": "USD",
+            "source": "scaled_from_goldeneye_benchmark",
+            "quality": "estimated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Reference cost component scaled by length for NSTA screening; scaled by NSTA length/reference length only (scale factor 3.184)"
+          },
+          {
+            "name": "cost_booster_station_usd_2025",
+            "value": 0.0,
+            "unit": "USD",
+            "source": "scaled_from_goldeneye_benchmark",
+            "quality": "estimated",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "No booster station assumed in the first screening default; scaled by NSTA length/reference length only (scale factor 3.184)"
+          },
+          {
+            "name": "contingency_fraction",
+            "value": 0.1,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "cost"
+            ],
+            "notes": "Project contingency factor"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "cost_subtotal_usd_2025",
+            "value": 661382595.7968388,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_contingency_usd_2025",
+            "value": 66138259.57968388,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "pre_lca_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_total_usd_2025",
+            "value": 727520855.3765227,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "reported_total_capex_usd_2025",
+            "value": null,
+            "unit": "USD 2025",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "cost_delta_usd_2025",
+            "value": null,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_reference_total_capex_usd_2025",
+            "value": null,
+            "unit": "USD 2025",
+            "quality": "reported",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_delta_usd_2025",
+            "value": null,
+            "unit": "USD 2025",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_delta_percent",
+            "value": null,
+            "unit": "%",
+            "quality": "calculated",
+            "used_by": [
+              "validation"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_validation_status",
+            "value": "not_supplied",
+            "unit": "status",
+            "quality": "calculated",
+            "used_by": [
+              "validation",
+              "report"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "contingency_fraction",
+            "value": 0.1,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Project contingency factor"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "No NETL CO2_T_COM reference total is supplied for this scenario, so cost is internally checked but not externally validated.",
+            "affected_modules": [
+              "cost",
+              "validation"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "cost_subtotal",
+            "formula": "sum(material, labor, ROW damages, misc, surge tank, control system, booster station)",
+            "inputs": [
+              "cost_material_usd_2025",
+              "cost_labor_usd_2025",
+              "cost_row_damages_usd_2025",
+              "cost_misc_usd_2025",
+              "cost_surge_tank_usd_2025",
+              "cost_control_system_usd_2025",
+              "cost_booster_station_usd_2025"
+            ],
+            "result_name": "cost_subtotal_usd_2025",
+            "notes": ""
+          },
+          {
+            "name": "contingency",
+            "formula": "contingency_fraction * cost_subtotal_usd_2025",
+            "inputs": [
+              "contingency_fraction",
+              "cost_subtotal_usd_2025"
+            ],
+            "result_name": "cost_contingency_usd_2025",
+            "notes": ""
+          },
+          {
+            "name": "total_cost",
+            "formula": "cost_subtotal_usd_2025 + cost_contingency_usd_2025",
+            "inputs": [
+              "cost_subtotal_usd_2025",
+              "cost_contingency_usd_2025"
+            ],
+            "result_name": "cost_total_usd_2025",
+            "notes": ""
+          },
+          {
+            "name": "netl_cost_comparison",
+            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
+            "inputs": [
+              "cost_total_usd_2025",
+              "netl_reference_total_capex_usd_2025"
+            ],
+            "result_name": "netl_cost_delta_usd_2025",
+            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
+          }
+        ]
+      },
+      {
+        "module": "repurposing_gate",
+        "model_version": "repurposing_gate_v0.1",
+        "status": "fail",
+        "inputs": [
+          {
+            "name": "pipeline_length_km",
+            "value": 323.73767187498,
+            "unit": "km",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "NSTA LENGTH_M converted to km in the ranked candidate file"
+          },
+          {
+            "name": "inner_diameter_in",
+            "value": 28.208661417322837,
+            "unit": "in",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "NSTA internal diameter converted from mm to inches"
+          },
+          {
+            "name": "nominal_wall_thickness_mm",
+            "value": 22.7,
+            "unit": "mm",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "NSTA wall thickness"
+          },
+          {
+            "name": "minimum_wall_thickness_mm",
+            "value": 22.165714080083532,
+            "unit": "mm",
+            "source": "simple_barlow_screening",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Approximate t = P * OD / (2 * SMYS * design factor); screening only"
+          },
+          {
+            "name": "pipe_grade",
+            "value": "X60",
+            "unit": "text",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Default grade used only to estimate minimum wall thickness"
+          },
+          {
+            "name": "inlet_pressure_psia",
+            "value": 2513.6961698633927,
+            "unit": "psia",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "NSTA max operating pressure in barg converted to approximate psia"
+          },
+          {
+            "name": "outlet_pressure_psia",
+            "value": 1100.0,
+            "unit": "psia",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Default outlet pressure; clipped to 80 percent of inlet if needed"
+          },
+          {
+            "name": "target_co2_phase",
+            "value": "dense_phase",
+            "unit": "text",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Default CO2 phase for first screening; replace with project-specific gas/dense phase decision"
+          },
+          {
+            "name": "co2_water_content_ppmv",
+            "value": 50.0,
+            "unit": "ppmv",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Placeholder dry CO2 water content for corrosion screening"
+          },
+          {
+            "name": "co2_water_spec_limit_ppmv",
+            "value": 500.0,
+            "unit": "ppmv",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Placeholder water specification limit for corrosion screening"
+          },
+          {
+            "name": "water_dew_point_margin_c",
+            "value": 10.0,
+            "unit": "degC",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assumed positive margin to water dew point for dry-CO2 screening"
+          },
+          {
+            "name": "co2_composition_known",
+            "value": "no",
+            "unit": "yes/no",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume detailed CO2 composition is not yet known until source-stream data are supplied"
+          },
+          {
+            "name": "material_certificates_available",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume material certificates are not yet verified for public-data screening"
+          },
+          {
+            "name": "fracture_toughness_basis",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume fracture toughness basis is not yet verified for public-data screening"
+          },
+          {
+            "name": "ili_mfl_available",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume latest ILI/MFL evidence is not yet available for public-data screening"
+          },
+          {
+            "name": "component_compatibility_screened",
+            "value": "no",
+            "unit": "yes/no",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "repurposing_gate"
+            ],
+            "notes": "Assume valves seals coatings and equipment have not yet been screened for CO2 compatibility"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "repurposing_gate_status",
+            "value": "fail",
+            "unit": "decision",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "lca",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_gate_confidence",
+            "value": "low",
+            "unit": "quality",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_gate_reason_summary",
+            "value": "Do not proceed until the showstoppers are resolved.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_gate_reasons",
+            "value": "Target CO2 phase is stated as dense/liquid/supercritical.; Evidence gaps remain: pipe_grade quality is assumed; outlet_pressure_psia quality is assumed; target_co2_phase quality is assumed; co2_water_content_ppmv quality is assumed; co2_water_spec_limit_ppmv quality is assumed; water_dew_point_margin_c quality is assumed; co2_composition_known is no; material_certificates_available is unknown; fracture_toughness_basis quality is assumed; ili_mfl_available is unknown; component_compatibility_screened is no.; Required work scope: confirm_co2_composition_and_impurities; confirm_water_limit_and_dew_point; cleaning_drying_and_debris_assessment; ili_mfl_or_equivalent_inspection; material_certificates_or_testing; component_compatibility_review; fracture_and_decompression_screen; wall_thickness_verification; co2_leak_detection_isolation_and_imr_plan.; Showstoppers: integrity module failed; available wall thickness is zero or negative.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_gate_next_data",
+            "value": "CO2 composition and impurity specification; water content, water limit and dew-point basis; cleaning, drying and residual debris evidence; latest ILI/MFL or equivalent inspection report; mill certificates or material testing plan; valve, seal, coating and equipment compatibility review; fracture toughness, decompression and blowdown evidence; verified wall thickness and minimum-wall basis; CO2 leak detection, isolation philosophy and IMR plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_phase_status",
+            "value": "dense_phase_selected",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "capacity",
+              "integrity",
+              "cost",
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_evidence_score",
+            "value": 23.5,
+            "unit": "0-100 score",
+            "quality": "calculated",
+            "used_by": [
+              "validation",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_evidence_gaps",
+            "value": "pipe_grade quality is assumed; outlet_pressure_psia quality is assumed; target_co2_phase quality is assumed; co2_water_content_ppmv quality is assumed; co2_water_spec_limit_ppmv quality is assumed; water_dew_point_margin_c quality is assumed; co2_composition_known is no; material_certificates_available is unknown; fracture_toughness_basis quality is assumed; ili_mfl_available is unknown; component_compatibility_screened is no",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "validation",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_showstoppers",
+            "value": "integrity module failed; available wall thickness is zero or negative",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "pre_lca_gate",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_work_scope_items",
+            "value": "confirm_co2_composition_and_impurities; confirm_water_limit_and_dew_point; cleaning_drying_and_debris_assessment; ili_mfl_or_equivalent_inspection; material_certificates_or_testing; component_compatibility_review; fracture_and_decompression_screen; wall_thickness_verification; co2_leak_detection_isolation_and_imr_plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "lca",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_cost_work_scope_items",
+            "value": "confirm_co2_composition_and_impurities; confirm_water_limit_and_dew_point; cleaning_drying_and_debris_assessment; ili_mfl_or_equivalent_inspection; material_certificates_or_testing; component_compatibility_review; fracture_and_decompression_screen; wall_thickness_verification; co2_leak_detection_isolation_and_imr_plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "cost"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "repurposing_lca_work_scope_items",
+            "value": "CO2 specification review; dew-point and water-specification study; cleaning and drying activity; inspection campaign; material verification/testing; component compatibility review; fracture/decompression study; targeted wall-thickness validation; IMR and monitoring plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_refurbishment_steel_fraction_recommended",
+            "value": 0.05,
+            "unit": "fraction",
+            "quality": "screening_placeholder",
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Not a standard value; a transparent screening bridge until itemised quantities exist."
+          },
+          {
+            "name": "repurposing_gate_cited_references",
+            "value": "REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION; REF_TORBERGSEN_LEINUM_RONEID_2025_GAS_PHASE_CO2_REQUALIFICATION; REF_MONSMA_MURRAY_2026_GAS_PHASE_CO2_REPURPOSING; REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR; REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING; REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR; REF_BURKINSHAW_GALLON_CARVELL_HUSSAIN_2024_HYDROGEN_DATA_EVIDENCE; REF_KASS_ET_AL_2023_MATERIAL_COMPATIBILITY",
+            "unit": "source_id_list",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "validation"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "target_co2_phase",
+            "value": "dense_phase",
+            "unit": "text",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Default CO2 phase for first screening; replace with project-specific gas/dense phase decision"
+          },
+          {
+            "name": "co2_composition_known",
+            "value": "no",
+            "unit": "yes/no",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume detailed CO2 composition is not yet known until source-stream data are supplied"
+          },
+          {
+            "name": "material_certificates_available",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume material certificates are not yet verified for public-data screening"
+          },
+          {
+            "name": "fracture_toughness_basis",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume fracture toughness basis is not yet verified for public-data screening"
+          },
+          {
+            "name": "ili_mfl_available",
+            "value": "unknown",
+            "unit": "status",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume latest ILI/MFL evidence is not yet available for public-data screening"
+          },
+          {
+            "name": "component_compatibility_screened",
+            "value": "no",
+            "unit": "yes/no",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume valves seals coatings and equipment have not yet been screened for CO2 compatibility"
+          },
+          {
+            "name": "section_replacement_fraction",
+            "value": 0.0,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "No specific pipe replacement fraction is assumed until inspection or requalification evidence requires it"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Repurposing gate is a screening/requalification checklist. It is not final engineering approval.",
+            "affected_modules": [
+              "repurposing_gate",
+              "cost",
+              "lca",
+              "final_gate"
+            ]
+          },
+          {
+            "level": "medium",
+            "message": "Repurposing evidence gaps: pipe_grade quality is assumed; outlet_pressure_psia quality is assumed; target_co2_phase quality is assumed; co2_water_content_ppmv quality is assumed; co2_water_spec_limit_ppmv quality is assumed; water_dew_point_margin_c quality is assumed; co2_composition_known is no; material_certificates_available is unknown; fracture_toughness_basis quality is assumed; ili_mfl_available is unknown; component_compatibility_screened is no.",
+            "affected_modules": [
+              "repurposing_gate",
+              "validation"
+            ]
+          },
+          {
+            "level": "high",
+            "message": "Repurposing showstoppers: integrity module failed; available wall thickness is zero or negative.",
+            "affected_modules": [
+              "repurposing_gate",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "repurposing_phase_screen",
+            "formula": "use target_co2_phase when stated; otherwise compare average pressure with CO2 critical pressure as a screening flag",
+            "inputs": [
+              "target_co2_phase",
+              "average_pressure_mpa",
+              "transport_temperature_c"
+            ],
+            "result_name": "repurposing_phase_status",
+            "notes": "Screening logic only; detailed phase behaviour needs validated EOS/mixture modelling. Cites REF_OSTBY_TORBERGSEN_RONEID_LEINUM_2022_CO2_REQUALIFICATION and REF_TORBERGSEN_LEINUM_RONEID_2025_GAS_PHASE_CO2_REQUALIFICATION."
+          },
+          {
+            "name": "repurposing_evidence_score",
+            "formula": "start at 100; subtract weighted penalties for missing, assumed, unknown or weak requalification evidence",
+            "inputs": [
+              "pipeline_length_km",
+              "inner_diameter_in",
+              "nominal_wall_thickness_mm",
+              "minimum_wall_thickness_mm",
+              "pipe_grade",
+              "inlet_pressure_psia",
+              "outlet_pressure_psia",
+              "target_co2_phase",
+              "co2_water_content_ppmv",
+              "co2_water_spec_limit_ppmv",
+              "water_dew_point_margin_c",
+              "co2_composition_known",
+              "material_certificates_available",
+              "fracture_toughness_basis",
+              "ili_mfl_available",
+              "component_compatibility_screened"
+            ],
+            "result_name": "repurposing_evidence_score",
+            "notes": "Cites REF_BURKINSHAW_GALLON_CARVELL_HUSSAIN_2024_HYDROGEN_DATA_EVIDENCE for data confidence discipline."
+          },
+          {
+            "name": "repurposing_work_scope",
+            "formula": "convert evidence gaps and CO2-service risks into named work items for cost and LCA",
+            "inputs": [
+              "co2_composition_known",
+              "co2_water_content_ppmv",
+              "co2_water_spec_limit_ppmv",
+              "ili_mfl_available",
+              "material_certificates_available",
+              "component_compatibility_screened",
+              "repurposing_phase_status"
+            ],
+            "result_name": "repurposing_work_scope_items",
+            "notes": "Cites REF_KUMAR_LOWERY_PASSUCCI_2025_ENI_LIVERPOOL_BAY_IMR, REF_DALONZO_BUSCO_ELVIRA_CHERUBINI_2025_CO2_IMR, REF_YUSOF_AZIZ_2025_PETRONAS_DENSE_PHASE_CO2_REPURPOSING and REF_KASS_ET_AL_2023_MATERIAL_COMPATIBILITY."
+          }
+        ]
+      },
+      {
+        "module": "work_scope",
+        "model_version": "refurbishment_work_scope_v0.1",
+        "status": "ready_for_screening",
+        "inputs": [],
+        "outputs": [
+          {
+            "name": "refurbishment_work_scope_status",
+            "value": "ready_for_screening",
+            "unit": "status",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "lca",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_work_scope_item_count",
+            "value": 11,
+            "unit": "count",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "lca",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_cost_item_count",
+            "value": 10,
+            "unit": "count",
+            "quality": "calculated",
+            "used_by": [
+              "cost",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_lca_item_count",
+            "value": 2,
+            "unit": "count",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_replacement_steel_kg",
+            "value": 6698392.44535,
+            "unit": "kg",
+            "quality": "screening_calculation",
+            "used_by": [
+              "cost",
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_activity_package_km",
+            "value": 323.737672,
+            "unit": "km",
+            "quality": "aggregate_screening_package",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "refurbishment_work_scope_row_ids",
+            "value": "confirm_co2_composition_and_impurities; confirm_water_limit_and_dew_point; cleaning_drying_and_debris_assessment; ili_mfl_or_equivalent_inspection; material_certificates_or_testing; component_compatibility_review; fracture_and_decompression_screen; wall_thickness_verification; co2_leak_detection_isolation_and_imr_plan; replacement_or_refurbishment_steel; refurbishment_activity_package",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "Refurbishment work-scope quantities are screening drivers. They are not contractor method statements, vendor quotes, or final LCA factors.",
+            "affected_modules": [
+              "work_scope",
+              "cost",
+              "lca"
+            ]
+          },
+          {
+            "level": "high",
+            "message": "The repurposing gate failed. Work-scope rows describe what would need resolution; they do not justify proceeding with reuse.",
+            "affected_modules": [
+              "work_scope",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "gate_items_to_work_scope_rows",
+            "formula": "map repurposing_work_scope_items to quantity drivers; add replacement steel and aggregate refurbishment activity package",
+            "inputs": [
+              "repurposing_work_scope_items",
+              "pipeline_length_km",
+              "nominal_wall_thickness_mm",
+              "inner_diameter_in",
+              "lca_refurbishment_steel_fraction_recommended"
+            ],
+            "result_name": "refurbishment_work_scope_item_count",
+            "notes": "Rows cite requalification, IMR, dense-phase, data quality and material compatibility source IDs. They are designed to feed cost and LCA modules."
+          }
+        ]
+      },
+      {
+        "module": "pre_lca_gate",
+        "model_version": "pre_lca_gate_v0.1",
+        "status": "fail",
+        "inputs": [],
+        "outputs": [
+          {
+            "name": "pre_lca_decision",
+            "value": "fail",
+            "unit": "decision",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_confidence",
+            "value": "medium",
+            "unit": "quality",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_reason_summary",
+            "value": "Do not move to LCA until failed technical or cost checks are resolved.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_reasons",
+            "value": "One or more upstream modules failed: integrity; repurposing_gate.",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "pre_lca_next_data",
+            "value": "verify wall thickness and inspection records; check pipe grade, design factor, defects, and pressure basis; replace simple Barlow screening with a proper requalification method; resolve repurposing showstoppers; collect missing requalification evidence; define cleaning, drying, inspection, repair, and monitoring work scope",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [],
+        "warnings": [],
+        "trace": [
+          {
+            "name": "pre_lca_gate",
+            "formula": "fail if any upstream module fails; insufficient_data if key outputs are missing; marginal if outputs pass but key assumptions, repurposing-gate gaps, or validation warnings remain; otherwise pass",
+            "inputs": [
+              "capacity_mtpa",
+              "required_design_mtpa",
+              "remaining_life_years",
+              "available_wall_thickness_mm",
+              "cost_total_usd_2025"
+            ],
+            "result_name": "pre_lca_decision",
+            "notes": "This is a screening gate, not an engineering approval decision."
+          }
+        ]
+      },
+      {
+        "module": "lca",
+        "model_version": "lca_screening_proxy_v0.1",
+        "status": "sensitivity_only",
+        "inputs": [
+          {
+            "name": "pipeline_length_km",
+            "value": 323.73767187498,
+            "unit": "km",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "reported",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "NSTA LENGTH_M converted to km in the ranked candidate file"
+          },
+          {
+            "name": "outer_diameter_in",
+            "value": 29.996062992125985,
+            "unit": "in",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Estimated as internal diameter plus two times wall thickness"
+          },
+          {
+            "name": "inner_diameter_in",
+            "value": 28.208661417322837,
+            "unit": "in",
+            "source": "NSTA ranked candidate dataset",
+            "quality": "derived",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "NSTA internal diameter converted from mm to inches"
+          },
+          {
+            "name": "steel_density_kg_per_m3",
+            "value": 7850.0,
+            "unit": "kg/m3",
+            "source": "engineering_reference",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Carbon steel density used for first LCA inventory calculation"
+          },
+          {
+            "name": "lca_refurbishment_steel_fraction",
+            "value": 0.05,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+          },
+          {
+            "name": "lca_pipeline_steel_factor_kgco2e_per_kg",
+            "value": 2.0,
+            "unit": "kgCO2e/kg",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_new_build_construction_factor_kgco2e_per_km",
+            "value": 100000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_refurbishment_activity_factor_kgco2e_per_km",
+            "value": 20000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "required": true,
+            "used_by": [
+              "lca"
+            ],
+            "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "lca_steel_mass_new_build_kg",
+            "value": 133967848.90699263,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_refurbishment_steel_kg",
+            "value": 6698392.445349632,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_refurbishment_steel_fraction_used",
+            "value": 0.05,
+            "unit": "fraction",
+            "quality": "screening_placeholder",
+            "used_by": [
+              "lca",
+              "report"
+            ],
+            "notes": "Uses the larger of the scenario value and repurposing-gate recommendation."
+          },
+          {
+            "name": "lca_gate_work_scope_items",
+            "value": "CO2 specification review; dew-point and water-specification study; cleaning and drying activity; inspection campaign; material verification/testing; component compatibility review; fracture/decompression study; targeted wall-thickness validation; IMR and monitoring plan",
+            "unit": "text",
+            "quality": "calculated",
+            "used_by": [
+              "lca",
+              "report"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_avoided_steel_kg",
+            "value": 127269456.461643,
+            "unit": "kg",
+            "quality": "calculated",
+            "used_by": [
+              "lca"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_new_build_proxy_kgco2e",
+            "value": 300309465.00148326,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_reuse_proxy_kgco2e",
+            "value": 19871538.328198865,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy_saving_kgco2e",
+            "value": 280437926.6732844,
+            "unit": "kg CO2e",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy_saving_percent",
+            "value": 93.38297967794631,
+            "unit": "%",
+            "quality": "screening_proxy",
+            "used_by": [
+              "final_gate",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          },
+          {
+            "name": "lca_screening_decision",
+            "value": "needs_data",
+            "unit": "decision",
+            "quality": "calculated",
+            "used_by": [
+              "final_gate",
+              "report",
+              "app"
+            ],
+            "notes": ""
+          }
+        ],
+        "assumptions": [
+          {
+            "name": "lca_refurbishment_steel_fraction",
+            "value": 0.05,
+            "unit": "fraction",
+            "source": "screening_default",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Assume refurbishment steel equals 5 percent of new-build pipe steel for first screening"
+          },
+          {
+            "name": "lca_pipeline_steel_factor_kgco2e_per_kg",
+            "value": 2.0,
+            "unit": "kgCO2e/kg",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_new_build_construction_factor_kgco2e_per_km",
+            "value": 100000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder offshore construction factor for first LCA proxy; replace with ecoinvent/Brightway result"
+          },
+          {
+            "name": "lca_refurbishment_activity_factor_kgco2e_per_km",
+            "value": 20000.0,
+            "unit": "kgCO2e/km",
+            "source": "screening_lca_proxy",
+            "quality": "assumed",
+            "sensitivity_required": true,
+            "notes": "Open placeholder refurbishment activity factor for first LCA proxy; replace with project-specific data"
+          }
+        ],
+        "warnings": [
+          {
+            "level": "medium",
+            "message": "LCA result is a screening proxy only. It uses open factors from the assumption file, not final ecoinvent impact results.",
+            "affected_modules": [
+              "lca",
+              "final_gate"
+            ]
+          },
+          {
+            "level": "high",
+            "message": "Pre-LCA gate did not pass, so LCA must be read as sensitivity only.",
+            "affected_modules": [
+              "lca",
+              "pre_lca_gate"
+            ]
+          }
+        ],
+        "trace": [
+          {
+            "name": "pipeline_steel_mass",
+            "formula": "pi * (OD^2 - ID^2) / 4 * length * steel_density",
+            "inputs": [
+              "outer_diameter_in",
+              "inner_diameter_in",
+              "pipeline_length_km",
+              "steel_density_kg_per_m3"
+            ],
+            "result_name": "lca_steel_mass_new_build_kg",
+            "notes": ""
+          },
+          {
+            "name": "lca_proxy",
+            "formula": "new-build proxy = steel mass * steel factor + length * construction factor; reuse proxy = refurbishment steel * steel factor + length * refurbishment factor",
+            "inputs": [
+              "lca_refurbishment_steel_fraction",
+              "lca_refurbishment_steel_fraction_recommended",
+              "lca_pipeline_steel_factor_kgco2e_per_kg",
+              "lca_new_build_construction_factor_kgco2e_per_km",
+              "lca_refurbishment_activity_factor_kgco2e_per_km"
+            ],
+            "result_name": "lca_proxy_saving_kgco2e",
+            "notes": "Screening proxy to be replaced by Brightway/openLCA ecoinvent calculation. The refurbishment fraction may be increased by the repurposing gate when evidence gaps suggest additional validation or replacement work."
+          }
+        ]
+      }
+    ],
+    "nsta_candidate": {
+      "RANK": "3",
+      "SCREENING_SCORE": "67.4",
+      "NSTAPIPNO": "PL762",
+      "PIPE_NAME": "SAGE PIPELINE",
+      "REP_GROUP": "WOOD GROUP",
+      "FLUID": "GAS",
+      "STATUS": "ACTIVE",
+      "PIPE_SYS": "SAGE",
+      "DIAMETERMM": "762",
+      "INT_DIAM": "716.5",
+      "MX_OP_PRES": "172.3",
+      "THICKNESS": "22.7",
+      "LENGTH_M": "323737.67187498",
+      "LENGTH_KM": "323.73767187498",
+      "PIPELINE_TYPE": "yes",
+      "STRATEGIC_PIPELINE": "yes",
+      "START_DATE": "1992-08-01",
+      "END_DATE": "",
+      "DESCRIPTIO": "BERYL ALPHA TO ST FERGUS 30IN GAS EXPORT",
+      "COMMENTS": "Route revised to match survey 240164_PL762",
+      "OBJECTID": "6525",
+      "FEATURE_ID": "e021c5b1-8081-4ec7-9549-849aadb3d896",
+      "INF_TYPE": "PIPELINE",
+      "INSUL_TYPE": "",
+      "BUNDLE": "0",
+      "BUNDLE_FLG": "",
+      "CRS_CODE": "23031",
+      "CRS_NAME": "UTM31, ED50\r\n",
+      "END_REAS": "",
+      "UNTRENCHED": "U",
+      "EXPOSED": "E",
+      "UPD_DATE": "2026-02-18",
+      "UPD_TYPE": "MODIFY",
+      "UPD_REAS": "CRS Code and CRS Name didn't correspond",
+      "LEGACY_ID": "500004552",
+      "REP_OWNER": "N",
+      "REP_OPERTR": "Y",
+      "REP_HOLDER": "N",
+      "SIMPLIFIED": "N"
+    },
+    "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
+  }
+]

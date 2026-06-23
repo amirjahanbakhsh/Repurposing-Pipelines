@@ -1,22 +1,22 @@
-# Pipeline Screen: nsta_pl774
+# Pipeline Screen: nsta_pl762
 
-Generated: 2026-06-13T15:59:01+00:00
+Generated: 2026-06-13T15:58:50+00:00
 
 Input assumptions: `model_layers/06_screening_and_decision/nsta_screening_defaults.csv`
 
 Outputs:
 
-- `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.csv`
-- `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774_trace.json`
-- `model_layers/06_screening_and_decision/refurbishment_work_scope_nsta_pl774.csv`
+- `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl762.csv`
+- `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl762_trace.json`
+- `model_layers/06_screening_and_decision/refurbishment_work_scope_nsta_pl762.csv`
 
 ## Plain Result
 
-Pipeline: `CATS PIPELINE`
+Pipeline: `SAGE PIPELINE`
 
 Input mode: `nsta_candidate_plus_defaults`
 
-NSTA pipeline number: `PL774`
+NSTA pipeline number: `PL762`
 
 Decision: `fail`
 
@@ -28,18 +28,18 @@ Meaning: Do not move to LCA until failed technical or cost checks are resolved.
 
 | Item | Value |
 | --- | --- |
-| CO2 capacity | 37.75 MtCO2/year |
+| CO2 capacity | 25.66 MtCO2/year |
 | Required design flow | 5.88 MtCO2/year |
 | Remaining life | 0.00 years |
-| Remaining life range | 0.00 to 531.44 years |
-| Available wall thickness | -0.93 mm |
+| Remaining life range | 0.00 to 408.95 years |
+| Available wall thickness | -1.17 mm |
 | Corrosion risk | medium |
 | Repurposing gate | fail |
 | Repurposing evidence score | 23.5 / 100 |
 | CO2 phase screen | dense_phase_selected |
-| Benchmark avoided new-build CAPEX | $910,078,962 |
+| Benchmark avoided new-build CAPEX | $727,520,855 |
 | NETL cost check | not_supplied |
-| LCA proxy saving | 93.9% |
+| LCA proxy saving | 93.4% |
 | LCA screen | needs_data |
 
 ## Repurposing Gate
@@ -79,8 +79,8 @@ Quantified work-scope summary:
 | Work-scope rows | 11 |
 | Cost-driver rows | 10 |
 | LCA-driver rows | 2 |
-| Replacement/refurbishment steel | 12565.2 t |
-| Refurbishment activity package | 405.0 km |
+| Replacement/refurbishment steel | 6698.4 t |
+| Refurbishment activity package | 323.7 km |
 
 References used by the gate:
 

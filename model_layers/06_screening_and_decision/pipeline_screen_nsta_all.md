@@ -1,6 +1,6 @@
 # NSTA Pipeline Batch Screening
 
-Generated: 2026-06-11T16:37:11+00:00
+Generated: 2026-06-24T23:22:54+00:00
 
 Candidate file: `model_layers/01_data_foundation/nsta_candidate_ranked.csv`
 

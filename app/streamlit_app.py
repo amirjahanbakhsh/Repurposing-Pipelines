@@ -1663,31 +1663,80 @@ def render_cost_layer(selection: dict[str, str], factor_mode: str) -> None:
 def render_lca_layer(row: pd.Series | None, selection: dict[str, str], factor_mode: str) -> None:
     lca_row = load_lca_row(selection["lca_scenario"])
     with st.container(border=True):
-        st.markdown('<div class="workflow-step"><h3>8. Conventional LCA Screening</h3></div>', unsafe_allow_html=True)
-        left, right = st.columns([1.1, 1])
-        with left:
-            equation_box(
-                [
-                    "functional_unit = transport 1 tonne CO2 through selected route",
-                    "new_build_impact = steel_impact + construction_impact",
-                    "reuse_impact = refurbishment_steel_impact + refurbishment_activity_impact",
-                    "saving = new_build_impact - reuse_impact",
-                ]
-            )
-            if st.button("Run LCA layer", key=f"run_lca_{selection['pipeline_id']}"):
-                ok, output = run_lca(selection, factor_mode)
-                st.session_state["last_lca_result"] = ("LCA layer", ok, output)
-                st.cache_data.clear()
-                st.rerun()
-            show_run_result("last_lca_result")
-        with right:
-            status_pill("Screening LCA", row.get("lca_screening_decision") if row is not None else "not run")
-            status_pill("ecoinvent-linked LCA", lca_row.get("lca_status") if lca_row is not None else "not run")
-            st.metric("Proxy saving", fmt_number(row.get("lca_proxy_saving_percent") if row is not None else None, 1, "%"))
-            st.metric("Avoided steel", fmt_number(row.get("lca_avoided_steel_kg") if row is not None else None, 0, " kg"))
+        st.markdown('<div class="workflow-step"><h3>8. LCA Screening</h3></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="section-note">Two-level LCA: (a) proxy screening using steel mass and construction factors; '
+            '(b) ecoinvent-linked LCA using Brightway. '
+            'Functional unit: transport of 1 tonne CO2 through the selected pipeline route. '
+            'Cross-validation target: Re-Stream (2021); HyNet pre-FEED WP6.</div>',
+            unsafe_allow_html=True,
+        )
+
+        r = row
+        nb_steel      = as_float(r.get("lca_steel_mass_new_build_kg")  if r is not None else None)
+        refurb_steel  = as_float(r.get("lca_refurbishment_steel_kg")   if r is not None else None)
+        avoided_steel = as_float(r.get("lca_avoided_steel_kg")         if r is not None else None)
+        nb_proxy      = as_float(r.get("lca_new_build_proxy_kgco2e")   if r is not None else None)
+        reuse_proxy   = as_float(r.get("lca_reuse_proxy_kgco2e")       if r is not None else None)
+        saving_proxy  = as_float(r.get("lca_proxy_saving_kgco2e")      if r is not None else None)
+        saving_pct    = as_float(r.get("lca_proxy_saving_percent")      if r is not None else None)
+
+        equation_box([
+            "functional_unit: transport 1 tonne CO2 through this pipeline for its remaining life",
+            "new_build_steel_kg = π × OD × wall × L × ρ_steel  [ρ=7850 kg/m³]",
+            "new_build_proxy_kgCO2e = steel_kg × steel_factor + L_km × construction_factor",
+            "reuse_steel_kg = new_build_steel_kg × refurbishment_steel_fraction  (default 5%)",
+            "reuse_proxy_kgCO2e = reuse_steel_kg × steel_factor + L_km × refurbishment_activity_factor",
+            "proxy_saving = new_build_proxy − reuse_proxy",
+            "⚠ proxy factors are placeholder assumptions — replace with ecoinvent/Brightway results",
+        ])
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown("**Steel inventory**")
+            data_table([
+                {"Item": "New-build steel",      "Value": fmt_number(nb_steel,      0, " kg")},
+                {"Item": "Refurbishment steel",  "Value": fmt_number(refurb_steel,  0, " kg")},
+                {"Item": "Avoided steel",        "Value": fmt_number(avoided_steel, 0, " kg")},
+                {"Item": "Refurb fraction",      "Value": fmt_number(
+                    100 * refurb_steel / nb_steel if nb_steel and refurb_steel else None, 1, "%")},
+            ])
+
+        with col2:
+            st.markdown("**Proxy LCA (screening)**")
+            status_pill("LCA screening decision", r.get("lca_screening_decision") if r is not None else "not run")
+            st.metric("New-build impact",  fmt_number((nb_proxy or 0)/1000,     1, " tCO2e"))
+            st.metric("Reuse impact",      fmt_number((reuse_proxy or 0)/1000,  1, " tCO2e"))
+            st.metric("Proxy saving",      fmt_number((saving_proxy or 0)/1000, 1, " tCO2e"))
+            st.metric("Saving vs new-build", fmt_number(saving_pct, 1, "%"))
+
+        with col3:
+            st.markdown("**ecoinvent-linked LCA**")
+            status_pill("ecoinvent LCA status", lca_row.get("lca_status") if lca_row is not None else "not run")
             if lca_row is not None:
-                st.metric("Base reuse impact", fmt_number(as_float(lca_row.get("reuse_kgco2e_base")) / 1000 if as_float(lca_row.get("reuse_kgco2e_base")) is not None else None, 1, " tCO2e"))
+                reuse_base = as_float(lca_row.get("reuse_kgco2e_base"))
+                reuse_low  = as_float(lca_row.get("reuse_kgco2e_low"))
+                reuse_high = as_float(lca_row.get("reuse_kgco2e_high"))
+                st.metric("Reuse impact (base)", fmt_number((reuse_base or 0)/1000, 1, " tCO2e"))
+                st.metric("Low case",            fmt_number((reuse_low  or 0)/1000, 1, " tCO2e"))
+                st.metric("High case",           fmt_number((reuse_high or 0)/1000, 1, " tCO2e"))
                 st.caption(f"Factor quality: {clean_text(lca_row.get('factor_quality_summary'))}")
+            else:
+                st.info("Run LCA layer to generate ecoinvent-linked results.")
+
+        st.caption(
+            "Proxy factors are open placeholders (steel: 2.0 kgCO2e/kg; construction: 100 tCO2e/km; refurbishment: 20 tCO2e/km). "
+            "These must be replaced with ecoinvent/Brightway outputs before publication. "
+            "Cross-validation targets: Re-Stream EU study (2021); HyNet CCUS pre-FEED WP6 (~2020)."
+        )
+
+        if st.button("Run LCA layer", key=f"run_lca_{selection['pipeline_id']}"):
+            ok, output = run_lca(selection, factor_mode)
+            st.session_state["last_lca_result"] = ("LCA layer", ok, output)
+            st.cache_data.clear()
+            st.rerun()
+        show_run_result("last_lca_result")
 
 
 def render_traceability(row: pd.Series | None, selection: dict[str, str]) -> None:

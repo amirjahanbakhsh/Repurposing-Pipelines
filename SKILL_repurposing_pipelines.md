@@ -145,6 +145,49 @@ Current state: some layers (capacity, corrosion, cost) have partial formula bloc
 
 ---
 
+## 9b. Data Quality Hierarchy — Formal Methodology
+
+This hierarchy applies to **every parameter** in every pipeline assessment. It is the formal response to missing or conflicting data and must be implemented in Gate 1 (Data Completeness) and documented in the journal paper.
+
+### Literature basis
+- Burkinshaw (2024, ROSEN/National Gas): *"existing integrity management systems are currently based on secondary data, often without direct reference to the supporting primary records... Where primary records are not available, care should be taken and additional justifications may be required."*
+- Mahmoud & Dodds (2022): *"Contingencies account for missing data"* and *"The method accepts some levels of data censoring."*
+- API TR 1178: Data Integration for Pipeline Integrity — defines source hierarchy and SME knowledge use when primary records are absent.
+- API RP 1160 (3rd ed.): Managing System Integrity — defines data quality requirements for IMP.
+- ASME B31.8S: Supplement to B31.8 — specifies data integration approach for integrity management.
+
+### The hierarchy (7 tiers)
+
+| Priority | Source | Label in code | Notes |
+|---|---|---|---|
+| 1 | Original design/construction documents, mill certificates, as-built drawings | `primary_record` | Gold standard. Lock as `reported`. |
+| 2 | Regulator database (NSTA, PHMSA, etc.) | `regulatory_record` | Publicly verifiable. Treat as `reported`. |
+| 3 | ILI/MFL inspection report (measured in-service) | `measured_inspection` | Most current wall condition. Supersedes design wall for integrity. |
+| 4 | Pressure test records (hydrotest — confirms minimum wall by implication) | `pressure_test_derived` | Indirect but physically binding lower bound. |
+| 5 | Engineering back-calculation from known P, grade, design factor (Barlow) | `engineering_derived` | Accepted in API 1160 / ASME B31.8S. Must state all inputs and DF used. |
+| 6 | API/ASME standard nominal wall for OD and pressure class | `standard_nominal` | Valid only when OD, grade, and MAOP are all confirmed. |
+| 7 | Conservative engineering assumption with explicit uncertainty range | `assumed_conservative` | Last resort. Must state the range and what it would take to improve it. |
+
+### Two-dimensional assessment required
+
+Source quality alone is insufficient. Every parameter must also carry a **criticality flag**:
+
+- **Critical** — result changes materially if this parameter is wrong (wall thickness, pipe grade, operating pressure, OD). A tier-7 source for a critical parameter must trigger a warning in the UI and be flagged in the journal paper.
+- **Significant** — affects result but within sensitivity range (corrosion rate, capacity factor).
+- **Minor** — small effect on output (LCA proxy factors, contingency fraction).
+
+### Implementation in Gate 1
+Every parameter's `quality` field in the assumptions CSV must be mapped to one of the 7 tiers above. Gate 1 scores completeness as: (number of critical parameters at tier ≤ 4) / (total critical parameters). A score below 50% means the result is screening-only and must not be cited as an engineering assessment.
+
+### Goldeneye wall thickness conflict
+- Dissertation: 22.23 mm (= Sch 140, standard wall) — consistent with ~260 barg design pressure typical of North Sea high-pressure gas export pipelines.
+- Poster: 14.28 mm (non-standard, implies ~167 barg design pressure — lower but still feasible).
+- Barlow minimum at 120 barg, X60, DF 0.72: 10.23 mm — both values are physically feasible.
+- **Resolution**: 22.23 mm is more likely correct (standard schedule, consistent with North Sea HPHT practice). 14.28 mm may be a data entry error or a different section of the pipeline. Both should be run as sensitivity cases until primary records are found.
+- **Source to seek**: Shell/Repsol Goldeneye pipeline specification, NSTA pipeline records, or Pale Blue Dot/Acorn pre-FEED documents.
+
+---
+
 ## 10. Reference Library — Evaluation and Gate Mapping
 
 All references are in `/write_up/papers_reports_guidelines/`. Every model layer must answer: **IS THIS RIGHT? IS THERE A WAY TO CROSS-CHECK AND VALIDATE?**

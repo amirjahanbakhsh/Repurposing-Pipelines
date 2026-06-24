@@ -1035,121 +1035,429 @@ def render_layer_button(label: str, selection: dict[str, str]) -> None:
     show_run_result(result_key)
 
 
+_DQ_TIERS: dict[str, tuple[int, str]] = {
+    # quality label -> (tier number, display label)
+    "primary_record":       (1, "Primary record"),
+    "reported":             (1, "Primary record"),
+    "regulatory_record":    (2, "Regulatory record"),
+    "measured_inspection":  (3, "ILI / inspection"),
+    "pressure_test_derived":(4, "Pressure test derived"),
+    "engineering_derived":  (5, "Engineering derived"),
+    "derived":              (5, "Engineering derived"),
+    "standard_nominal":     (6, "Standard nominal"),
+    "assumed_conservative": (7, "Assumption"),
+    "assumed":              (7, "Assumption"),
+    "assumed_or_standard":  (6, "Standard/assumption"),
+    "calculated":           (5, "Calculated"),
+    "screening_lca_proxy":  (7, "Assumption"),
+}
+
+_DQ_CRITICAL_PARAMS: set[str] = {
+    "nominal_wall_thickness_mm",
+    "inner_diameter_in",
+    "outer_diameter_in",
+    "pipe_grade",
+    "inlet_pressure_psia",
+    "outlet_pressure_psia",
+    "length_km",
+    "pipeline_length_km",
+}
+
+_DQ_SIGNIFICANT_PARAMS: set[str] = {
+    "historical_corrosion_rate_mm_per_year",
+    "future_co2_corrosion_rate_mm_per_year",
+    "transport_temperature_c",
+    "required_project_flow_mtpa",
+    "start_operation_year",
+    "capacity_factor",
+}
+
+
+def _dq_tier(quality: str) -> tuple[int, str]:
+    return _DQ_TIERS.get(str(quality).strip().lower(), (7, "Assumption"))
+
+
+def _dq_tier_colour(tier: int) -> str:
+    return {1: "🟢", 2: "🟢", 3: "🟡", 4: "🟡", 5: "🟠", 6: "🟠", 7: "🔴"}.get(tier, "⚪")
+
+
+def _load_assumption_quality(selection: dict[str, str]) -> dict[str, str]:
+    """Load parameter -> quality mapping from the assumptions CSV for this scenario."""
+    from pathlib import Path
+    import csv
+
+    quality: dict[str, str] = {}
+    # Try goldeneye assumptions first, then NSTA defaults
+    for path in [
+        Path("model_layers/06_screening_and_decision/goldeneye_assumptions.csv"),
+        Path("model_layers/06_screening_and_decision/nsta_screening_defaults.csv"),
+    ]:
+        if not path.exists():
+            continue
+        with path.open(newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                sc = row.get("scenario", "")
+                param = row.get("parameter", "")
+                q = row.get("quality", "assumed")
+                scenario = selection.get("screening_scenario", "")
+                if sc == scenario or sc == "defaults" or sc == "nsta_defaults":
+                    quality[param] = q
+    return quality
+
+
 def render_data_layer(row: pd.Series | None, ranked_row: pd.Series | None, selection: dict[str, str]) -> None:
     with st.container(border=True):
-        st.markdown('<div class="workflow-step"><h3>1. Data Completeness Gate</h3></div>', unsafe_allow_html=True)
+        st.markdown('<div class="workflow-step"><h3>1. Data Completeness &amp; Quality Gate</h3></div>', unsafe_allow_html=True)
         st.markdown(
-            '<div class="section-note">Purpose: confirm that the minimum data needed for screening are available or clearly labelled as assumptions.</div>',
+            '<div class="section-note">Scores each input parameter against a 7-tier data quality hierarchy '
+            '(primary records → regulatory → ILI → pressure test → engineering derivation → standard nominal → assumption). '
+            'Basis: Burkinshaw (2024); Mahmoud &amp; Dodds (2022); API TR 1178; API RP 1160.</div>',
             unsafe_allow_html=True,
         )
-        info = profile_rows(row, ranked_row, selection)
-        data_table(info)
-        render_missing_warning(info)
-        render_layer_button("Run / refresh data gate", selection)
+
+        # ── equation block ────────────────────────────────────────────────────
+        equation_box([
+            "completeness_score = critical_params_at_tier≤4 / total_critical_params × 100",
+            "tier 1-2 (green): primary or regulatory records — fully traceable",
+            "tier 3-4 (yellow): measured inspection or pressure test — acceptable for assessment",
+            "tier 5-6 (orange): engineering derived or standard nominal — screening only",
+            "tier 7 (red): assumption — must state range and what evidence is needed",
+        ])
+
+        # ── build quality table ───────────────────────────────────────────────
+        quality_map = _load_assumption_quality(selection)
+
+        critical_params = [
+            ("Pipeline length",         "pipeline_length_km",           row.get("length_km") if row is not None else ranked_row.get("LENGTH_KM") if ranked_row is not None else None, "km"),
+            ("Outer diameter",          "outer_diameter_in",            row.get("outer_diameter_in") if row is not None else None, "in"),
+            ("Inner diameter",          "inner_diameter_in",            row.get("inner_diameter_in") if row is not None else ranked_row.get("INT_DIAM") if ranked_row is not None else None, "in"),
+            ("Wall thickness (nominal)","nominal_wall_thickness_mm",    row.get("nominal_wall_thickness_mm") if row is not None else ranked_row.get("THICKNESS") if ranked_row is not None else None, "mm"),
+            ("Pipe grade",              "pipe_grade",                   row.get("pipe_grade") if row is not None else None, ""),
+            ("Inlet pressure",          "inlet_pressure_psia",          None, "psia"),
+            ("Outlet pressure",         "outlet_pressure_psia",         None, "psia"),
+        ]
+
+        significant_params = [
+            ("Transport temperature",   "transport_temperature_c",      None, "°C"),
+            ("Required project flow",   "required_project_flow_mtpa",   row.get("required_design_mtpa") if row is not None else None, "Mtpa"),
+            ("Capacity factor",         "capacity_factor",              None, ""),
+            ("Start operation year",    "start_operation_year",         row.get("start_operation_year") if row is not None else ranked_row.get("START_DATE") if ranked_row is not None else None, ""),
+            ("Historical corrosion rate","historical_corrosion_rate_mm_per_year", row.get("historical_wall_loss_mm") if row is not None else None, "mm/yr"),
+            ("Future CO2 corrosion rate","future_co2_corrosion_rate_mm_per_year", row.get("future_co2_corrosion_rate_mm_per_year") if row is not None else None, "mm/yr"),
+            ("ILI / MFL available",     "ili_mfl_available",            row.get("ili_mfl_available") if row is not None else None, ""),
+            ("Material certificates",   "material_certificates_available", row.get("material_certificates_available") if row is not None else None, ""),
+            ("Fracture toughness basis","fracture_toughness_basis",     row.get("fracture_toughness_basis") if row is not None else None, ""),
+            ("Component compatibility", "component_compatibility_screened", row.get("component_compatibility_screened") if row is not None else None, ""),
+        ]
+
+        def _build_dq_rows(params: list, label: str) -> list[dict]:
+            out = []
+            for display, param, value, unit in params:
+                q = quality_map.get(param, "assumed")
+                tier, tier_label = _dq_tier(q)
+                icon = _dq_tier_colour(tier)
+                val_str = f"{value} {unit}".strip() if value not in (None, "", "nan", float("nan")) else "—"
+                try:
+                    if value is not None and float(str(value)) != float(str(value)):
+                        val_str = "—"
+                except (ValueError, TypeError):
+                    pass
+                out.append({
+                    "Criticality": label,
+                    "Parameter": display,
+                    "Value": val_str,
+                    "Source quality": f"{icon} T{tier} — {tier_label}",
+                    "Tier": tier,
+                })
+            return out
+
+        crit_rows = _build_dq_rows(critical_params, "Critical")
+        sig_rows  = _build_dq_rows(significant_params, "Significant")
+        all_rows  = crit_rows + sig_rows
+
+        # ── completeness score ────────────────────────────────────────────────
+        crit_tiers = [r["Tier"] for r in crit_rows]
+        score = int(100 * sum(1 for t in crit_tiers if t <= 4) / len(crit_tiers)) if crit_tiers else 0
+        score_colour = "🟢" if score >= 75 else ("🟡" if score >= 50 else "🔴")
+
+        col_score, col_table = st.columns([1, 2.5])
+        with col_score:
+            st.metric("Critical parameter score", f"{score_colour} {score}%")
+            st.caption(
+                "% of critical parameters sourced from tier 1–4 "
+                "(primary, regulatory, ILI, or pressure test records)."
+            )
+            n_assumed = sum(1 for r in crit_rows if r["Tier"] >= 7)
+            if n_assumed:
+                st.warning(
+                    f"{n_assumed} critical parameter(s) are tier-7 assumptions. "
+                    "Results are screening-level only. Do not cite as engineering assessment.",
+                    icon="⚠️",
+                )
+            n_missing = sum(1 for r in all_rows if r["Value"] == "—")
+            if n_missing:
+                st.info(f"{n_missing} parameter(s) have no value available in current run.", icon="ℹ️")
+
+        with col_table:
+            display_df = pd.DataFrame([
+                {"Parameter": r["Parameter"], "Value": r["Value"], "Quality": r["Source quality"], "Criticality": r["Criticality"]}
+                for r in all_rows
+            ])
+            st.dataframe(display_df, hide_index=True, use_container_width=True)
+
+        # ── wall thickness conflict warning ───────────────────────────────────
+        wall = row.get("nominal_wall_thickness_mm") if row is not None else None
+        if wall is not None:
+            wall_f = as_float(wall)
+            if wall_f is not None:
+                od_in = row.get("outer_diameter_in") if row is not None else None
+                od_f  = as_float(od_in)
+                inlet = row.get("average_pressure_mpa") if row is not None else None
+                inlet_f = as_float(inlet)
+                if od_f and inlet_f:
+                    smys_mpa = 413.7  # X60 default
+                    t_min = inlet_f * (od_f * 25.4) / (2 * smys_mpa * 0.72)
+                    if wall_f < t_min:
+                        st.error(
+                            f"⛔ Wall thickness {wall_f:.2f} mm is below the Barlow minimum "
+                            f"({t_min:.2f} mm) for {inlet_f:.1f} MPa, X60, DF=0.72. "
+                            "This value must be verified before any integrity assessment.",
+                            icon="🚨",
+                        )
+                    elif wall_f < t_min * 1.15:
+                        st.warning(
+                            f"Wall thickness {wall_f:.2f} mm is close to the Barlow minimum "
+                            f"({t_min:.2f} mm, <15% margin). Verify against primary records.",
+                            icon="⚠️",
+                        )
+
+        render_layer_button("Run / refresh screening", selection)
 
 
 def render_capacity_layer(row: pd.Series | None, selection: dict[str, str]) -> None:
     with st.container(border=True):
         st.markdown('<div class="workflow-step"><h3>2. CO2 Transport Capacity</h3></div>', unsafe_allow_html=True)
-        inputs = [
-            input_row("Pipeline length", row.get("length_km") if row is not None else None, "km", zero_invalid=True),
-            input_row("Internal diameter", row.get("inner_diameter_in") if row is not None else None, "in", zero_invalid=True),
-            input_row("Average pressure", row.get("average_pressure_mpa") if row is not None else None, "MPa", zero_invalid=True),
-            input_row("CO2 compressibility factor", "see screening defaults", "-", source="assumption file"),
-            input_row("Fanning friction factor", row.get("fanning_friction_factor") if row is not None else None, "-", zero_invalid=True),
-            input_row("Required project flow", row.get("required_design_mtpa") if row is not None else None, "Mtpa", zero_invalid=True),
-        ]
-        left, right = st.columns([1.1, 1])
+        st.markdown(
+            '<div class="section-note">Weymouth equation for dense-phase CO2 flow. '
+            'Cross-validation target: REPACT tool (2024). Ref: hydraulics.py.</div>',
+            unsafe_allow_html=True,
+        )
+
+        r = row  # shorthand
+        length   = as_float(r.get("length_km") if r is not None else None)
+        id_in    = as_float(r.get("inner_diameter_in") if r is not None else None)
+        id_m     = as_float(r.get("inner_diameter_m") if r is not None else None)
+        p_avg    = as_float(r.get("average_pressure_mpa") if r is not None else None)
+        friction = as_float(r.get("fanning_friction_factor") if r is not None else None)
+        cap_kgs  = as_float(r.get("capacity_kg_per_s") if r is not None else None)
+        cap_mtp  = as_float(r.get("capacity_mtpa") if r is not None else None)
+        req_flow = as_float(r.get("required_design_mtpa") if r is not None else None)
+        reynolds = as_float(r.get("reynolds_number") if r is not None else None)
+        rep_cap  = as_float(r.get("reported_capacity_mtpa") if r is not None else None)
+
+        left, right = st.columns([1.2, 1])
         with left:
-            data_table(inputs)
-            render_missing_warning(inputs)
+            equation_box([
+                "P_avg = (2/3) × [P_in + P_out − (P_in × P_out)/(P_in + P_out)]",
+                "mass_flow = √[(π²/64) × ρ × ΔP × ID⁵ / (f × L)]",
+                "capacity_Mtpa = mass_flow_kg/s × 3600 × 8760 / 1e9 × capacity_factor",
+                "suitable = estimated_capacity ≥ required_design_flow",
+                "Re = 4 × ṁ / (π × μ × ID)  [verify turbulent regime]",
+            ])
+            data_table([
+                {"Input": "Length",             "Value": fmt_number(length, 1, " km"),      "Source": "NSTA/scenario"},
+                {"Input": "Inner diameter",     "Value": fmt_number(id_in, 3, " in"),       "Source": "NSTA/scenario"},
+                {"Input": "Avg pressure",       "Value": fmt_number(p_avg, 2, " MPa"),      "Source": "calculated"},
+                {"Input": "Fanning friction f", "Value": fmt_number(friction, 6),           "Source": "Moody/defaults"},
+                {"Input": "Reynolds number",    "Value": fmt_number(reynolds, 0),           "Source": "calculated"},
+                {"Input": "Required design flow","Value": fmt_number(req_flow, 2, " Mtpa"), "Source": "project requirement"},
+            ])
+
         with right:
-            equation_box(
-                [
-                    "P_average = (2/3) * (P_in + P_out - (P_in * P_out) / (P_in + P_out))",
-                    "required_design_flow = project_flow / capacity_factor",
-                    "capacity_suitable = estimated_capacity >= required_design_flow",
-                ]
-            )
-            status_pill("Capacity suitable", row.get("capacity_suitable") if row is not None else "not run")
-            st.metric("Estimated capacity", fmt_number(row.get("capacity_mtpa") if row is not None else None, 2, " MtCO2/year"))
+            status_pill("Capacity suitable", r.get("capacity_suitable") if r is not None else "not run")
+            st.metric("Estimated capacity",  fmt_number(cap_mtp, 2, " MtCO2/yr"))
+            st.metric("Required flow",       fmt_number(req_flow, 2, " MtCO2/yr"))
+            if cap_mtp is not None and req_flow is not None:
+                delta = cap_mtp - req_flow
+                st.metric("Capacity margin", fmt_number(delta, 2, " Mtpa"),
+                          delta_color="normal" if delta >= 0 else "inverse")
+            st.metric("Mass flow", fmt_number(cap_kgs, 1, " kg/s"))
+            if rep_cap is not None:
+                st.metric("Reported capacity (original gas)", fmt_number(rep_cap, 2, " Mtpa"))
+                if cap_mtp is not None:
+                    st.caption(f"CO2 capacity / original gas capacity = {cap_mtp/rep_cap*100:.0f}% — dense CO2 is denser than gas so capacity increases")
+
         render_layer_button("Run / refresh capacity layer", selection)
 
 
 def render_corrosion_layer(row: pd.Series | None, selection: dict[str, str]) -> None:
     with st.container(border=True):
         st.markdown('<div class="workflow-step"><h3>3. Corrosion Screening</h3></div>', unsafe_allow_html=True)
-        inputs = [
-            input_row("Water content", "see scenario/defaults", "ppmv", source="assumption file"),
-            input_row("Water specification limit", "see scenario/defaults", "ppmv", source="assumption file"),
-            input_row("Dew-point margin", "see scenario/defaults", "degC", source="assumption file"),
-            input_row("Future CO2 corrosion rate", row.get("future_co2_corrosion_rate_mm_per_year") if row is not None else None, "mm/year"),
-            input_row("Low corrosion case", row.get("corrosion_rate_low_mm_per_year") if row is not None else None, "mm/year"),
-            input_row("High corrosion case", row.get("corrosion_rate_high_mm_per_year") if row is not None else None, "mm/year"),
-        ]
-        left, right = st.columns([1.1, 1])
+        st.markdown(
+            '<div class="section-note">Internal corrosion risk from water content; future corrosion rate for remaining life. '
+            'Ref: ISO 27913:2024 §8.3 (water limit 500 ppmv for carbon steel); DNV-RP-J202.</div>',
+            unsafe_allow_html=True,
+        )
+
+        r = row
+        corr_rate     = as_float(r.get("future_co2_corrosion_rate_mm_per_year") if r is not None else None)
+        corr_low      = as_float(r.get("corrosion_rate_low_mm_per_year") if r is not None else None)
+        corr_high     = as_float(r.get("corrosion_rate_high_mm_per_year") if r is not None else None)
+
+        left, right = st.columns([1.2, 1])
         with left:
-            data_table(inputs)
+            equation_box([
+                "if water_content_ppmv > water_spec_limit_ppmv: corrosion_risk = high",
+                "if dew_point_margin_degC < 0: corrosion_risk = high  [ISO 27913:2024]",
+                "if water_content unknown: corrosion_risk ≥ medium (precautionary)",
+                "standard dry-dense CO2 water limit: 500 ppmv [DNV-RP-J202; ISO 27913:2024]",
+                "future_corrosion_rate used for remaining life (Gate 4)",
+            ])
+            data_table([
+                {"Input": "CO2 water content",      "Value": "see scenario defaults",         "Source": "assumption — replace with stream spec"},
+                {"Input": "Water spec limit",        "Value": "500 ppmv",                      "Source": "ISO 27913:2024; DNV-RP-J202"},
+                {"Input": "Dew-point margin",        "Value": "see scenario defaults",         "Source": "assumption"},
+                {"Input": "Future CO2 corr. rate",   "Value": fmt_number(corr_rate, 3, " mm/yr"), "Source": "scenario/defaults"},
+                {"Input": "Low corrosion case",      "Value": fmt_number(corr_low,  3, " mm/yr"), "Source": "sensitivity"},
+                {"Input": "High corrosion case",     "Value": fmt_number(corr_high, 3, " mm/yr"), "Source": "sensitivity"},
+            ])
+
         with right:
-            equation_box(
-                [
-                    "if water_content > water_limit: corrosion_risk = high",
-                    "if dew_point_margin < 0: corrosion_risk = high",
-                    "if water/dew-point evidence is missing: corrosion_risk at least medium",
-                ]
+            status_pill("Corrosion risk", r.get("corrosion_risk_level") if r is not None else "not run")
+            if corr_rate is not None:
+                st.metric("Future CO2 corrosion rate (base)", fmt_number(corr_rate, 3, " mm/yr"))
+            if corr_low is not None and corr_high is not None:
+                st.metric("Low case",  fmt_number(corr_low, 3, " mm/yr"))
+                st.metric("High case", fmt_number(corr_high, 3, " mm/yr"))
+            st.caption(
+                "⚠ Corrosion rate is an assumed value for all NSTA pipelines. "
+                "Validation requires: CO2 stream composition, water dew-point test, "
+                "and ILI metal-loss data [Kass et al. 2023; ISO 27913:2024]."
             )
-            status_pill("Corrosion risk", row.get("corrosion_risk_level") if row is not None else "not run")
+
         render_layer_button("Run / refresh corrosion layer", selection)
 
 
 def render_integrity_layer(row: pd.Series | None, selection: dict[str, str]) -> None:
     with st.container(border=True):
-        st.markdown('<div class="workflow-step"><h3>4. Wall Thickness And Remaining Life</h3></div>', unsafe_allow_html=True)
-        inputs = [
-            input_row("Nominal wall thickness", row.get("nominal_wall_thickness_mm") if row is not None else None, "mm", zero_invalid=True),
-            input_row("Historical wall loss", row.get("historical_wall_loss_mm") if row is not None else None, "mm"),
-            input_row("Current wall thickness", row.get("current_wall_thickness_mm") if row is not None else None, "mm"),
-            input_row("Minimum wall thickness", row.get("minimum_wall_thickness_mm") if row is not None else None, "mm", zero_invalid=True),
-            input_row("Future CO2 corrosion rate", row.get("future_co2_corrosion_rate_mm_per_year") if row is not None else None, "mm/year"),
-        ]
-        left, right = st.columns([1.1, 1])
+        st.markdown('<div class="workflow-step"><h3>4. Wall Thickness &amp; Remaining Life</h3></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="section-note">Barlow minimum wall check + remaining life from future corrosion rate. '
+            'Methodology: Mahmoud &amp; Dodds (2022) survival analysis approach. '
+            'Cross-check: ISO 27913:2024 §7; DNV-RP-J202.</div>',
+            unsafe_allow_html=True,
+        )
+
+        r = row
+        nominal_wall  = as_float(r.get("nominal_wall_thickness_mm") if r is not None else None)
+        hist_loss     = as_float(r.get("historical_wall_loss_mm") if r is not None else None)
+        current_wall  = as_float(r.get("current_wall_thickness_mm") if r is not None else None)
+        min_wall      = as_float(r.get("minimum_wall_thickness_mm") if r is not None else None)
+        avail_wall    = as_float(r.get("available_wall_thickness_mm") if r is not None else None)
+        avail_low     = as_float(r.get("available_wall_low_mm") if r is not None else None)
+        avail_high    = as_float(r.get("available_wall_high_mm") if r is not None else None)
+        corr_rate     = as_float(r.get("future_co2_corrosion_rate_mm_per_year") if r is not None else None)
+        life_base     = as_float(r.get("remaining_life_years") if r is not None else None)
+        life_low      = as_float(r.get("remaining_life_low_years") if r is not None else None)
+        life_high     = as_float(r.get("remaining_life_high_years") if r is not None else None)
+        rep_life      = as_float(r.get("reported_remaining_life_years") if r is not None else None)
+
+        left, right = st.columns([1.2, 1])
         with left:
-            data_table(inputs)
-            render_missing_warning(inputs)
+            equation_box([
+                "historical_wall_loss = corrosion_rate_historical × service_years",
+                "current_wall = nominal_wall − historical_wall_loss",
+                "minimum_wall = P × OD / (2 × SMYS × design_factor)  [Barlow]",
+                "available_wall = current_wall − minimum_wall",
+                "remaining_life = available_wall / future_CO2_corrosion_rate",
+                "uncertainty: ±20% nominal wall; ±60% minimum wall; ±25% wall loss [see Gate 1]",
+            ])
+            data_table([
+                {"Step": "Nominal wall (t₀)",        "Value": fmt_number(nominal_wall,  2, " mm"),  "Note": "design or NSTA record — verify source tier"},
+                {"Step": "− Historical loss",         "Value": fmt_number(hist_loss,     2, " mm"),  "Note": "rate × years"},
+                {"Step": "= Current wall (t_now)",    "Value": fmt_number(current_wall,  2, " mm"),  "Note": ""},
+                {"Step": "− Barlow minimum (t_min)",  "Value": fmt_number(min_wall,      2, " mm"),  "Note": "P × OD / (2 × SMYS × DF)"},
+                {"Step": "= Available wall (t_avail)","Value": fmt_number(avail_wall,    2, " mm"),  "Note": f"low={fmt_number(avail_low,1)} high={fmt_number(avail_high,1)}"},
+                {"Step": "÷ Future CO2 corr. rate",   "Value": fmt_number(corr_rate,     3, " mm/yr"),"Note": "from Gate 3"},
+                {"Step": "= Remaining life",          "Value": fmt_number(life_base,     1, " years"),"Note": f"low={fmt_number(life_low,1)} high={fmt_number(life_high,1)}"},
+            ])
+
         with right:
-            equation_box(
-                [
-                    "current_wall = nominal_wall - historical_wall_loss",
-                    "available_wall = current_wall - minimum_wall",
-                    "remaining_life = available_wall / future_CO2_corrosion_rate",
-                ]
-            )
-            st.metric("Available wall", fmt_number(row.get("available_wall_thickness_mm") if row is not None else None, 2, " mm"))
-            st.metric("Remaining life", fmt_number(row.get("remaining_life_years") if row is not None else None, 1, " years"))
+            st.metric("Remaining life (base)", fmt_number(life_base, 1, " years"))
+            st.metric("Low case",              fmt_number(life_low,  1, " years"))
+            st.metric("High case",             fmt_number(life_high, 1, " years"))
+            if rep_life is not None:
+                st.metric("Reported life (original source)", fmt_number(rep_life, 1, " years"))
+                if life_base is not None:
+                    delta_life = life_base - rep_life
+                    st.metric("Model vs reported", fmt_number(delta_life, 1, " years"),
+                              delta_color="normal" if abs(delta_life) < 5 else "inverse")
+            if avail_wall is not None and avail_wall < 0:
+                st.error("⛔ Available wall is negative — pipeline has exceeded design life at base case.", icon="🚨")
+            elif avail_wall is not None and avail_wall < 2:
+                st.warning("Available wall < 2 mm — very thin margin. Verify wall thickness source tier.", icon="⚠️")
+
         render_layer_button("Run / refresh integrity layer", selection)
 
 
 def render_gate_layer(row: pd.Series | None, selection: dict[str, str]) -> None:
     with st.container(border=True):
         st.markdown('<div class="workflow-step"><h3>5. Repurposing Evidence Gate</h3></div>', unsafe_allow_html=True)
-        left, right = st.columns([1, 1])
-        with left:
-            status_pill("Gate status", row.get("repurposing_gate_status") if row is not None else "not run")
-            status_pill("CO2 phase screen", row.get("repurposing_phase_status") if row is not None else "not run")
-            st.metric("Evidence score", fmt_number(row.get("repurposing_evidence_score") if row is not None else None, 1, "/100"))
-            equation_box(
-                [
-                    "gate_status = function(capacity, integrity, CO2 phase evidence, inspection evidence, material evidence)",
-                    "missing evidence is reported as an output, not hidden in a final score",
-                ]
-            )
-        with right:
+        st.markdown(
+            '<div class="section-note">Structured evidence checklist for CO2 repurposing. '
+            'Framework: DNV PTC 2022 (Leinum et al.); Monsma &amp; Murray (2026); '
+            'OTC-31457 (Luna-Ortiz 2022). Missing evidence is output, not hidden.</div>',
+            unsafe_allow_html=True,
+        )
+
+        r = row
+        evidence_score = as_float(r.get("repurposing_evidence_score") if r is not None else None)
+        gaps   = split_items(r.get("repurposing_evidence_gaps") if r is not None else None)
+        stops  = split_items(r.get("repurposing_showstoppers") if r is not None else None)
+        refs   = split_items(r.get("repurposing_gate_cited_references") if r is not None else None)
+        next_d = split_items(r.get("pre_lca_next_data") if r is not None else None)
+
+        equation_box([
+            "gate_status = f(capacity_gate, integrity_gate, phase_evidence, CO2_composition, material_certs, ILI, compatibility)",
+            "evidence_score = weighted sum of available vs required evidence items (0–100)",
+            "showstoppers → fail regardless of score",
+            "missing evidence → reported as gap, not failed automatically (screening philosophy)",
+        ])
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            status_pill("Gate status",      r.get("repurposing_gate_status")    if r is not None else "not run")
+            status_pill("CO2 phase screen", r.get("repurposing_phase_status")   if r is not None else "not run")
+            status_pill("Gate confidence",  r.get("repurposing_gate_confidence") if r is not None else "not run")
+            st.metric("Evidence score", fmt_number(evidence_score, 1, "/100"))
+
+        with col2:
             st.markdown("**Evidence gaps**")
-            gaps = split_items(row.get("repurposing_evidence_gaps") if row is not None else None)
-            st.write("\n".join(f"- {item}" for item in gaps) if gaps else "No evidence gaps listed.")
-            st.markdown("**Next data to add**")
-            next_data = split_items(row.get("pre_lca_next_data") if row is not None else None)
-            st.write("\n".join(f"- {item}" for item in next_data) if next_data else "No next-data list available.")
+            if gaps:
+                for g in gaps:
+                    st.markdown(f"- {g}")
+            else:
+                st.markdown("_None listed — run screening_")
+            if stops:
+                st.error("**Showstoppers:**\n" + "\n".join(f"- {s}" for s in stops), icon="🚨")
+
+        with col3:
+            st.markdown("**Next data required**")
+            if next_d:
+                for nd in next_d:
+                    st.markdown(f"- {nd}")
+            else:
+                st.markdown("_None listed_")
+            if refs:
+                st.markdown("**References cited**")
+                for ref in refs:
+                    st.markdown(f"- {ref}")
+
+        if r is not None:
+            reason = r.get("repurposing_gate_reason_summary")
+            if reason and str(reason).strip() not in ("", "nan"):
+                st.caption(f"Summary: {clean_text(reason)}")
+
         render_layer_button("Run / refresh repurposing gate", selection)
 
 
@@ -1160,34 +1468,37 @@ def render_work_scope_layer(row: pd.Series | None, selection: dict[str, str]) ->
     with st.container(border=True):
         st.markdown('<div class="workflow-step"><h3>6. Quantified Work Scope</h3></div>', unsafe_allow_html=True)
         st.markdown(
-            '<div class="section-note">Purpose: convert gate findings into quantities that cost and LCA can use.</div>',
+            '<div class="section-note">Converts gate findings into quantities for cost and LCA. '
+            'Work items are derived from evidence gaps, not invented. '
+            'Ref: Saipem PTC 2025 (D\'Alonzo et al.) IMR plan framework; DNV PTC 2025 (Torbergsen).</div>',
             unsafe_allow_html=True,
         )
+
+        r = row
+        equation_box([
+            "work_item_quantity = rule(work_item_type, pipeline_length_km, steel_mass_kg, evidence_gap_flag)",
+            "replacement_steel_kg = new_build_steel_mass × section_replacement_fraction",
+            "lca_refurbishment_steel = replacement_steel_kg (feeds Gate 8)",
+            "refurbishment_cost_drivers = work_scope_items (feeds Gate 7)",
+        ])
+
         cols = st.columns(4)
-        cols[0].metric("Work items", fmt_number(row.get("refurbishment_work_scope_item_count") if row is not None else None, 0))
-        cols[1].metric("Cost items", fmt_number(row.get("refurbishment_cost_item_count") if row is not None else None, 0))
-        cols[2].metric("LCA items", fmt_number(row.get("refurbishment_lca_item_count") if row is not None else None, 0))
-        cols[3].metric("Replacement steel", fmt_number(row.get("refurbishment_replacement_steel_kg") if row is not None else None, 0, " kg"))
-        equation_box(
-            [
-                "work_item_quantity = rule(work_item_type, pipeline_length, steel_mass, evidence_gap)",
-                "replacement_steel = new_build_steel_mass * recommended_refurbishment_fraction",
-            ]
-        )
+        cols[0].metric("Work items",        fmt_number(r.get("refurbishment_work_scope_item_count") if r is not None else None, 0))
+        cols[1].metric("Cost items",        fmt_number(r.get("refurbishment_cost_item_count")      if r is not None else None, 0))
+        cols[2].metric("LCA items",         fmt_number(r.get("refurbishment_lca_item_count")       if r is not None else None, 0))
+        cols[3].metric("Replacement steel", fmt_number(r.get("refurbishment_replacement_steel_kg") if r is not None else None, 0, " kg"))
+
         if not selected.empty:
-            visible = [
-                "work_item_name",
-                "work_stage",
-                "quantity_base",
-                "unit",
-                "cost_driver",
-                "lca_mapping_key",
-                "data_quality",
-            ]
-            available = [column for column in visible if column in selected.columns]
-            st.dataframe(selected[available], hide_index=True, width="stretch")
+            visible = ["work_item_name", "work_stage", "quantity_base", "unit", "cost_driver", "lca_mapping_key", "data_quality"]
+            available = [c for c in visible if c in selected.columns]
+            st.dataframe(selected[available], hide_index=True, use_container_width=True)
+            st.caption(
+                "Work scope quantities are derived from pipeline length and evidence gaps. "
+                "They are inputs to unit-cost screening (Gate 7) and LCA (Gate 8), "
+                "not contractor estimates. Data quality column follows the 7-tier hierarchy from Gate 1."
+            )
         else:
-            st.info("No work-scope table has been created yet for this selection.")
+            st.info("No work-scope table created yet. Run the screening layer.")
 
 
 def render_cost_layer(selection: dict[str, str], factor_mode: str) -> None:

@@ -1737,7 +1737,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 827344511.3437829,
+            "value": 827344511.3437828,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -1748,7 +1748,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 82734451.1343783,
+            "value": 82734451.13437828,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -1759,7 +1759,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 910078962.4781612,
+            "value": 910078962.4781611,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -1886,16 +1886,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -4828,16 +4818,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -7770,16 +7750,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -8810,7 +8780,7 @@
       "BUNDLE": "0",
       "BUNDLE_FLG": "",
       "CRS_CODE": "23031",
-      "CRS_NAME": "UTM31, ED50\r\n",
+      "CRS_NAME": "UTM31, ED50\n",
       "END_REAS": "",
       "UNTRENCHED": "U",
       "EXPOSED": "E",
@@ -10534,7 +10504,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 102625563.61858775,
+            "value": 102625563.61858773,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -10545,7 +10515,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 10262556.361858776,
+            "value": 10262556.361858774,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -10556,7 +10526,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 112888119.98044652,
+            "value": 112888119.9804465,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -10683,16 +10653,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -13610,16 +13570,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -16552,16 +16502,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -19470,16 +19410,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -22412,16 +22342,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -23464,7 +23384,7 @@
         "unit": "text",
         "source": "NSTA ranked candidate dataset",
         "quality": "reported",
-        "notes": "NSTA pipeline number PL762\r\nPL762\r\nPL762; rank 9"
+        "notes": "NSTA pipeline number PL762\nPL762\nPL762; rank 9"
       },
       {
         "scenario": "nsta_pl762_pl762_pl762",
@@ -25339,16 +25259,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -26339,7 +26249,7 @@
     "nsta_candidate": {
       "RANK": "9",
       "SCREENING_SCORE": "58.8",
-      "NSTAPIPNO": "PL762\r\nPL762\r\nPL762",
+      "NSTAPIPNO": "PL762\nPL762\nPL762",
       "PIPE_NAME": "SAGE PIPELINE",
       "REP_GROUP": "WOOD GROUP",
       "FLUID": "GAS",
@@ -28257,16 +28167,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -31012,7 +30912,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 72132775.14830843,
+            "value": 72132775.14830841,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -31023,7 +30923,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 7213277.514830843,
+            "value": 7213277.514830842,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -31034,7 +30934,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 79346052.66313927,
+            "value": 79346052.66313925,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -31161,16 +31061,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -33939,7 +33829,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 15773273.206215579,
+            "value": 15773273.206215577,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -33950,7 +33840,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1577327.320621558,
+            "value": 1577327.3206215578,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -34088,16 +33978,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -36866,7 +36746,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 74292182.17594413,
+            "value": 74292182.17594415,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -36877,7 +36757,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 7429218.217594414,
+            "value": 7429218.217594415,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -36888,7 +36768,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 81721400.39353855,
+            "value": 81721400.39353856,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -37015,16 +36895,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -39904,16 +39774,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -42644,7 +42504,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 46534506.41011014,
+            "value": 46534506.410110146,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -42655,7 +42515,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 4653450.641011014,
+            "value": 4653450.641011015,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -42666,7 +42526,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 51187957.05112115,
+            "value": 51187957.05112116,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -42793,16 +42653,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -45533,7 +45383,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 46804176.918764755,
+            "value": 46804176.91876475,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -45544,7 +45394,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 4680417.691876476,
+            "value": 4680417.691876475,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -45555,7 +45405,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 51484594.61064123,
+            "value": 51484594.610641226,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -45682,16 +45532,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -48431,7 +48271,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 60451863.20565286,
+            "value": 60451863.205652855,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -48442,7 +48282,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6045186.320565287,
+            "value": 6045186.320565286,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -48453,7 +48293,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 66497049.526218146,
+            "value": 66497049.52621814,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -48580,16 +48420,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -51478,16 +51308,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -54376,16 +54196,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -57294,16 +57104,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -60072,7 +59872,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 34730292.78127458,
+            "value": 34730292.78127459,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -60083,7 +59883,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 3473029.278127458,
+            "value": 3473029.278127459,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -60094,7 +59894,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 38203322.05940203,
+            "value": 38203322.05940205,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -60221,16 +60021,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -62961,7 +62751,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 96019.04474822972,
+            "value": 96019.04474822973,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -62972,7 +62762,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9601.904474822972,
+            "value": 9601.904474822973,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -62983,7 +62773,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 105620.94922305268,
+            "value": 105620.94922305271,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -63110,16 +62900,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -65999,16 +65779,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -68739,7 +68509,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 96019.04474822972,
+            "value": 96019.04474822973,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -68750,7 +68520,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9601.904474822972,
+            "value": 9601.904474822973,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -68761,7 +68531,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 105620.94922305268,
+            "value": 105620.94922305271,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -68888,16 +68658,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -71777,16 +71537,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -74517,7 +74267,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170733,
+            "value": 126663.42073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -74528,7 +74278,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170734,
+            "value": 12666.342073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -74666,16 +74416,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -77555,16 +77295,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -80295,7 +80025,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 96019.04474822972,
+            "value": 96019.04474822973,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -80306,7 +80036,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9601.904474822972,
+            "value": 9601.904474822973,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -80317,7 +80047,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 105620.94922305268,
+            "value": 105620.94922305271,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -80444,16 +80174,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -83333,16 +83053,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -86073,7 +85783,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170733,
+            "value": 126663.42073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -86084,7 +85794,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170734,
+            "value": 12666.342073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -86222,16 +85932,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -88962,7 +88662,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 112362.71193941776,
+            "value": 112362.71193941777,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -88973,7 +88673,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11236.271193941777,
+            "value": 11236.271193941779,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -88984,7 +88684,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 123598.98313335954,
+            "value": 123598.98313335955,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -89111,16 +88811,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -92029,16 +91719,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -94962,16 +94642,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -97726,7 +97396,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 31886494.690007873,
+            "value": 31886494.69000787,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -97737,7 +97407,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 3188649.4690007875,
+            "value": 3188649.469000787,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -97875,16 +97545,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -100793,16 +100453,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -103682,16 +103332,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -106451,7 +106091,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 31776174.936467342,
+            "value": 31776174.936467346,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -106462,7 +106102,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 3177617.4936467344,
+            "value": 3177617.493646735,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -106473,7 +106113,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 34953792.430114076,
+            "value": 34953792.43011408,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -106600,16 +106240,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -109489,16 +109119,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -112378,16 +111998,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -115127,7 +114737,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 15506046.104148995,
+            "value": 15506046.104148997,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -115138,7 +114748,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1550604.6104148997,
+            "value": 1550604.6104149,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -115149,7 +114759,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 17056650.714563895,
+            "value": 17056650.7145639,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -115276,16 +114886,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -118174,16 +117774,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -121087,16 +120677,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -124000,16 +123580,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -126933,16 +126503,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -129837,16 +129397,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -132735,16 +132285,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -135633,16 +135173,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -138411,7 +137941,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 22242662.253090955,
+            "value": 22242662.25309095,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -138422,7 +137952,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 2224266.225309096,
+            "value": 2224266.2253090953,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -138433,7 +137963,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 24466928.47840005,
+            "value": 24466928.478400048,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -138560,16 +138090,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -141449,16 +140969,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -144189,7 +143699,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 210424.71508654597,
+            "value": 210424.715086546,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -144200,7 +143710,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 21042.4715086546,
+            "value": 21042.471508654602,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -144211,7 +143721,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 231467.18659520056,
+            "value": 231467.1865952006,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -144338,16 +143848,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -147256,16 +146756,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -150154,16 +149644,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -153081,16 +152561,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -155999,16 +155469,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -158768,7 +158228,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 120438.71188873828,
+            "value": 120438.71188873827,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -158779,7 +158239,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12043.871188873829,
+            "value": 12043.871188873827,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -158917,16 +158377,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -161686,7 +161136,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 134591.23111838647,
+            "value": 134591.2311183865,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -161697,7 +161147,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 13459.123111838648,
+            "value": 13459.12311183865,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -161708,7 +161158,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 148050.35423022512,
+            "value": 148050.35423022514,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -161835,16 +161285,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -164604,7 +164044,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 136931.14009889093,
+            "value": 136931.14009889096,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -164615,7 +164055,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 13693.114009889094,
+            "value": 13693.114009889097,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -164626,7 +164066,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 150624.25410878003,
+            "value": 150624.25410878006,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -164753,16 +164193,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -167651,16 +167081,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -170569,16 +169989,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -173487,16 +172897,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -176256,7 +175656,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 181823.29750196697,
+            "value": 181823.29750196694,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -176267,7 +175667,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 18182.3297501967,
+            "value": 18182.329750196695,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -176278,7 +175678,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 200005.62725216366,
+            "value": 200005.62725216363,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -176405,16 +175805,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -179145,7 +178535,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 110419.05525168205,
+            "value": 110419.05525168203,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -179156,7 +178546,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11041.905525168206,
+            "value": 11041.905525168204,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -179167,7 +178557,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 121460.96077685025,
+            "value": 121460.96077685023,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -179294,16 +178684,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -182034,7 +181414,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 106307.50465810025,
+            "value": 106307.50465810027,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -182045,7 +181425,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 10630.750465810026,
+            "value": 10630.750465810028,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -182056,7 +181436,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 116938.25512391028,
+            "value": 116938.25512391029,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -182183,16 +181563,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -184923,7 +184293,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 253326.84146341466,
+            "value": 253326.84146341463,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -184934,7 +184304,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 25332.684146341468,
+            "value": 25332.684146341464,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -185072,16 +184442,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -187970,16 +187330,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -190883,16 +190233,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -193796,16 +193136,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -196565,7 +195895,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 114405.67033831628,
+            "value": 114405.6703383163,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -196576,7 +195906,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11440.567033831629,
+            "value": 11440.56703383163,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -196587,7 +195917,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 125846.23737214791,
+            "value": 125846.23737214792,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -196714,16 +196044,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -199483,7 +198803,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 63331.710365853665,
+            "value": 63331.71036585366,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -199494,7 +198814,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6333.171036585367,
+            "value": 6333.171036585366,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -199632,16 +198952,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -202401,7 +201711,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 63331.710365853665,
+            "value": 63331.71036585366,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -202412,7 +201722,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6333.171036585367,
+            "value": 6333.171036585366,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -202550,16 +201860,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -205319,7 +204619,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 367732.5118017309,
+            "value": 367732.51180173084,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -205330,7 +204630,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 36773.251180173094,
+            "value": 36773.25118017309,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -205341,7 +204641,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 404505.762981904,
+            "value": 404505.7629819039,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -205468,16 +204768,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -208237,7 +207527,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 114405.67033831628,
+            "value": 114405.6703383163,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -208248,7 +207538,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11440.567033831629,
+            "value": 11440.56703383163,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -208259,7 +207549,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 125846.23737214791,
+            "value": 125846.23737214792,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -208386,16 +207676,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -211155,7 +210435,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 89890.1695515342,
+            "value": 89890.16955153421,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -211166,7 +210446,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 8989.01695515342,
+            "value": 8989.016955153422,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -211177,7 +210457,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 98879.18650668762,
+            "value": 98879.18650668763,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -211304,16 +210584,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -214073,7 +213343,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 96019.04474822972,
+            "value": 96019.04474822973,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -214084,7 +213354,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9601.904474822972,
+            "value": 9601.904474822973,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -214095,7 +213365,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 105620.94922305268,
+            "value": 105620.94922305271,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -214222,16 +213492,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -217140,16 +216400,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -220058,16 +219308,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -222807,7 +222047,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 32133692.65627458,
+            "value": 32133692.656274583,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -222818,7 +222058,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 3213369.265627458,
+            "value": 3213369.2656274587,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -222829,7 +222069,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 35347061.92190204,
+            "value": 35347061.921902046,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -222956,16 +222196,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -225898,16 +225128,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -228802,16 +228022,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -231542,7 +230752,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 13485568.391129032,
+            "value": 13485568.39112903,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -231553,7 +230763,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1348556.8391129032,
+            "value": 1348556.839112903,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -231564,7 +230774,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 14834125.230241936,
+            "value": 14834125.230241932,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -231691,16 +230901,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -234431,7 +233631,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 304400.8014358772,
+            "value": 304400.8014358773,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -234442,7 +233642,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 30440.080143587722,
+            "value": 30440.08014358773,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -234453,7 +233653,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 334840.88157946494,
+            "value": 334840.881579465,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -234580,16 +233780,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -237478,16 +236668,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -240411,16 +239591,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -243315,16 +242485,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -246233,16 +245393,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -249137,16 +248287,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -249959,7 +249099,7 @@
         "outputs": [
           {
             "name": "lca_steel_mass_new_build_kg",
-            "value": 2272.855104105282,
+            "value": 2272.8551041052815,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -249969,7 +249109,7 @@
           },
           {
             "name": "lca_refurbishment_steel_kg",
-            "value": 113.64275520526411,
+            "value": 113.64275520526408,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -250001,7 +249141,7 @@
           },
           {
             "name": "lca_avoided_steel_kg",
-            "value": 2159.212348900018,
+            "value": 2159.2123489000173,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -252041,16 +251181,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -254781,7 +253911,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 169565.54710857588,
+            "value": 169565.5471085759,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -254792,7 +253922,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 16956.55471085759,
+            "value": 16956.554710857592,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -254803,7 +253933,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 186522.10181943348,
+            "value": 186522.1018194335,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -254930,16 +254060,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -255752,7 +254872,7 @@
         "outputs": [
           {
             "name": "lca_steel_mass_new_build_kg",
-            "value": 1905.524986270085,
+            "value": 1905.5249862700848,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -255794,7 +254914,7 @@
           },
           {
             "name": "lca_avoided_steel_kg",
-            "value": 1810.2487369565808,
+            "value": 1810.2487369565806,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -257834,16 +256954,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -260723,16 +259833,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -263516,7 +262616,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 11984291.577325676,
+            "value": 11984291.577325677,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -263527,7 +262627,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1198429.1577325675,
+            "value": 1198429.1577325677,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -263538,7 +262638,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 13182720.735058242,
+            "value": 13182720.735058244,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -263665,16 +262765,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -266405,7 +265495,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 112362.71193941776,
+            "value": 112362.71193941777,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -266416,7 +265506,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11236.271193941777,
+            "value": 11236.271193941779,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -266427,7 +265517,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 123598.98313335954,
+            "value": 123598.98313335955,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -266554,16 +265644,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -269443,16 +268523,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -272332,16 +271402,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -275072,7 +274132,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170733,
+            "value": 126663.42073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -275083,7 +274143,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170734,
+            "value": 12666.342073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -275221,16 +274281,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -277961,7 +277011,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 67417.62716365066,
+            "value": 67417.62716365067,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -277972,7 +277022,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6741.762716365066,
+            "value": 6741.762716365068,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -277983,7 +277033,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 74159.38988001572,
+            "value": 74159.38988001573,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -278110,16 +277160,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -280850,7 +279890,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170733,
+            "value": 126663.42073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -280861,7 +279901,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170734,
+            "value": 12666.342073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -280999,16 +280039,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -283917,16 +282947,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -286850,16 +285870,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -289619,7 +288629,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 104190.87834382376,
+            "value": 104190.87834382374,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -289630,7 +288640,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 10419.087834382377,
+            "value": 10419.087834382375,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -289641,7 +288651,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 114609.96617820613,
+            "value": 114609.96617820612,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -289768,16 +288778,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -292686,16 +291686,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -295426,7 +294416,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 2711005.795338316,
+            "value": 2711005.7953383164,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -295448,7 +294438,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 2982106.3748721476,
+            "value": 2982106.374872148,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -295575,16 +294565,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -298502,16 +297482,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -301271,7 +300241,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 273756.4254523996,
+            "value": 273756.42545239965,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -301282,7 +300252,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 27375.64254523996,
+            "value": 27375.642545239967,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -301293,7 +300263,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 301132.06799763953,
+            "value": 301132.0679976396,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -301420,16 +300390,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -304204,7 +303164,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 185909.214299764,
+            "value": 185909.21429976396,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -304215,7 +303175,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 18590.9214299764,
+            "value": 18590.921429976395,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -304226,7 +303186,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 204500.13572974037,
+            "value": 204500.13572974034,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -304353,16 +303313,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -307137,7 +306087,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 153221.8799173879,
+            "value": 153221.87991738788,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -307148,7 +306098,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 15322.187991738792,
+            "value": 15322.187991738789,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -307159,7 +306109,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 168544.0679091267,
+            "value": 168544.06790912666,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -307286,16 +306236,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -310219,16 +309159,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -313117,16 +312047,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -315872,7 +314792,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 484181.1405389457,
+            "value": 484181.14053894574,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -315883,7 +314803,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 48418.11405389457,
+            "value": 48418.11405389458,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -315894,7 +314814,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 532599.2545928402,
+            "value": 532599.2545928403,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -316021,16 +314941,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -318790,7 +317700,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 7891948.294944925,
+            "value": 7891948.294944924,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -318801,7 +317711,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 789194.8294944926,
+            "value": 789194.8294944925,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -318812,7 +317722,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 8681143.124439418,
+            "value": 8681143.124439416,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -318939,16 +317849,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -321688,7 +320588,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 13307831.01042486,
+            "value": 13307831.010424862,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -321699,7 +320599,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1330783.101042486,
+            "value": 1330783.1010424863,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -321710,7 +320610,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 14638614.111467347,
+            "value": 14638614.111467348,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -321837,16 +320737,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -324741,16 +323631,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -327668,16 +326548,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -330432,7 +329302,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 15526483.83162864,
+            "value": 15526483.831628637,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -330443,7 +329313,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1552648.383162864,
+            "value": 1552648.3831628638,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -330581,16 +329451,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -333494,16 +332354,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -336392,16 +335242,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -339319,16 +338159,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -342208,16 +341038,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -344948,7 +343768,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170733,
+            "value": 126663.42073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -344959,7 +343779,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170734,
+            "value": 12666.342073170732,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -345097,16 +343917,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -347986,16 +346796,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -350875,16 +349675,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -353764,16 +352554,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -356653,16 +355433,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -359557,16 +358327,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -362446,16 +361206,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -365201,7 +363951,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 108268.08384443037,
+            "value": 108268.08384443035,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -365223,7 +363973,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 119094.8922288734,
+            "value": 119094.89222887339,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -365350,16 +364100,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -368248,16 +366988,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -371003,7 +369733,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 3133898.183910307,
+            "value": 3133898.1839103065,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -371014,7 +369744,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 313389.8183910307,
+            "value": 313389.81839103065,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -371025,7 +369755,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 3447288.0023013377,
+            "value": 3447288.002301337,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -371152,16 +369882,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -373916,7 +372636,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 8903233.066249993,
+            "value": 8903233.066249995,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -373927,7 +372647,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 890323.3066249993,
+            "value": 890323.3066249995,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -373938,7 +372658,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 9793556.372874992,
+            "value": 9793556.372874994,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -374065,16 +372785,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -376820,7 +375530,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 112362.71193941776,
+            "value": 112362.71193941777,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -376831,7 +375541,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11236.271193941777,
+            "value": 11236.271193941779,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -376842,7 +375552,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 123598.98313335954,
+            "value": 123598.98313335955,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -376969,16 +375679,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -379709,7 +378409,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 416763.51337529504,
+            "value": 416763.513375295,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -379720,7 +378420,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 41676.35133752951,
+            "value": 41676.3513375295,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -379731,7 +378431,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 458439.8647128245,
+            "value": 458439.86471282446,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -379858,16 +378558,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -382598,7 +381288,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 124620.46233280882,
+            "value": 124620.4623328088,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -382620,7 +381310,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 137082.5085660897,
+            "value": 137082.50856608967,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -382747,16 +381437,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -385487,7 +384167,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 27784.234225019667,
+            "value": 27784.234225019663,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -385498,7 +384178,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 2778.423422501967,
+            "value": 2778.4234225019663,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -385509,7 +384189,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 30562.657647521635,
+            "value": 30562.657647521628,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -385636,16 +384316,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -388385,7 +387055,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 615653.4402336322,
+            "value": 615653.4402336321,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -388396,7 +387066,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 61565.34402336323,
+            "value": 61565.34402336321,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -388407,7 +387077,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 677218.7842569954,
+            "value": 677218.7842569953,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -388534,16 +387204,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -391432,16 +390092,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -394172,7 +392822,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 62718.82284618411,
+            "value": 62718.822846184106,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -394183,7 +392833,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6271.882284618412,
+            "value": 6271.882284618411,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -394194,7 +392844,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 68990.70513080253,
+            "value": 68990.70513080251,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -394321,16 +392971,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -397061,7 +395701,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 400419.84618410695,
+            "value": 400419.846184107,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -397083,7 +395723,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 440461.83080251765,
+            "value": 440461.8308025177,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -397210,16 +395850,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -399950,7 +398580,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 204295.83988985053,
+            "value": 204295.8398898505,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -399961,7 +398591,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 20429.583988985054,
+            "value": 20429.58398898505,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -399972,7 +398602,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 224725.42387883557,
+            "value": 224725.42387883554,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -400099,16 +398729,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -402988,16 +401608,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -405940,16 +404550,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -408695,7 +407295,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 171608.50550747445,
+            "value": 171608.50550747442,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -408717,7 +407317,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 188769.3560582219,
+            "value": 188769.35605822186,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -408844,16 +407444,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -411733,16 +410323,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -414482,7 +413062,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 20627750.953678202,
+            "value": 20627750.953678206,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -414493,7 +413073,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 2062775.0953678202,
+            "value": 2062775.0953678207,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -414504,7 +413084,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 22690526.04904602,
+            "value": 22690526.049046025,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -414631,16 +413211,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -417386,7 +415956,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 67009.03548387095,
+            "value": 67009.03548387096,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -417397,7 +415967,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6700.903548387095,
+            "value": 6700.903548387097,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -417408,7 +415978,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 73709.93903225804,
+            "value": 73709.93903225806,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -417535,16 +416105,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -420424,16 +418984,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -423164,7 +421714,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 68643.40220298976,
+            "value": 68643.40220298978,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -423175,7 +421725,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6864.340220298976,
+            "value": 6864.340220298978,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -423186,7 +421736,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 75507.74242328874,
+            "value": 75507.74242328876,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -423313,16 +421863,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -426202,16 +424742,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -428957,7 +427487,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 9358792.42535405,
+            "value": 9358792.425354052,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -428968,7 +427498,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 935879.2425354051,
+            "value": 935879.2425354053,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -428979,7 +427509,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 10294671.667889455,
+            "value": 10294671.667889457,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -429106,16 +427636,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -431861,7 +430381,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 124620.46233280882,
+            "value": 124620.4623328088,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -431883,7 +430403,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 137082.5085660897,
+            "value": 137082.50856608967,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -432010,16 +430530,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -434899,16 +433409,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -437788,16 +436288,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -440552,7 +439042,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 4698804.317466561,
+            "value": 4698804.317466562,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -440563,7 +439053,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 469880.4317466561,
+            "value": 469880.4317466562,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -440574,7 +439064,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 5168684.749213217,
+            "value": 5168684.749213218,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -440701,16 +439191,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -443456,7 +441936,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 130749.33752950434,
+            "value": 130749.33752950432,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -443478,7 +441958,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 143824.27128245478,
+            "value": 143824.27128245475,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -443605,16 +442085,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -446345,7 +444815,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 91728.83211054288,
+            "value": 91728.83211054286,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -446356,7 +444826,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9172.883211054288,
+            "value": 9172.883211054286,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -446367,7 +444837,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 100901.71532159716,
+            "value": 100901.71532159715,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -446494,16 +444964,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },

@@ -178,9 +178,14 @@ All references are in `/write_up/papers_reports_guidelines/`. Every model layer 
 
 | Ref | Authors / Title | Year | Relevant Gates | Key content |
 |---|---|---|---|---|
-| NETL 2024 | FECM/NETL CO2 Transport Cost Model | 2024 | Gate 7 | **Primary reference for new-build CAPEX model.** Contains the regression equations, CO2 factor, escalation methodology. Must be read in full before finalising costs.py |
-| Smith 2021 (MIT) | Cost of CO2 Transport and Storage in Global Integrated Assessment Modelling | 2021 | Gate 7 | Reviews all four regression models (Parker, Rui, McCoy, Brown). Provides cross-comparison. **Use to validate our multi-model implementation** |
-| GlobalCCS 2024 (DNV) | Building Our Way to Net-Zero: CO2 Pipelines in the United States | 2024 | Gate 7 | Current US CO2 pipeline cost benchmark data. Use to sense-check our new-build CAPEX outputs |
+| NETL 2024 | FECM/NETL CO2 Transport Cost Model | 2024 | Gate 7 | **Primary reference for new-build CAPEX model.** Contains regression equations, CO2 factor (1.25 on mat+lab for D>20"), escalation indices. All four model equations, coefficients and validation cases in one document |
+| Smith 2021 (MIT) | Cost of CO2 Transport and Storage in Global Integrated Assessment Modelling | 2021 | Gate 7 | Reviews all four regression models. Cross-comparison. Use to validate our multi-model implementation |
+| ZEP 2011 | The Costs of CO2 Transport: Post-Demonstration CCS in the EU | 2011 | Gate 7 | **Best available European offshore CO2 benchmark.** Based on real in-house data from Gassco, AMEC, Shell, Vattenfall. North Sea route. CAPEX tables for 2.5–20 Mtpa, 180–1500 km offshore. Base year Q2 2009 EUR. **Use as cross-validation benchmark** |
+| Knoope et al. 2014 | Improved cost models for optimizing CO2 pipeline configuration | 2014 | Gate 7 | Physics-based European model (Utrecht + Shell). Costs in €2010. Offshore factor implicitly 1.7–3.5× vs onshore. Explicitly cross-checks against ZEP. Confirms our offshore factor 1.6 is conservative lower bound |
+| Baek et al. 2026 | CO2 pipeline network transportation cost model (Argonne) | 2026 | Gate 7 | **Most current peer-reviewed paper (April 2026).** From same team as Brown et al. Uses Brown coefficients + road-network routing. Confirms regional variation is 13–70% — averaging across regions distorts estimates |
+| GlobalCCS 2024 (DNV) | Building Our Way to Net-Zero: CO2 Pipelines in the United States | 2024 | Gate 7 | US CO2 pipeline cost benchmark. Use to sense-check outputs |
+
+**Critical limitation documented in references:** There is no published regression equation calibrated on measured offshore CO2 pipeline construction costs. All four regression models (Parker–Brown) are US onshore gas data with scalar adjustment factors. ZEP (2011) and Knoope et al. (2014) give the closest available European offshore benchmarks but as cost tables and physics models, not regressions. This limitation must be stated explicitly in the journal paper and the UI.
 
 ### 10.4 Hydraulics and Flow Assurance References
 

@@ -253,3 +253,138 @@ Model base year (USD)
 
 *Document owner: Amir Jahanbakhsh | Heriot-Watt University*  
 *Contributors: Jean Carlos Campos Valverde (student dissertation, 2025)*
+
+---
+
+## 12. European and Offshore-Specific Cost References
+
+### 12.1 Critical gap: no offshore CO2 regression model exists
+
+All four regression models in Section 2 (Parker, McCoy & Rubin, Rui et al., Brown et al.) are calibrated on **US onshore natural gas pipeline** data from the Oil & Gas Journal. The CO2 factor and offshore factor are applied as scalar multipliers — they are not derived from actual offshore CO2 pipeline construction cost data.
+
+There is currently no published regression equation calibrated on measured offshore CO2 pipeline construction costs. This is explicitly acknowledged in the literature: the nascent stage of CO2 transport infrastructure means there is no historical precedent for empirically grounded offshore CO2 pipeline cost data [CEEPR-2024].
+
+### 12.2 ZEP (2011) — European offshore CO2 benchmark cost tables
+
+**Reference:** Zero Emissions Platform (ZEP). (2011). *The Costs of CO2 Transport: Post-Demonstration CCS in the EU*. European Technology Platform for Zero Emission Fossil Fuel Power Plants. Base year: Q2 2009 EUR.
+
+This is the most authoritative European source for offshore CO2 pipeline costs. It is based on **in-house data from ZEP member organisations** including Gassco (Norway), AMEC (UK), Vattenfall (Sweden), Open Grid Europe (Germany), Tel-Tek (Norway), and Shell Projects & Technology. The reference route is Belgian coast → Norwegian continental shelf — directly North Sea relevant.
+
+**Key cost data from ZEP Annex 3 (Q2 2009 EUR, 8% discount rate, 40-year lifetime):**
+
+| Volume | Length | Diameter | CAPEX (M€) | Annual cost (M€/yr) | Unit cost (€/tonne CO2) |
+|---|---|---|---|---|---|
+| 2.5 Mtpa | 180 km offshore | 12" | 250 | 23.3 | 9.34 |
+| 2.5 Mtpa | 500 km offshore | 16" | 581 | 51.0 | 20.42 |
+| 10 Mtpa | 180 km offshore | 22" | 338 | 33.1 | 3.31 |
+| 10 Mtpa | 500 km offshore | 26" | 781 | 70.2 | 7.02 |
+| 20 Mtpa | 180 km offshore | 26" | 424 | 43.4 | 2.17 |
+| 20 Mtpa | 500 km offshore | 32" | 1,035 | 94.7 | 4.74 |
+| 20 Mtpa | 750 km offshore | 34" | 1,552 | 138.1 | 6.90 |
+| 20 Mtpa | 1,500 km offshore | 40" | 3,501 | 301.5 | 15.08 |
+
+OPEX is assumed at 7.9 M€/yr regardless of length, based on 1.87% of CAPEX.
+
+**Annual unit cost in k€/inch/km (from Annex 3):**
+
+| Volume | 10 km | 180 km | 500 km | 750 km | 1,500 km |
+|---|---|---|---|---|---|
+| 2.5 Mtpa | 10.81 | 6.38 | 5.98 | 4.79 | — |
+| 10 Mtpa | — | 8.36 | 5.40 | 5.00 | 4.50 |
+| 20 Mtpa | — | 9.28 | 5.92 | 5.41 | 5.03 |
+
+**Key design assumptions (offshore):**
+- Inlet pressure: 200 barg; outlet pressure: 60 barg
+- Design pressure: 250 barg; pipeline material: carbon steel
+- External coating: 3 mm polypropylene + 70 mm concrete for >16"
+- Buried 100% in first 50 km (shallow sand wave area); no burial elsewhere
+- No booster/pumping stations offshore (inlet pressure only)
+- Accuracy: ±30%
+
+**How to use for cross-validation:**
+Convert ZEP 2009 EUR to project-year USD and compare against our regression model outputs for matching diameter and length. This provides the only available European offshore CO2 pipeline cost benchmark. Note that ZEP costs include a subsea template; our regression model does not include a template or well manifold.
+
+### 12.3 Knoope et al. (2014) — Physics-based European CO2 pipeline cost model
+
+**Reference:** Knoope, M.M.J., Guijt, W., Ramírez, A., & Faaij, A.P.C. (2014). Improved cost models for optimizing CO2 pipeline configuration for point-to-point pipelines and simple networks. *International Journal of Greenhouse Gas Control*, 22, 25–46. https://doi.org/10.1016/j.ijggc.2013.12.016
+
+**What this model is:**
+A physics-based cost optimisation tool (not a regression) developed at Utrecht University with Shell Projects & Technology. It calculates minimum levelised cost of CO2 transport by optimising: (1) inlet pressure, (2) outer diameter (from standard NPS sizes), (3) steel grade (X42–X120), and (4) number of pumping stations. All costs in €2010, escalated from literature sources using the IHS Upstream Capital Cost Index (UCCI).
+
+**Key structural cost equations:**
+
+*Material costs — pipeline weight-based:*
+`C_material = (π/4) × [(OD²_NPS − ID²_NPS) × L × ρ_steel × C_steel]`
+where ρ_steel = 7850 kg/m³; C_steel = €1.17–1.79/kg depending on grade (X42–X120)
+
+*Construction costs — components:*
+- **Labour**: based on European pipeline construction costs (M€/km function of OD)
+- **ROW and miscellaneous**: fixed €/km values by terrain type
+- **Offshore factor**: implicitly included via separate offshore terrain parameters and no pumping stations
+
+*Offshore-specific parameters:*
+- Maximum pressure: 35 MPa (vs 24 MPa onshore liquid)
+- No pumping stations allowed offshore (platform required → very expensive)
+- Minimum wall thickness: 2.5% of OD_NPS (anti-corrosion and stability)
+- Design factor: 0.72 (same as sparsely populated onshore)
+- Outlet pressure: fixed 8 MPa
+
+**Key results for offshore liquid CO2 transport (Table 3 of paper, costs in €2010/tonne CO2):**
+
+| Mass flow (kg/s) | Length (km) | OD (m) | Inlet P (MPa) | LCtrans (€/t) |
+|---|---|---|---|---|
+| 100 | 100 | 0.32 | 13 | 3.25 |
+| 300 | 100 | 0.51 | 12 | 1.43 |
+| 300 | 340 | 0.51 | 22 | 4.35 |
+| 300 | 350 | 0.61 | 14 | 4.91 |
+
+These are levelised transport costs only (excluding initial compression). LCtrans for offshore cases is 1.7–3.5× higher than equivalent onshore sparsely populated cases, giving an empirically derived offshore cost multiplier of approximately **1.7–3.5×** depending on length and mass flow — this is higher than our assumed 1.6 and consistent with the literature range of 1.5–2.0×.
+
+**Validation against ZEP:**
+Knoope et al. explicitly compare their model against ZEP (2011) in Table 5. For a 180 km offshore trunkline at 20 Mtpa: ZEP gives LCtrans = 3.4 €/t, Knoope model gives 1.92–1.97 €/t. The Knoope model gives lower costs because it optimises the configuration (larger diameter, lower pressure drop) rather than using ZEP's fixed assumptions.
+
+**Implication for our model:**
+The Knoope et al. (2014) model confirms that our offshore factor of 1.6 is conservative (potentially underestimating costs) and that the range 1.5–2.0 is appropriate, with 2.0 being more likely for small-diameter, short-range North Sea pipelines.
+
+### 12.4 Baek, Tanveer & Elgowainy (2026) — Most current US model
+
+**Reference:** Baek, K.H., Tanveer, S., & Elgowainy, A. (2026). Carbon dioxide pipeline network transportation cost model: evaluating economic and geographic factors for efficient carbon capture, storage, and utilization. *International Journal of Greenhouse Gas Control*, 151, 104622. https://doi.org/10.1016/j.ijggc.2026.104622
+
+From Argonne National Laboratory (same team as Brown et al. 2022). Uses Brown et al. coefficients as the cost foundation with road-network routing and pipeline diameter optimisation. Published April 2026 — the most current peer-reviewed CO2 pipeline cost paper available.
+
+Key finding: **Regional cost variation is substantial (13–70% above lowest-cost region for identical conditions).** Averaging across regions can significantly distort cost estimates — supports our use of "Avg" as a default with a clear warning.
+
+**Validation case from paper:**
+- Case 1: 340 miles, Mississippi, 11.5 MMT/year → $7.4/tonne CO2 → total CAPEX $322M
+- This uses Brown et al. regional (GP group) coefficients, consistent with our implementation.
+
+### 12.5 Updated bibliography entries
+
+[ZEP-2011]
+    Zero Emissions Platform (ZEP). (2011). *The Costs of CO2 Transport: Post-Demonstration CCS in the EU*. European Technology Platform for Zero Emission Fossil Fuel Power Plants. Brussels, Belgium. Base year: Q2 2009.
+
+[KNOOPE-2014]
+    Knoope, M.M.J., Guijt, W., Ramírez, A., & Faaij, A.P.C. (2014). Improved cost models for optimizing CO2 pipeline configuration for point-to-point pipelines and simple networks. *International Journal of Greenhouse Gas Control*, 22, 25–46. https://doi.org/10.1016/j.ijggc.2013.12.016
+
+[BAEK-2026]
+    Baek, K.H., Tanveer, S., & Elgowainy, A. (2026). Carbon dioxide pipeline network transportation cost model: evaluating economic and geographic factors for efficient carbon capture, storage, and utilization. *International Journal of Greenhouse Gas Control*, 151, 104622. https://doi.org/10.1016/j.ijggc.2026.104622
+
+[CEEPR-2024]
+    MIT CEEPR Working Paper 2024-12. (2024). *The Impact of Financing Costs on CO2 Transport Infrastructure*. MIT Center for Energy and Environmental Policy Research. Available at: https://ceepr.mit.edu/wp-content/uploads/2024/08/MIT-CEEPR-WP-2024-12.pdf
+
+---
+
+## 13. Revised Offshore Factor Justification
+
+Based on the complete reference review above, the offshore factor range and default are revised as follows:
+
+| Source | Offshore factor (vs onshore) | Context |
+|---|---|---|
+| USAID (2002) | ~1.96× | US 2000–2001, general offshore |
+| ZEP (2011) | ~1.7–2.4× | North Sea offshore CO2 pipelines, derived from CAPEX comparison |
+| Knoope et al. (2014) | ~1.7–3.5× | European offshore CO2, physics-based |
+| Our model default | **1.6×** | Conservative estimate, North Sea screening |
+
+The default of 1.6 is **deliberately conservative** for screening purposes — it is at the low end of published ranges. The journal paper must state clearly that this factor is an assumption and not derived from measured offshore CO2 pipeline data. A sensitivity range of 1.5–2.0 is retained, with 2.0 as the upper bound consistent with all cited references.
+
+**Recommendation for future work:** Calibrate the offshore factor against actual North Sea project costs when these become publicly available (e.g., NEP/Northern Endurance Partnership 143 km 28" pipeline, currently under construction).

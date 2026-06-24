@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-13T13:51:57.798589+00:00",
+  "generated_at_utc": "2026-06-23T13:51:44.565006+00:00",
   "source_geojson": "data/raw/nsta_pipeline_linear.geojson",
   "source_ranked_csv": "model_layers/01_data_foundation/nsta_candidate_ranked.csv",
   "candidate_count": 144,

@@ -23,7 +23,6 @@ def _float_or_none(value: Any) -> float | None:
 def _downsample_path(path: list[list[float]], max_points: int) -> list[list[float]]:
     if max_points < 2 or len(path) <= max_points:
         return path
-
     step = (len(path) - 1) / float(max_points - 1)
     sampled: list[list[float]] = []
     last_index = -1
@@ -93,14 +92,7 @@ def build_candidate_route_asset(
     output_path: Path,
     max_points_per_part: int = 220,
 ) -> dict[str, Any]:
-    """Create a compact route JSON for the Streamlit dashboard.
-
-    The raw NSTA GeoJSON is intentionally not committed to GitHub because it is
-    large and generated. This function extracts only the ranked screening
-    candidates and reduces geometry detail for fast dashboard rendering. The
-    compact route file is visual-only; engineering calculations continue to use
-    the CSV model inputs.
-    """
+    """Create a compact route JSON for the Streamlit dashboard (candidates only)."""
 
     with ranked_csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
         ranked_rows = list(csv.DictReader(handle))
@@ -122,7 +114,6 @@ def build_candidate_route_asset(
         pipeline_id = _normalise_pipeline_id(properties.get("NSTAPIPNO"))
         if pipeline_id not in ranked_by_id:
             continue
-
         ranked = ranked_by_id[pipeline_id]
         paths = _geometry_paths(feature.get("geometry") or {}, max_points_per_part)
         for part_index, path in enumerate(paths, start=1):
@@ -162,6 +153,107 @@ def build_candidate_route_asset(
         handle.write("\n")
 
     return {
+        "candidate_count": len(ranked_by_id),
+        "route_part_count": len(route_records),
+        "pipelines_with_routes": len(feature_count_by_pipeline),
+        "output_path": str(output_path),
+    }
+
+
+def build_all_routes_asset(
+    *,
+    raw_geojson_path: Path,
+    ranked_csv_path: Path,
+    output_path: Path,
+    max_points_per_part: int = 60,
+) -> dict[str, Any]:
+    """Create a compact route JSON for ALL NSTA pipelines.
+
+    Candidates (those in ranked_csv_path) are tagged is_candidate=True so the
+    map can colour them differently.  Non-candidates are still pickable so users
+    can click any pipeline to view its properties.
+    """
+
+    with ranked_csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        ranked_rows = list(csv.DictReader(handle))
+
+    ranked_by_id: dict[str, dict[str, Any]] = {
+        _normalise_pipeline_id(row.get("NSTAPIPNO")): row
+        for row in ranked_rows
+        if _normalise_pipeline_id(row.get("NSTAPIPNO"))
+    }
+
+    with raw_geojson_path.open("r", encoding="utf-8") as handle:
+        raw_geojson = json.load(handle)
+
+    route_records: list[dict[str, Any]] = []
+    feature_count_by_pipeline: dict[str, int] = {}
+    all_pipeline_ids: set[str] = set()
+
+    for feature in raw_geojson.get("features", []):
+        properties = feature.get("properties") or {}
+        pipeline_id = _normalise_pipeline_id(properties.get("NSTAPIPNO"))
+        if not pipeline_id:
+            continue
+
+        is_candidate = pipeline_id in ranked_by_id
+        ranked = ranked_by_id.get(pipeline_id, {})
+
+        paths = _geometry_paths(feature.get("geometry") or {}, max_points_per_part)
+        for part_index, path in enumerate(paths, start=1):
+            bounds = _path_bounds(path)
+            feature_count_by_pipeline[pipeline_id] = feature_count_by_pipeline.get(pipeline_id, 0) + 1
+            all_pipeline_ids.add(pipeline_id)
+
+            length_m = _float_or_none(properties.get("LENGTH_M"))
+            length_km_val = _float_or_none(ranked.get("LENGTH_KM")) or (
+                length_m / 1000.0 if length_m is not None else None
+            )
+
+            route_records.append(
+                {
+                    "pipeline_id": pipeline_id,
+                    "pipeline_name": (
+                        properties.get("PIPE_NAME") or ranked.get("PIPE_NAME") or pipeline_id
+                    ),
+                    "is_candidate": is_candidate,
+                    "rank": int(float(ranked.get("RANK") or 0)) if is_candidate else None,
+                    "screening_score": _float_or_none(ranked.get("SCREENING_SCORE")) if is_candidate else None,
+                    "fluid": properties.get("FLUID") or ranked.get("FLUID") or "",
+                    "status": properties.get("STATUS") or ranked.get("STATUS") or "",
+                    "diameter_mm": _float_or_none(properties.get("DIAMETERMM")),
+                    "length_km": length_km_val,
+                    "max_op_pressure": _float_or_none(
+                        ranked.get("MX_OP_PRES") or properties.get("MX_OP_PRES")
+                    ),
+                    "operator": properties.get("REP_OPERTR") or "",
+                    "part_index": part_index,
+                    "path": path,
+                    "start": path[0],
+                    "end": path[-1],
+                    "bounds": bounds,
+                }
+            )
+
+    payload = {
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "source_geojson": _portable_path(raw_geojson_path),
+        "source_ranked_csv": _portable_path(ranked_csv_path),
+        "total_pipeline_count": len(all_pipeline_ids),
+        "candidate_count": len(ranked_by_id),
+        "route_part_count": len(route_records),
+        "pipelines_with_routes": len(feature_count_by_pipeline),
+        "max_points_per_part": max_points_per_part,
+        "routes": route_records,
+    }
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8", newline="\n") as handle:
+        json.dump(payload, handle, separators=(",", ":"))
+        handle.write("\n")
+
+    return {
+        "total_pipeline_count": len(all_pipeline_ids),
         "candidate_count": len(ranked_by_id),
         "route_part_count": len(route_records),
         "pipelines_with_routes": len(feature_count_by_pipeline),

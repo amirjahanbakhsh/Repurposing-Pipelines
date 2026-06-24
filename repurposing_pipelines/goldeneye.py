@@ -162,6 +162,7 @@ def benchmark_scenario_with_trace(
         "pipeline_name": scenario.raw("pipeline_name"),
         "length_km": scenario.number("pipeline_length_km"),
         "inner_diameter_in": scenario.number("inner_diameter_in"),
+        "outer_diameter_in": scenario.number("inner_diameter_in") + 2 * scenario.number("nominal_wall_thickness_mm") / 25.4,
         "inner_diameter_m": outputs["inner_diameter_m"],
         "nominal_wall_thickness_mm": scenario.number("nominal_wall_thickness_mm"),
         "average_pressure_mpa": outputs["average_pressure_mpa"],

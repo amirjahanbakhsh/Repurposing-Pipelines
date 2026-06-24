@@ -61,23 +61,45 @@ The selector at the top of the UI has two modes:
 
 ### What exists
 - `repurposing_pipelines/refurbishment_cost.py` — applies unit-cost factors to work-scope rows, outputs `cost_low_usd_2025`, `cost_base_usd_2025`, `cost_high_usd_2025`.
-- `repurposing_pipelines/costs.py` — separate module that calculates **new-build CAPEX** using component parameters (Parker 2004-style: material, labour, ROW damages, misc, surge tank, control, booster + contingency).
+- `repurposing_pipelines/costs.py` — currently only partially implements Parker; only pre-calculated component inputs, not full regression equations.
 - `model_layers/04_cost_economics/refurbishment_cost_summary_*.csv` — has refurbishment low/base/high; loaded by `load_cost_row()` in `streamlit_app.py`.
 - The UI currently shows only refurbishment cost (low/base/high) as three metrics.
 
-### What is missing (the key outstanding objective)
-The cost layer in `render_cost_layer()` must show **three things side by side**:
-1. **New-build CAPEX** — Parker (2004) regression applied to the pipeline's OD and length (from `costs.py`)
-2. **Refurbishment CAPEX** — itemised work-scope unit costs (from `refurbishment_cost.py`)
-3. **Net CAPEX saving** = new-build − refurbishment, with low/base/high range
+### What needs to be built (agreed decisions)
 
-This is the core economic claim of the tool: reusing the pipeline saves money vs building new. It must be visible in the UI, not buried in CSVs.
+**Step 1 — Rewrite `costs.py`** to implement all four regression models properly:
+- Parker (2004) — full equations, base year 2000 USD
+- Rui et al. (2011) — regional + AVG, base year 2008 USD
+- McCoy & Rubin (2008) — regional + AVG, base year 2004 USD
+- Brown et al. (2022) — regional + AVG, base year 2018 USD
 
-### How to achieve it
-- The new-build cost is already computed in `costs.py`; its output `cost_total_usd_2025` needs to be surfaced in the cost summary CSV or computed on the fly in the UI.
-- The cost layer needs a three-column layout: new-build | refurbishment | net saving.
-- Low/base/high ranges should be shown for each column.
-- A formula block should explain the arithmetic explicitly.
+**Step 2 — Proper escalation chain** (see `model_layers/04_cost_economics/cost_escalation_basis.md`):
+- Normalise all models to 2011 USD using Handy-Whitman / GDP / PPI index ratios
+- Escalate 2011 → project year using **RSMeans CCI** (not a flat % rate)
+- RSMeans CCI table: 191.2 (2011 base) → 295.6 (2024) → 298.7 (2025) → ~306.5 (2026 est.)
+- For years beyond last known data point: user-defined flat rate with a warning
+
+**Step 3 — CO2 factor and offshore factor:**
+- CO2 factor: **1.25** on MAT + LAB only (not ROW or MISC). Ref: McCoy & Rubin (2008); NETL (2024)
+- Offshore factor: **1.6** (base), range 1.5–2.0 for sensitivity. Replaces student's 1.3 which was too low
+- Basis: USAID (2002) reports offshore ≈1.96× onshore; 1.6 is conservative for shallow North Sea
+
+**Step 4 — UI: three-column cost layer**
+The `render_cost_layer()` function must show:
+1. **New-build CAPEX** — computed from chosen model + escalation + CO2 + offshore factors
+2. **Refurbishment CAPEX** — from work-scope unit costs (low/base/high)
+3. **Net CAPEX saving** = new-build − refurbishment (low/base/high)
+
+**Step 5 — Model selection in UI**
+User selects which of the four models to use for new-build CAPEX, with a default of Parker (most cited in CCS literature). All four can be shown together as a range.
+
+### Key references (full bibliography in cost_escalation_basis.md)
+- Parker (2004): original regression, UCD-ITS-RR-04-35
+- Rui et al. (2011): Oil and Gas Journal, 109(27), 120–127
+- McCoy & Rubin (2008): Int. J. Greenhouse Gas Control, 2(2), 219–229
+- Brown et al. (2022): Int. J. Hydrogen Energy, 47(50), 33813–33826
+- NETL (2024): CO2 Transport Cost Model 2024, OSTI:2473642
+- RSMeans (2026): Construction Cost Index, Gordian Group
 
 ---
 
@@ -123,7 +145,88 @@ Current state: some layers (capacity, corrosion, cost) have partial formula bloc
 
 ---
 
-## 10. Priority Order for Outstanding Work
+## 10. Reference Library — Evaluation and Gate Mapping
+
+All references are in `/write_up/papers_reports_guidelines/`. Every model layer must answer: **IS THIS RIGHT? IS THERE A WAY TO CROSS-CHECK AND VALIDATE?**
+
+### 10.1 Standards and Guidelines (Authoritative — use as mandatory references)
+
+| Ref | Document | Year | Relevant Gates | Key content |
+|---|---|---|---|---|
+| ISO-27913 | ISO 27913: CO2 Pipeline Transportation Systems | 2024 (2nd ed.) | Gates 3,4,5,6 | Design, materials, operating limits, inspection, commissioning for CO2 pipelines. **Most current standard — use for all CO2-specific requirements** |
+| DNV-RP-J202 | DNV: Design and Operation of CO2 Pipelines | 2010 | Gates 3,4,5,6 | Re-qualification process, material compatibility, pressure, fracture. Superseded in part by ISO 27913 but still widely cited — note its age |
+| API-RP-1110 | API RP 1110: Pressure Testing of Steel Pipelines (7th ed.) | 2022 | Gate 4,5,6 | Pressure testing requirements for CO2 service. **2022 edition — current** |
+| CO2PipeHaz | CO2PipeHaz Good Practice Guidelines (EU FP7) | 2013 | Gates 3,4,5 | Failure consequence hazard assessment, safety distances, good practice for CO2 pipelines |
+| CCS_Policy | CCS Policy, Legal and Regulatory Review | 2024 | Context/Introduction | Global CCS regulatory landscape. Use for introduction and policy context |
+
+### 10.2 Key Papers on Pipeline Repurposing (Core technical references)
+
+| Ref | Authors / Title | Year | Relevant Gates | Key content and validation use |
+|---|---|---|---|---|
+| Mahmoud & Dodds | Technical evaluation for repurposing submarine pipelines for H2 and CCS using survival analysis | 2022 | Gates 1,4,5 | **Directly relevant** — survival analysis for offshore pipeline remaining life. Validates approach to data completeness and integrity gate. Cross-check our wall thickness and remaining life estimates against their method |
+| OTC-31457 (Luna-Ortiz) | Reusing Existing Infrastructure for CO2 Transport: Risks and Opportunities | 2022 | Gates 3,4,5,6 | Risks checklist for CO2 reuse: corrosion, materials, inspection, cleaning. Validates our gate structure |
+| DNV PTC2022 (Leinum et al.) | Safely repurposing existing pipeline infrastructure for CO2 transport | 2022 | Gates 3,4,5,6 | DNV re-qualification process per DNV-ST-F101. **Key reference for the evidence/repurposing gate (Gate 5)** |
+| DNV PTC2025 (Torbergsen et al.) | Key considerations for re-qualification of pipelines for CO2 in gas phase | 2025 | Gates 3,4,5 | Gas-phase CO2 repurposing specifics. Dense phase not always viable for existing pipes. **2025 — most current DNV view** |
+| Saipem PTC2025 (D'Alonzo et al.) | Transport and Fitness for Purpose: assessment, baseline benchmark and IMR plan | 2025 | Gates 4,5,6 | Step-by-step guidance for inspection, maintenance, repair plan for repurposing and new CO2 pipelines. **Validates work scope (Gate 6)** |
+| Burkinshaw 2024 (ROSEN/National Gas) | Case Study: Efficient Route to Evidence Safe Repurposing | 2024 | Gates 1,4,5 | Importance of primary data records. Validates our data completeness gate and evidence gate approach |
+| Monsma & Murray 2026 (DNV) | Strategic Repurposing of Existing Oil Pipeline for CO2 Gas-phase Transport | 2026 | Gates 3,4,5 | **Most recent (2026)** feasibility framework for gas-phase CO2. Structured decision gate approach mirrors ours |
+| Kumar et al. 2025 (Eni UK) | Integrity Management, Monitoring and Maintenance of Eni UK CCS Pipelines | 2025 | Gates 4,5,6 | Real case: Liverpool Bay repurposing. Validates integrity management approach |
+| Kass et al. 2023 | Assessing Compatibility of NG Pipeline Materials with H2, CO2, and Ammonia | 2023 | Gates 3,4,5 | Material compatibility for CO2 (gaseous and supercritical). Steel and polymer compatibility. **Validates corrosion and material gate** |
+| Ayodele & Ali 2026 (RGU Aberdeen) | Assessing Feasibility of Repurposing NG Pipelines for Hydrogen — Comprehensive Review | 2026 | Gates 3,4,5 | Pressure, temperature, composition effects. From Robert Gordon University (Aberdeen) — directly relevant to UKCS |
+
+### 10.3 Cost References
+
+| Ref | Authors / Title | Year | Relevant Gates | Key content |
+|---|---|---|---|---|
+| NETL 2024 | FECM/NETL CO2 Transport Cost Model | 2024 | Gate 7 | **Primary reference for new-build CAPEX model.** Contains the regression equations, CO2 factor, escalation methodology. Must be read in full before finalising costs.py |
+| Smith 2021 (MIT) | Cost of CO2 Transport and Storage in Global Integrated Assessment Modelling | 2021 | Gate 7 | Reviews all four regression models (Parker, Rui, McCoy, Brown). Provides cross-comparison. **Use to validate our multi-model implementation** |
+| GlobalCCS 2024 (DNV) | Building Our Way to Net-Zero: CO2 Pipelines in the United States | 2024 | Gate 7 | Current US CO2 pipeline cost benchmark data. Use to sense-check our new-build CAPEX outputs |
+
+### 10.4 Hydraulics and Flow Assurance References
+
+| Ref | Authors / Title | Year | Relevant Gates | Key content |
+|---|---|---|---|---|
+| FlowAssurance | Key Elements of Flow Assurance in CCS | 2025 | Gate 2 | Supercritical CO2 transport, pressure/temperature management, phase behaviour. **Cross-check our capacity/hydraulics model** |
+| REPACT 2024 | REPACT Tool User Manual | 2024 | Gate 2 | Excel-based CO2 flow screening tool (gaseous and supercritical phases). **Direct cross-validation tool for Gate 2** — run same pipeline through REPACT and compare |
+| HyNet CCUS Pre-FEED | WP6: Offshore Transport and Storage | ~2020 | Gate 2 | Real offshore CCS pre-FEED hydraulic design. Pressure, flow, pipeline sizing for UK offshore CO2. **Benchmark for capacity gate** |
+| Goldeneye 2014 (Shell) | Peterhead-Goldeneye CCS Project | 2014 | Gates 2,5,7 | **Our primary benchmark case.** Goldeneye pipeline specifications, CO2 flow assumptions, project cost estimates. All Goldeneye results in our tool should match this paper |
+
+### 10.5 Corrosion and Integrity References
+
+| Ref | Authors / Title | Year | Relevant Gates | Key content |
+|---|---|---|---|---|
+| DNV-RP-J202 | (see above) | 2010 | Gates 3,4 | CO2 corrosion threshold: <500 ppm water content to avoid internal corrosion. Wall thickness assessment methodology |
+| ISO-27913 | (see above) | 2024 | Gates 3,4 | Updated limits for water content, impurities, pressure cycles. **Supersedes DNV-RP-J202 on technical limits** |
+| Kass 2023 | (see above) | 2023 | Gates 3,4 | Polymer seals and epoxy coating compatibility with supercritical CO2. Knowledge gap on compressor/regulator stations |
+
+### 10.6 Context and Background References
+
+| Ref | Authors / Title | Year | Use |
+|---|---|---|---|
+| ReStream 2021 (EU) | Reuse of O&G Infrastructure for H2 and CCS in Europe | 2021 | Introduction: European context for pipeline reuse. 23 TSOs participated. Covers feasibility criteria |
+| H2Germany 2024 (DIW Berlin) | Repurposing NG Pipelines for Hydrogen: Limits and Options | 2024 | Introduction and Gate 5: comparison between H2 and CO2 repurposing challenges |
+| CCS_Policy 2024 | CCS Policy, Legal and Regulatory Review | 2024 | Introduction: current global regulatory landscape |
+| Noor Aini 2025 (PETRONAS) | Challenge in Enabling Pipeline Repurpose for CO2 Transportation | 2025 | Gate 5: Asian perspective on CO2 repurposing challenges |
+| Ptc_2022_Leinum | (see above) | 2022 | Gate 5: DNV safety framework |
+
+### 10.7 Cross-Validation Strategy (IS THIS RIGHT?)
+
+For every gate, a specific cross-validation method is required:
+
+| Gate | Cross-validation approach | Reference used |
+|---|---|---|
+| Gate 1: Data | Compare our completeness scoring against Burkinshaw (2024) primary data checklist | Burkinshaw 2024 |
+| Gate 2: Capacity | Run same pipeline through REPACT tool and compare outlet pressure and max flow | REPACT 2024; FlowAssurance |
+| Gate 3: Corrosion | Check our water content threshold (500 ppm) against ISO 27913:2024 Table values | ISO-27913; DNV-RP-J202 |
+| Gate 4: Integrity | Compare wall thickness and remaining life calculation against Mahmoud & Dodds survival analysis outputs for same pipeline | Mahmoud & Dodds 2022 |
+| Gate 5: Evidence | Map our evidence checklist against DNV re-qualification steps (DNV-ST-F101 / PTC2022 Leinum) | DNV PTC2022; Monsma 2026 |
+| Gate 6: Work scope | Check our work scope items against Saipem IMR plan items (D'Alonzo 2025) | Saipem PTC2025 |
+| Gate 7: Cost | (a) Compare Parker new-build to NETL model output for same OD/length. (b) Validate Goldeneye new-build estimate against Goldeneye 2014 paper project cost | NETL 2024; Smith 2021; Goldeneye 2014 |
+| Gate 8: LCA | Compare our LCA results against Re-Stream report and HyNet pre-FEED carbon footprint figures | ReStream 2021; HyNet |
+
+---
+
+## 11. Priority Order for Outstanding Work
 
 1. **Cost layer** — new-build vs refurbishment vs net saving (three-column layout, low/base/high).
 2. **Data input page** — new Streamlit page for uploading and mapping external pipeline data.

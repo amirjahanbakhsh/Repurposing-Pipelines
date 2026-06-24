@@ -1191,31 +1191,161 @@ def render_work_scope_layer(row: pd.Series | None, selection: dict[str, str]) ->
 
 
 def render_cost_layer(selection: dict[str, str], factor_mode: str) -> None:
+    from repurposing_pipelines.costs import calculate_all_models
+
     cost_row = load_cost_row(selection["cost_case"])
+    screen_row = load_scenario_row(selection["screening_scenario"])
+
     with st.container(border=True):
-        st.markdown('<div class="workflow-step"><h3>7. Refurbishment Cost</h3></div>', unsafe_allow_html=True)
-        left, right = st.columns([1.1, 1])
-        with left:
-            equation_box(
-                [
-                    "item_cost_low/base/high = quantity_low/base/high * unit_cost_low/base/high",
-                    "total_refurbishment_cost = sum(item_costs)",
-                    "screening factors are not contractor quotes",
-                ]
-            )
-            if st.button("Run cost layer", key=f"run_cost_{selection['pipeline_id']}"):
-                ok, output = run_cost(selection, factor_mode)
-                st.session_state["last_cost_result"] = ("Cost layer", ok, output)
-                st.cache_data.clear()
-                st.rerun()
-            show_run_result("last_cost_result")
-        with right:
+        st.markdown('<div class="workflow-step"><h3>7. Refurbishment Cost vs New-Build CAPEX</h3></div>', unsafe_allow_html=True)
+
+        # ── equation block ────────────────────────────────────────────────────
+        equation_box(
+            [
+                "refurbishment_cost = Σ (quantity_low/base/high × unit_cost_low/base/high)",
+                "new_build_capex = regression_model(OD_in, length_km) × CO2_factor × offshore_factor × RSMeans_CCI_escalation",
+                "net_saving = new_build_capex − refurbishment_cost",
+                "regression models: Parker (2004), McCoy & Rubin (2008), Rui et al. (2011), Brown et al. (2022) [NETL-2024]",
+                "offshore_factor = 1.6 (central estimate, range 1.5–2.0) — US onshore model adjusted for North Sea",
+            ]
+        )
+
+        # ── run button ────────────────────────────────────────────────────────
+        if st.button("Run cost layer", key=f"run_cost_{selection['pipeline_id']}"):
+            ok, output = run_cost(selection, factor_mode)
+            st.session_state["last_cost_result"] = ("Cost layer", ok, output)
+            st.cache_data.clear()
+            st.rerun()
+        show_run_result("last_cost_result")
+
+        # ── compute new-build if pipeline data available ───────────────────
+        nb_results: dict | None = None
+        od_in: float | None = None
+        length_km: float | None = None
+        offshore_factor: float = 1.6
+
+        if screen_row is not None:
+            od_in = as_float(screen_row.get("outer_diameter_in"))
+            length_km = as_float(screen_row.get("length_km"))
+
+        if od_in is not None and length_km is not None and od_in > 0 and length_km > 0:
+            try:
+                nb_results = calculate_all_models(
+                    diameter_in=od_in,
+                    length_km=length_km,
+                    project_year=2026,
+                    offshore=True,
+                    offshore_factor=offshore_factor,
+                    contingency_fraction=as_float(
+                        screen_row.get("contingency_fraction") if screen_row is not None else None
+                    ) or 0.10,
+                )
+            except Exception:
+                nb_results = None
+
+        # ── model selector ────────────────────────────────────────────────────
+        model_choice = st.selectbox(
+            "New-build model",
+            options=["brown", "parker", "mccoy", "rui", "all"],
+            format_func=lambda m: {
+                "brown": "Brown et al. (2022) — recommended",
+                "parker": "Parker (2004)",
+                "mccoy": "McCoy & Rubin (2008)",
+                "rui": "Rui et al. (2011)",
+                "all": "Show all four models",
+            }.get(m, m),
+            key=f"nb_model_{selection['pipeline_id']}",
+        )
+
+        # derive single new-build value for net saving calculation
+        nb_total: float | None = None
+        if nb_results is not None:
+            if model_choice == "all":
+                # use Brown as the anchor for net saving when showing all
+                nb_total = nb_results["brown"].cost_total_usd
+            else:
+                nb_total = nb_results[model_choice].cost_total_usd
+
+        # refurbishment values
+        refurb_low  = as_float(cost_row.get("cost_low_usd_2025")  if cost_row is not None else None)
+        refurb_base = as_float(cost_row.get("cost_base_usd_2025") if cost_row is not None else None)
+        refurb_high = as_float(cost_row.get("cost_high_usd_2025") if cost_row is not None else None)
+
+        # ── three-column layout ───────────────────────────────────────────────
+        col_nb, col_refurb, col_saving = st.columns(3)
+
+        # Column 1: New-build
+        with col_nb:
+            st.markdown("**New-build CAPEX**")
+            st.caption(f"OD {od_in:.1f}\" · {length_km:.0f} km · offshore {offshore_factor}×" if od_in else "Pipeline dimensions not available")
+            if nb_results is None:
+                st.info("Run screening to compute new-build cost")
+            elif model_choice == "all":
+                for m, label in [
+                    ("parker", "Parker (2004)"),
+                    ("mccoy",  "McCoy & Rubin (2008)"),
+                    ("rui",    "Rui et al. (2011)"),
+                    ("brown",  "Brown et al. (2022)"),
+                ]:
+                    st.metric(label, fmt_money(nb_results[m].cost_total_usd))
+            else:
+                r = nb_results[model_choice]
+                st.metric("Total CAPEX", fmt_money(r.cost_total_usd))
+                st.metric("Subtotal (pre-contingency)", fmt_money(r.cost_subtotal_usd))
+                data_table([
+                    {"Component": "Materials",        "Cost": fmt_money(r.cost_mat_usd)},
+                    {"Component": "Labour",           "Cost": fmt_money(r.cost_lab_usd)},
+                    {"Component": "ROW & damages",    "Cost": fmt_money(r.cost_row_usd)},
+                    {"Component": "Miscellaneous",    "Cost": fmt_money(r.cost_misc_usd)},
+                    {"Component": "Surge tank",       "Cost": fmt_money(r.cost_surge_tank_usd)},
+                    {"Component": "Control system",   "Cost": fmt_money(r.cost_control_system_usd)},
+                    {"Component": "Contingency",      "Cost": fmt_money(r.cost_contingency_usd)},
+                ])
+                if r.warnings:
+                    for w in r.warnings:
+                        st.caption(f"⚠ {w[:120]}")
+
+        # Column 2: Refurbishment
+        with col_refurb:
+            st.markdown("**Refurbishment CAPEX**")
+            st.caption("Work-scope unit costs — not contractor quotes")
             status_pill("Cost status", cost_row.get("refurbishment_cost_status") if cost_row is not None else "not run")
-            st.metric("Base cost", fmt_money(cost_row.get("cost_base_usd_2025") if cost_row is not None else None))
-            st.metric("Low case", fmt_money(cost_row.get("cost_low_usd_2025") if cost_row is not None else None))
-            st.metric("High case", fmt_money(cost_row.get("cost_high_usd_2025") if cost_row is not None else None))
+            st.metric("Base estimate", fmt_money(refurb_base))
+            st.metric("Low estimate",  fmt_money(refurb_low))
+            st.metric("High estimate", fmt_money(refurb_high))
             if cost_row is not None:
                 st.caption(f"Factor quality: {clean_text(cost_row.get('factor_quality_summary'))}")
+                n_factors = as_float(cost_row.get("included_factor_count"))
+                n_missing = as_float(cost_row.get("missing_factor_count"))
+                if n_factors is not None:
+                    st.caption(f"Factors: {int(n_factors)} included, {int(n_missing or 0)} missing")
+
+        # Column 3: Net saving
+        with col_saving:
+            st.markdown("**Net CAPEX Saving**")
+            st.caption(f"New-build ({model_choice if model_choice != 'all' else 'Brown'}) − refurbishment")
+            if nb_total is None or refurb_base is None:
+                st.info("Run screening and cost layer to compute net saving")
+            else:
+                saving_low  = nb_total - (refurb_high or 0)   # worst case saving
+                saving_base = nb_total - (refurb_base or 0)
+                saving_high = nb_total - (refurb_low or 0)    # best case saving
+                saving_pct  = 100 * saving_base / nb_total if nb_total else None
+
+                st.metric("Base saving",      fmt_money(saving_base))
+                st.metric("Low saving",       fmt_money(saving_low))
+                st.metric("High saving",      fmt_money(saving_high))
+                if saving_pct is not None:
+                    st.metric("Saving vs new-build", fmt_number(saving_pct, 1, "%"))
+
+        # ── disclaimer ────────────────────────────────────────────────────────
+        st.caption(
+            "New-build CAPEX uses US onshore natural gas pipeline regression models (Parker 2004; McCoy & Rubin 2008; "
+            "Rui et al. 2011; Brown et al. 2022) per NETL (2024), escalated to 2026 USD using the RSMeans CCI. "
+            "An offshore factor of 1.6 is applied (range 1.5–2.0; ZEP 2011; Knoope et al. 2014). "
+            "No offshore CO2 pipeline regression model currently exists in the published literature. "
+            "See model_layers/04_cost_economics/cost_escalation_basis.md for full methodology."
+        )
 
 
 def render_lca_layer(row: pd.Series | None, selection: dict[str, str], factor_mode: str) -> None:

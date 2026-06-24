@@ -1236,9 +1236,10 @@ def render_cost_layer(selection: dict[str, str], factor_mode: str) -> None:
                     project_year=2026,
                     offshore=True,
                     offshore_factor=offshore_factor,
-                    contingency_fraction=as_float(
-                        screen_row.get("contingency_fraction") if screen_row is not None else None
-                    ) or 0.10,
+                    contingency_fraction=(
+                        cf if (cf := as_float(screen_row.get("contingency_fraction") if screen_row is not None else None)) is not None
+                        else 0.10
+                    ),
                 )
             except Exception:
                 nb_results = None

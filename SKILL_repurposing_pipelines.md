@@ -126,7 +126,77 @@ Current state: some layers (capacity, corrosion, cost) have partial formula bloc
 ## 10. Priority Order for Outstanding Work
 
 1. **Cost layer** — new-build vs refurbishment vs net saving (three-column layout, low/base/high).
-2. **Map/dropdown reliability** — verify and fix if broken after testing.
-3. **Transparent calculation cards** — expand formula blocks across all 8 gates.
-4. **Factor assumptions review** — NETL comparison, wall-thickness validation basis.
-5. **Wells** — Phase 2, do not start until pipeline screening is stable.
+2. **Data input page** — new Streamlit page for uploading and mapping external pipeline data.
+3. **Map/dropdown reliability** — verify and fix if broken after testing.
+4. **Transparent calculation cards** — expand formula blocks across all 8 gates.
+5. **Two-level documentation** — layman and technical, both significantly improved.
+6. **Factor assumptions review** — NETL comparison, wall-thickness validation basis.
+7. **Wells** — Phase 2, do not start until pipeline screening is stable.
+
+---
+
+## 11. Data Input Page — Design Specification
+
+### Purpose
+Allow any user — regardless of data source or country — to use the tool with their own pipeline database. The tool must not be implicitly NSTA-specific.
+
+### Supported Input Formats
+- CSV
+- Excel (.xlsx)
+- JSON
+- SQLite (file-based database, no server required)
+- Future extension: PostgreSQL, SQL Server (not in scope now)
+
+### Workflow (5 steps)
+
+**Step 1 — Upload**
+User uploads their raw database file (any supported format) or a pre-filled version of our standard input template.
+
+**Step 2 — Auto-extraction**
+If a raw file is uploaded, the tool attempts to map the user's column names to our standard template fields using name-similarity matching. Each match is shown with a confidence indicator (high / medium / low / no match).
+
+**Step 3 — Review and confirm mapping**
+User sees a table of: their column → our field → confidence. They can correct any mapping via dropdown (fallback to manual). Missing fields with no match are flagged clearly.
+
+**Step 4 — Fill gaps manually**
+Missing required fields are listed. User can enter values manually in the UI. Optional fields can be left blank with a warning.
+
+**Step 5 — Save template**
+Exports the completed data as our standard input CSV template, which feeds all 8 model gates. User can also save the column mapping for reuse with the same data source.
+
+### Map behaviour
+The pipeline map must use coordinates from the uploaded data, not hardcoded to the North Sea. Map centre and zoom adjust dynamically to the dataset's geographic extent.
+
+### Field naming convention
+All internal field names are based on the model's own terminology (e.g. `pipeline_id`, `outer_diameter_in`, `length_km`). No field name should be NSTA-specific. Names must be common, readable, and self-explanatory to a non-specialist.
+
+### Column auto-matching approach
+- Primary: string similarity between user column names and our field names (case-insensitive, ignore underscores/spaces)
+- Secondary: match against a list of known aliases per field (e.g. `OD`, `outer_dia`, `pipe_diameter` all map to `outer_diameter_in`)
+- Fallback: manual dropdown selection by user
+- Confidence levels: High (>85% match), Medium (60–85%), Low (<60%), No match
+
+---
+
+## 12. Documentation — Design Specification
+
+### Two levels required
+
+**Layman / policymaker level**
+- What the tool does and why it matters (plain English)
+- What inputs are needed and where to get them
+- How to read the results
+- What a `pass`, `marginal`, or `fail` means in practice
+- No Python, no equations
+
+**Technical level**
+- Full methodology for each of the 8 gates
+- Equation derivations and references
+- How to extend the tool (new data sources, new gates)
+- How to run scripts from the command line
+- How to interpret validation outputs
+
+### Format
+- Both levels should be accessible from the Streamlit UI (a Help or Documentation page)
+- Also available as standalone markdown files in the repo
+- Current `README.md`, `START_HERE.md`, and `methodology.md` are a starting point but need significant expansion and simplification

@@ -229,334 +229,136 @@ def status_pill(label: str, status: Any) -> None:
 
 
 def apply_style() -> None:
-    st.markdown(
-        """
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-    --bg:     #0A0E1A;
-    --panel:  #111827;
-    --panel2: #1a2236;
-    --line:   #1e2d47;
-    --text:   #E8E4DC;
-    --mute:   #7A8499;
-    --accent: #5EEAD4;
-    --amber:  #FBBF24;
-    --coral:  #F87171;
-    --green:  #86EFAC;
-}
-
-/* ── Base ── */
-.stApp { background: var(--bg); color: var(--text); font-family: 'Manrope', sans-serif; }
-.block-container { padding-top: 0 !important; padding-bottom: 3rem; max-width: 1440px; }
-h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; letter-spacing: -0.01em; color: var(--text); }
-h1 { font-size: 32px; margin: 0; }
-h2 { font-size: 22px; }
-h3 { font-size: 17px; margin: 0 0 0.4rem; }
-
-/* ── Streamlit overrides ── */
-div[data-testid="stMetric"] {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-top: 2px solid var(--accent);
-    border-radius: 10px;
-    padding: 0.9rem 1.1rem;
-}
-div[data-testid="stMetric"] label {
-    font-family: 'Manrope', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mute);
-}
-div[data-testid="stMetric"] [data-testid="stMetricValue"] {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 20px;
-    color: var(--text);
-    letter-spacing: -0.02em;
-}
-div[data-testid="stVerticalBlockBorderWrapper"] {
-    border-color: var(--line) !important;
-    border-radius: 12px;
-    background: var(--panel);
-}
-
-/* ── Force dark dropdowns / selects ── */
-div[data-baseweb="select"] > div,
-div[data-baseweb="select"] > div:hover {
-    background-color: var(--panel2) !important;
-    border-color: var(--line) !important;
-    color: var(--text) !important;
-    border-radius: 8px !important;
-}
-div[data-baseweb="select"] span,
-div[data-baseweb="select"] div[class*="singleValue"],
-div[data-baseweb="select"] input {
-    color: var(--text) !important;
-}
-div[data-baseweb="popover"] ul {
-    background-color: var(--panel2) !important;
-    border: 1px solid var(--line) !important;
-}
-div[data-baseweb="popover"] li {
-    color: var(--text) !important;
-}
-div[data-baseweb="popover"] li:hover {
-    background-color: var(--line) !important;
-}
-[data-testid="stSelectbox"] label { color: var(--mute); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
-
-/* ── Segmented control ── */
-[data-testid="stSegmentedControl"] div[role="radio"] {
-    background: var(--panel2);
-    color: var(--text);
-    border-color: var(--line);
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-}
-[data-testid="stSegmentedControl"] div[role="radio"][aria-checked="true"] {
-    background: var(--panel2);
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-/* ── Buttons ── */
-.stButton > button {
-    font-family: 'Manrope', sans-serif;
-    border-radius: 8px;
-    border: 1px solid var(--line);
-    background: var(--panel2);
-    color: var(--text);
-    font-weight: 500;
-    font-size: 13px;
-    padding: 0.45rem 1rem;
-    transition: all 0.15s;
-}
-.stButton > button:hover {
-    background: var(--line);
-    border-color: var(--accent);
-    color: var(--accent);
-}
-.stButton > button[kind="primary"] {
-    background: var(--accent);
-    color: #0A0E1A;
-    border-color: var(--accent);
-    font-weight: 600;
-}
-
-/* ── Header bar ── */
-.tool-header {
-    background: var(--panel);
-    border-bottom: 1px solid var(--line);
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin: 0 -5rem 1.5rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-.tool-header-left { display: flex; align-items: baseline; gap: 0.6rem; }
-.tool-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--text); margin: 0; }
-.tool-title em { color: var(--accent); font-style: italic; }
-.tool-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--mute);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 2px 6px;
-    letter-spacing: 0.08em;
-}
-.tool-subtitle {
-    font-size: 12px;
-    color: var(--mute);
-    font-family: 'Manrope', sans-serif;
-    max-width: 500px;
-}
-
-/* ── Pipeline profile card ── */
-.pipeline-card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-}
-.pipeline-card-id {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 2px;
-}
-.pipeline-card-name {
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
-}
-.pipeline-card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem 1rem;
-    margin-top: 0.75rem;
-}
-.pipeline-card-item { display: flex; flex-direction: column; gap: 2px; }
-.pipeline-card-label {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--mute);
-    font-family: 'Manrope', sans-serif;
-}
-.pipeline-card-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: var(--text);
-}
-
-/* ── Status pills ── */
-.status-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 13px;
-    font-family: 'Manrope', sans-serif;
-    color: var(--mute);
-}
-.status-row strong {
-    display: inline-block;
-    border-radius: 999px;
-    padding: 0.18rem 0.65rem;
-    font-size: 11px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-}
-.status-bar {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.75rem;
-}
-.status-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    border-radius: 6px;
-    padding: 0.3rem 0.7rem;
-    font-size: 11px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    border: 1px solid;
-}
-
-/* ── Map legend ── */
-.map-legend {
-    display: flex;
-    gap: 1.2rem;
-    align-items: center;
-    padding: 0.4rem 0 0.6rem;
-    font-size: 11px;
-    font-family: 'Manrope', sans-serif;
-    color: var(--mute);
-    letter-spacing: 0.04em;
-}
-.legend-dot {
-    display: inline-block;
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    margin-right: 4px;
-    flex-shrink: 0;
-}
-.map-caption {
-    font-size: 11px;
-    color: var(--mute);
-    font-family: 'Manrope', sans-serif;
-    padding: 0.3rem 0;
-}
-
-/* ── Metrics strip ── */
-.metrics-strip {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.6rem;
-    margin: 1rem 0;
-}
-.metric-tile {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-top: 2px solid var(--accent);
-    border-radius: 10px;
-    padding: 0.8rem 1rem;
-}
-.metric-tile-label {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--mute);
-    font-family: 'Manrope', sans-serif;
-    margin-bottom: 4px;
-}
-.metric-tile-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 20px;
-    color: var(--text);
-    letter-spacing: -0.02em;
-}
-
-/* ── Gate containers ── */
-.workflow-step {
-    border-left: 3px solid var(--accent);
-    padding-left: 0.8rem;
-    margin-bottom: 0.6rem;
-}
-.section-note {
-    background: var(--panel2);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    border-radius: 8px;
-    padding: 0.7rem 1rem;
-    color: var(--mute);
-    font-size: 12px;
-    font-family: 'Manrope', sans-serif;
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
-}
-.missing-note {
-    background: #1a1200;
-    border: 1px solid #3a2e00;
-    border-left: 3px solid var(--amber);
-    border-radius: 8px;
-    padding: 0.7rem 1rem;
-    color: #FCD34D;
-    font-size: 12px;
-    font-family: 'Manrope', sans-serif;
-    line-height: 1.6;
-}
-.score-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
-.eyebrow { font-family: 'Manrope', sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
-.small-muted { color: var(--mute); font-size: 12px; font-family: 'Manrope', sans-serif; }
-hr { border-color: var(--line); margin: 1rem 0; }
-[data-testid="stDataFrame"] { border-radius: 8px; overflow: hidden; }
-.stCodeBlock { background: #080d18 !important; border: 1px solid var(--line); border-radius: 8px; }
-[data-testid="stExpander"] summary { font-family: 'Manrope', sans-serif; font-weight: 500; color: var(--text); }
-[data-testid="stExpander"] { border-color: var(--line) !important; background: var(--panel); border-radius: 10px; }
-.score-num-small { font-family: 'JetBrains Mono', monospace; font-size: 24px; color: var(--text); }
-</style>
-        """,
-        unsafe_allow_html=True,
+    css = (
+        "<link href='https://fonts.googleapis.com/css2?"
+        "family=Fraunces:ital,wght@0,400;0,500;0,600;1,400"
+        "&family=Manrope:wght@300;400;500;600"
+        "&family=JetBrains+Mono:wght@400;500&display=swap' rel='stylesheet'>"
+        "<style>"
+        ":root{"
+        "--bg:#0A0E1A;--panel:#111827;--panel2:#1a2236;--line:#1e2d47;"
+        "--text:#E8E4DC;--mute:#7A8499;--accent:#5EEAD4;"
+        "--amber:#FBBF24;--coral:#F87171;--green:#86EFAC;"
+        "}"
+        ".stApp{background:var(--bg)!important;color:var(--text);font-family:'Manrope',sans-serif;}"
+        ".stApp>div{background:var(--bg)!important;}"
+        "header[data-testid='stHeader']{background:#0A0E1A!important;border-bottom:1px solid #1e2d47;}"
+        ".block-container{padding-top:0!important;padding-bottom:3rem;max-width:1440px;}"
+        "h2{font-family:'Fraunces',serif;font-size:22px;font-weight:500;color:var(--text);}"
+        "h3{font-family:'Fraunces',serif;font-size:17px;font-weight:500;color:var(--text);margin:0 0 .4rem;}"
+        "div[data-testid='stMetric']{background:var(--panel);border:1px solid var(--line);"
+        "border-top:2px solid var(--accent);border-radius:10px;padding:.9rem 1.1rem;}"
+        "div[data-testid='stMetric'] label{font-size:10px;letter-spacing:.12em;"
+        "text-transform:uppercase;color:var(--mute);}"
+        "div[data-testid='stMetric'] [data-testid='stMetricValue']{"
+        "font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--text);}"
+        "div[data-testid='stVerticalBlockBorderWrapper']{"
+        "border-color:var(--line)!important;border-radius:12px;background:var(--panel);}"
+        "div[data-baseweb='select']>div{"
+        "background-color:var(--panel2)!important;border-color:var(--line)!important;"
+        "color:var(--text)!important;border-radius:8px!important;}"
+        "div[data-baseweb='select'] span,"
+        "div[data-baseweb='select'] div[class*='singleValue'],"
+        "div[data-baseweb='select'] input{color:var(--text)!important;background:transparent!important;}"
+        "div[data-baseweb='popover'] ul{"
+        "background-color:var(--panel2)!important;border:1px solid var(--line)!important;}"
+        "div[data-baseweb='popover'] li{color:var(--text)!important;background:var(--panel2)!important;}"
+        "div[data-baseweb='popover'] li:hover{background-color:var(--line)!important;}"
+        "[data-testid='stSelectbox'] label{color:var(--mute)!important;font-size:11px;"
+        "letter-spacing:.1em;text-transform:uppercase;}"
+        "[data-testid='stSegmentedControl'] div[role='radio']{"
+        "background:var(--panel2)!important;color:var(--text)!important;"
+        "border-color:var(--line)!important;font-size:12px;}"
+        "[data-testid='stSegmentedControl'] div[role='radio'][aria-checked='true']{"
+        "border-color:var(--accent)!important;color:var(--accent)!important;"
+        "background:#0d2a28!important;}"
+        ".stButton>button{font-family:'Manrope',sans-serif;border-radius:8px;"
+        "border:1px solid var(--line);background:var(--panel2);color:var(--text);"
+        "font-weight:500;font-size:13px;padding:.45rem 1rem;transition:all .15s;}"
+        ".stButton>button:hover{background:var(--line);border-color:var(--accent);color:var(--accent);}"
+        ".stButton>button[kind='primary']{background:var(--accent);color:#0A0E1A;"
+        "border-color:var(--accent);font-weight:600;}"
+        "[data-testid='stDataFrame']{border-radius:8px;overflow:hidden;}"
+        "[data-testid='stDataFrame'] th{background:var(--panel2)!important;"
+        "color:var(--mute)!important;font-size:11px;letter-spacing:.08em;"
+        "text-transform:uppercase;border-bottom:1px solid var(--line)!important;}"
+        "[data-testid='stDataFrame'] td{background:var(--panel)!important;"
+        "color:var(--text)!important;border-bottom:1px solid var(--line)!important;font-size:13px;}"
+        ".stCodeBlock,[data-testid='stCode']{background:#080d18!important;"
+        "border:1px solid var(--line);border-radius:8px;}"
+        "[data-testid='stExpander']{border-color:var(--line)!important;"
+        "background:var(--panel);border-radius:10px;}"
+        "[data-testid='stExpander'] summary{font-family:'Manrope',sans-serif;"
+        "font-weight:500;color:var(--text);}"
+        ".nav-bar{background:var(--panel);border-bottom:1px solid var(--line);"
+        "padding:.75rem 2rem;display:flex;align-items:center;"
+        "justify-content:space-between;margin:-1rem -5rem 1.5rem;"
+        "position:sticky;top:0;z-index:100;}"
+        ".nav-brand{display:flex;align-items:baseline;gap:.5rem;}"
+        ".nav-title{font-family:'Fraunces',serif;font-size:19px;font-weight:500;color:var(--text);}"
+        ".nav-title em{color:var(--accent);font-style:italic;}"
+        ".nav-badge{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--mute);"
+        "border:1px solid var(--line);border-radius:3px;padding:1px 5px;letter-spacing:.08em;}"
+        ".nav-sub{font-size:11px;color:var(--mute);font-family:'Manrope',sans-serif;}"
+        ".hero-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;"
+        "color:var(--accent);font-family:'Manrope',sans-serif;margin-bottom:.5rem;}"
+        ".hero-hed{font-family:'Fraunces',serif;font-size:34px;font-weight:500;"
+        "line-height:1.2;color:var(--text);margin:0 0 .6rem;}"
+        ".hero-hed em{color:var(--accent);font-style:italic;}"
+        ".hero-sub{font-size:13px;color:var(--mute);font-family:'Manrope',sans-serif;"
+        "line-height:1.65;margin-bottom:1.25rem;max-width:430px;}"
+        ".pipe-id{font-family:'JetBrains Mono',monospace;font-size:11px;"
+        "color:var(--accent);letter-spacing:.1em;margin-bottom:2px;}"
+        ".pipe-name{font-family:'Fraunces',serif;font-size:21px;font-weight:500;"
+        "color:var(--text);line-height:1.2;margin-bottom:.8rem;}"
+        ".pipe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem .75rem;margin-top:.25rem;}"
+        ".pi-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;"
+        "color:var(--mute);font-family:'Manrope',sans-serif;}"
+        ".pi-value{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);margin-top:1px;}"
+        ".sbar{display:flex;gap:.35rem;flex-wrap:wrap;margin:.75rem 0 .5rem;}"
+        ".schip{display:inline-flex;align-items:center;gap:.25rem;border-radius:5px;"
+        "padding:.22rem .55rem;font-size:11px;font-family:'Manrope',sans-serif;"
+        "font-weight:600;letter-spacing:.04em;border:1px solid;}"
+        ".schip-lbl{opacity:.6;font-weight:400;margin-right:1px;}"
+        ".map-legend{display:flex;gap:1.2rem;align-items:center;"
+        "padding:.4rem 0 .5rem;font-size:11px;font-family:'Manrope',sans-serif;color:var(--mute);}"
+        ".ldot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;}"
+        ".map-cap{font-size:11px;color:var(--mute);font-family:'Manrope',sans-serif;padding:.2rem 0;}"
+        ".kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin:1.25rem 0;}"
+        ".kpi-tile{background:var(--panel);border:1px solid var(--line);"
+        "border-top:2px solid var(--accent);border-radius:10px;padding:.75rem 1rem;}"
+        ".kpi-lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;"
+        "color:var(--mute);font-family:'Manrope',sans-serif;margin-bottom:4px;}"
+        ".kpi-val{font-family:'JetBrains Mono',monospace;font-size:19px;"
+        "color:var(--text);letter-spacing:-.02em;}"
+        ".status-row{display:flex;align-items:center;justify-content:space-between;"
+        "gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--line);"
+        "font-size:13px;font-family:'Manrope',sans-serif;color:var(--mute);}"
+        ".status-row strong{display:inline-block;border-radius:999px;"
+        "padding:.18rem .65rem;font-size:11px;font-weight:600;"
+        "letter-spacing:.06em;white-space:nowrap;}"
+        ".section-note{background:var(--panel2);border:1px solid var(--line);"
+        "border-left:3px solid var(--accent);border-radius:8px;"
+        "padding:.7rem 1rem;color:var(--mute);font-size:12px;"
+        "font-family:'Manrope',sans-serif;line-height:1.6;margin-bottom:.75rem;}"
+        ".missing-note{background:#1a1200;border:1px solid #3a2e00;"
+        "border-left:3px solid var(--amber);border-radius:8px;"
+        "padding:.7rem 1rem;color:#FCD34D;font-size:12px;"
+        "font-family:'Manrope',sans-serif;line-height:1.6;}"
+        ".workflow-step{border-left:3px solid var(--accent);padding-left:.8rem;margin-bottom:.6rem;}"
+        ".score-card{background:var(--panel);border:1px solid var(--line);"
+        "border-radius:12px;padding:16px 20px;margin-bottom:10px;}"
+        ".eyebrow{font-family:'Manrope',sans-serif;font-size:10px;letter-spacing:.14em;"
+        "text-transform:uppercase;color:var(--mute);margin-bottom:4px;}"
+        ".small-muted{color:var(--mute);font-size:12px;font-family:'Manrope',sans-serif;}"
+        "hr{border-color:var(--line);margin:1rem 0;}"
+        ".score-num-small{font-family:'JetBrains Mono',monospace;font-size:24px;color:var(--text);}"
+        "</style>"
     )
-
+    if hasattr(st, "html"):
+        st.html(css)
+    else:
+        st.markdown(css, unsafe_allow_html=True)
 def build_candidate_table(ranked_df: pd.DataFrame, screening_df: pd.DataFrame) -> pd.DataFrame:
     if ranked_df.empty:
         return pd.DataFrame()
@@ -710,7 +512,7 @@ def render_route_map(all_routes_payload: dict[str, Any], selected_pipeline_id: s
             if pid not in seen_cand:
                 seen_cand[pid] = route
         else:
-            dim_routes.append({**route, "_color": [59, 106, 181, 40], "_width": 1})
+            dim_routes.append({**route, "_color": [60, 80, 140, 110], "_width": 2})
 
     # Also expose selected pipeline via dot layer if it is not a candidate
     if selected_pipeline_id and selected_pipeline_id not in seen_cand:
@@ -957,24 +759,19 @@ def profile_rows(row: pd.Series | None, ranked_row: pd.Series | None, selection:
 
 
 def render_header() -> None:
-    st.markdown(
-        """
-        <div class="tool-header">
-          <div class="tool-header-left">
-            <span class="tool-title">
-              CO<sub style="font-size:0.65em;">2</sub> Pipeline Repurposing
-              <em>Evaluation Tool</em>
-            </span>
-            <span class="tool-badge">v1.0 · NSTA dataset</span>
-          </div>
-          <div class="tool-subtitle">
-            Screen existing offshore pipelines for CO₂ transport reuse.
-            A pass or marginal result means <em>worth deeper study</em> — not engineering approval.
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    html = (
+        "<div class='nav-bar'>"
+        "<div class='nav-brand'>"
+        "<span class='nav-title'>CO&#8322; Pipeline Repurposing <em>Evaluation Tool</em></span>"
+        "<span class='nav-badge'>v1.0 &middot; NSTA</span>"
+        "</div>"
+        "<span class='nav-sub'>Screen &middot; Score &middot; Decide</span>"
+        "</div>"
     )
+    if hasattr(st, "html"):
+        st.html(html)
+    else:
+        st.markdown(html, unsafe_allow_html=True)
 
 
 def render_selector(candidate_df: pd.DataFrame) -> dict[str, str]:
@@ -1071,65 +868,68 @@ def render_non_candidate_info(record: dict[str, Any]) -> None:
     )
 
 
-def _status_chip_html(label: str, status: Any) -> str:
+def _html(html: str) -> None:
+    """Render HTML reliably across Streamlit versions."""
+    if hasattr(st, "html"):
+        st.html(html)
+    else:
+        st.markdown(html, unsafe_allow_html=True)
+
+
+def _chip(label: str, status: Any) -> str:
     fg, bg = status_colour(status)
     text = clean_text(status)
     return (
-        f'<span class="status-chip" style="color:{fg}; background:{bg}22; border-color:{fg}44;">'
-        f'<span style="opacity:0.7; font-size:10px;">{label}</span> {text}</span>'
+        f"<span class='schip' style='color:{fg};background:{bg}22;border-color:{fg}55;'>"
+        f"<span class='schip-lbl'>{label}</span>{text}</span>"
     )
 
 
-def _pipeline_card_html(
+def _pipe_info_html(
     row: pd.Series | None,
     ranked_row: pd.Series | None,
     selection: dict[str, str],
 ) -> str:
     pid   = selection["pipeline_id"]
     name  = clean_text(
-        row.get("pipeline_name") if row is not None
-        else ranked_row.get("PIPE_NAME") if ranked_row is not None
-        else selection["label"]
+        (row.get("pipeline_name") if row is not None else None)
+        or (ranked_row.get("PIPE_NAME") if ranked_row is not None else None)
+        or selection["label"]
     )
-    fluid  = clean_text(ranked_row.get("FLUID")  if ranked_row is not None else None, "—")
-    status = clean_text(ranked_row.get("STATUS") if ranked_row is not None else None, "—")
-    length = as_float(
-        row.get("length_km") if row is not None
-        else ranked_row.get("LENGTH_KM") if ranked_row is not None else None
-    )
-    id_in  = as_float(row.get("inner_diameter_in") if row is not None else ranked_row.get("INT_DIAM") if ranked_row is not None else None)
-    wall   = as_float(row.get("nominal_wall_thickness_mm") if row is not None else ranked_row.get("THICKNESS") if ranked_row is not None else None)
-    mop    = as_float(ranked_row.get("MX_OP_PRES") if ranked_row is not None else None) or as_float(row.get("average_pressure_mpa") if row is not None else None)
-    start  = clean_text(ranked_row.get("START_DATE") if ranked_row is not None else None, "—")
+    fluid  = clean_text(ranked_row.get("FLUID")  if ranked_row is not None else None, "N/A")
+    status = clean_text(ranked_row.get("STATUS") if ranked_row is not None else None, "N/A")
+    length = as_float((row.get("length_km") if row is not None else None) or (ranked_row.get("LENGTH_KM") if ranked_row is not None else None))
     od_in  = as_float(row.get("outer_diameter_in") if row is not None else None)
+    id_in  = as_float((row.get("inner_diameter_in") if row is not None else None) or (ranked_row.get("INT_DIAM") if ranked_row is not None else None))
+    wall   = as_float((row.get("nominal_wall_thickness_mm") if row is not None else None) or (ranked_row.get("THICKNESS") if ranked_row is not None else None))
+    mop    = as_float((ranked_row.get("MX_OP_PRES") if ranked_row is not None else None) or (row.get("average_pressure_mpa") if row is not None else None))
+    start  = clean_text(ranked_row.get("START_DATE") if ranked_row is not None else None, "N/A")
+    grade  = clean_text(row.get("pipe_grade") if row is not None else None, "N/A")
 
-    def val(v: float | None, digits: int, unit: str) -> str:
-        return fmt_number(v, digits, f" {unit}") if v is not None else "—"
+    def v(val: Any, d: int, u: str) -> str:
+        f = as_float(val)
+        return fmt_number(f, d, f" {u}") if f is not None else "N/A"
 
+    od_str = v(od_in, 1, "in") if od_in else v(id_in, 1, "in")
     items = [
-        ("Fluid",       fluid),
-        ("Status",      status),
-        ("Length",      val(length, 1, "km")),
-        ("OD",          val(od_in, 1, "in") if od_in else val(id_in, 1, "in (ID)")),
-        ("Wall",        val(wall, 1, "mm")),
-        ("Max pressure",val(mop, 0, "bar")),
-        ("Start",       start[:10] if start != "—" else "—"),
-        ("Grade",       clean_text(row.get("pipe_grade") if row is not None else None, "—")),
+        ("Fluid",    fluid),
+        ("Status",   status),
+        ("Length",   v(length, 1, "km")),
+        ("OD",       od_str),
+        ("Wall",     v(wall, 1, "mm")),
+        ("Max P",    v(mop, 0, "bar")),
+        ("Start",    start[:10] if start != "N/A" else "N/A"),
+        ("Grade",    grade),
     ]
-    grid_html = "".join(
-        f'<div class="pipeline-card-item">'
-        f'<span class="pipeline-card-label">{lbl}</span>'
-        f'<span class="pipeline-card-value">{v}</span>'
-        f'</div>'
-        for lbl, v in items
+    grid = "".join(
+        f"<div><div class='pi-label'>{lbl}</div><div class='pi-value'>{val}</div></div>"
+        for lbl, val in items
     )
-    return f"""
-    <div class="pipeline-card">
-      <div class="pipeline-card-id">{pid}</div>
-      <div class="pipeline-card-name">{name}</div>
-      <div class="pipeline-card-grid">{grid_html}</div>
-    </div>
-    """
+    return (
+        f"<div class='pipe-id'>{pid}</div>"
+        f"<div class='pipe-name'>{name}</div>"
+        f"<div class='pipe-grid'>{grid}</div>"
+    )
 
 
 def render_top_area(
@@ -1144,115 +944,110 @@ def render_top_area(
     if non_candidate_preview:
         map_active_id = non_candidate_preview
 
-    # ── map legend ────────────────────────────────────────────────────────────
-    st.markdown(
-        """<div class="map-legend">
-          <span><span class="legend-dot" style="background:#5EEAD4;"></span>CO₂ candidate</span>
-          <span><span class="legend-dot" style="background:#F87171;"></span>Selected</span>
-          <span><span class="legend-dot" style="background:#3C5078;"></span>All NSTA pipelines</span>
-        </div>""",
-        unsafe_allow_html=True,
-    )
+    left_col, right_col = st.columns([1, 1.85], gap="large")
 
-    # ── map (full width) ──────────────────────────────────────────────────────
-    clicked_pipeline_id = render_route_map(all_routes_payload, map_active_id)
-    if clicked_pipeline_id and clicked_pipeline_id != map_active_id:
-        apply_pipeline_selection_from_map_choice(clicked_pipeline_id, candidate_pipeline_ids)
-        st.rerun()
-
-    n_routes    = len(all_routes_payload.get("routes", []))
-    n_candidates= all_routes_payload.get("candidate_count", "?")
-    st.markdown(
-        f'<div class="map-caption">↑ {n_routes} route segments · {n_candidates} CO₂ candidates (teal) · Click any pipeline to inspect it</div>',
-        unsafe_allow_html=True,
-    )
-
-    # ── pipeline profile card + status + fallback selector (below map) ────────
-    if non_candidate_preview:
-        record = find_route_record(all_routes_payload, non_candidate_preview)
-        if record:
-            render_non_candidate_info(record)
-        if st.button("← Back to candidate"):
-            st.session_state.pop("non_candidate_preview", None)
-            st.rerun()
-        return
-
-    # Status chips row
-    pre_lca = row.get("pre_lca_decision") if row is not None else "not run"
-    gate    = row.get("repurposing_gate_status") if row is not None else "not run"
-    cap     = row.get("capacity_suitable") if row is not None else "not run"
-    chips   = (
-        _status_chip_html("Pre-LCA", pre_lca)
-        + _status_chip_html("Evidence gate", gate)
-        + _status_chip_html("Capacity", cap)
-    )
-    st.markdown(f'<div class="status-bar" style="margin-top:0.8rem;">{chips}</div>', unsafe_allow_html=True)
-
-    # Pipeline profile card
-    st.markdown(_pipeline_card_html(row, ranked_row, selection), unsafe_allow_html=True)
-
-    # Fallback selector (compact, below card)
-    route_summary = route_summary_table(all_routes_payload)
-    if not route_summary.empty:
-        active_route_id = (
-            map_active_id if map_active_id in set(route_summary["pipeline_id"])
-            else route_summary.iloc[0]["pipeline_id"]
+    with left_col:
+        _html(
+            "<div class='hero-eyebrow'>UKCS North Sea &middot; CO&#8322; Transport Screening</div>"
+            "<div class='hero-hed'>Evaluate existing<br>pipelines for<br><em>CO&#8322; reuse.</em></div>"
+            "<div class='hero-sub'>Gate-by-gate technical and economic screening "
+            "for offshore pipeline repurposing. Select a pipeline, run each layer, "
+            "inspect the result. A pass means worth deeper study -- not engineering approval.</div>"
         )
-        fallback_index   = int(route_summary.index[route_summary["pipeline_id"] == active_route_id][0])
-        fallback_options = route_summary["display"].tolist()
-        if st.session_state.get("route_picker_label") not in fallback_options:
-            st.session_state["route_picker_label"] = fallback_options[fallback_index]
 
-        picked_label = st.selectbox(
-            "Search / select any pipeline",
-            fallback_options,
-            index=fallback_index,
-            key="route_picker_label",
-            help="Type to search. Use this if map clicks do not register.",
+        # Asset source selector (no label clutter)
+        pending = st.session_state.pop("pending_asset_source", None)
+        if pending:
+            st.session_state["asset_source"] = pending
+        source = st.segmented_control(
+            "Asset source",
+            ["NSTA model-ready pipelines", "Known CCS benchmark cases"],
+            default=st.session_state.get("asset_source", "NSTA model-ready pipelines"),
+            key="asset_source",
         )
-        picked_id = str(route_summary.loc[route_summary["display"] == picked_label, "pipeline_id"].iloc[0])
-        if picked_id != map_active_id:
-            apply_pipeline_selection_from_map_choice(picked_id, candidate_pipeline_ids)
+
+        if source == "Known CCS benchmark cases":
+            case_label = st.selectbox("Select case", list(KNOWN_CASES), key="known_case_label")
+            case = KNOWN_CASES[case_label]
+            selection.update({
+                "kind": "scenario",
+                "pipeline_id": case["selection_id"],
+                "map_pipeline_id": case["map_pipeline_id"],
+                "screening_scenario": case["screening_scenario"],
+                "cost_case": case["cost_case"],
+                "lca_scenario": case["lca_scenario"],
+                "label": case["label"],
+            })
+            st.session_state["selected_pipeline_id"] = selection["pipeline_id"]
+        else:
+            route_summary = route_summary_table(all_routes_payload)
+            if not route_summary.empty:
+                active_route_id = (
+                    map_active_id if map_active_id in set(route_summary["pipeline_id"])
+                    else route_summary.iloc[0]["pipeline_id"]
+                )
+                fallback_index = int(route_summary.index[route_summary["pipeline_id"] == active_route_id][0])
+                fallback_options = route_summary["display"].tolist()
+                if st.session_state.get("route_picker_label") not in fallback_options:
+                    st.session_state["route_picker_label"] = fallback_options[fallback_index]
+                picked_label = st.selectbox(
+                    "Search pipelines",
+                    fallback_options,
+                    index=fallback_index,
+                    key="route_picker_label",
+                    label_visibility="collapsed",
+                )
+                picked_id = str(route_summary.loc[route_summary["display"] == picked_label, "pipeline_id"].iloc[0])
+                if picked_id != map_active_id:
+                    apply_pipeline_selection_from_map_choice(picked_id, candidate_pipeline_ids)
+                    st.rerun()
+
+        if non_candidate_preview:
+            record = find_route_record(all_routes_payload, non_candidate_preview)
+            if record:
+                render_non_candidate_info(record)
+            if st.button("Back to candidate"):
+                st.session_state.pop("non_candidate_preview", None)
+                st.rerun()
+            return
+
+        # Status chips + pipeline info card
+        pre_lca = row.get("pre_lca_decision") if row is not None else "not run"
+        gate    = row.get("repurposing_gate_status") if row is not None else "not run"
+        cap     = row.get("capacity_suitable") if row is not None else "not run"
+        _html(
+            f"<div class='sbar'>{_chip('Pre-LCA', pre_lca)}"
+            f"{_chip('Gate', gate)}{_chip('Capacity', cap)}</div>"
+            + _pipe_info_html(row, ranked_row, selection)
+        )
+
+    with right_col:
+        _html(
+            "<div class='map-legend'>"
+            "<span><span class='ldot' style='background:#5EEAD4;'></span>CO&#8322; candidate</span>"
+            "<span><span class='ldot' style='background:#F87171;'></span>Selected</span>"
+            "<span><span class='ldot' style='background:#3C5078;opacity:.7;'></span>All NSTA pipelines</span>"
+            "</div>"
+        )
+        clicked_pipeline_id = render_route_map(all_routes_payload, map_active_id)
+        if clicked_pipeline_id and clicked_pipeline_id != map_active_id:
+            apply_pipeline_selection_from_map_choice(clicked_pipeline_id, candidate_pipeline_ids)
             st.rerun()
+        n_routes     = len(all_routes_payload.get("routes", []))
+        n_candidates = all_routes_payload.get("candidate_count", "?")
+        _html(
+            f"<div class='map-cap'>{n_routes} route segments "
+            f"&middot; {n_candidates} CO&#8322; candidates (teal) "
+            "&middot; Click any pipeline to inspect it</div>"
+        )
 
 
 def render_key_metrics(row: pd.Series | None, ranked_row: pd.Series | None) -> None:
-    cap      = fmt_number(row.get("capacity_mtpa")            if row is not None else None, 1, " Mtpa")
-    req      = fmt_number(row.get("required_design_mtpa")     if row is not None else None, 1, " Mtpa")
-    life     = fmt_number(row.get("remaining_life_years")     if row is not None else None, 1, " yr")
-    evidence = fmt_number(row.get("repurposing_evidence_score")if row is not None else None, 0, "/100")
-    lca      = fmt_number(row.get("lca_proxy_saving_percent") if row is not None else None, 1, "%")
-    score    = fmt_number(ranked_row.get("data_priority_score") if ranked_row is not None else None, 0, "/100")
-
-    st.markdown(
-        f"""
-        <div class="metrics-strip">
-          <div class="metric-tile">
-            <div class="metric-tile-label">Capacity</div>
-            <div class="metric-tile-value">{cap}</div>
-          </div>
-          <div class="metric-tile">
-            <div class="metric-tile-label">Required flow</div>
-            <div class="metric-tile-value">{req}</div>
-          </div>
-          <div class="metric-tile">
-            <div class="metric-tile-label">Remaining life</div>
-            <div class="metric-tile-value">{life}</div>
-          </div>
-          <div class="metric-tile">
-            <div class="metric-tile-label">Evidence score</div>
-            <div class="metric-tile-value">{evidence}</div>
-          </div>
-          <div class="metric-tile">
-            <div class="metric-tile-label">LCA proxy saving</div>
-            <div class="metric-tile-value">{lca}</div>
-          </div>
-        </div>
-        {'<div class="map-caption" style="margin-bottom:0.5rem;">Data priority score: ' + score + ' — screening order only, not engineering rank.</div>' if ranked_row is not None else ''}
-        """,
-        unsafe_allow_html=True,
-    )
-
+    cap      = fmt_number(row.get("capacity_mtpa")             if row is not None else None, 1, " Mtpa")
+    req      = fmt_number(row.get("required_design_mtpa")      if row is not None else None, 1, " Mtpa")
+    life     = fmt_number(row.get("remaining_life_years")      if row is not None else None, 1, " yr")
+    evidence = fmt_number(row.get("repurposing_evidence_score") if row is not None else None, 0, "/100")
+    lca      = fmt_number(row.get("lca_proxy_saving_percent")  if row is not None else None, 1, "%")
 
 def render_layer_button(label: str, selection: dict[str, str]) -> None:
     result_key = f"last_result_{safe_filename(label)}"
@@ -2015,11 +1810,6 @@ def main() -> None:
         return
     candidate_pipeline_ids: set[str] = set(candidate_df["pipeline_id"].tolist())
 
-    # ── selector (compact, above map) ────────────────────────────────────────
-    sel_col, _ = st.columns([1, 2])
-    with sel_col:
-        selection = render_selector(candidate_df)
-
     factor_mode = "screening"
 
     if selection["kind"] == "nsta":
@@ -2031,7 +1821,7 @@ def main() -> None:
 
     render_top_area(all_routes_payload, row, ranked_row, selection, candidate_pipeline_ids)
     render_key_metrics(row, ranked_row)
-    st.markdown("<hr>", unsafe_allow_html=True)
+    _html("<hr>")
     render_workflow(row, ranked_row, selection, factor_mode)
 
 

@@ -1741,17 +1741,370 @@ def render_traceability(row: pd.Series | None, selection: dict[str, str]) -> Non
                 st.write("\n".join(f"- {item}" for item in refs))
 
 
-def render_workflow(row: pd.Series | None, ranked_row: pd.Series | None, selection: dict[str, str], factor_mode: str) -> None:
-    st.subheader("Gate-By-Gate Model Layers")
-    render_data_layer(row, ranked_row, selection)
-    render_capacity_layer(row, selection)
-    render_corrosion_layer(row, selection)
-    render_integrity_layer(row, selection)
-    render_gate_layer(row, selection)
-    render_work_scope_layer(row, selection)
-    render_cost_layer(selection, factor_mode)
-    render_lca_layer(row, selection, factor_mode)
-    render_traceability(row, selection)
+def _ninput(label: str, value: float | None, unit: str, key: str,
+            min_val: float = 0.0, step: float = 0.1, fmt: str = "%.4g") -> float:
+    """Styled number input — pre-filled, editable, no spinner arrows via CSS."""
+    v = value if value is not None else 0.0
+    return st.number_input(
+        f"{label} ({unit})" if unit else label,
+        value=float(v),
+        min_value=min_val,
+        step=step,
+        format=fmt,
+        key=key,
+        label_visibility="visible",
+    )
+
+
+def _sinput(label: str, options: list[str], default: str, key: str) -> str:
+    idx = options.index(default) if default in options else 0
+    return st.selectbox(label, options, index=idx, key=key, label_visibility="visible")
+
+
+def _out_metric(label: str, value: Any, unit: str = "", digits: int = 1,
+                highlight: str = "") -> None:
+    """Output metric tile rendered as custom HTML."""
+    val_str = fmt_number(value, digits, f" {unit}") if value is not None else "N/A"
+    colour = {"green": "#86EFAC", "red": "#F87171", "amber": "#FBBF24"}.get(highlight, "#E8E4DC")
+    _html(
+        f"<div style='background:#111827;border:1px solid #1e2d47;border-radius:8px;"
+        f"padding:.6rem .85rem;margin:.25rem 0;'>"
+        f"<div style='font-size:9px;letter-spacing:.12em;text-transform:uppercase;"
+        f"color:#7A8499;font-family:Manrope,sans-serif;margin-bottom:3px;'>{label}</div>"
+        f"<div style='font-family:JetBrains Mono,monospace;font-size:18px;color:{colour};"
+        f"letter-spacing:-.02em;'>{val_str}</div></div>"
+    )
+
+
+def _card_header(title: str, icon: str, colour: str) -> None:
+    _html(
+        f"<div style='border-left:3px solid {colour};padding:.3rem .7rem;"
+        f"margin-bottom:.75rem;'>"
+        f"<div style='font-size:10px;letter-spacing:.15em;text-transform:uppercase;"
+        f"color:{colour};font-family:Manrope,sans-serif;'>{icon} {title}</div>"
+        f"</div>"
+    )
+
+
+def _divider() -> None:
+    _html("<div style='border-top:1px solid #1e2d47;margin:.75rem 0;'></div>")
+
+
+def _dep_warning(message: str) -> None:
+    _html(
+        f"<div style='background:#1a1200;border:1px solid #3a2e00;"
+        f"border-left:3px solid #FBBF24;border-radius:6px;"
+        f"padding:.5rem .75rem;font-size:11px;color:#FCD34D;"
+        f"font-family:Manrope,sans-serif;margin:.5rem 0;'>"
+        f"&#9888; {message}</div>"
+    )
+
+
+def _run_btn(label: str, key: str) -> bool:
+    return st.button(
+        label,
+        key=key,
+        use_container_width=True,
+        type="primary",
+    )
+
+
+# ---------------------------------------------------------------------------
+# Four assessment card functions
+# ---------------------------------------------------------------------------
+
+def _card_capacity(row: pd.Series | None, pid: str) -> None:
+    _card_header("Capacity Assessment", "&#x1F4A8;", "#5EEAD4")
+
+    # -- Inputs --
+    length    = _ninput("Length", as_float(row.get("length_km") if row is not None else None),
+                        "km", f"cap_length_{pid}", step=1.0, fmt="%.1f")
+    id_in     = _ninput("Inner diameter", as_float(row.get("inner_diameter_in") if row is not None else None),
+                        "in", f"cap_id_{pid}", step=0.1, fmt="%.2f")
+    pressure  = _ninput("Avg pressure", as_float(row.get("average_pressure_mpa") if row is not None else None),
+                        "MPa", f"cap_pres_{pid}", step=0.1, fmt="%.2f")
+    req_flow  = _ninput("Required flow", as_float(row.get("required_design_mtpa") if row is not None else 5.0),
+                        "Mtpa", f"cap_req_{pid}", step=0.1, fmt="%.2f")
+    density   = _ninput("CO&#8322; density", 904.0, "kg/m&#179;", f"cap_dens_{pid}",
+                        step=1.0, fmt="%.0f")
+
+    _divider()
+    run = _run_btn("Run Capacity", f"run_cap_{pid}")
+    _divider()
+
+    # -- Outputs --
+    if run or st.session_state.get(f"cap_done_{pid}"):
+        if run:
+            # Live calculation using Weymouth-simplified formula
+            try:
+                import math
+                id_m = id_in * 0.0254
+                area = math.pi * (id_m / 2) ** 2
+                f = 0.003  # fanning friction factor default
+                dp = pressure * 1e6 * 0.3  # approx pressure drop ~ 30% of avg
+                v = math.sqrt(dp * id_m / (4 * f * length * 1000 * density))
+                mass_flow = density * v * area
+                cap_mtpa = mass_flow * 3600 * 8760 * 0.85 / 1e9
+            except Exception:
+                cap_mtpa = as_float(row.get("capacity_mtpa") if row is not None else None)
+                mass_flow = as_float(row.get("capacity_kg_per_s") if row is not None else None)
+            st.session_state[f"cap_done_{pid}"] = True
+            st.session_state[f"cap_mtpa_{pid}"] = cap_mtpa
+            st.session_state[f"cap_kgs_{pid}"] = mass_flow if "mass_flow" in dir() else None
+
+        cap_mtpa  = st.session_state.get(f"cap_mtpa_{pid}",
+                       as_float(row.get("capacity_mtpa") if row is not None else None))
+        cap_kgs   = st.session_state.get(f"cap_kgs_{pid}",
+                       as_float(row.get("capacity_kg_per_s") if row is not None else None))
+        margin    = (cap_mtpa - req_flow) if cap_mtpa is not None else None
+        suitable  = margin is not None and margin >= 0
+
+        _out_metric("Estimated capacity", cap_mtpa, "MtCO&#8322;/yr", 1,
+                    "green" if suitable else "red")
+        _out_metric("Capacity margin", margin, "Mtpa", 1,
+                    "green" if suitable else "red")
+        _out_metric("Mass flow", cap_kgs, "kg/s", 0)
+        fg, bg = status_colour("yes" if suitable else "no")
+        _html(f"<div style='background:{bg};border:1px solid {fg}44;border-radius:6px;"
+              f"padding:.3rem .6rem;font-size:11px;font-family:Manrope,sans-serif;"
+              f"font-weight:600;color:{fg};margin-top:.35rem;text-align:center;'>"
+              f"{'SUITABLE' if suitable else 'NOT SUITABLE'}</div>")
+    else:
+        _html("<div style='color:#7A8499;font-size:12px;font-family:Manrope,sans-serif;"
+              "text-align:center;padding:.75rem 0;'>Run assessment to see results</div>")
+
+
+def _card_integrity(row: pd.Series | None, pid: str) -> None:
+    _card_header("Integrity Assessment", "&#x1F527;", "#FBBF24")
+
+    # -- Inputs --
+    wall      = _ninput("Wall thickness", as_float(row.get("nominal_wall_thickness_mm") if row is not None else None),
+                        "mm", f"int_wall_{pid}", step=0.1, fmt="%.2f")
+    od_in     = _ninput("Outer diameter", as_float(row.get("outer_diameter_in") if row is not None else None),
+                        "in", f"int_od_{pid}", step=0.1, fmt="%.2f")
+    pressure  = _ninput("Op. pressure", as_float(row.get("average_pressure_mpa") if row is not None else None),
+                        "MPa", f"int_pres_{pid}", step=0.1, fmt="%.2f")
+    grade     = _sinput("Pipe grade", ["X42","X46","X52","X56","X60","X65","X70","X80"], "X60", f"int_grade_{pid}")
+    svc_yrs   = _ninput("Service years", 33.0, "yr", f"int_svc_{pid}", step=1.0, fmt="%.0f")
+    corr_rate = _ninput("Corrosion rate", as_float(row.get("future_co2_corrosion_rate_mm_per_year") if row is not None else 0.10),
+                        "mm/yr", f"int_corr_{pid}", step=0.01, fmt="%.3f")
+
+    _divider()
+    run = _run_btn("Run Integrity", f"run_int_{pid}")
+    _divider()
+
+    # -- Outputs --
+    if run or st.session_state.get(f"int_done_{pid}"):
+        if run:
+            smys = {"X42":289.6,"X46":317.2,"X52":358.5,"X56":386.1,
+                    "X60":413.7,"X65":448.2,"X70":482.6,"X80":551.6}.get(grade, 413.7)
+            od_mm = od_in * 25.4
+            t_min = pressure * od_mm / (2 * smys * 0.72)
+            hist_loss = (row.get("historical_corrosion_rate_mm_per_year") if row is not None else 0.05 or 0.05) * svc_yrs
+            if isinstance(hist_loss, str):
+                hist_loss = 0.05 * svc_yrs
+            t_current = wall - float(hist_loss)
+            t_avail = t_current - t_min
+            life_base = max(0.0, t_avail / corr_rate) if corr_rate > 0 else 0.0
+            life_low  = max(0.0, (t_avail * 0.7) / (corr_rate * 1.5)) if corr_rate > 0 else 0.0
+            life_high = max(0.0, (t_avail * 1.3) / (corr_rate * 0.5)) if corr_rate > 0 else 0.0
+            st.session_state[f"int_done_{pid}"] = True
+            st.session_state[f"int_life_{pid}"] = (life_base, life_low, life_high)
+            st.session_state[f"int_avail_{pid}"] = t_avail
+            st.session_state[f"int_risk_{pid}"] = "low" if t_avail > 5 else ("medium" if t_avail > 0 else "high")
+
+        life_base, life_low, life_high = st.session_state.get(f"int_life_{pid}",
+            (as_float(row.get("remaining_life_years") if row is not None else None),
+             as_float(row.get("remaining_life_low_years") if row is not None else None),
+             as_float(row.get("remaining_life_high_years") if row is not None else None)))
+        t_avail = st.session_state.get(f"int_avail_{pid}",
+                     as_float(row.get("available_wall_thickness_mm") if row is not None else None))
+        risk = st.session_state.get(f"int_risk_{pid}",
+                  clean_text(row.get("corrosion_risk_level") if row is not None else None, "unknown"))
+
+        hl = "red" if (t_avail is not None and t_avail < 0) else ("amber" if (t_avail is not None and t_avail < 2) else "green")
+        _out_metric("Available wall", t_avail, "mm", 2, hl)
+        _out_metric("Remaining life (base)", life_base, "yr", 1,
+                    "green" if life_base and life_base > 20 else ("amber" if life_base and life_base > 0 else "red"))
+        _out_metric("Low case", life_low, "yr", 1)
+        _out_metric("High case", life_high, "yr", 1)
+        fg, bg = status_colour("high" if risk == "high" else ("marginal" if risk == "medium" else "pass"))
+        _html(f"<div style='background:{bg};border:1px solid {fg}44;border-radius:6px;"
+              f"padding:.3rem .6rem;font-size:11px;font-family:Manrope,sans-serif;"
+              f"font-weight:600;color:{fg};margin-top:.35rem;text-align:center;'>"
+              f"CORROSION RISK: {risk.upper()}</div>")
+        if t_avail is not None and t_avail < 0:
+            st.error("Wall below Barlow minimum — pipeline has exceeded design life.", icon="🚨")
+    else:
+        _html("<div style='color:#7A8499;font-size:12px;font-family:Manrope,sans-serif;"
+              "text-align:center;padding:.75rem 0;'>Run assessment to see results</div>")
+
+
+def _card_economics(row: pd.Series | None, selection: dict[str, str], pid: str) -> None:
+    _card_header("Economic Assessment", "&#x1F4B0;", "#86EFAC")
+
+    # -- Inputs --
+    od_in     = _ninput("Outer diameter", as_float(row.get("outer_diameter_in") if row is not None else None),
+                        "in", f"eco_od_{pid}", step=0.1, fmt="%.1f")
+    length    = _ninput("Length", as_float(row.get("length_km") if row is not None else None),
+                        "km", f"eco_len_{pid}", step=1.0, fmt="%.1f")
+    offshr    = _ninput("Offshore factor", 1.6, "", f"eco_off_{pid}", step=0.05, fmt="%.2f")
+    cont      = _ninput("Contingency", 10.0, "%", f"eco_cont_{pid}", step=1.0, fmt="%.0f")
+    model     = _sinput("Cost model",
+                        ["Brown et al. (2022)","Parker (2004)","McCoy & Rubin (2008)","Rui et al. (2011)","All four"],
+                        "Brown et al. (2022)", f"eco_model_{pid}")
+
+    _divider()
+    run = _run_btn("Run Economics", f"run_eco_{pid}")
+    _divider()
+
+    # -- Outputs --
+    # Check if refurbishment CSV exists
+    cost_row = load_cost_row(selection["cost_case"])
+
+    if run or st.session_state.get(f"eco_done_{pid}"):
+        if run:
+            try:
+                from repurposing_pipelines.costs import calculate_newbuild_cost, calculate_all_models
+                model_map = {
+                    "Brown et al. (2022)": "brown",
+                    "Parker (2004)": "parker",
+                    "McCoy & Rubin (2008)": "mccoy",
+                    "Rui et al. (2011)": "rui",
+                }
+                if model == "All four":
+                    results = calculate_all_models(od_in, length, project_year=2026,
+                                                   offshore=True, offshore_factor=offshr,
+                                                   contingency_fraction=cont/100)
+                    nb = {m: r.cost_total_usd for m, r in results.items()}
+                    nb_usd = sum(nb.values()) / len(nb)
+                else:
+                    m_key = model_map[model]
+                    r = calculate_newbuild_cost(od_in, length, project_year=2026,
+                                               model=m_key, offshore=True,
+                                               offshore_factor=offshr,
+                                               contingency_fraction=cont/100)
+                    nb_usd = r.cost_total_usd
+                st.session_state[f"eco_done_{pid}"] = True
+                st.session_state[f"eco_nb_{pid}"] = nb_usd
+            except Exception as e:
+                st.error(f"Cost calculation failed: {e}")
+                nb_usd = None
+
+        nb_usd   = st.session_state.get(f"eco_nb_{pid}")
+        refurb_l = as_float(cost_row.get("cost_low_usd_2025")  if cost_row is not None else None)
+        refurb_b = as_float(cost_row.get("cost_base_usd_2025") if cost_row is not None else None)
+        refurb_h = as_float(cost_row.get("cost_high_usd_2025") if cost_row is not None else None)
+
+        if nb_usd is not None:
+            _out_metric("New-build CAPEX", nb_usd / 1e6, "M USD", 1)
+        if cost_row is None:
+            _dep_warning("Run full screening first to get refurbishment cost and net saving.")
+        else:
+            saving_b = (nb_usd - refurb_b) if nb_usd and refurb_b else None
+            saving_pct = (100 * saving_b / nb_usd) if saving_b and nb_usd else None
+            _out_metric("Refurbishment (base)", refurb_b / 1e6 if refurb_b else None, "M USD", 1)
+            _out_metric("Refurbishment (low)",  refurb_l / 1e6 if refurb_l else None, "M USD", 1)
+            _out_metric("Refurbishment (high)", refurb_h / 1e6 if refurb_h else None, "M USD", 1)
+            _out_metric("Net saving (base)", saving_b / 1e6 if saving_b else None, "M USD", 1, "green")
+            _out_metric("Saving vs new-build", saving_pct, "%", 1, "green")
+    else:
+        _html("<div style='color:#7A8499;font-size:12px;font-family:Manrope,sans-serif;"
+              "text-align:center;padding:.75rem 0;'>Run assessment to see results</div>")
+
+
+def _card_lca(row: pd.Series | None, pid: str) -> None:
+    _card_header("LCA Assessment", "&#x1F331;", "#818CF8")
+
+    # -- Inputs --
+    length    = _ninput("Length", as_float(row.get("length_km") if row is not None else None),
+                        "km", f"lca_len_{pid}", step=1.0, fmt="%.1f")
+    od_in     = _ninput("Outer diameter", as_float(row.get("outer_diameter_in") if row is not None else None),
+                        "in", f"lca_od_{pid}", step=0.1, fmt="%.1f")
+    wall      = _ninput("Wall thickness", as_float(row.get("nominal_wall_thickness_mm") if row is not None else None),
+                        "mm", f"lca_wall_{pid}", step=0.1, fmt="%.1f")
+    refurb_frac = _ninput("Refurb fraction", 5.0, "%", f"lca_refrac_{pid}", step=0.5, fmt="%.1f")
+    steel_f   = _ninput("Steel CO&#8322; factor", 2.0, "kgCO&#8322;e/kg", f"lca_sf_{pid}", step=0.1, fmt="%.1f")
+
+    _divider()
+    run = _run_btn("Run LCA", f"run_lca_{pid}")
+    _divider()
+
+    # -- Outputs --
+    if run or st.session_state.get(f"lca_done_{pid}"):
+        if run:
+            import math
+            od_m = od_in * 0.0254
+            wall_m = wall / 1000
+            id_m = od_m - 2 * wall_m
+            steel_kg = math.pi * ((od_m/2)**2 - (id_m/2)**2) * length * 1000 * 7850
+            nb_co2 = steel_kg * steel_f + length * 100_000
+            refurb_steel = steel_kg * (refurb_frac / 100)
+            reuse_co2 = refurb_steel * steel_f + length * 20_000
+            saving = nb_co2 - reuse_co2
+            saving_pct = 100 * saving / nb_co2 if nb_co2 > 0 else 0
+            st.session_state[f"lca_done_{pid}"] = True
+            st.session_state[f"lca_res_{pid}"] = (nb_co2, reuse_co2, saving, saving_pct)
+
+        nb_co2, reuse_co2, saving, saving_pct = st.session_state.get(f"lca_res_{pid}",
+            (as_float(row.get("lca_new_build_proxy_kgco2e") if row is not None else None),
+             as_float(row.get("lca_reuse_proxy_kgco2e") if row is not None else None),
+             as_float(row.get("lca_proxy_saving_kgco2e") if row is not None else None),
+             as_float(row.get("lca_proxy_saving_percent") if row is not None else None)))
+
+        def ktco2(v: Any) -> str:
+            f = as_float(v)
+            return f"{f/1000:,.0f} ktCO&#8322;e" if f is not None else "N/A"
+
+        _out_metric("New-build impact", as_float(nb_co2) / 1000 if nb_co2 else None, "ktCO&#8322;e", 0)
+        _out_metric("Reuse impact", as_float(reuse_co2) / 1000 if reuse_co2 else None, "ktCO&#8322;e", 0)
+        _out_metric("Carbon saving", as_float(saving) / 1000 if saving else None, "ktCO&#8322;e", 0, "green")
+        _out_metric("Reduction vs new-build", saving_pct, "%", 1, "green")
+        st.caption("Proxy LCA only — replace with ecoinvent results before publication.")
+    else:
+        _html("<div style='color:#7A8499;font-size:12px;font-family:Manrope,sans-serif;"
+              "text-align:center;padding:.75rem 0;'>Run assessment to see results</div>")
+
+
+def render_workflow(row: pd.Series | None, ranked_row: pd.Series | None,
+                    selection: dict[str, str], factor_mode: str) -> None:
+    pid = selection["pipeline_id"]
+
+    # Add CSS for number inputs
+    _html(
+        "<style>"
+        "div[data-testid='stNumberInput'] input{"
+        "background:#1a2236!important;color:#E8E4DC!important;"
+        "border:1px solid #1e2d47!important;border-radius:6px!important;"
+        "font-family:'JetBrains Mono',monospace!important;font-size:13px!important;"
+        "padding:.35rem .6rem!important;}"
+        "div[data-testid='stNumberInput'] input:focus{"
+        "border-color:#5EEAD4!important;outline:none!important;box-shadow:none!important;}"
+        "div[data-testid='stNumberInput'] label{"
+        "font-size:10px!important;letter-spacing:.1em!important;"
+        "text-transform:uppercase!important;color:#7A8499!important;"
+        "font-family:'Manrope',sans-serif!important;}"
+        "div[data-testid='stNumberInput'] button{display:none!important;}"
+        "div[data-testid='stSelectbox'] label{"
+        "font-size:10px!important;letter-spacing:.1em!important;"
+        "text-transform:uppercase!important;color:#7A8499!important;"
+        "font-family:'Manrope',sans-serif!important;}"
+        "</style>"
+    )
+
+    c1, c2, c3, c4 = st.columns(4, gap="small")
+    with c1:
+        with st.container(border=True):
+            _card_capacity(row, pid)
+    with c2:
+        with st.container(border=True):
+            _card_integrity(row, pid)
+    with c3:
+        with st.container(border=True):
+            _card_economics(row, selection, pid)
+    with c4:
+        with st.container(border=True):
+            _card_lca(row, pid)
 
 
 def main() -> None:

@@ -234,179 +234,328 @@ def apply_style() -> None:
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg:    #0A0E1A;
-    --panel: #131826;
-    --line:  #232B42;
-    --text:  #F4F1EA;
-    --mute:  #9CA3B2;
-    --accent:#5EEAD4;
+    --bg:     #0A0E1A;
+    --panel:  #111827;
+    --panel2: #1a2236;
+    --line:   #1e2d47;
+    --text:   #E8E4DC;
+    --mute:   #7A8499;
+    --accent: #5EEAD4;
+    --amber:  #FBBF24;
+    --coral:  #F87171;
+    --green:  #86EFAC;
 }
-.stApp {
-    background: #0A0E1A;
-    color: #F4F1EA;
-    font-family: 'Manrope', sans-serif;
-}
-.block-container {
-    padding-top: 1.5rem;
-    padding-bottom: 3rem;
-    max-width: 1400px;
-}
-h1, h2, h3 {
-    font-family: 'Fraunces', 'Georgia', serif;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: #F4F1EA;
-}
-h1 { font-size: 36px; margin-bottom: 0.15rem; }
-h2 { font-size: 24px; margin-top: 0.4rem; }
-h3 { font-size: 18px; }
+
+/* ── Base ── */
+.stApp { background: var(--bg); color: var(--text); font-family: 'Manrope', sans-serif; }
+.block-container { padding-top: 0 !important; padding-bottom: 3rem; max-width: 1440px; }
+h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; letter-spacing: -0.01em; color: var(--text); }
+h1 { font-size: 32px; margin: 0; }
+h2 { font-size: 22px; }
+h3 { font-size: 17px; margin: 0 0 0.4rem; }
+
+/* ── Streamlit overrides ── */
 div[data-testid="stMetric"] {
-    background: #131826;
-    border: 1px solid #232B42;
-    border-radius: 12px;
-    padding: 0.85rem 1rem;
-    min-height: 92px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
 }
 div[data-testid="stMetric"] label {
     font-family: 'Manrope', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    font-size: 10px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #9CA3B2;
+    color: var(--mute);
 }
 div[data-testid="stMetric"] [data-testid="stMetricValue"] {
-    font-family: 'JetBrains Mono', 'Consolas', monospace;
-    font-size: 22px;
-    color: #F4F1EA;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: -0.02em;
 }
 div[data-testid="stVerticalBlockBorderWrapper"] {
-    border-color: #232B42;
-    border-radius: 14px;
-    background: #131826;
+    border-color: var(--line) !important;
+    border-radius: 12px;
+    background: var(--panel);
 }
-[data-testid="stSidebar"] {
-    background: #131826;
-    border-right: 1px solid #232B42;
+
+/* ── Force dark dropdowns / selects ── */
+div[data-baseweb="select"] > div,
+div[data-baseweb="select"] > div:hover {
+    background-color: var(--panel2) !important;
+    border-color: var(--line) !important;
+    color: var(--text) !important;
+    border-radius: 8px !important;
 }
+div[data-baseweb="select"] span,
+div[data-baseweb="select"] div[class*="singleValue"],
+div[data-baseweb="select"] input {
+    color: var(--text) !important;
+}
+div[data-baseweb="popover"] ul {
+    background-color: var(--panel2) !important;
+    border: 1px solid var(--line) !important;
+}
+div[data-baseweb="popover"] li {
+    color: var(--text) !important;
+}
+div[data-baseweb="popover"] li:hover {
+    background-color: var(--line) !important;
+}
+[data-testid="stSelectbox"] label { color: var(--mute); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── Segmented control ── */
+[data-testid="stSegmentedControl"] div[role="radio"] {
+    background: var(--panel2);
+    color: var(--text);
+    border-color: var(--line);
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+}
+[data-testid="stSegmentedControl"] div[role="radio"][aria-checked="true"] {
+    background: var(--panel2);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ── Buttons ── */
 .stButton > button {
     font-family: 'Manrope', sans-serif;
     border-radius: 8px;
-    border: 1px solid #232B42;
-    background: #131826;
-    color: #F4F1EA;
+    border: 1px solid var(--line);
+    background: var(--panel2);
+    color: var(--text);
     font-weight: 500;
+    font-size: 13px;
+    padding: 0.45rem 1rem;
+    transition: all 0.15s;
 }
 .stButton > button:hover {
-    background: #1e263a;
-    border-color: #5EEAD4;
-    color: #5EEAD4;
+    background: var(--line);
+    border-color: var(--accent);
+    color: var(--accent);
 }
+.stButton > button[kind="primary"] {
+    background: var(--accent);
+    color: #0A0E1A;
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+/* ── Header bar ── */
 .tool-header {
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 1.5rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    border-bottom: 1px solid #232B42;
-    padding-bottom: 1rem;
-    margin-bottom: 1.2rem;
+    gap: 1.5rem;
+    margin: 0 -5rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
-.eyebrow {
+.tool-header-left { display: flex; align-items: baseline; gap: 0.6rem; }
+.tool-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--text); margin: 0; }
+.tool-title em { color: var(--accent); font-style: italic; }
+.tool-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--mute);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 2px 6px;
+    letter-spacing: 0.08em;
+}
+.tool-subtitle {
+    font-size: 12px;
+    color: var(--mute);
     font-family: 'Manrope', sans-serif;
+    max-width: 500px;
+}
+
+/* ── Pipeline profile card ── */
+.pipeline-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+}
+.pipeline-card-id {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #5F6981;
-    margin-bottom: 4px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
 }
-.small-muted {
-    color: #9CA3B2;
-    font-size: 0.88rem;
+.pipeline-card-name {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+.pipeline-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem 1rem;
+    margin-top: 0.75rem;
+}
+.pipeline-card-item { display: flex; flex-direction: column; gap: 2px; }
+.pipeline-card-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mute);
     font-family: 'Manrope', sans-serif;
 }
+.pipeline-card-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text);
+}
+
+/* ── Status pills ── */
 .status-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid #232B42;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    font-family: 'Manrope', sans-serif;
+    color: var(--mute);
 }
 .status-row strong {
     display: inline-block;
     border-radius: 999px;
-    padding: 0.22rem 0.7rem;
-    font-size: 0.75rem;
+    padding: 0.18rem 0.65rem;
+    font-size: 11px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+.status-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+.status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    font-size: 11px;
     font-family: 'Manrope', sans-serif;
     font-weight: 600;
     letter-spacing: 0.05em;
-    line-height: 1.3;
-    white-space: nowrap;
+    border: 1px solid;
+}
+
+/* ── Map legend ── */
+.map-legend {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    padding: 0.4rem 0 0.6rem;
+    font-size: 11px;
+    font-family: 'Manrope', sans-serif;
+    color: var(--mute);
+    letter-spacing: 0.04em;
+}
+.legend-dot {
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    margin-right: 4px;
+    flex-shrink: 0;
+}
+.map-caption {
+    font-size: 11px;
+    color: var(--mute);
+    font-family: 'Manrope', sans-serif;
+    padding: 0.3rem 0;
+}
+
+/* ── Metrics strip ── */
+.metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.6rem;
+    margin: 1rem 0;
+}
+.metric-tile {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+}
+.metric-tile-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mute);
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 4px;
+}
+.metric-tile-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: -0.02em;
+}
+
+/* ── Gate containers ── */
+.workflow-step {
+    border-left: 3px solid var(--accent);
+    padding-left: 0.8rem;
+    margin-bottom: 0.6rem;
 }
 .section-note {
-    background: #131826;
-    border: 1px solid #232B42;
-    border-left: 3px solid #5EEAD4;
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    color: #9CA3B2;
-    font-size: 0.88rem;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    color: var(--mute);
+    font-size: 12px;
     font-family: 'Manrope', sans-serif;
     line-height: 1.6;
+    margin-bottom: 0.75rem;
 }
 .missing-note {
-    background: #1e1500;
-    border: 1px solid #4a3500;
-    border-left: 3px solid #FBBF24;
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
+    background: #1a1200;
+    border: 1px solid #3a2e00;
+    border-left: 3px solid var(--amber);
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
     color: #FCD34D;
-    font-size: 0.88rem;
+    font-size: 12px;
     font-family: 'Manrope', sans-serif;
     line-height: 1.6;
 }
-.workflow-step {
-    border-left: 4px solid #5EEAD4;
-    padding-left: 0.85rem;
-    margin-bottom: 0.5rem;
-}
-.score-card {
-    background: #131826;
-    border: 1px solid #232B42;
-    border-radius: 14px;
-    padding: 18px 22px;
-    margin-bottom: 12px;
-}
-.score-num {
-    font-family: 'JetBrains Mono', 'Consolas', monospace;
-    font-size: 52px;
-    font-weight: 500;
-    line-height: 1;
-    color: #F4F1EA;
-}
-.score-num-small {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 26px;
-    color: #F4F1EA;
-}
-hr { border-color: #232B42; }
-/* dataframes */
-[data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; }
-/* code blocks */
-.stCodeBlock { background: #0f1320 !important; border: 1px solid #232B42; border-radius: 8px; }
-/* expanders */
-[data-testid="stExpander"] summary {
-    font-family: 'Manrope', sans-serif;
-    font-weight: 500;
-    color: #F4F1EA;
-}
-[data-testid="stExpander"] { border-color: #232B42 !important; background: #131826; border-radius: 10px; }
-/* segmented control & select */
-[data-testid="stSegmentedControl"] { font-family: 'Manrope', sans-serif; }
+.score-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+.eyebrow { font-family: 'Manrope', sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
+.small-muted { color: var(--mute); font-size: 12px; font-family: 'Manrope', sans-serif; }
+hr { border-color: var(--line); margin: 1rem 0; }
+[data-testid="stDataFrame"] { border-radius: 8px; overflow: hidden; }
+.stCodeBlock { background: #080d18 !important; border: 1px solid var(--line); border-radius: 8px; }
+[data-testid="stExpander"] summary { font-family: 'Manrope', sans-serif; font-weight: 500; color: var(--text); }
+[data-testid="stExpander"] { border-color: var(--line) !important; background: var(--panel); border-radius: 10px; }
+.score-num-small { font-family: 'JetBrains Mono', monospace; font-size: 24px; color: var(--text); }
 </style>
         """,
         unsafe_allow_html=True,
     )
-
 
 def build_candidate_table(ranked_df: pd.DataFrame, screening_df: pd.DataFrame) -> pd.DataFrame:
     if ranked_df.empty:
@@ -811,20 +960,16 @@ def render_header() -> None:
     st.markdown(
         """
         <div class="tool-header">
-          <div>
-            <div class="eyebrow">Screening &amp; Evidence Workflow</div>
-            <h1>CO<sub style="font-size:0.7em;">2</sub> Pipeline Repurposing
-              <em style="font-style:italic; color:#5EEAD4;">Evaluation Tool</em></h1>
-            <div class="small-muted" style="max-width:680px; line-height:1.6; margin-top:6px;">
-              Select an asset, inspect the data, then run each model layer gate by gate.
-              A pass or marginal result means &#8220;worth deeper study&#8221;,
-              not engineering approval.
-            </div>
+          <div class="tool-header-left">
+            <span class="tool-title">
+              CO<sub style="font-size:0.65em;">2</sub> Pipeline Repurposing
+              <em>Evaluation Tool</em>
+            </span>
+            <span class="tool-badge">v1.0 · NSTA dataset</span>
           </div>
-          <div class="score-card" style="min-width:160px; text-align:center; border-top:2px solid #5EEAD4;">
-            <div class="eyebrow">Model version</div>
-            <div class="score-num-small" style="color:#5EEAD4;">1.0</div>
-            <div style="color:#5F6981; font-size:11px; margin-top:4px;">NSTA pipeline dataset</div>
+          <div class="tool-subtitle">
+            Screen existing offshore pipelines for CO₂ transport reuse.
+            A pass or marginal result means <em>worth deeper study</em> — not engineering approval.
           </div>
         </div>
         """,
@@ -926,6 +1071,67 @@ def render_non_candidate_info(record: dict[str, Any]) -> None:
     )
 
 
+def _status_chip_html(label: str, status: Any) -> str:
+    fg, bg = status_colour(status)
+    text = clean_text(status)
+    return (
+        f'<span class="status-chip" style="color:{fg}; background:{bg}22; border-color:{fg}44;">'
+        f'<span style="opacity:0.7; font-size:10px;">{label}</span> {text}</span>'
+    )
+
+
+def _pipeline_card_html(
+    row: pd.Series | None,
+    ranked_row: pd.Series | None,
+    selection: dict[str, str],
+) -> str:
+    pid   = selection["pipeline_id"]
+    name  = clean_text(
+        row.get("pipeline_name") if row is not None
+        else ranked_row.get("PIPE_NAME") if ranked_row is not None
+        else selection["label"]
+    )
+    fluid  = clean_text(ranked_row.get("FLUID")  if ranked_row is not None else None, "—")
+    status = clean_text(ranked_row.get("STATUS") if ranked_row is not None else None, "—")
+    length = as_float(
+        row.get("length_km") if row is not None
+        else ranked_row.get("LENGTH_KM") if ranked_row is not None else None
+    )
+    id_in  = as_float(row.get("inner_diameter_in") if row is not None else ranked_row.get("INT_DIAM") if ranked_row is not None else None)
+    wall   = as_float(row.get("nominal_wall_thickness_mm") if row is not None else ranked_row.get("THICKNESS") if ranked_row is not None else None)
+    mop    = as_float(ranked_row.get("MX_OP_PRES") if ranked_row is not None else None) or as_float(row.get("average_pressure_mpa") if row is not None else None)
+    start  = clean_text(ranked_row.get("START_DATE") if ranked_row is not None else None, "—")
+    od_in  = as_float(row.get("outer_diameter_in") if row is not None else None)
+
+    def val(v: float | None, digits: int, unit: str) -> str:
+        return fmt_number(v, digits, f" {unit}") if v is not None else "—"
+
+    items = [
+        ("Fluid",       fluid),
+        ("Status",      status),
+        ("Length",      val(length, 1, "km")),
+        ("OD",          val(od_in, 1, "in") if od_in else val(id_in, 1, "in (ID)")),
+        ("Wall",        val(wall, 1, "mm")),
+        ("Max pressure",val(mop, 0, "bar")),
+        ("Start",       start[:10] if start != "—" else "—"),
+        ("Grade",       clean_text(row.get("pipe_grade") if row is not None else None, "—")),
+    ]
+    grid_html = "".join(
+        f'<div class="pipeline-card-item">'
+        f'<span class="pipeline-card-label">{lbl}</span>'
+        f'<span class="pipeline-card-value">{v}</span>'
+        f'</div>'
+        for lbl, v in items
+    )
+    return f"""
+    <div class="pipeline-card">
+      <div class="pipeline-card-id">{pid}</div>
+      <div class="pipeline-card-name">{name}</div>
+      <div class="pipeline-card-grid">{grid_html}</div>
+    </div>
+    """
+
+
 def render_top_area(
     all_routes_payload: dict[str, Any],
     row: pd.Series | None,
@@ -933,96 +1139,119 @@ def render_top_area(
     selection: dict[str, str],
     candidate_pipeline_ids: set[str],
 ) -> None:
-    map_col, profile_col = st.columns([1.65, 1], gap="large")
-
     map_active_id = selection["pipeline_id"] if selection["kind"] == "nsta" else selection.get("map_pipeline_id")
     non_candidate_preview = st.session_state.get("non_candidate_preview")
     if non_candidate_preview:
         map_active_id = non_candidate_preview
 
-    with map_col:
-        st.markdown(
-            """
-            <div style="display:flex; gap:18px; margin-bottom:6px; font-size:12px;
-                        font-family:'Manrope',sans-serif; color:#9CA3B2;">
-              <span><span style="display:inline-block; width:10px; height:10px;
-                    border-radius:50%; background:#5EEAD4; margin-right:5px;"></span>CO₂ candidate</span>
-              <span><span style="display:inline-block; width:10px; height:10px;
-                    border-radius:50%; background:#F87171; margin-right:5px;"></span>Selected</span>
-              <span><span style="display:inline-block; width:10px; height:10px;
-                    border-radius:50%; background:#3C5078; margin-right:5px;"></span>All NSTA pipelines</span>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        clicked_pipeline_id = render_route_map(all_routes_payload, map_active_id)
-        if clicked_pipeline_id and clicked_pipeline_id != map_active_id:
-            apply_pipeline_selection_from_map_choice(clicked_pipeline_id, candidate_pipeline_ids)
+    # ── map legend ────────────────────────────────────────────────────────────
+    st.markdown(
+        """<div class="map-legend">
+          <span><span class="legend-dot" style="background:#5EEAD4;"></span>CO₂ candidate</span>
+          <span><span class="legend-dot" style="background:#F87171;"></span>Selected</span>
+          <span><span class="legend-dot" style="background:#3C5078;"></span>All NSTA pipelines</span>
+        </div>""",
+        unsafe_allow_html=True,
+    )
+
+    # ── map (full width) ──────────────────────────────────────────────────────
+    clicked_pipeline_id = render_route_map(all_routes_payload, map_active_id)
+    if clicked_pipeline_id and clicked_pipeline_id != map_active_id:
+        apply_pipeline_selection_from_map_choice(clicked_pipeline_id, candidate_pipeline_ids)
+        st.rerun()
+
+    n_routes    = len(all_routes_payload.get("routes", []))
+    n_candidates= all_routes_payload.get("candidate_count", "?")
+    st.markdown(
+        f'<div class="map-caption">↑ {n_routes} route segments · {n_candidates} CO₂ candidates (teal) · Click any pipeline to inspect it</div>',
+        unsafe_allow_html=True,
+    )
+
+    # ── pipeline profile card + status + fallback selector (below map) ────────
+    if non_candidate_preview:
+        record = find_route_record(all_routes_payload, non_candidate_preview)
+        if record:
+            render_non_candidate_info(record)
+        if st.button("← Back to candidate"):
+            st.session_state.pop("non_candidate_preview", None)
             st.rerun()
-        st.caption(
-            f"Showing {len(all_routes_payload.get('routes', []))} route segments · "
-            f"{all_routes_payload.get('candidate_count', '?')} CO₂ candidates (teal) · "
-            "Click any pipeline to inspect it."
+        return
+
+    # Status chips row
+    pre_lca = row.get("pre_lca_decision") if row is not None else "not run"
+    gate    = row.get("repurposing_gate_status") if row is not None else "not run"
+    cap     = row.get("capacity_suitable") if row is not None else "not run"
+    chips   = (
+        _status_chip_html("Pre-LCA", pre_lca)
+        + _status_chip_html("Evidence gate", gate)
+        + _status_chip_html("Capacity", cap)
+    )
+    st.markdown(f'<div class="status-bar" style="margin-top:0.8rem;">{chips}</div>', unsafe_allow_html=True)
+
+    # Pipeline profile card
+    st.markdown(_pipeline_card_html(row, ranked_row, selection), unsafe_allow_html=True)
+
+    # Fallback selector (compact, below card)
+    route_summary = route_summary_table(all_routes_payload)
+    if not route_summary.empty:
+        active_route_id = (
+            map_active_id if map_active_id in set(route_summary["pipeline_id"])
+            else route_summary.iloc[0]["pipeline_id"]
         )
+        fallback_index   = int(route_summary.index[route_summary["pipeline_id"] == active_route_id][0])
+        fallback_options = route_summary["display"].tolist()
+        if st.session_state.get("route_picker_label") not in fallback_options:
+            st.session_state["route_picker_label"] = fallback_options[fallback_index]
 
-        route_summary = route_summary_table(all_routes_payload)
-        if not route_summary.empty:
-            active_route_id = map_active_id if map_active_id in set(route_summary["pipeline_id"]) else route_summary.iloc[0]["pipeline_id"]
-            fallback_index = int(route_summary.index[route_summary["pipeline_id"] == active_route_id][0])
-            fallback_options = route_summary["display"].tolist()
-            fallback_default = fallback_options[fallback_index]
-            if st.session_state.get("route_picker_label") not in fallback_options:
-                st.session_state["route_picker_label"] = fallback_default
-
-            picked_label = st.selectbox(
-                "Fallback selector",
-                fallback_options,
-                index=fallback_index,
-                key="route_picker_label",
-                help="Use this if map clicks do not register reliably.",
-            )
-            picked_pipeline_id = str(route_summary.loc[route_summary["display"] == picked_label, "pipeline_id"].iloc[0])
-            if picked_pipeline_id != map_active_id:
-                apply_pipeline_selection_from_map_choice(picked_pipeline_id, candidate_pipeline_ids)
-                st.rerun()
-
-    with profile_col:
-        if non_candidate_preview:
-            record = find_route_record(all_routes_payload, non_candidate_preview)
-            if record:
-                render_non_candidate_info(record)
-            if st.button("← Back to candidate", width="stretch"):
-                st.session_state.pop("non_candidate_preview", None)
-                st.rerun()
-        else:
-            st.markdown(
-                "<div class='eyebrow' style='margin-bottom:8px;'>Pipeline Information</div>",
-                unsafe_allow_html=True,
-            )
-            status_pill("Pre-LCA decision", row.get("pre_lca_decision") if row is not None else "not run")
-            status_pill("Repurposing gate", row.get("repurposing_gate_status") if row is not None else "not run")
-            status_pill("Capacity suitable", row.get("capacity_suitable") if row is not None else "not run")
-            info = profile_rows(row, ranked_row, selection)
-            data_table(info)
-            render_missing_warning(info)
-            if ranked_row is not None:
-                st.caption(
-                    "Data priority score is a data-screening helper only — not an engineering suitability ranking."
-                )
+        picked_label = st.selectbox(
+            "Search / select any pipeline",
+            fallback_options,
+            index=fallback_index,
+            key="route_picker_label",
+            help="Type to search. Use this if map clicks do not register.",
+        )
+        picked_id = str(route_summary.loc[route_summary["display"] == picked_label, "pipeline_id"].iloc[0])
+        if picked_id != map_active_id:
+            apply_pipeline_selection_from_map_choice(picked_id, candidate_pipeline_ids)
+            st.rerun()
 
 
 def render_key_metrics(row: pd.Series | None, ranked_row: pd.Series | None) -> None:
-    cols = st.columns(5)
-    cols[0].metric("Capacity", fmt_number(row.get("capacity_mtpa") if row is not None else None, 2, " Mtpa"))
-    cols[1].metric("Required flow", fmt_number(row.get("required_design_mtpa") if row is not None else None, 2, " Mtpa"))
-    cols[2].metric("Remaining life", fmt_number(row.get("remaining_life_years") if row is not None else None, 1, " yr"))
-    cols[3].metric("Evidence score", fmt_number(row.get("repurposing_evidence_score") if row is not None else None, 1, "/100"))
-    cols[4].metric("LCA proxy saving", fmt_number(row.get("lca_proxy_saving_percent") if row is not None else None, 1, "%"))
-    if ranked_row is not None:
-        st.caption(
-            f"Data priority score: {fmt_number(ranked_row.get('data_priority_score'), 1, '/100')}."
-            " This score only orders records for first-pass review."
-        )
+    cap      = fmt_number(row.get("capacity_mtpa")            if row is not None else None, 1, " Mtpa")
+    req      = fmt_number(row.get("required_design_mtpa")     if row is not None else None, 1, " Mtpa")
+    life     = fmt_number(row.get("remaining_life_years")     if row is not None else None, 1, " yr")
+    evidence = fmt_number(row.get("repurposing_evidence_score")if row is not None else None, 0, "/100")
+    lca      = fmt_number(row.get("lca_proxy_saving_percent") if row is not None else None, 1, "%")
+    score    = fmt_number(ranked_row.get("data_priority_score") if ranked_row is not None else None, 0, "/100")
+
+    st.markdown(
+        f"""
+        <div class="metrics-strip">
+          <div class="metric-tile">
+            <div class="metric-tile-label">Capacity</div>
+            <div class="metric-tile-value">{cap}</div>
+          </div>
+          <div class="metric-tile">
+            <div class="metric-tile-label">Required flow</div>
+            <div class="metric-tile-value">{req}</div>
+          </div>
+          <div class="metric-tile">
+            <div class="metric-tile-label">Remaining life</div>
+            <div class="metric-tile-value">{life}</div>
+          </div>
+          <div class="metric-tile">
+            <div class="metric-tile-label">Evidence score</div>
+            <div class="metric-tile-value">{evidence}</div>
+          </div>
+          <div class="metric-tile">
+            <div class="metric-tile-label">LCA proxy saving</div>
+            <div class="metric-tile-value">{lca}</div>
+          </div>
+        </div>
+        {'<div class="map-caption" style="margin-bottom:0.5rem;">Data priority score: ' + score + ' — screening order only, not engineering rank.</div>' if ranked_row is not None else ''}
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_layer_button(label: str, selection: dict[str, str]) -> None:
@@ -1786,36 +2015,12 @@ def main() -> None:
         return
     candidate_pipeline_ids: set[str] = set(candidate_df["pipeline_id"].tolist())
 
-    # Simple selector and controls
-    controls = st.columns([1.1, 1.8, 0.8, 0.8], gap="medium")
-    with controls[0]:
+    # ── selector (compact, above map) ────────────────────────────────────────
+    sel_col, _ = st.columns([1, 2])
+    with sel_col:
         selection = render_selector(candidate_df)
-    with controls[1]:
-        st.markdown(
-            """
-            <div class="section-note">
-            Select a pipeline from the map or dropdown below.
-            The map shows all NSTA pipelines — click to select, or use the fallback selector.
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
 
-    # ── Commented out: Model layers & formulations (commented per user request)
-    # with controls[2]:
-    #     factor_mode = st.radio("Cost/LCA factors", ["screening", "private"], horizontal=True)
-    # with controls[3]:
-    #     st.write("")
-    #     st.write("")
-    #     if st.button("Run all layers", type="primary", width="stretch"):
-    #         st.session_state["last_all_results"] = run_all(selection, factor_mode)
-    #         st.rerun()
-
-    # if "last_all_results" in st.session_state:
-    #     with st.expander("Last full run"):
-    #         for label, ok, output in st.session_state["last_all_results"]:
-    #             st.write(f"**{label}:** {'completed' if ok else 'failed'}")
-    #             st.code(output or "No output", language="text")
+    factor_mode = "screening"
 
     if selection["kind"] == "nsta":
         ranked_row = selected_ranked_row(candidate_df, selection["pipeline_id"])
@@ -1826,9 +2031,8 @@ def main() -> None:
 
     render_top_area(all_routes_payload, row, ranked_row, selection, candidate_pipeline_ids)
     render_key_metrics(row, ranked_row)
-    
-    # ── Commented out: Display workflow with formulations (per user request)
-    # render_workflow(row, ranked_row, selection, factor_mode)
+    st.markdown("<hr>", unsafe_allow_html=True)
+    render_workflow(row, ranked_row, selection, factor_mode)
 
 
 

@@ -20,6 +20,8 @@ except ImportError:
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 SCREENING_DIR = ROOT / "model_layers" / "06_screening_and_decision"
 DATA_DIR = ROOT / "model_layers" / "01_data_foundation"
 COST_DIR = ROOT / "model_layers" / "04_cost_economics"
@@ -360,12 +362,34 @@ def apply_style() -> None:
     else:
         st.markdown(css, unsafe_allow_html=True)
 def build_candidate_table(ranked_df: pd.DataFrame, screening_df: pd.DataFrame) -> pd.DataFrame:
+    """Build the pipeline selector table from ALL NSTA pipelines.
+
+    The list shows every pipeline in the ranked CSV regardless of data completeness.
+    Users can upload data for any pipeline. Goldeneye (PL1978) is added manually
+    since it has pre-loaded scenario assumptions but does not appear in the ranked CSV
+    with full technical data.
+    """
     if ranked_df.empty:
         return pd.DataFrame()
     candidates = ranked_df.copy()
     candidates["pipeline_id"] = candidates["NSTAPIPNO"].astype(str).str.strip().str.upper()
     candidates["rank"] = pd.to_numeric(candidates["RANK"], errors="coerce")
     candidates["data_priority_score"] = pd.to_numeric(candidates["SCREENING_SCORE"], errors="coerce")
+
+    # Add Goldeneye (PL1978) if not already present — it has preloaded scenario data
+    if "PL1978" not in set(candidates["pipeline_id"]):
+        goldeneye_row = pd.DataFrame([{
+            "pipeline_id": "PL1978",
+            "NSTAPIPNO": "PL1978",
+            "PIPE_NAME": "20\" GAS GOLDENEYE - ST. FERGUS",
+            "FLUID": "GAS",
+            "STATUS": "ACTIVE",
+            "RANK": 0,
+            "SCREENING_SCORE": 0,
+            "data_priority_score": 0,
+            "rank": 0,
+        }])
+        candidates = pd.concat([goldeneye_row, candidates], ignore_index=True)
 
     if not screening_df.empty:
         screen_cols = [
@@ -376,7 +400,7 @@ def build_candidate_table(ranked_df: pd.DataFrame, screening_df: pd.DataFrame) -
             "remaining_life_years",
             "lca_proxy_saving_percent",
         ]
-        available = [column for column in screen_cols if column in screening_df.columns]
+        available = [c for c in screen_cols if c in screening_df.columns]
         screen = screening_df[available].copy()
         screen["pipeline_id"] = screen["nsta_pipeline_number"].astype(str).str.strip().str.upper()
         candidates = candidates.merge(
@@ -390,7 +414,8 @@ def build_candidate_table(ranked_df: pd.DataFrame, screening_df: pd.DataFrame) -
     candidates["display"] = candidates.apply(
         lambda row: (
             f"{row['pipeline_id']} - {clean_text(row.get('PIPE_NAME'), row['pipeline_id'])} "
-            f"({clean_text(row.get('FLUID'), 'fluid n/a').lower()}, {clean_text(row.get('STATUS'), 'status n/a').lower()})"
+            f"({clean_text(row.get('FLUID'), 'fluid n/a').lower()}, "
+            f"{clean_text(row.get('STATUS'), 'status n/a').lower()})"
         ),
         axis=1,
     )
@@ -505,9 +530,13 @@ def render_route_map(all_routes_payload: dict[str, Any], selected_pipeline_id: s
         if not path:
             continue
         pid = route.get("pipeline_id", "")
+        # Routes JSON contains only candidate pipelines (is_candidate field may be absent)
+        # A route is a candidate if is_candidate is True OR if is_candidate is not set
+        # (legacy JSON without the field — all routes in the file are candidates)
+        is_cand = route.get("is_candidate", True)
         if pid == selected_pipeline_id:
             sel_routes.append({**route, "_color": [248, 113, 113, 240], "_width": 6})
-        elif route.get("is_candidate"):
+        elif is_cand:
             cand_routes.append({**route, "_color": [20, 184, 166, 200], "_width": 3})
             if pid not in seen_cand:
                 seen_cand[pid] = route
@@ -948,59 +977,38 @@ def render_top_area(
 
     with left_col:
         _html(
-            "<div class='hero-eyebrow'>UKCS North Sea &middot; CO&#8322; Transport Screening</div>"
-            "<div class='hero-hed'>Evaluate existing<br>pipelines for<br><em>CO&#8322; reuse.</em></div>"
-            "<div class='hero-sub'>Gate-by-gate technical and economic screening "
-            "for offshore pipeline repurposing. Select a pipeline, run each layer, "
-            "inspect the result. A pass means worth deeper study -- not engineering approval.</div>"
+            "<div class='hero-hed'>Repurpose pipelines<br>for <em>CO&#8322; transport.</em></div>"
+            "<div class='hero-sub'>A technical, economic and lifecycle assessment tool "
+            "for evaluating whether existing offshore gas pipelines can be reused for CO&#8322; "
+            "transport and carbon capture and storage (CCS). "
+            "A pass means the pipeline warrants detailed engineering study -- not a construction permit.</div>"
         )
 
-        # Asset source selector (no label clutter)
-        pending = st.session_state.pop("pending_asset_source", None)
-        if pending:
-            st.session_state["asset_source"] = pending
-        source = st.segmented_control(
-            "Asset source",
-            ["NSTA model-ready pipelines", "Known CCS benchmark cases"],
-            default=st.session_state.get("asset_source", "NSTA model-ready pipelines"),
-            key="asset_source",
-        )
+        # Pipeline search dropdown — all pipelines in the database
+        route_summary = route_summary_table(all_routes_payload)
+        all_pipeline_ids = set(candidate_df["pipeline_id"]) if "candidate_df" in dir() else set()
 
-        if source == "Known CCS benchmark cases":
-            case_label = st.selectbox("Select case", list(KNOWN_CASES), key="known_case_label")
-            case = KNOWN_CASES[case_label]
-            selection.update({
-                "kind": "scenario",
-                "pipeline_id": case["selection_id"],
-                "map_pipeline_id": case["map_pipeline_id"],
-                "screening_scenario": case["screening_scenario"],
-                "cost_case": case["cost_case"],
-                "lca_scenario": case["lca_scenario"],
-                "label": case["label"],
-            })
-            st.session_state["selected_pipeline_id"] = selection["pipeline_id"]
-        else:
-            route_summary = route_summary_table(all_routes_payload)
-            if not route_summary.empty:
-                active_route_id = (
-                    map_active_id if map_active_id in set(route_summary["pipeline_id"])
-                    else route_summary.iloc[0]["pipeline_id"]
-                )
-                fallback_index = int(route_summary.index[route_summary["pipeline_id"] == active_route_id][0])
-                fallback_options = route_summary["display"].tolist()
-                if st.session_state.get("route_picker_label") not in fallback_options:
-                    st.session_state["route_picker_label"] = fallback_options[fallback_index]
-                picked_label = st.selectbox(
-                    "Search pipelines",
-                    fallback_options,
-                    index=fallback_index,
-                    key="route_picker_label",
-                    label_visibility="collapsed",
-                )
-                picked_id = str(route_summary.loc[route_summary["display"] == picked_label, "pipeline_id"].iloc[0])
-                if picked_id != map_active_id:
-                    apply_pipeline_selection_from_map_choice(picked_id, candidate_pipeline_ids)
-                    st.rerun()
+        # Build combined option list: routes + any candidates not in routes
+        if not route_summary.empty:
+            active_route_id = (
+                map_active_id if map_active_id in set(route_summary["pipeline_id"])
+                else route_summary.iloc[0]["pipeline_id"]
+            )
+            fallback_index = int(route_summary.index[route_summary["pipeline_id"] == active_route_id][0])
+            fallback_options = route_summary["display"].tolist()
+            if st.session_state.get("route_picker_label") not in fallback_options:
+                st.session_state["route_picker_label"] = fallback_options[fallback_index]
+            picked_label = st.selectbox(
+                "Search pipelines",
+                fallback_options,
+                index=fallback_index,
+                key="route_picker_label",
+                label_visibility="collapsed",
+            )
+            picked_id = str(route_summary.loc[route_summary["display"] == picked_label, "pipeline_id"].iloc[0])
+            if picked_id != map_active_id:
+                apply_pipeline_selection_from_map_choice(picked_id, candidate_pipeline_ids)
+                st.rerun()
 
         if non_candidate_preview:
             record = find_route_record(all_routes_payload, non_candidate_preview)
@@ -1140,13 +1148,7 @@ def render_data_layer(row: pd.Series | None, ranked_row: pd.Series | None, selec
         )
 
         # ── equation block ────────────────────────────────────────────────────
-        equation_box([
-            "completeness_score = critical_params_at_tier≤4 / total_critical_params × 100",
-            "tier 1-2 (green): primary or regulatory records — fully traceable",
-            "tier 3-4 (yellow): measured inspection or pressure test — acceptable for assessment",
-            "tier 5-6 (orange): engineering derived or standard nominal — screening only",
-            "tier 7 (red): assumption — must state range and what evidence is needed",
-        ])
+        # (equations hidden in UI — see methodology docs)
 
         # ── build quality table ───────────────────────────────────────────────
         quality_map = _load_assumption_quality(selection)
@@ -1281,13 +1283,7 @@ def render_capacity_layer(row: pd.Series | None, selection: dict[str, str]) -> N
 
         left, right = st.columns([1.2, 1])
         with left:
-            equation_box([
-                "P_avg = (2/3) × [P_in + P_out − (P_in × P_out)/(P_in + P_out)]",
-                "mass_flow = √[(π²/64) × ρ × ΔP × ID⁵ / (f × L)]",
-                "capacity_Mtpa = mass_flow_kg/s × 3600 × 8760 / 1e9 × capacity_factor",
-                "suitable = estimated_capacity ≥ required_design_flow",
-                "Re = 4 × ṁ / (π × μ × ID)  [verify turbulent regime]",
-            ])
+            # (equations hidden in UI — see methodology docs)
             data_table([
                 {"Input": "Length",             "Value": fmt_number(length, 1, " km"),      "Source": "NSTA/scenario"},
                 {"Input": "Inner diameter",     "Value": fmt_number(id_in, 3, " in"),       "Source": "NSTA/scenario"},
@@ -1330,13 +1326,7 @@ def render_corrosion_layer(row: pd.Series | None, selection: dict[str, str]) -> 
 
         left, right = st.columns([1.2, 1])
         with left:
-            equation_box([
-                "if water_content_ppmv > water_spec_limit_ppmv: corrosion_risk = high",
-                "if dew_point_margin_degC < 0: corrosion_risk = high  [ISO 27913:2024]",
-                "if water_content unknown: corrosion_risk ≥ medium (precautionary)",
-                "standard dry-dense CO2 water limit: 500 ppmv [DNV-RP-J202; ISO 27913:2024]",
-                "future_corrosion_rate used for remaining life (Gate 4)",
-            ])
+            # (equations hidden in UI — see methodology docs)
             data_table([
                 {"Input": "CO2 water content",      "Value": "see scenario defaults",         "Source": "assumption — replace with stream spec"},
                 {"Input": "Water spec limit",        "Value": "500 ppmv",                      "Source": "ISO 27913:2024; DNV-RP-J202"},
@@ -1388,14 +1378,7 @@ def render_integrity_layer(row: pd.Series | None, selection: dict[str, str]) -> 
 
         left, right = st.columns([1.2, 1])
         with left:
-            equation_box([
-                "historical_wall_loss = corrosion_rate_historical × service_years",
-                "current_wall = nominal_wall − historical_wall_loss",
-                "minimum_wall = P × OD / (2 × SMYS × design_factor)  [Barlow]",
-                "available_wall = current_wall − minimum_wall",
-                "remaining_life = available_wall / future_CO2_corrosion_rate",
-                "uncertainty: ±20% nominal wall; ±60% minimum wall; ±25% wall loss [see Gate 1]",
-            ])
+            # (equations hidden in UI — see methodology docs)
             data_table([
                 {"Step": "Nominal wall (t₀)",        "Value": fmt_number(nominal_wall,  2, " mm"),  "Note": "design or NSTA record — verify source tier"},
                 {"Step": "− Historical loss",         "Value": fmt_number(hist_loss,     2, " mm"),  "Note": "rate × years"},
@@ -1441,12 +1424,7 @@ def render_gate_layer(row: pd.Series | None, selection: dict[str, str]) -> None:
         refs   = split_items(r.get("repurposing_gate_cited_references") if r is not None else None)
         next_d = split_items(r.get("pre_lca_next_data") if r is not None else None)
 
-        equation_box([
-            "gate_status = f(capacity_gate, integrity_gate, phase_evidence, CO2_composition, material_certs, ILI, compatibility)",
-            "evidence_score = weighted sum of available vs required evidence items (0–100)",
-            "showstoppers → fail regardless of score",
-            "missing evidence → reported as gap, not failed automatically (screening philosophy)",
-        ])
+        # (equations hidden in UI — see methodology docs)
 
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -1499,12 +1477,7 @@ def render_work_scope_layer(row: pd.Series | None, selection: dict[str, str]) ->
         )
 
         r = row
-        equation_box([
-            "work_item_quantity = rule(work_item_type, pipeline_length_km, steel_mass_kg, evidence_gap_flag)",
-            "replacement_steel_kg = new_build_steel_mass × section_replacement_fraction",
-            "lca_refurbishment_steel = replacement_steel_kg (feeds Gate 8)",
-            "refurbishment_cost_drivers = work_scope_items (feeds Gate 7)",
-        ])
+        # (equations hidden in UI — see methodology docs)
 
         cols = st.columns(4)
         cols[0].metric("Work items",        fmt_number(r.get("refurbishment_work_scope_item_count") if r is not None else None, 0))
@@ -1535,15 +1508,7 @@ def render_cost_layer(selection: dict[str, str], factor_mode: str) -> None:
         st.markdown('<div class="workflow-step"><h3>7. Refurbishment Cost vs New-Build CAPEX</h3></div>', unsafe_allow_html=True)
 
         # ── equation block ────────────────────────────────────────────────────
-        equation_box(
-            [
-                "refurbishment_cost = Σ (quantity_low/base/high × unit_cost_low/base/high)",
-                "new_build_capex = regression_model(OD_in, length_km) × CO2_factor × offshore_factor × RSMeans_CCI_escalation",
-                "net_saving = new_build_capex − refurbishment_cost",
-                "regression models: Parker (2004), McCoy & Rubin (2008), Rui et al. (2011), Brown et al. (2022) [NETL-2024]",
-                "offshore_factor = 1.6 (central estimate, range 1.5–2.0) — US onshore model adjusted for North Sea",
-            ]
-        )
+        # (equations hidden in UI — see methodology docs)
 
         # ── run button ────────────────────────────────────────────────────────
         if st.button("Run cost layer", key=f"run_cost_{selection['pipeline_id']}"):
@@ -1705,15 +1670,7 @@ def render_lca_layer(row: pd.Series | None, selection: dict[str, str], factor_mo
         saving_proxy  = as_float(r.get("lca_proxy_saving_kgco2e")      if r is not None else None)
         saving_pct    = as_float(r.get("lca_proxy_saving_percent")      if r is not None else None)
 
-        equation_box([
-            "functional_unit: transport 1 tonne CO2 through this pipeline for its remaining life",
-            "new_build_steel_kg = π × OD × wall × L × ρ_steel  [ρ=7850 kg/m³]",
-            "new_build_proxy_kgCO2e = steel_kg × steel_factor + L_km × construction_factor",
-            "reuse_steel_kg = new_build_steel_kg × refurbishment_steel_fraction  (default 5%)",
-            "reuse_proxy_kgCO2e = reuse_steel_kg × steel_factor + L_km × refurbishment_activity_factor",
-            "proxy_saving = new_build_proxy − reuse_proxy",
-            "⚠ proxy factors are placeholder assumptions — replace with ecoinvent/Brightway results",
-        ])
+        # (equations hidden in UI — see methodology docs)
 
         col1, col2, col3 = st.columns(3)
 
@@ -1812,36 +1769,29 @@ def main() -> None:
 
     factor_mode = "screening"
 
-    # Resolve selection from session state (render_top_area updates it interactively)
-    pending = st.session_state.pop("pending_asset_source", None)
-    if pending:
-        st.session_state["asset_source"] = pending
-
+    # Resolve pipeline selection from session state
     map_selected = st.session_state.get("map_selected_pipeline_id")
     if map_selected in candidate_pipeline_ids:
         st.session_state["selected_pipeline_id"] = map_selected
         del st.session_state["map_selected_pipeline_id"]
 
-    asset_source = st.session_state.get("asset_source", "NSTA model-ready pipelines")
+    default_id = st.session_state.get("selected_pipeline_id", "PL774")
+    if default_id not in candidate_pipeline_ids:
+        default_id = "PL774" if "PL774" in candidate_pipeline_ids else candidate_df.iloc[0]["pipeline_id"]
 
-    if asset_source == "Known CCS benchmark cases":
-        case_label = st.session_state.get("known_case_label", list(KNOWN_CASES)[0])
-        case = KNOWN_CASES.get(case_label, list(KNOWN_CASES.values())[0])
+    # Goldeneye uses preloaded scenario assumptions; all other pipelines use NSTA screening
+    if default_id == "PL1978":
         selection: dict[str, str] = {
-            "kind": "scenario",
-            "pipeline_id": case["selection_id"],
-            "map_pipeline_id": case["map_pipeline_id"],
-            "screening_scenario": case["screening_scenario"],
-            "cost_case": case["cost_case"],
-            "lca_scenario": case["lca_scenario"],
-            "label": case["label"],
+            "kind": "nsta",
+            "pipeline_id": "PL1978",
+            "screening_scenario": "goldeneye_poster",
+            "cost_case": "goldeneye_poster",
+            "lca_scenario": "goldeneye_poster",
+            "label": "20\" GAS GOLDENEYE - ST. FERGUS",
         }
-        ranked_row = None
-        row = load_scenario_row(selection["screening_scenario"])
+        ranked_row = selected_ranked_row(candidate_df, "PL1978")
+        row = load_scenario_row("goldeneye_poster")
     else:
-        default_id = st.session_state.get("selected_pipeline_id", "PL774")
-        if default_id not in candidate_pipeline_ids:
-            default_id = "PL774" if "PL774" in candidate_pipeline_ids else candidate_df.iloc[0]["pipeline_id"]
         selection = {
             "kind": "nsta",
             "pipeline_id": default_id,

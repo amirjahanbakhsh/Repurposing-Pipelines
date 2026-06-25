@@ -48,12 +48,60 @@ The dashboard walks a pipeline through 8 sequential assessment stages, each with
 
 ---
 
-## 4. Known Cases vs NSTA Pipelines
+## 4. Pipeline Selector — Design Decisions (Updated)
 
-The selector at the top of the UI has two modes:
+- **Single dropdown** showing ALL pipelines from the NSTA database — no separate "Known CCS benchmark cases" tab
+- **Goldeneye (PL1978)** is added to the candidate table manually since it has preloaded scenario assumptions but does not appear in the ranked CSV with full technical data. When selected, it loads `goldeneye_poster` scenario
+- **All pipelines** are shown in the list regardless of data completeness — user can provide missing data via the Data Input page
+- **Map** shows all candidate pipelines in teal; selected pipeline in coral red. The routes JSON (`nsta_candidate_routes.json`) contains only candidates — when `is_candidate` field is absent, all routes in the file are treated as candidates
 
-- **NSTA model-ready pipelines** — selected from the ranked candidate list; scenario name is `nsta_{pipeline_id_lower}` (e.g. `nsta_pl774`).
-- **Known CCS benchmark cases** — hardcoded in `KNOWN_CASES` dict: `goldeneye_poster`, `goldeneye_dissertation`. These benchmark against the student dissertation and conference poster assumptions.
+---
+
+## 4b. Dashboard UI — Design Decisions (Updated)
+
+### What the dashboard shows (four sections only):
+1. **Capacity Assessment** — hydraulic capacity, required flow, capacity margin
+2. **Integrity Assessment** — wall thickness, corrosion screening, remaining life (combines old Gates 3+4)
+3. **Economic Assessment** — new-build CAPEX vs refurbishment CAPEX vs net saving
+4. **LCA Assessment** — lifecycle carbon impact, proxy saving
+
+### What the dashboard does NOT show:
+- Data completeness gate (moved to separate Data Input page)
+- Evidence gate (internal model logic, not user-facing)
+- Work scope (internal model logic, feeds cost/LCA)
+- Formula/equation blocks (commented out — see methodology docs)
+
+### Input presentation:
+- Inputs shown as **fillable boxes** (not tables)
+- No source column shown to users
+- Consistent font across all sections
+- Run button per section
+- Outputs as metric tiles
+
+### Navigation:
+- Page 1: Main dashboard (pipeline selection + 4 assessment sections)
+- Page 2: Data input and completeness check (separate page — to be designed)
+- Page 3: Documentation (layman + technical)
+
+### Other design rules:
+- No "UKCS North Sea · CO2 Transport Screening" eyebrow text
+- Hero headline: "Repurpose pipelines for CO2 transport."
+- No equation blocks visible in UI (commented out in code)
+- Dark theme throughout, consistent fonts (Fraunces serif for headings, Manrope for body, JetBrains Mono for numbers)
+
+---
+
+## 4c. Data Completeness — User-Facing Design (Updated)
+
+The tier system (7 tiers) is for internal code use only. Users should NOT see tier numbers.
+
+**User-facing completeness display:**
+- Show a simple traffic-light per parameter: green (verified), amber (estimated), red (missing)
+- Group by assessment area: Geometry, Operating Conditions, Material, Inspection History
+- Show a plain-English confidence statement: "This pipeline has enough data for a capacity assessment but not for an integrity assessment"
+- Do NOT show "Critical parameter score 0%" — this is meaningless to a policymaker
+
+---
 
 ---
 

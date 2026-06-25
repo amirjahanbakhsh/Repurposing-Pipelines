@@ -1812,12 +1812,46 @@ def main() -> None:
 
     factor_mode = "screening"
 
-    if selection["kind"] == "nsta":
-        ranked_row = selected_ranked_row(candidate_df, selection["pipeline_id"])
-        row = selected_screening_row(screening_df, selection["pipeline_id"])
-    else:
+    # Resolve selection from session state (render_top_area updates it interactively)
+    pending = st.session_state.pop("pending_asset_source", None)
+    if pending:
+        st.session_state["asset_source"] = pending
+
+    map_selected = st.session_state.get("map_selected_pipeline_id")
+    if map_selected in candidate_pipeline_ids:
+        st.session_state["selected_pipeline_id"] = map_selected
+        del st.session_state["map_selected_pipeline_id"]
+
+    asset_source = st.session_state.get("asset_source", "NSTA model-ready pipelines")
+
+    if asset_source == "Known CCS benchmark cases":
+        case_label = st.session_state.get("known_case_label", list(KNOWN_CASES)[0])
+        case = KNOWN_CASES.get(case_label, list(KNOWN_CASES.values())[0])
+        selection: dict[str, str] = {
+            "kind": "scenario",
+            "pipeline_id": case["selection_id"],
+            "map_pipeline_id": case["map_pipeline_id"],
+            "screening_scenario": case["screening_scenario"],
+            "cost_case": case["cost_case"],
+            "lca_scenario": case["lca_scenario"],
+            "label": case["label"],
+        }
         ranked_row = None
         row = load_scenario_row(selection["screening_scenario"])
+    else:
+        default_id = st.session_state.get("selected_pipeline_id", "PL774")
+        if default_id not in candidate_pipeline_ids:
+            default_id = "PL774" if "PL774" in candidate_pipeline_ids else candidate_df.iloc[0]["pipeline_id"]
+        selection = {
+            "kind": "nsta",
+            "pipeline_id": default_id,
+            "screening_scenario": nsta_scenario_name(default_id),
+            "cost_case": nsta_scenario_name(default_id),
+            "lca_scenario": nsta_scenario_name(default_id),
+            "label": default_id,
+        }
+        ranked_row = selected_ranked_row(candidate_df, default_id)
+        row = selected_screening_row(screening_df, default_id)
 
     render_top_area(all_routes_payload, row, ranked_row, selection, candidate_pipeline_ids)
     render_key_metrics(row, ranked_row)

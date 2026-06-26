@@ -2097,6 +2097,9 @@ def render_workflow(row: pd.Series | None, ranked_row: pd.Series | None,
     with c4:
         with st.container(border=True):
             _card_lca(row, pid)
+
+
+def main() -> None:
     apply_style()
     render_header()
 

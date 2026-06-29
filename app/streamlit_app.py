@@ -787,20 +787,31 @@ def profile_rows(row: pd.Series | None, ranked_row: pd.Series | None, selection:
     ]
 
 
-def render_header() -> None:
-    html = (
-        "<div class='nav-bar'>"
-        "<div class='nav-brand'>"
-        "<span class='nav-title'>CO&#8322; Pipeline Repurposing <em>Evaluation Tool</em></span>"
-        "<span class='nav-badge'>v1.0 &middot; NSTA</span>"
-        "</div>"
-        "<span class='nav-sub'>Screen &middot; Score &middot; Decide</span>"
-        "</div>"
-    )
-    if hasattr(st, "html"):
-        st.html(html)
-    else:
-        st.markdown(html, unsafe_allow_html=True)
+def render_header(current_page: str = "dashboard") -> None:
+    col_brand, col_nav = st.columns([3, 1])
+    with col_brand:
+        _html(
+            "<div class='nav-bar' style='margin:0;border:none;padding:.6rem 0;'>"
+            "<div class='nav-brand'>"
+            "<span class='nav-title'>CO&#8322; Pipeline Repurposing <em>Evaluation Tool</em></span>"
+            "<span class='nav-badge'>v1.0 &middot; NSTA</span>"
+            "</div></div>"
+        )
+    with col_nav:
+        nav_cols = st.columns(2)
+        pages = [
+            ("dashboard",  "Dashboard",  _page_dashboard),
+            ("data_input", "Data Input", _page_data_input),
+        ]
+        for i, (pid, label, _) in enumerate(pages):
+            btn_type = "primary" if pid == current_page else "secondary"
+            with nav_cols[i]:
+                if st.button(label, key=f"nav_{pid}", type=btn_type,
+                             use_container_width=True):
+                    st.switch_page(st.Page(
+                        _page_dashboard if pid == "dashboard" else _page_data_input,
+                        url_path=pid.replace("_", "-"),
+                    ))
 
 
 def render_selector(candidate_df: pd.DataFrame) -> dict[str, str]:
@@ -2650,11 +2661,12 @@ def render_workflow(row: pd.Series | None, ranked_row: pd.Series | None,
             _card_lca(row, pid, header_colour=lca_col)
 
 
-def main() -> None:
+def _page_dashboard() -> None:
+    """Main dashboard page."""
     apply_style()
-    render_header()
+    render_header(current_page="dashboard")
 
-    ranked_df = load_csv(str(DATA_DIR / "nsta_candidate_ranked.csv"))
+    ranked_df    = load_csv(str(DATA_DIR / "nsta_candidate_ranked.csv"))
     screening_df = load_csv(str(SCREENING_DIR / "pipeline_screen_nsta_all.csv"))
     all_routes_payload = load_all_routes()
     candidate_df = build_candidate_table(ranked_df, screening_df)
@@ -2665,7 +2677,6 @@ def main() -> None:
 
     factor_mode = "screening"
 
-    # Resolve pipeline selection from session state
     map_selected = st.session_state.get("map_selected_pipeline_id")
     if map_selected in candidate_pipeline_ids:
         st.session_state["selected_pipeline_id"] = map_selected
@@ -2675,7 +2686,6 @@ def main() -> None:
     if default_id not in candidate_pipeline_ids:
         default_id = "PL774" if "PL774" in candidate_pipeline_ids else candidate_df.iloc[0]["pipeline_id"]
 
-    # Goldeneye uses preloaded scenario assumptions; all other pipelines use NSTA screening
     if default_id == "PL1978":
         selection: dict[str, str] = {
             "kind": "nsta",
@@ -2699,11 +2709,47 @@ def main() -> None:
         ranked_row = selected_ranked_row(candidate_df, default_id)
         row = selected_screening_row(screening_df, default_id)
 
+    # Custom data banner
+    if st.session_state.get("use_custom_data") and st.session_state.get("custom_pipeline_data"):
+        src = st.session_state.get("custom_data_source", "custom upload")
+        n   = len(st.session_state["custom_pipeline_data"])
+        _html(
+            f"<div style='background:#0d2a1a;border:1px solid #86EFAC44;"
+            f"border-left:4px solid #86EFAC;border-radius:8px;"
+            f"padding:.5rem 1rem;font-size:12px;color:#86EFAC;"
+            f"font-family:Manrope,sans-serif;margin-bottom:.75rem;'>"
+            f"&#x2705; Using custom data from <strong>{src}</strong> ({n:,} pipelines)."
+            f"</div>"
+        )
+        if st.button("Switch back to NSTA data", key="switch_nsta"):
+            st.session_state["use_custom_data"]      = False
+            st.session_state["custom_pipeline_data"] = []
+            st.rerun()
+
     render_top_area(all_routes_payload, row, ranked_row, selection, candidate_pipeline_ids)
     render_key_metrics(row, ranked_row)
     _html("<hr>")
     render_workflow(row, ranked_row, selection, factor_mode)
 
+
+def _page_data_input() -> None:
+    """Data Input page."""
+    apply_style()
+    render_header(current_page="data_input")
+    sys.path.insert(0, str(Path(__file__).parent))
+    from pages.data_input import render_data_input_page
+    render_data_input_page()
+
+
+def main() -> None:
+    pg = st.navigation(
+        [
+            st.Page(_page_dashboard,  title="Dashboard",  url_path="dashboard",  default=True),
+            st.Page(_page_data_input, title="Data Input", url_path="data-input"),
+        ],
+        position="hidden",
+    )
+    pg.run()
 
 
 if __name__ == "__main__":

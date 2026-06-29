@@ -788,30 +788,66 @@ def profile_rows(row: pd.Series | None, ranked_row: pd.Series | None, selection:
 
 
 def render_header(current_page: str = "dashboard") -> None:
-    col_brand, col_nav = st.columns([3, 1])
-    with col_brand:
-        _html(
-            "<div class='nav-bar' style='margin:0;border:none;padding:.6rem 0;'>"
-            "<div class='nav-brand'>"
-            "<span class='nav-title'>CO&#8322; Pipeline Repurposing <em>Evaluation Tool</em></span>"
-            "<span class='nav-badge'>v1.0 &middot; NSTA</span>"
-            "</div></div>"
+    pages = [
+        ("dashboard",  "Dashboard"),
+        ("data_input", "Data Input"),
+    ]
+
+    # Full-width sticky nav bar as single HTML block
+    nav_items_html = ""
+    for pid, label in pages:
+        active = pid == current_page
+        colour = "#5EEAD4" if active else "#7A8499"
+        bg     = "#5EEAD422" if active else "transparent"
+        border = "#5EEAD4" if active else "#1e2d47"
+        nav_items_html += (
+            f"<span style='border:1px solid {border};border-radius:6px;"
+            f"padding:.3rem .85rem;font-size:12px;font-family:Manrope,sans-serif;"
+            f"font-weight:600;color:{colour};background:{bg};"
+            f"letter-spacing:.04em;'>{label}</span>"
         )
-    with col_nav:
-        nav_cols = st.columns(2)
-        pages = [
-            ("dashboard",  "Dashboard",  _page_dashboard),
-            ("data_input", "Data Input", _page_data_input),
-        ]
-        for i, (pid, label, _) in enumerate(pages):
-            btn_type = "primary" if pid == current_page else "secondary"
-            with nav_cols[i]:
-                if st.button(label, key=f"nav_{pid}", type=btn_type,
-                             use_container_width=True):
-                    st.switch_page(st.Page(
-                        _page_dashboard if pid == "dashboard" else _page_data_input,
-                        url_path=pid.replace("_", "-"),
-                    ))
+
+    _html(
+        "<div style='background:#111827;border-bottom:1px solid #1e2d47;"
+        "padding:.7rem 1.5rem;display:flex;align-items:center;"
+        "justify-content:space-between;margin:-1rem -5rem .5rem;"
+        "position:sticky;top:0;z-index:100;'>"
+        "<div style='display:flex;align-items:baseline;gap:.5rem;'>"
+        "<span style='font-family:Fraunces,serif;font-size:19px;"
+        "font-weight:500;color:#E8E4DC;'>"
+        "CO&#8322; Pipeline Repurposing <em style='color:#5EEAD4;"
+        "font-style:italic;'>Evaluation Tool</em></span>"
+        "<span style='font-family:JetBrains Mono,monospace;font-size:9px;"
+        "color:#7A8499;border:1px solid #1e2d47;border-radius:3px;"
+        "padding:1px 5px;letter-spacing:.08em;'>v1.0 &middot; NSTA</span>"
+        "</div>"
+        f"<div style='display:flex;gap:.5rem;align-items:center;'>{nav_items_html}</div>"
+        "</div>"
+    )
+
+    # Invisible Streamlit buttons overlaid — placed in a hidden div
+    # We use a zero-height container with absolute-positioned buttons
+    _html(
+        "<style>"
+        ".nav-btn-row{display:flex;gap:.5rem;justify-content:flex-end;"
+        "margin:-2.85rem -5rem .25rem;padding-right:1.5rem;position:relative;z-index:101;}"
+        ".nav-btn-row .stButton>button{"
+        "background:transparent!important;border:none!important;"
+        "color:transparent!important;padding:.3rem .85rem!important;"
+        "font-size:12px!important;min-height:0!important;"
+        "height:30px!important;cursor:pointer!important;}"
+        ".nav-btn-row .stButton>button:hover{background:transparent!important;}"
+        "</style>"
+        "<div class='nav-btn-row'>"
+    )
+    nav_col1, nav_col2 = st.columns([1, 1])
+    with nav_col1:
+        if st.button("Dashboard", key="nav_dashboard", use_container_width=False):
+            st.switch_page(st.Page(_page_dashboard, url_path="dashboard", default=True))
+    with nav_col2:
+        if st.button("Data Input", key="nav_data_input", use_container_width=False):
+            st.switch_page(st.Page(_page_data_input, url_path="data-input"))
+    _html("</div>")
 
 
 def render_selector(candidate_df: pd.DataFrame) -> dict[str, str]:

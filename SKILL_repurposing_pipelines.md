@@ -95,11 +95,26 @@ The dashboard walks a pipeline through 8 sequential assessment stages, each with
 
 The tier system (7 tiers) is for internal code use only. Users should NOT see tier numbers.
 
-**User-facing completeness display:**
-- Show a simple traffic-light per parameter: green (verified), amber (estimated), red (missing)
-- Group by assessment area: Geometry, Operating Conditions, Material, Inspection History
-- Show a plain-English confidence statement: "This pipeline has enough data for a capacity assessment but not for an integrity assessment"
-- Do NOT show "Critical parameter score 0%" — this is meaningless to a policymaker
+**Pipeline Readiness Panel — implemented in render_readiness_panel():**
+- Placed between pipeline info card and four assessment columns
+- User-triggered: "Check Readiness" button — NOT auto-run, NOT pre-filled
+- Five evidence groups with progress bars: Geometry | Wall & Integrity | Operating Conditions | Material Evidence | CO2 Suitability
+- Each group shows: progress bar, status icon (✅ ⚠ ❌), plain-English gaps (no acronyms)
+- Four readiness levels: Ready (≥85%) / Partial (55–85%) / Limited (25–55%) / Insufficient (<25%)
+- Per-assessment readiness strip: shows which of the 4 cards are ready/partial/insufficient
+- Most important next step: links to Data Input page (to be built)
+- Assessment card headers change colour: teal=ready, amber=partial, red=insufficient
+- Session state keyed by pipeline_id so switching pipeline resets readiness
+
+**Acronym rule:** Full name on first use, no acronyms in user-facing panels.
+- ILI/MFL → "In-line inspection record"
+- MAOP → "Maximum allowable operating pressure"
+- ppmv → "parts per million by volume"
+
+**Readiness data source:** `_load_readiness_values()` reads from:
+1. Goldeneye assumptions CSV (for Goldeneye scenarios)
+2. NSTA screening defaults CSV (for NSTA pipelines)
+3. NSTA candidate ranked CSV (for basic geometry)
 
 ---
 

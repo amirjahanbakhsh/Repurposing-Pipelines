@@ -572,7 +572,7 @@ def render_route_map(all_routes_payload: dict[str, Any], selected_pipeline_id: s
         })
 
     # ── View state ─────────────────────────────────────────────────────────
-    view = pdk.ViewState(latitude=56.5, longitude=3.0, zoom=5, pitch=0)
+    view = pdk.ViewState(latitude=56.5, longitude=0.3, zoom=5, pitch=0)
 
     # ── Layers ─────────────────────────────────────────────────────────────
     layers = [
@@ -788,26 +788,25 @@ def profile_rows(row: pd.Series | None, ranked_row: pd.Series | None, selection:
 
 
 def render_header(current_page: str = "dashboard") -> None:
+    # Hide Streamlit default header, style the page top
     _html(
         "<style>"
-        ".block-container{padding-top:0!important;}"
-        "[data-testid='stHorizontalBlock']:first-of-type{"
-        "background:#111827;border-bottom:1px solid #1e2d47;padding:.4rem 0;}"
+        "header[data-testid='stHeader']{display:none!important;}"
+        ".block-container{padding-top:.5rem!important;}"
         "</style>"
     )
-    col_logo, col_nav = st.columns([4, 1], gap="small")
+
+    col_logo, col_nav = st.columns([5, 1], gap="small")
     with col_logo:
         st.markdown(
-            "<div style='padding:.3rem 0;'>"
-            "<span style='font-family:Fraunces,serif;font-size:19px;"
+            "<span style='font-family:Fraunces,serif;font-size:20px;"
             "font-weight:500;color:#E8E4DC;'>"
             "CO&#8322; Pipeline Repurposing "
             "<em style='color:#5EEAD4;font-style:italic;'>Evaluation Tool</em>"
             "</span>"
             "<span style='font-family:JetBrains Mono,monospace;font-size:9px;"
             "color:#7A8499;border:1px solid #1e2d47;border-radius:3px;"
-            "padding:1px 5px;letter-spacing:.08em;margin-left:.5rem;'>v1.0</span>"
-            "</div>",
+            "padding:1px 5px;letter-spacing:.08em;margin-left:.5rem;'>v1.0</span>",
             unsafe_allow_html=True,
         )
     with col_nav:
@@ -829,7 +828,10 @@ def render_header(current_page: str = "dashboard") -> None:
                         url_path=pid.replace("_", "-"),
                         default=(pid == "dashboard"),
                     ))
-        st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<hr style='margin:.4rem 0 .75rem;border-color:#1e2d47;'>",
+        unsafe_allow_html=True,
+    )
 
 
 def render_selector(candidate_df: pd.DataFrame) -> dict[str, str]:

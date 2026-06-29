@@ -796,7 +796,7 @@ def render_header(current_page: str = "dashboard") -> None:
         "</style>"
     )
 
-    col_logo, col_nav = st.columns([5, 1], gap="small")
+    col_logo, col_nav = st.columns([3, 1], gap="small")
     with col_logo:
         st.markdown(
             "<span style='font-family:Fraunces,serif;font-size:20px;"

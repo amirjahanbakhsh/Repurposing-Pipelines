@@ -1019,15 +1019,8 @@ def render_top_area(
                 st.rerun()
             return
 
-        # Status chips + pipeline info card
-        pre_lca = row.get("pre_lca_decision") if row is not None else "not run"
-        gate    = row.get("repurposing_gate_status") if row is not None else "not run"
-        cap     = row.get("capacity_suitable") if row is not None else "not run"
-        _html(
-            f"<div class='sbar'>{_chip('Pre-LCA', pre_lca)}"
-            f"{_chip('Gate', gate)}{_chip('Capacity', cap)}</div>"
-            + _pipe_info_html(row, ranked_row, selection)
-        )
+        # Pipeline info card
+        _html(_pipe_info_html(row, ranked_row, selection))
 
     with right_col:
         _html(

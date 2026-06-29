@@ -788,28 +788,17 @@ def profile_rows(row: pd.Series | None, ranked_row: pd.Series | None, selection:
 
 
 def render_header(current_page: str = "dashboard") -> None:
-    # Style the top area via CSS injected into the page
     _html(
         "<style>"
-        ".nav-container{background:#111827;border-bottom:1px solid #1e2d47;"
-        "padding:.6rem 1.5rem;display:flex;align-items:center;"
-        "justify-content:space-between;}"
         ".block-container{padding-top:0!important;}"
-        "[data-testid='stHorizontalBlock']:first-of-type .stButton>button{"
-        "font-family:Manrope,sans-serif!important;font-size:12px!important;"
-        "font-weight:600!important;letter-spacing:.04em!important;"
-        "border-radius:6px!important;padding:.3rem .85rem!important;"
-        "height:32px!important;min-height:0!important;}"
+        "[data-testid='stHorizontalBlock']:first-of-type{"
+        "background:#111827;border-bottom:1px solid #1e2d47;padding:.4rem 0;}"
         "</style>"
     )
-
-    # Build the nav bar using a single st.columns row
-    col_logo, col_spacer, col_nav = st.columns([4, 2, 2], gap="small")
-
+    col_logo, col_nav = st.columns([4, 1], gap="small")
     with col_logo:
         st.markdown(
-            "<div style='background:#111827;border-bottom:1px solid #1e2d47;"
-            "margin:-1rem -1rem 0;padding:.7rem 1rem;'>"
+            "<div style='padding:.3rem 0;'>"
             "<span style='font-family:Fraunces,serif;font-size:19px;"
             "font-weight:500;color:#E8E4DC;'>"
             "CO&#8322; Pipeline Repurposing "
@@ -821,38 +810,25 @@ def render_header(current_page: str = "dashboard") -> None:
             "</div>",
             unsafe_allow_html=True,
         )
-
-    with col_spacer:
-        # Dark background filler
-        st.markdown(
-            "<div style='background:#111827;border-bottom:1px solid #1e2d47;"
-            "margin:-1rem -1rem 0;padding:.7rem 0;height:50px;'></div>",
-            unsafe_allow_html=True,
-        )
-
     with col_nav:
-        st.markdown(
-            "<div style='background:#111827;border-bottom:1px solid #1e2d47;"
-            "margin:-1rem -1rem 0;padding:.45rem 1rem;height:50px;"
-            "display:flex;align-items:center;justify-content:flex-end;gap:.5rem;'>",
-            unsafe_allow_html=True,
-        )
         btn_cols = st.columns(2, gap="small")
         pages = [
             ("dashboard",  "Dashboard",  _page_dashboard),
             ("data_input", "Data Input", _page_data_input),
         ]
         for i, (pid, label, page_fn) in enumerate(pages):
-            active = pid == current_page
             with btn_cols[i]:
                 if st.button(
                     label,
                     key=f"nav_{pid}",
-                    type="primary" if active else "secondary",
+                    type="primary" if pid == current_page else "secondary",
                     use_container_width=True,
                 ):
-                    st.switch_page(st.Page(page_fn, url_path=pid.replace("_", "-"),
-                                           default=(pid == "dashboard")))
+                    st.switch_page(st.Page(
+                        page_fn,
+                        url_path=pid.replace("_", "-"),
+                        default=(pid == "dashboard"),
+                    ))
         st.markdown("</div>", unsafe_allow_html=True)
 
 

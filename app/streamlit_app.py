@@ -1206,15 +1206,217 @@ def render_readiness_panel(selection: dict[str, str]) -> dict[str, str]:
     key_vals = f"readiness_vals_{pid}"
 
     _html(
-        "<div style='border-top:1px solid #1e2d47;margin:1rem 0 0;'></div>"
-        "<div style='display:flex;align-items:center;justify-content:space-between;"
-        "margin:.75rem 0;'>"
-        "<div style='font-family:Fraunces,serif;font-size:16px;font-weight:500;"
-        "color:#E8E4DC;'>Pipeline Readiness Level</div>"
-        "<div style='font-size:11px;color:#7A8499;font-family:Manrope,sans-serif;'>"
-        "Check what data are available before running assessments</div>"
+        "<div style='border-top:1px solid #1e2d47;margin:1.25rem 0 0;'></div>"
+        "<div style='margin:.75rem 0 .5rem;'>"
+        "<div style='font-family:Fraunces,serif;font-size:18px;font-weight:500;"
+        "color:#E8E4DC;margin-bottom:3px;'>Data Availability Check</div>"
+        "<div style='font-size:12px;color:#7A8499;font-family:Manrope,sans-serif;'>"
+        "See which data are available for this pipeline and what each assessment requires "
+        "before running calculations.</div>"
         "</div>"
     )
+
+    col_btn, col_hint = st.columns([1, 3])
+    with col_btn:
+        run = st.button(
+            "Check Data Availability",
+            key=f"check_readiness_{pid}",
+            use_container_width=True,
+        )
+    with col_hint:
+        if not st.session_state.get(key_done):
+            _html(
+                "<div style='color:#7A8499;font-size:12px;font-family:Manrope,sans-serif;"
+                "padding:.45rem 0;'>Click to check what data are currently available "
+                "for the selected pipeline.</div>"
+            )
+
+    assessment_readiness: dict[str, str] = {
+        "Capacity": "partial", "Integrity": "partial",
+        "Economics": "partial", "LCA": "partial",
+    }
+
+    if run:
+        values = _load_readiness_values(selection)
+        st.session_state[key_done] = True
+        st.session_state[key_vals] = values
+
+    if st.session_state.get(key_done):
+        values = st.session_state.get(key_vals, {})
+
+        # Compute group scores and statuses
+        group_scores:   dict[str, float] = {}
+        group_statuses: dict[str, str]   = {}
+        group_pcts:     dict[str, float] = {}
+        group_gaps:     dict[str, list[str]] = {}
+
+        for gname, params in _READINESS_GROUPS:
+            earned  = 0.0
+            total_g = sum(w for _, w, _ in params)
+            statuses_g: list[str] = []
+            gaps_g: list[str] = []
+            for pkey, weight, label in params:
+                val, qual = values.get(pkey, ("", "missing"))
+                status = _param_status(val, qual)
+                statuses_g.append(status)
+                if status == "ok":
+                    earned += weight
+                elif status == "partial":
+                    earned += weight * 0.5
+                else:
+                    gaps_g.append(label)
+            group_scores[gname]   = earned
+            group_pcts[gname]     = earned / total_g if total_g > 0 else 0.0
+            group_statuses[gname] = _group_status(statuses_g)
+            group_gaps[gname]     = gaps_g
+
+        level, level_fg, level_bg = _readiness_level(group_scores)
+        assessment_readiness = _assessment_readiness(group_statuses, group_pcts)
+
+        # Overall level badge
+        level_msgs = {
+            "Ready":        "All key data are present. Run any of the four assessments with confidence.",
+            "Partial":      "Enough data for a capacity and economic screening. Some assessments need additional evidence.",
+            "Limited":      "Only basic pipeline data available. Assessment results are indicative only.",
+            "Insufficient": "Critical data are missing. Assessment results cannot be relied upon.",
+        }
+        _html(
+            f"<div style='display:flex;align-items:center;gap:1.25rem;"
+            f"background:{level_bg};border:1px solid {level_fg}55;"
+            f"border-left:5px solid {level_fg};border-radius:10px;"
+            f"padding:.85rem 1.1rem;margin:.75rem 0;'>"
+            f"<div style='font-family:Fraunces,serif;font-size:20px;"
+            f"font-weight:500;color:{level_fg};min-width:130px;'>{level}</div>"
+            f"<div style='font-size:13px;color:#E8E4DC;"
+            f"font-family:Manrope,sans-serif;line-height:1.5;'>"
+            f"{level_msgs[level]}</div>"
+            f"</div>"
+        )
+
+        # Group progress bars — one per column, chunky bars
+        icon_map  = {"ok": "&#x2705;", "partial": "&#x26A0;&#xFE0F;", "missing": "&#x274C;"}
+        color_map = {"ok": "#86EFAC",  "partial": "#FBBF24",          "missing": "#F87171"}
+        label_map = {"ok": "Available", "partial": "Partial", "missing": "Missing"}
+
+        cols = st.columns(5)
+        for i, (gname, params) in enumerate(_READINESS_GROUPS):
+            gs      = group_statuses[gname]
+            pct     = group_pcts[gname]
+            icon    = icon_map[gs]
+            fg      = color_map[gs]
+            gaps    = group_gaps[gname]
+            bar_pct = max(4, int(pct * 100))  # min 4% so bar is always visible
+
+            gap_html = ""
+            if gaps:
+                items = "".join(
+                    f"<div style='display:flex;align-items:baseline;gap:5px;"
+                    f"margin-top:5px;'>"
+                    f"<span style='color:#F87171;font-size:11px;'>&#x25B6;</span>"
+                    f"<span style='font-size:11px;color:#9CA3B2;"
+                    f"font-family:Manrope,sans-serif;line-height:1.4;'>{g}</span>"
+                    f"</div>"
+                    for g in gaps[:3]
+                )
+                if len(gaps) > 3:
+                    items += (
+                        f"<div style='font-size:11px;color:#7A8499;"
+                        f"font-family:Manrope,sans-serif;margin-top:3px;'>"
+                        f"+ {len(gaps)-3} more</div>"
+                    )
+                gap_html = f"<div style='margin-top:8px;'>{items}</div>"
+
+            with cols[i]:
+                _html(
+                    f"<div style='background:#111827;border:1px solid #1e2d47;"
+                    f"border-top:3px solid {fg};border-radius:10px;"
+                    f"padding:.85rem .9rem;height:100%;box-sizing:border-box;'>"
+                    # Group title
+                    f"<div style='font-size:11px;letter-spacing:.1em;text-transform:uppercase;"
+                    f"color:#7A8499;font-family:Manrope,sans-serif;"
+                    f"margin-bottom:10px;'>{gname}</div>"
+                    # Progress bar — chunky, clearly a bar
+                    f"<div style='background:#1e2d47;border-radius:8px;height:14px;"
+                    f"margin-bottom:10px;overflow:hidden;'>"
+                    f"<div style='background:{fg};width:{bar_pct}%;height:14px;"
+                    f"border-radius:8px;transition:width .3s;'></div></div>"
+                    # Status label
+                    f"<div style='display:flex;align-items:center;gap:6px;"
+                    f"margin-bottom:4px;'>"
+                    f"<span style='font-size:15px;'>{icon}</span>"
+                    f"<span style='font-size:13px;font-family:Manrope,sans-serif;"
+                    f"color:{fg};font-weight:600;'>{label_map[gs]}</span>"
+                    f"<span style='font-size:12px;color:#7A8499;margin-left:auto;'>"
+                    f"{int(pct*100)}%</span>"
+                    f"</div>"
+                    # Missing items
+                    + gap_html
+                    + "</div>"
+                )
+
+        # Assessment readiness strip
+        ar_color = {"ok": "#86EFAC", "partial": "#FBBF24", "missing": "#F87171"}
+        ar_icon  = {"ok": "&#x2705;", "partial": "&#x26A0;&#xFE0F;", "missing": "&#x274C;"}
+        ar_label = {
+            "ok":      "Ready to run",
+            "partial": "Run with caution",
+            "missing": "Needs more data",
+        }
+
+        strips = "".join(
+            f"<div style='background:{ar_color[v]}14;border:1px solid {ar_color[v]}44;"
+            f"border-radius:8px;padding:.55rem .8rem;'>"
+            f"<div style='display:flex;align-items:center;gap:6px;margin-bottom:2px;'>"
+            f"<span style='font-size:14px;'>{ar_icon[v]}</span>"
+            f"<span style='font-size:12px;letter-spacing:.08em;text-transform:uppercase;"
+            f"color:{ar_color[v]};font-family:Manrope,sans-serif;"
+            f"font-weight:700;'>{k}</span></div>"
+            f"<div style='font-size:11px;color:#7A8499;"
+            f"font-family:Manrope,sans-serif;'>{ar_label[v]}</div>"
+            f"</div>"
+            for k, v in assessment_readiness.items()
+        )
+        _html(
+            f"<div style='display:grid;grid-template-columns:repeat(4,1fr);"
+            f"gap:.6rem;margin:.85rem 0;'>{strips}</div>"
+        )
+
+        # Most important missing item + next step
+        all_gaps: list[tuple[int, str, str]] = []
+        for gname, params in _READINESS_GROUPS:
+            for pkey, weight, label in params:
+                val, qual = values.get(pkey, ("", "missing"))
+                if _param_status(val, qual) == "missing":
+                    all_gaps.append((weight, label, gname))
+        all_gaps.sort(reverse=True)
+
+        if all_gaps:
+            top_weight, top_label, top_group = all_gaps[0]
+            _html(
+                f"<div style='background:#0d1829;border:1px solid #1e2d47;"
+                f"border-left:4px solid #5EEAD4;border-radius:8px;"
+                f"padding:.65rem 1rem;display:flex;align-items:center;"
+                f"justify-content:space-between;gap:1rem;margin:.25rem 0;'>"
+                f"<div style='font-size:13px;color:#E8E4DC;"
+                f"font-family:Manrope,sans-serif;'>"
+                f"<span style='color:#5EEAD4;font-weight:600;'>Most important next step: </span>"
+                f"Provide <strong>{top_label}</strong> data "
+                f"<span style='color:#7A8499;'>({top_group})</span></div>"
+                f"<div style='font-size:12px;color:#5EEAD4;font-family:Manrope,sans-serif;"
+                f"white-space:nowrap;font-weight:500;cursor:pointer;'>"
+                f"Add data &#8594;</div>"
+                f"</div>"
+            )
+        else:
+            _html(
+                "<div style='background:#0d2a1a;border:1px solid #86EFAC44;"
+                "border-left:4px solid #86EFAC;border-radius:8px;"
+                "padding:.65rem 1rem;font-size:13px;color:#86EFAC;"
+                "font-family:Manrope,sans-serif;'>"
+                "&#x2705; All key data are present. Proceed with assessments.</div>"
+            )
+
+    return assessment_readiness
 
     col_btn, col_hint = st.columns([1, 3])
     with col_btn:

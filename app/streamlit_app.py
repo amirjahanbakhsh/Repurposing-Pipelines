@@ -567,7 +567,7 @@ def render_route_map(all_routes_payload: dict[str, Any], selected_pipeline_id: s
             "status": route.get("status", ""),
             "length_km": route.get("length_km", ""),
             "diameter_mm": route.get("diameter_mm", ""),
-            "_radius": 9000 if is_sel else 6000,
+            "_radius": 14000 if is_sel else 9000,
             "_color": [248, 113, 113, 230] if is_sel else [20, 184, 166, 200],
         })
 
@@ -576,9 +576,9 @@ def render_route_map(all_routes_payload: dict[str, Any], selected_pipeline_id: s
 
     # ── Layers ─────────────────────────────────────────────────────────────
     layers = [
-        pdk.Layer("PathLayer", id="dim",       data=dim_routes,  get_path="path", get_color="_color", get_width="_width", width_min_pixels=1,  rounded=True, pickable=False),
-        pdk.Layer("PathLayer", id="candidates", data=cand_routes, get_path="path", get_color="_color", get_width="_width", width_min_pixels=2,  rounded=True, pickable=False),
-        pdk.Layer("PathLayer", id="selected",   data=sel_routes,  get_path="path", get_color="_color", get_width="_width", width_min_pixels=4,  rounded=True, pickable=False),
+        pdk.Layer("PathLayer", id="dim",       data=dim_routes,  get_path="path", get_color="_color", get_width="_width", width_min_pixels=3,  rounded=True, pickable=False),
+        pdk.Layer("PathLayer", id="candidates", data=cand_routes, get_path="path", get_color="_color", get_width="_width", width_min_pixels=5,  rounded=True, pickable=False),
+        pdk.Layer("PathLayer", id="selected",   data=sel_routes,  get_path="path", get_color="_color", get_width="_width", width_min_pixels=8,  rounded=True, pickable=False),
         pdk.Layer(
             "ScatterplotLayer",
             id="dots",
@@ -586,7 +586,7 @@ def render_route_map(all_routes_payload: dict[str, Any], selected_pipeline_id: s
             get_position="position",
             get_radius="_radius",
             get_fill_color="_color",
-            radius_min_pixels=2,
+            radius_min_pixels=5,
             stroked=True,
             get_line_color=[255, 255, 255, 120],
             line_width_min_pixels=1,
@@ -984,24 +984,24 @@ def render_top_area(
             "A pass means the pipeline warrants detailed engineering study -- not a construction permit.</div>"
         )
 
-        # Pipeline search dropdown — all pipelines in the database
+        # Pipeline search dropdown — synced to current selection from main()
         route_summary = route_summary_table(all_routes_payload)
-        all_pipeline_ids = set(candidate_df["pipeline_id"]) if "candidate_df" in dir() else set()
 
-        # Build combined option list: routes + any candidates not in routes
         if not route_summary.empty:
-            active_route_id = (
-                map_active_id if map_active_id in set(route_summary["pipeline_id"])
-                else route_summary.iloc[0]["pipeline_id"]
-            )
-            fallback_index = int(route_summary.index[route_summary["pipeline_id"] == active_route_id][0])
+            # Always sync dropdown to map_active_id (the pipeline selected in main())
+            if map_active_id in set(route_summary["pipeline_id"]):
+                active_idx = int(route_summary.index[route_summary["pipeline_id"] == map_active_id][0])
+            else:
+                active_idx = 0
+
             fallback_options = route_summary["display"].tolist()
-            if st.session_state.get("route_picker_label") not in fallback_options:
-                st.session_state["route_picker_label"] = fallback_options[fallback_index]
+            # Force the session state key to match map_active_id on every render
+            st.session_state["route_picker_label"] = fallback_options[active_idx]
+
             picked_label = st.selectbox(
                 "Search pipelines",
                 fallback_options,
-                index=fallback_index,
+                index=active_idx,
                 key="route_picker_label",
                 label_visibility="collapsed",
             )

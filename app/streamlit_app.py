@@ -870,7 +870,7 @@ def render_non_candidate_info(record: dict[str, Any]) -> None:
     st.markdown(
         f"""
         <div class="score-card" style="border-top:2px solid #9CA3B2;">
-          <div class="eyebrow" style="color:#9CA3B2;">Not in CO₂ candidate set</div>
+          <div class="eyebrow" style="color:#9CA3B2;">Not in CO&#8322; candidate set</div>
           <div style="font-family:'Fraunces',serif; font-size:18px; font-weight:500;
                       margin:6px 0 12px; color:#F4F1EA;">{name}</div>
           <div style="color:#5F6981; font-size:12px; font-family:'JetBrains Mono',monospace;
@@ -891,7 +891,7 @@ def render_non_candidate_info(record: dict[str, Any]) -> None:
     st.markdown(
         """<div class="section-note" style="margin-top:10px;">
         This pipeline did not pass the initial data-completeness or geometry screen
-        for the CO₂ repurposing candidate set. No engineering model layers are available.
+        for the CO&#8322; repurposing candidate set. No engineering model layers are available.
         </div>""",
         unsafe_allow_html=True,
     )
@@ -1049,6 +1049,343 @@ def render_key_metrics(row: pd.Series | None, ranked_row: pd.Series | None) -> N
     life     = fmt_number(row.get("remaining_life_years")      if row is not None else None, 1, " yr")
     evidence = fmt_number(row.get("repurposing_evidence_score") if row is not None else None, 0, "/100")
     lca      = fmt_number(row.get("lca_proxy_saving_percent")  if row is not None else None, 1, "%")
+
+
+# ---------------------------------------------------------------------------
+# Pipeline Readiness Panel
+# ---------------------------------------------------------------------------
+
+# Five evidence groups — plain English, no acronyms
+_READINESS_GROUPS: list[tuple[str, list[tuple[str, int, str]]]] = [
+    ("Geometry", [
+        ("pipeline_length_km",   6, "Pipeline length"),
+        ("inner_diameter_in",    6, "Internal diameter"),
+    ]),
+    ("Wall & Integrity", [
+        ("nominal_wall_thickness_mm",  10, "Wall thickness"),
+        ("minimum_wall_thickness_mm",  10, "Minimum required wall"),
+        ("ili_mfl_available",          10, "In-line inspection record"),
+    ]),
+    ("Operating Conditions", [
+        ("inlet_pressure_psia",   8, "Inlet pressure"),
+        ("outlet_pressure_psia",  8, "Outlet pressure"),
+        ("target_co2_phase",      6, "Target CO\u2082 transport phase"),
+    ]),
+    ("Material Evidence", [
+        ("pipe_grade",                    6,  "Pipe material grade"),
+        ("material_certificates_available",10, "Material certificates"),
+        ("fracture_toughness_basis",      10, "Fracture toughness evidence"),
+    ]),
+    ("CO\u2082 Suitability", [
+        ("co2_water_content_ppmv",          8, "CO\u2082 water content"),
+        ("co2_water_spec_limit_ppmv",       8, "Water content limit"),
+        ("water_dew_point_margin_c",        8, "Water dew-point margin"),
+        ("co2_composition_known",           8, "CO\u2082 gas composition"),
+        ("component_compatibility_screened",8, "Component compatibility"),
+    ]),
+]
+
+_TOTAL_WEIGHT = 130
+
+# Which groups each assessment depends on
+_ASSESSMENT_DEPS: dict[str, list[str]] = {
+    "Capacity":   ["Geometry", "Operating Conditions"],
+    "Integrity":  ["Geometry", "Wall & Integrity", "Material Evidence"],
+    "Economics":  ["Geometry"],
+    "LCA":        ["Geometry", "Wall & Integrity"],
+}
+
+
+def _load_readiness_values(selection: dict[str, str]) -> dict[str, tuple[str, str]]:
+    """Load parameter -> (value, quality) from assumptions CSV."""
+    import csv
+    from pathlib import Path
+
+    result: dict[str, tuple[str, str]] = {}
+    scenario = selection.get("screening_scenario", "")
+
+    # Try scenario-specific assumptions first, then NSTA defaults
+    paths = [
+        Path("model_layers/06_screening_and_decision/goldeneye_assumptions.csv"),
+        Path("model_layers/06_screening_and_decision/nsta_screening_defaults.csv"),
+    ]
+    for path in paths:
+        if not path.exists():
+            continue
+        with path.open(newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                sc  = row.get("scenario", "")
+                param = row.get("parameter", "")
+                val   = row.get("value", "")
+                qual  = row.get("quality", "assumed")
+                # Include if it matches the current scenario, or is a default
+                if sc in (scenario, "defaults", "nsta_defaults", "") and param not in result:
+                    result[param] = (val, qual)
+
+    # Also pull from nsta_candidate_ranked for basic geometry
+    pid = selection.get("pipeline_id", "")
+    ranked_path = Path("model_layers/01_data_foundation/nsta_candidate_ranked.csv")
+    if ranked_path.exists():
+        import pandas as pd
+        df = pd.read_csv(ranked_path)
+        df["pid"] = df["NSTAPIPNO"].astype(str).str.strip().str.upper()
+        match = df[df["pid"] == pid]
+        if not match.empty:
+            r = match.iloc[0]
+            if "pipeline_length_km" not in result and pd.notna(r.get("LENGTH_KM")):
+                result["pipeline_length_km"] = (str(r["LENGTH_KM"]), "regulatory_record")
+            if "inner_diameter_in" not in result and pd.notna(r.get("INT_DIAM")):
+                result["inner_diameter_in"] = (str(r["INT_DIAM"]), "regulatory_record")
+            if "nominal_wall_thickness_mm" not in result and pd.notna(r.get("THICKNESS")):
+                result["nominal_wall_thickness_mm"] = (str(r["THICKNESS"]), "regulatory_record")
+
+    return result
+
+
+def _param_status(val: str, qual: str) -> str:
+    """Convert value + quality into a simple status: ok / partial / missing."""
+    if not val or val.lower() in ("", "nan", "none", "missing", "not available"):
+        return "missing"
+    if val.lower() in ("unknown", "no", "false"):
+        return "missing"
+    if qual in ("assumed", "screening_default_unvalidated", "assumed_conservative",
+                "assumed_or_standard"):
+        return "partial"
+    if qual in ("reported", "regulatory_record", "measured_inspection",
+                "primary_record", "calculated", "derived", "engineering_derived"):
+        return "ok"
+    return "partial"
+
+
+def _group_status(statuses: list[str]) -> str:
+    if all(s == "ok" for s in statuses):
+        return "ok"
+    if all(s == "missing" for s in statuses):
+        return "missing"
+    return "partial"
+
+
+def _readiness_level(group_scores: dict[str, float]) -> tuple[str, str, str]:
+    """Compute overall readiness level from group scores."""
+    total_earned = sum(group_scores.values())
+    pct = total_earned / _TOTAL_WEIGHT
+
+    if pct >= 0.85:
+        return "Ready", "#86EFAC", "#0d2a1a"
+    if pct >= 0.55:
+        return "Partial", "#FBBF24", "#1a1200"
+    if pct >= 0.25:
+        return "Limited", "#F97316", "#1a0f00"
+    return "Insufficient", "#F87171", "#2a0d0d"
+
+
+def _assessment_readiness(
+    group_statuses: dict[str, str],
+    group_pcts: dict[str, float],
+) -> dict[str, str]:
+    """Compute per-assessment readiness: ok / partial / missing."""
+    out: dict[str, str] = {}
+    for assessment, deps in _ASSESSMENT_DEPS.items():
+        statuses = [group_statuses.get(g, "missing") for g in deps]
+        pcts = [group_pcts.get(g, 0.0) for g in deps]
+        avg_pct = sum(pcts) / len(pcts) if pcts else 0.0
+        gs = _group_status(statuses)
+        if gs == "ok" or avg_pct >= 0.85:
+            out[assessment] = "ok"
+        elif gs == "missing" or avg_pct < 0.25:
+            out[assessment] = "missing"
+        else:
+            out[assessment] = "partial"
+    return out
+
+
+def render_readiness_panel(selection: dict[str, str]) -> dict[str, str]:
+    """Render the Pipeline Readiness panel. Returns per-assessment readiness dict."""
+    pid = selection["pipeline_id"]
+    key_done = f"readiness_done_{pid}"
+    key_vals = f"readiness_vals_{pid}"
+
+    _html(
+        "<div style='border-top:1px solid #1e2d47;margin:1rem 0 0;'></div>"
+        "<div style='display:flex;align-items:center;justify-content:space-between;"
+        "margin:.75rem 0;'>"
+        "<div style='font-family:Fraunces,serif;font-size:16px;font-weight:500;"
+        "color:#E8E4DC;'>Pipeline Readiness Level</div>"
+        "<div style='font-size:11px;color:#7A8499;font-family:Manrope,sans-serif;'>"
+        "Check what data are available before running assessments</div>"
+        "</div>"
+    )
+
+    col_btn, col_hint = st.columns([1, 3])
+    with col_btn:
+        run = st.button(
+            "Check Readiness",
+            key=f"check_readiness_{pid}",
+            use_container_width=True,
+        )
+    with col_hint:
+        if not st.session_state.get(key_done):
+            _html(
+                "<div style='color:#7A8499;font-size:12px;font-family:Manrope,sans-serif;"
+                "padding:.4rem 0;'>Select a pipeline and click to check what data are available.</div>"
+            )
+
+    assessment_readiness: dict[str, str] = {
+        "Capacity": "partial", "Integrity": "partial",
+        "Economics": "partial", "LCA": "partial",
+    }
+
+    if run:
+        values = _load_readiness_values(selection)
+        st.session_state[key_done] = True
+        st.session_state[key_vals] = values
+
+    if st.session_state.get(key_done):
+        values = st.session_state.get(key_vals, {})
+
+        # Compute group scores and statuses
+        group_scores:   dict[str, float] = {}
+        group_statuses: dict[str, str]   = {}
+        group_pcts:     dict[str, float] = {}
+        group_gaps:     dict[str, list[str]] = {}
+
+        for gname, params in _READINESS_GROUPS:
+            earned  = 0.0
+            total_g = sum(w for _, w, _ in params)
+            statuses_g: list[str] = []
+            gaps_g: list[str] = []
+            for pkey, weight, label in params:
+                val, qual = values.get(pkey, ("", "missing"))
+                status = _param_status(val, qual)
+                statuses_g.append(status)
+                if status == "ok":
+                    earned += weight
+                elif status == "partial":
+                    earned += weight * 0.5
+                else:
+                    gaps_g.append(label)
+            group_scores[gname]   = earned
+            group_pcts[gname]     = earned / total_g if total_g > 0 else 0.0
+            group_statuses[gname] = _group_status(statuses_g)
+            group_gaps[gname]     = gaps_g
+
+        level, level_fg, level_bg = _readiness_level(group_scores)
+        assessment_readiness = _assessment_readiness(group_statuses, group_pcts)
+
+        # Overall level badge
+        level_msgs = {
+            "Ready":        "All key data are present. Run any of the four assessments.",
+            "Partial":      "Enough data for a capacity and economic screening. Some assessments need additional evidence.",
+            "Limited":      "Only basic pipeline data available. Results are indicative only.",
+            "Insufficient": "Critical data are missing. Assessment results cannot be trusted.",
+        }
+        _html(
+            f"<div style='display:flex;align-items:center;gap:1rem;"
+            f"background:{level_bg};border:1px solid {level_fg}44;"
+            f"border-left:4px solid {level_fg};border-radius:8px;"
+            f"padding:.65rem 1rem;margin:.5rem 0;'>"
+            f"<div style='font-family:Manrope,sans-serif;font-size:14px;"
+            f"font-weight:700;color:{level_fg};min-width:110px;'>{level.upper()}</div>"
+            f"<div style='font-size:12px;color:#E8E4DC;font-family:Manrope,sans-serif;'>"
+            f"{level_msgs[level]}</div>"
+            f"</div>"
+        )
+
+        # Group progress bars
+        icon_map  = {"ok": "&#x2705;", "partial": "&#x26A0;&#xFE0F;", "missing": "&#x274C;"}
+        color_map = {"ok": "#86EFAC",  "partial": "#FBBF24",          "missing": "#F87171"}
+
+        cols = st.columns(5)
+        for i, (gname, params) in enumerate(_READINESS_GROUPS):
+            gs   = group_statuses[gname]
+            pct  = group_pcts[gname]
+            icon = icon_map[gs]
+            fg   = color_map[gs]
+            gaps = group_gaps[gname]
+            bar_pct = int(pct * 100)
+
+            with cols[i]:
+                gap_text = ""
+                if gaps:
+                    gap_text = (
+                        f"<div style='font-size:10px;color:#7A8499;"
+                        f"font-family:Manrope,sans-serif;margin-top:4px;line-height:1.4;'>"
+                        + "<br>".join(f"&#x2BC8; {g}" for g in gaps[:3])
+                        + ("..." if len(gaps) > 3 else "")
+                        + "</div>"
+                    )
+                _html(
+                    f"<div style='background:#111827;border:1px solid #1e2d47;"
+                    f"border-top:2px solid {fg};border-radius:8px;padding:.65rem .75rem;'>"
+                    f"<div style='font-size:9px;letter-spacing:.1em;text-transform:uppercase;"
+                    f"color:#7A8499;font-family:Manrope,sans-serif;margin-bottom:5px;'>{gname}</div>"
+                    f"<div style='background:#1a2236;border-radius:4px;height:6px;margin-bottom:6px;'>"
+                    f"<div style='background:{fg};width:{bar_pct}%;height:6px;"
+                    f"border-radius:4px;'></div></div>"
+                    f"<div style='font-size:11px;font-family:Manrope,sans-serif;"
+                    f"color:{fg};font-weight:600;'>{icon} {gs.capitalize()}</div>"
+                    + gap_text
+                    + "</div>"
+                )
+
+        # Assessment readiness strip
+        ar_icon  = {"ok": "&#x2705;", "partial": "&#x26A0;&#xFE0F;", "missing": "&#x274C;"}
+        ar_color = {"ok": "#86EFAC",   "partial": "#FBBF24",           "missing": "#F87171"}
+        ar_label = {
+            "ok":      "Ready to run",
+            "partial": "Run with caution",
+            "missing": "Needs more data",
+        }
+
+        strips = "".join(
+            f"<div style='display:flex;align-items:center;gap:.4rem;"
+            f"background:{ar_color[v]}18;border:1px solid {ar_color[v]}44;"
+            f"border-radius:6px;padding:.3rem .65rem;'>"
+            f"<span style='font-size:12px;'>{ar_icon[v]}</span>"
+            f"<div><div style='font-size:10px;letter-spacing:.08em;text-transform:uppercase;"
+            f"color:{ar_color[v]};font-family:Manrope,sans-serif;font-weight:700;'>{k}</div>"
+            f"<div style='font-size:9px;color:#7A8499;font-family:Manrope,sans-serif;'>"
+            f"{ar_label[v]}</div></div></div>"
+            for k, v in assessment_readiness.items()
+        )
+        _html(
+            f"<div style='display:grid;grid-template-columns:repeat(4,1fr);"
+            f"gap:.5rem;margin:.75rem 0;'>{strips}</div>"
+        )
+
+        # Most important missing item
+        all_gaps: list[tuple[int, str, str]] = []
+        for gname, params in _READINESS_GROUPS:
+            for pkey, weight, label in params:
+                val, qual = values.get(pkey, ("", "missing"))
+                if _param_status(val, qual) == "missing":
+                    all_gaps.append((weight, label, gname))
+        all_gaps.sort(reverse=True)
+
+        if all_gaps:
+            top_weight, top_label, top_group = all_gaps[0]
+            _html(
+                f"<div style='background:#0d1829;border:1px solid #1e2d47;"
+                f"border-left:3px solid #5EEAD4;border-radius:6px;"
+                f"padding:.5rem 1rem;display:flex;align-items:center;"
+                f"justify-content:space-between;gap:1rem;margin:.25rem 0;'>"
+                f"<div style='font-size:12px;color:#E8E4DC;font-family:Manrope,sans-serif;'>"
+                f"<span style='color:#5EEAD4;font-weight:600;'>Most important next step:</span> "
+                f"Provide {top_label} data ({top_group} group)</div>"
+                f"<div style='font-size:11px;color:#7A8499;font-family:Manrope,sans-serif;"
+                f"white-space:nowrap;'>&#8594; Data Input page (coming soon)</div>"
+                f"</div>"
+            )
+        else:
+            _html(
+                "<div style='background:#0d2a1a;border:1px solid #86EFAC44;"
+                "border-left:3px solid #86EFAC;border-radius:6px;"
+                "padding:.5rem 1rem;font-size:12px;color:#86EFAC;"
+                "font-family:Manrope,sans-serif;'>"
+                "All key data are present. Proceed with assessments.</div>"
+            )
+
+    return assessment_readiness
 
 def render_layer_button(label: str, selection: dict[str, str]) -> None:
     result_key = f"last_result_{safe_filename(label)}"
@@ -1804,8 +2141,8 @@ def _no_results_yet() -> None:
     )
 
 
-def _card_capacity(row: pd.Series | None, pid: str) -> None:
-    _card_header("Capacity Assessment", "&#x1F4A8;", "#5EEAD4")
+def _card_capacity(row: pd.Series | None, pid: str, header_colour: str = "#5EEAD4") -> None:
+    _card_header("Capacity Assessment", "&#x1F4A8;", header_colour)
     length   = _ninput("Length", as_float(row.get("length_km") if row is not None else None),
                        "km", f"cap_length_{pid}", step=1.0, fmt="%.1f")
     id_in    = _ninput("Inner diameter", as_float(row.get("inner_diameter_in") if row is not None else None),
@@ -1863,8 +2200,8 @@ def _card_capacity(row: pd.Series | None, pid: str) -> None:
         _no_results_yet()
 
 
-def _card_integrity(row: pd.Series | None, pid: str) -> None:
-    _card_header("Integrity Assessment", "&#x1F527;", "#FBBF24")
+def _card_integrity(row: pd.Series | None, pid: str, header_colour: str = "#FBBF24") -> None:
+    _card_header("Integrity Assessment", "&#x1F527;", header_colour)
     wall      = _ninput("Wall thickness",
                         as_float(row.get("nominal_wall_thickness_mm") if row is not None else None) or 10.0,
                         "mm", f"int_wall_{pid}", step=0.1, fmt="%.2f")
@@ -1944,8 +2281,8 @@ def _card_integrity(row: pd.Series | None, pid: str) -> None:
         _no_results_yet()
 
 
-def _card_economics(row: pd.Series | None, selection: dict[str, str], pid: str) -> None:
-    _card_header("Economic Assessment", "&#x1F4B0;", "#86EFAC")
+def _card_economics(row: pd.Series | None, selection: dict[str, str], pid: str, header_colour: str = "#86EFAC") -> None:
+    _card_header("Economic Assessment", "&#x1F4B0;", header_colour)
     od_in  = _ninput("Outer diameter",
                      as_float(row.get("outer_diameter_in") if row is not None else None) or 20.0,
                      "in", f"eco_od_{pid}", step=0.1, fmt="%.1f")
@@ -2004,8 +2341,8 @@ def _card_economics(row: pd.Series | None, selection: dict[str, str], pid: str) 
         _no_results_yet()
 
 
-def _card_lca(row: pd.Series | None, pid: str) -> None:
-    _card_header("LCA Assessment", "&#x1F331;", "#818CF8")
+def _card_lca(row: pd.Series | None, pid: str, header_colour: str = "#818CF8") -> None:
+    _card_header("LCA Assessment", "&#x1F331;", header_colour)
     length      = _ninput("Length",
                           as_float(row.get("length_km") if row is not None else None) or 100.0,
                           "km", f"lca_len_{pid}", step=1.0, fmt="%.1f")
@@ -2060,6 +2397,8 @@ def _card_lca(row: pd.Series | None, pid: str) -> None:
 def render_workflow(row: pd.Series | None, ranked_row: pd.Series | None,
                     selection: dict[str, str], factor_mode: str) -> None:
     pid = selection["pipeline_id"]
+
+    # Input box CSS
     _html(
         "<style>"
         "div[data-testid='stNumberInput'] input{"
@@ -2077,19 +2416,36 @@ def render_workflow(row: pd.Series | None, ranked_row: pd.Series | None,
         "div[data-testid='stNumberInput'] button{display:none!important;}"
         "</style>"
     )
+
+    # Readiness panel — between pipeline info and assessment cards
+    assessment_readiness = render_readiness_panel(selection)
+
+    _html("<div style='border-top:1px solid #1e2d47;margin:.75rem 0;'></div>")
+
+    # Colour each card header based on readiness
+    card_colours = {
+        "ok":      "#5EEAD4",
+        "partial": "#FBBF24",
+        "missing": "#F87171",
+    }
+    cap_col  = card_colours.get(assessment_readiness.get("Capacity",  "partial"), "#5EEAD4")
+    int_col  = card_colours.get(assessment_readiness.get("Integrity", "partial"), "#FBBF24")
+    eco_col  = card_colours.get(assessment_readiness.get("Economics", "partial"), "#5EEAD4")
+    lca_col  = card_colours.get(assessment_readiness.get("LCA",       "partial"), "#FBBF24")
+
     c1, c2, c3, c4 = st.columns(4, gap="small")
     with c1:
         with st.container(border=True):
-            _card_capacity(row, pid)
+            _card_capacity(row, pid, header_colour=cap_col)
     with c2:
         with st.container(border=True):
-            _card_integrity(row, pid)
+            _card_integrity(row, pid, header_colour=int_col)
     with c3:
         with st.container(border=True):
-            _card_economics(row, selection, pid)
+            _card_economics(row, selection, pid, header_colour=eco_col)
     with c4:
         with st.container(border=True):
-            _card_lca(row, pid)
+            _card_lca(row, pid, header_colour=lca_col)
 
 
 def main() -> None:

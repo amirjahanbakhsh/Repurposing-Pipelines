@@ -543,61 +543,35 @@ def render_route_map(all_routes_payload: dict[str, Any], selected_pipeline_id: s
         else:
             dim_routes.append({**route, "_color": [60, 80, 140, 110], "_width": 2})
 
-    # Also expose selected pipeline via dot layer if it is not a candidate
+    # Track candidate pipelines for selected-pipeline fallback (used by hit layer lookup)
     if selected_pipeline_id and selected_pipeline_id not in seen_cand:
         for route in routes:
             if route.get("pipeline_id") == selected_pipeline_id:
                 seen_cand[selected_pipeline_id] = route
                 break
 
-    # ── Dot layer data ─────────────────────────────────────────────────────
-    # One point per unique pipeline_id at the route midpoint.
-    dot_data: list[dict] = []
-    for pid, route in seen_cand.items():
-        path = route.get("path") or []
-        if not path:
-            continue
-        mid = path[len(path) // 2]          # [lon, lat]
-        is_sel = pid == selected_pipeline_id
-        dot_data.append({
-            "position": mid,
-            "pipeline_id": pid,
-            "pipeline_name": route.get("pipeline_name", ""),
-            "fluid": route.get("fluid", ""),
-            "status": route.get("status", ""),
-            "length_km": route.get("length_km", ""),
-            "diameter_mm": route.get("diameter_mm", ""),
-            "_radius": 14000 if is_sel else 9000,
-            "_color": [248, 113, 113, 230] if is_sel else [20, 184, 166, 200],
-        })
-
     # ── View state ─────────────────────────────────────────────────────────
     view = pdk.ViewState(latitude=56.5, longitude=0.3, zoom=5, pitch=0)
 
     # ── Layers ─────────────────────────────────────────────────────────────
+    # PathLayer is pickable directly -- no dot overlay needed.
+    # A wider, near-invisible "hit area" path sits behind the visible lines
+    # so that thin/short pipelines are still easy to click.
+    hit_routes = [
+        {**route, "_color": [0, 0, 0, 1]}
+        for route in routes if route.get("path")
+    ]
     layers = [
+        pdk.Layer("PathLayer", id="hit",       data=hit_routes,  get_path="path", get_color="_color", get_width=14, width_min_pixels=14, rounded=True, pickable=True),
         pdk.Layer("PathLayer", id="dim",       data=dim_routes,  get_path="path", get_color="_color", get_width="_width", width_min_pixels=3,  rounded=True, pickable=False),
         pdk.Layer("PathLayer", id="candidates", data=cand_routes, get_path="path", get_color="_color", get_width="_width", width_min_pixels=5,  rounded=True, pickable=False),
         pdk.Layer("PathLayer", id="selected",   data=sel_routes,  get_path="path", get_color="_color", get_width="_width", width_min_pixels=8,  rounded=True, pickable=False),
-        pdk.Layer(
-            "ScatterplotLayer",
-            id="dots",
-            data=dot_data,
-            get_position="position",
-            get_radius="_radius",
-            get_fill_color="_color",
-            radius_min_pixels=5,
-            stroked=True,
-            get_line_color=[255, 255, 255, 120],
-            line_width_min_pixels=1,
-            pickable=True,
-        ),
     ]
 
     tooltip = {
         "html": "<b>{pipeline_id}</b> {pipeline_name}<br/>"
-                "Fluid: {fluid} · {status}<br/>"
-                "Length: {length_km} km · ⌀ {diameter_mm} mm",
+                "Fluid: {fluid} &middot; {status}<br/>"
+                "Length: {length_km} km",
         "style": {"backgroundColor": "#131826", "color": "#F4F1EA", "fontSize": "12px",
                   "padding": "8px 12px", "borderRadius": "8px"},
     }
@@ -1019,27 +993,40 @@ def render_top_area(
         route_summary = route_summary_table(all_routes_payload)
 
         if not route_summary.empty:
-            # Always sync dropdown to map_active_id (the pipeline selected in main())
-            if map_active_id in set(route_summary["pipeline_id"]):
-                active_idx = int(route_summary.index[route_summary["pipeline_id"] == map_active_id][0])
+            fallback_options = ["Select a pipeline..."] + route_summary["display"].tolist()
+
+            if map_active_id and map_active_id in set(route_summary["pipeline_id"]):
+                active_idx = 1 + int(
+                    route_summary.index[route_summary["pipeline_id"] == map_active_id][0]
+                )
             else:
                 active_idx = 0
 
-            fallback_options = route_summary["display"].tolist()
-            # Force the session state key to match map_active_id on every render
-            st.session_state["route_picker_label"] = fallback_options[active_idx]
+            # Only seed the widget's session-state value if it doesn't exist yet
+            # (first load) or if the active pipeline changed via the MAP (not via
+            # this same dropdown). This avoids the dropdown fighting the user's
+            # own click and snapping back to the previous pipeline.
+            widget_key = "route_picker_label"
+            if widget_key not in st.session_state:
+                st.session_state[widget_key] = fallback_options[active_idx]
+            elif st.session_state.get("_last_map_active_id") != map_active_id:
+                # The active pipeline changed from outside this widget (e.g. map click)
+                st.session_state[widget_key] = fallback_options[active_idx]
+            st.session_state["_last_map_active_id"] = map_active_id
 
             picked_label = st.selectbox(
                 "Search pipelines",
                 fallback_options,
-                index=active_idx,
-                key="route_picker_label",
+                key=widget_key,
                 label_visibility="collapsed",
             )
-            picked_id = str(route_summary.loc[route_summary["display"] == picked_label, "pipeline_id"].iloc[0])
-            if picked_id != map_active_id:
-                apply_pipeline_selection_from_map_choice(picked_id, candidate_pipeline_ids)
-                st.rerun()
+            if picked_label != "Select a pipeline...":
+                picked_id = str(
+                    route_summary.loc[route_summary["display"] == picked_label, "pipeline_id"].iloc[0]
+                )
+                if picked_id != map_active_id:
+                    apply_pipeline_selection_from_map_choice(picked_id, candidate_pipeline_ids)
+                    st.rerun()
 
         if non_candidate_preview:
             record = find_route_record(all_routes_payload, non_candidate_preview)
@@ -1051,7 +1038,16 @@ def render_top_area(
             return
 
         # Pipeline info card
-        _html(_pipe_info_html(row, ranked_row, selection))
+        if selection.get("pipeline_id"):
+            _html(_pipe_info_html(row, ranked_row, selection))
+        else:
+            _html(
+                "<div style='background:#111827;border:1px dashed #1e2d47;"
+                "border-radius:10px;padding:1.25rem;text-align:center;margin-top:.5rem;'>"
+                "<div style='font-size:13px;color:#7A8499;font-family:Manrope,sans-serif;'>"
+                "Select a pipeline from the list above or click one on the map "
+                "to begin.</div></div>"
+            )
 
     with right_col:
         _html(
@@ -2697,14 +2693,24 @@ def _page_dashboard() -> None:
 
     factor_mode = "screening"
 
+    # Pick up a map click before resolving the active selection
     map_selected = st.session_state.get("map_selected_pipeline_id")
     if map_selected in candidate_pipeline_ids:
         st.session_state["selected_pipeline_id"] = map_selected
         del st.session_state["map_selected_pipeline_id"]
 
-    default_id = st.session_state.get("selected_pipeline_id", "PL774")
+    # No pipeline is preselected on first load -- the user must choose one.
+    default_id = st.session_state.get("selected_pipeline_id")
+
+    if default_id is None:
+        render_top_area(all_routes_payload, None, None,
+                        {"kind": "nsta", "pipeline_id": "", "label": ""},
+                        candidate_pipeline_ids)
+        return
+
     if default_id not in candidate_pipeline_ids:
-        default_id = "PL774" if "PL774" in candidate_pipeline_ids else candidate_df.iloc[0]["pipeline_id"]
+        default_id = candidate_df.iloc[0]["pipeline_id"]
+        st.session_state["selected_pipeline_id"] = default_id
 
     if default_id == "PL1978":
         selection: dict[str, str] = {

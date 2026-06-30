@@ -1419,21 +1419,24 @@ def render_readiness_panel(selection: dict[str, str]) -> dict[str, str]:
 
         if all_gaps:
             top_weight, top_label, top_group = all_gaps[0]
-            _html(
-                f"<div style='background:#0d1829;border:1px solid #1e2d47;"
-                f"border-left:4px solid #5EEAD4;border-radius:8px;"
-                f"padding:.65rem 1rem;display:flex;align-items:center;"
-                f"justify-content:space-between;gap:1rem;margin:.25rem 0;'>"
-                f"<div style='font-size:13px;color:#E8E4DC;"
-                f"font-family:Manrope,sans-serif;'>"
-                f"<span style='color:#5EEAD4;font-weight:600;'>Most important next step: </span>"
-                f"Provide <strong>{top_label}</strong> data "
-                f"<span style='color:#7A8499;'>({top_group})</span></div>"
-                f"<div style='font-size:12px;color:#5EEAD4;font-family:Manrope,sans-serif;"
-                f"white-space:nowrap;font-weight:500;cursor:pointer;'>"
-                f"Add data &#8594;</div>"
-                f"</div>"
-            )
+            col_msg, col_btn = st.columns([4, 1])
+            with col_msg:
+                _html(
+                    f"<div style='background:#0d1829;border:1px solid #1e2d47;"
+                    f"border-left:4px solid #5EEAD4;border-radius:8px;"
+                    f"padding:.65rem 1rem;margin:.25rem 0;height:100%;"
+                    f"display:flex;align-items:center;'>"
+                    f"<div style='font-size:13px;color:#E8E4DC;"
+                    f"font-family:Manrope,sans-serif;'>"
+                    f"<span style='color:#5EEAD4;font-weight:600;'>Most important next step: </span>"
+                    f"Provide <strong>{top_label}</strong> data "
+                    f"<span style='color:#7A8499;'>({top_group})</span></div>"
+                    f"</div>"
+                )
+            with col_btn:
+                if st.button("Add data \u2192", key=f"add_data_{pid}",
+                             use_container_width=True):
+                    st.switch_page(st.Page(_page_data_input, url_path="data-input"))
         else:
             _html(
                 "<div style='background:#0d2a1a;border:1px solid #86EFAC44;"
@@ -1441,177 +1444,6 @@ def render_readiness_panel(selection: dict[str, str]) -> dict[str, str]:
                 "padding:.65rem 1rem;font-size:13px;color:#86EFAC;"
                 "font-family:Manrope,sans-serif;'>"
                 "&#x2705; All key data are present. Proceed with assessments.</div>"
-            )
-
-    return assessment_readiness
-
-    col_btn, col_hint = st.columns([1, 3])
-    with col_btn:
-        run = st.button(
-            "Check Readiness",
-            key=f"check_readiness_{pid}",
-            use_container_width=True,
-        )
-    with col_hint:
-        if not st.session_state.get(key_done):
-            _html(
-                "<div style='color:#7A8499;font-size:12px;font-family:Manrope,sans-serif;"
-                "padding:.4rem 0;'>Select a pipeline and click to check what data are available.</div>"
-            )
-
-    assessment_readiness: dict[str, str] = {
-        "Capacity": "partial", "Integrity": "partial",
-        "Economics": "partial", "LCA": "partial",
-    }
-
-    if run:
-        values = _load_readiness_values(selection)
-        st.session_state[key_done] = True
-        st.session_state[key_vals] = values
-
-    if st.session_state.get(key_done):
-        values = st.session_state.get(key_vals, {})
-
-        # Compute group scores and statuses
-        group_scores:   dict[str, float] = {}
-        group_statuses: dict[str, str]   = {}
-        group_pcts:     dict[str, float] = {}
-        group_gaps:     dict[str, list[str]] = {}
-
-        for gname, params in _READINESS_GROUPS:
-            earned  = 0.0
-            total_g = sum(w for _, w, _ in params)
-            statuses_g: list[str] = []
-            gaps_g: list[str] = []
-            for pkey, weight, label in params:
-                val, qual = values.get(pkey, ("", "missing"))
-                status = _param_status(val, qual)
-                statuses_g.append(status)
-                if status == "ok":
-                    earned += weight
-                elif status == "partial":
-                    earned += weight * 0.5
-                else:
-                    gaps_g.append(label)
-            group_scores[gname]   = earned
-            group_pcts[gname]     = earned / total_g if total_g > 0 else 0.0
-            group_statuses[gname] = _group_status(statuses_g)
-            group_gaps[gname]     = gaps_g
-
-        level, level_fg, level_bg = _readiness_level(group_scores)
-        assessment_readiness = _assessment_readiness(group_statuses, group_pcts)
-
-        # Overall level badge
-        level_msgs = {
-            "Ready":        "All key data are present. Run any of the four assessments.",
-            "Partial":      "Enough data for a capacity and economic screening. Some assessments need additional evidence.",
-            "Limited":      "Only basic pipeline data available. Results are indicative only.",
-            "Insufficient": "Critical data are missing. Assessment results cannot be trusted.",
-        }
-        _html(
-            f"<div style='display:flex;align-items:center;gap:1rem;"
-            f"background:{level_bg};border:1px solid {level_fg}44;"
-            f"border-left:4px solid {level_fg};border-radius:8px;"
-            f"padding:.65rem 1rem;margin:.5rem 0;'>"
-            f"<div style='font-family:Manrope,sans-serif;font-size:14px;"
-            f"font-weight:700;color:{level_fg};min-width:110px;'>{level.upper()}</div>"
-            f"<div style='font-size:12px;color:#E8E4DC;font-family:Manrope,sans-serif;'>"
-            f"{level_msgs[level]}</div>"
-            f"</div>"
-        )
-
-        # Group progress bars
-        icon_map  = {"ok": "&#x2705;", "partial": "&#x26A0;&#xFE0F;", "missing": "&#x274C;"}
-        color_map = {"ok": "#86EFAC",  "partial": "#FBBF24",          "missing": "#F87171"}
-
-        cols = st.columns(5)
-        for i, (gname, params) in enumerate(_READINESS_GROUPS):
-            gs   = group_statuses[gname]
-            pct  = group_pcts[gname]
-            icon = icon_map[gs]
-            fg   = color_map[gs]
-            gaps = group_gaps[gname]
-            bar_pct = int(pct * 100)
-
-            with cols[i]:
-                gap_text = ""
-                if gaps:
-                    gap_text = (
-                        f"<div style='font-size:10px;color:#7A8499;"
-                        f"font-family:Manrope,sans-serif;margin-top:4px;line-height:1.4;'>"
-                        + "<br>".join(f"&#x2BC8; {g}" for g in gaps[:3])
-                        + ("..." if len(gaps) > 3 else "")
-                        + "</div>"
-                    )
-                _html(
-                    f"<div style='background:#111827;border:1px solid #1e2d47;"
-                    f"border-top:2px solid {fg};border-radius:8px;padding:.65rem .75rem;'>"
-                    f"<div style='font-size:9px;letter-spacing:.1em;text-transform:uppercase;"
-                    f"color:#7A8499;font-family:Manrope,sans-serif;margin-bottom:5px;'>{gname}</div>"
-                    f"<div style='background:#1a2236;border-radius:4px;height:6px;margin-bottom:6px;'>"
-                    f"<div style='background:{fg};width:{bar_pct}%;height:6px;"
-                    f"border-radius:4px;'></div></div>"
-                    f"<div style='font-size:11px;font-family:Manrope,sans-serif;"
-                    f"color:{fg};font-weight:600;'>{icon} {gs.capitalize()}</div>"
-                    + gap_text
-                    + "</div>"
-                )
-
-        # Assessment readiness strip
-        ar_icon  = {"ok": "&#x2705;", "partial": "&#x26A0;&#xFE0F;", "missing": "&#x274C;"}
-        ar_color = {"ok": "#86EFAC",   "partial": "#FBBF24",           "missing": "#F87171"}
-        ar_label = {
-            "ok":      "Ready to run",
-            "partial": "Run with caution",
-            "missing": "Needs more data",
-        }
-
-        strips = "".join(
-            f"<div style='display:flex;align-items:center;gap:.4rem;"
-            f"background:{ar_color[v]}18;border:1px solid {ar_color[v]}44;"
-            f"border-radius:6px;padding:.3rem .65rem;'>"
-            f"<span style='font-size:12px;'>{ar_icon[v]}</span>"
-            f"<div><div style='font-size:10px;letter-spacing:.08em;text-transform:uppercase;"
-            f"color:{ar_color[v]};font-family:Manrope,sans-serif;font-weight:700;'>{k}</div>"
-            f"<div style='font-size:9px;color:#7A8499;font-family:Manrope,sans-serif;'>"
-            f"{ar_label[v]}</div></div></div>"
-            for k, v in assessment_readiness.items()
-        )
-        _html(
-            f"<div style='display:grid;grid-template-columns:repeat(4,1fr);"
-            f"gap:.5rem;margin:.75rem 0;'>{strips}</div>"
-        )
-
-        # Most important missing item
-        all_gaps: list[tuple[int, str, str]] = []
-        for gname, params in _READINESS_GROUPS:
-            for pkey, weight, label in params:
-                val, qual = values.get(pkey, ("", "missing"))
-                if _param_status(val, qual) == "missing":
-                    all_gaps.append((weight, label, gname))
-        all_gaps.sort(reverse=True)
-
-        if all_gaps:
-            top_weight, top_label, top_group = all_gaps[0]
-            _html(
-                f"<div style='background:#0d1829;border:1px solid #1e2d47;"
-                f"border-left:3px solid #5EEAD4;border-radius:6px;"
-                f"padding:.5rem 1rem;display:flex;align-items:center;"
-                f"justify-content:space-between;gap:1rem;margin:.25rem 0;'>"
-                f"<div style='font-size:12px;color:#E8E4DC;font-family:Manrope,sans-serif;'>"
-                f"<span style='color:#5EEAD4;font-weight:600;'>Most important next step:</span> "
-                f"Provide {top_label} data ({top_group} group)</div>"
-                f"<div style='font-size:11px;color:#7A8499;font-family:Manrope,sans-serif;"
-                f"white-space:nowrap;'>&#8594; Data Input page (coming soon)</div>"
-                f"</div>"
-            )
-        else:
-            _html(
-                "<div style='background:#0d2a1a;border:1px solid #86EFAC44;"
-                "border-left:3px solid #86EFAC;border-radius:6px;"
-                "padding:.5rem 1rem;font-size:12px;color:#86EFAC;"
-                "font-family:Manrope,sans-serif;'>"
-                "All key data are present. Proceed with assessments.</div>"
             )
 
     return assessment_readiness

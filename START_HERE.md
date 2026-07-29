@@ -21,6 +21,7 @@ If you are new to the repository, do not start by opening every folder. Start wi
 | See the latest all-pipeline screening result | `model_layers/06_screening_and_decision/pipeline_screen_nsta_all.md` |
 | See the PL774 / CATS example result | `model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.md` |
 | See the Goldeneye benchmark result | `model_layers/06_screening_and_decision/goldeneye_benchmark.md` |
+| See NSTA wall-thickness pressure flags | `model_layers/03_corrosion_integrity/nsta_wall_thickness_pressure_check.md` |
 | See the first ecoinvent-linked LCA reports | `model_layers/05_lca/lca_report_nsta_pl774.md` |
 | See validation status | `model_layers/07_independent_validation/independent_validation_report.md` |
 | Find LCA CSV files | `model_layers/05_lca/` |
@@ -42,26 +43,38 @@ python scripts\run_pipeline_screen.py --screen-all-nsta
 model_layers/06_screening_and_decision/pipeline_screen_nsta_all.md
 ```
 
-4. Choose one NSTA pipeline number, for example `PL774`.
-5. Run one detailed pipeline case:
+4. Run the wall-thickness pressure sanity check:
+
+```powershell
+python scripts\run_nsta_wall_thickness_check.py
+```
+
+5. Open:
+
+```text
+model_layers/03_corrosion_integrity/nsta_wall_thickness_pressure_check.md
+```
+
+6. Choose one NSTA pipeline number, for example `PL774`.
+7. Run one detailed pipeline case:
 
 ```powershell
 python scripts\run_pipeline_screen.py --nsta-id PL774
 ```
 
-6. Open the single-pipeline report:
+8. Open the single-pipeline report:
 
 ```text
 model_layers/06_screening_and_decision/pipeline_screen_nsta_pl774.md
 ```
 
-7. Optional: run the ecoinvent-linked LCA report for the same pipeline:
+9. Optional: run the ecoinvent-linked LCA report for the same pipeline:
 
 ```powershell
 python scripts\run_ecoinvent_lca.py --nsta-id PL774
 ```
 
-8. Open:
+10. Open:
 
 ```text
 model_layers/05_lca/lca_report_nsta_pl774.md

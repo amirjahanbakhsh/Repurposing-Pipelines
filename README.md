@@ -41,7 +41,7 @@ The repository is now organised by model layer rather than by file type.
 | `model_layers/00_project_overview/` | Run guide, architecture, strategy, novelty, similar tools. |
 | `model_layers/01_data_foundation/` | NSTA raw/processed data, completeness report, candidate ranking. |
 | `model_layers/02_capacity_hydraulics/` | CO2 property and capacity validation CSVs. |
-| `model_layers/03_corrosion_integrity/` | Wall-thickness and integrity validation files. |
+| `model_layers/03_corrosion_integrity/` | Wall-thickness, pressure sanity, corrosion, and integrity validation files. |
 | `model_layers/04_cost_economics/` | NETL cost template and cost validation. |
 | `model_layers/05_lca/` | LCA inventory CSVs, ecoinvent mapping, LCA method notes. |
 | `model_layers/06_screening_and_decision/` | Goldeneye benchmark, NSTA screening results, pre-LCA gate outputs. |
@@ -143,6 +143,12 @@ Run independent validation:
 python scripts\run_independent_validation.py
 ```
 
+Run the NSTA wall-thickness pressure sanity check:
+
+```powershell
+python scripts\run_nsta_wall_thickness_check.py
+```
+
 Run tests:
 
 ```powershell
@@ -195,6 +201,7 @@ Implemented so far:
 - ranking of model-ready hydrocarbon pipeline candidates;
 - Goldeneye dissertation/poster benchmark cases;
 - batch screening of 155 NSTA records;
+- NSTA wall-thickness pressure sanity check for all 155 ranked candidates;
 - first evidence-based repurposing gate with cited references and work-scope outputs;
 - quantified refurbishment work-scope CSVs for cost and LCA drivers;
 - private unit-cost factor workflow for refurbishment work-scope rows;
@@ -210,7 +217,7 @@ Implemented so far:
 Next technical priorities:
 
 - fill project-specific private unit costs and ecoinvent/openLCA/Brightway LCA factors;
-- improve the wall-thickness/minimum-wall basis;
+- resolve the NSTA candidates flagged by the pressure-wall check, especially `fail_sanity` and tight-margin rows;
 - validate capacity and cost against external tools such as CO2 transport models and NETL CO2_T_COM;
 - keep `PROJECT_STATUS.md`, `START_HERE.md`, and `README.md` aligned with the actual Git/data policy;
 - keep wells as Phase 2 after pipeline screening is stable.

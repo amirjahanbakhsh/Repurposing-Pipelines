@@ -20,6 +20,7 @@ from .goldeneye import benchmark_scenario_with_trace
 from .hydraulics import average_pressure_pa
 from .trace import InputRecord, ModuleResult, OutputRecord
 from .units import kg_per_s_to_mtpa
+from .wall_thickness import PIPE_GRADE_SMYS_MPA, barlow_minimum_wall_thickness_mm
 
 
 MODEL_VERSION = "independent_validation_v0.2"
@@ -28,14 +29,6 @@ PROPERTY_THRESHOLDS_PERCENT = {
     "density_kg_per_m3": 1.0,
     "viscosity_micro_pa_s": 3.0,
     "compressibility_factor_z": 1.0,
-}
-
-PIPE_GRADE_SMYS_MPA = {
-    "X42": 289.6,
-    "X52": 358.5,
-    "X60": 413.7,
-    "X65": 448.2,
-    "X70": 482.6,
 }
 
 VALIDATION_STATUS_MEANINGS = {
@@ -179,6 +172,13 @@ def _is_missing(value: Any) -> bool:
         return True
     stripped = str(value).strip()
     return stripped == "" or stripped.upper() in {"N/A", "NA", "NULL", "UNKNOWN"}
+
+
+def _is_blank_trace_field(value: Any) -> bool:
+    if value is None:
+        return True
+    stripped = str(value).strip()
+    return stripped == "" or stripped.upper() in {"N/A", "NA", "NULL"}
 
 
 def _to_float(value: Any) -> float | None:
@@ -467,7 +467,7 @@ def validate_assumption_register(
         f"{source}:{row.get('parameter', '<missing parameter>')}:{column}"
         for source, row in combined
         for column in required_columns
-        if _is_missing(row.get(column))
+        if _is_blank_trace_field(row.get(column))
     ]
     rows.append(
         {
@@ -1036,7 +1036,12 @@ def validate_integrity_barlow_sanity(
 
         pressure_mpa = scenario.number("inlet_pressure_psia") * PSI_TO_PA / 1e6
         outer_diameter_mm = scenario.number("outer_diameter_in") * 25.4
-        barlow_min_wall_mm = pressure_mpa * outer_diameter_mm / (2 * smys_mpa * design_factor)
+        barlow_min_wall_mm = barlow_minimum_wall_thickness_mm(
+            pressure_mpa=pressure_mpa,
+            outer_diameter_mm=outer_diameter_mm,
+            smys_mpa=smys_mpa,
+            design_factor=design_factor,
+        )
         scenario_min_wall_mm = scenario.number("minimum_wall_thickness_mm")
         historical_loss_mm = _historical_wall_loss_mm(scenario)
         current_wall_mm = scenario.number("nominal_wall_thickness_mm") - historical_loss_mm

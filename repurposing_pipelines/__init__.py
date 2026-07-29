@@ -13,5 +13,6 @@ __all__ = [
     "refurbishment_cost",
     "repurposing_gate",
     "trace",
+    "wall_thickness",
     "work_scope",
 ]

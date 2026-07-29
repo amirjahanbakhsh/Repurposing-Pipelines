@@ -7,6 +7,7 @@ Last updated: 2026-07-29
 - The local public repository is now the clean reclone at `C:\Users\aj52\Documents\Repurposing Pipelines`.
 - The project is organised by model layer under `model_layers/`.
 - The model can screen all model-ready NSTA hydrocarbon pipelines and selected single-pipeline cases.
+- The NSTA wall-thickness pressure sanity check now screens all 155 ranked candidates; the current run flags 6 `fail_sanity` rows and 12 `review_required` tight-margin rows.
 - The Streamlit dashboard supports visual review, pipeline selection, map-based route display, saved outputs, and data-input/navigation work.
 - The evidence-based repurposing gate runs before cost/LCA decisions and produces quantified refurbishment work-scope rows.
 - Public screening cost and LCA factors give complete early estimates; private factors remain needed before final cost or LCA claims.
@@ -33,6 +34,7 @@ Last updated: 2026-07-29
 ## Next Technical Priorities
 
 - Review and replace screening cost/LCA factor assumptions with defensible project-specific factors.
-- Improve the wall-thickness/minimum-wall basis and validation.
+- Resolve the NSTA candidates flagged by the wall-thickness pressure sanity check.
+- Improve the wall-thickness/minimum-wall basis beyond the simple Barlow triage check.
 - Validate capacity and cost against external tools such as CO2 transport models and NETL CO2_T_COM.
 - Keep wells as Phase 2 after pipeline screening is stable.

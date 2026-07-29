@@ -1,6 +1,6 @@
 # Independent Validation Report
 
-Generated: 2026-06-10T14:56:08+00:00
+Generated: 2026-07-29T12:17:06+00:00
 
 Model validation version: `independent_validation_v0.2`
 
@@ -85,7 +85,7 @@ The extraction is reproducible and the ranked candidates keep only pipelines wit
 | --- | --- | --- | --- |
 | required_trace_fields | 0 | 0 | pass |
 | quality_labels | 0 | 0 | pass |
-| assumption_visibility | 65 | explicitly labelled | pass |
+| assumption_visibility | 87 | explicitly labelled | pass |
 
 Plain meaning:
 

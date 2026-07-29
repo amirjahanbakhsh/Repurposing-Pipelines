@@ -11,6 +11,7 @@ from typing import Any
 from .assumptions import AssumptionValue, ScenarioAssumptions, read_scenario_assumptions
 from .constants import BAR_TO_PSI
 from .goldeneye import benchmark_scenario_with_trace, write_trace
+from .wall_thickness import barlow_minimum_wall_thickness_mm
 from .work_scope import collect_refurbishment_work_scope_rows, write_refurbishment_work_scope_csv
 
 
@@ -321,7 +322,12 @@ def build_nsta_scenario(
     smys_mpa = _default_number(defaults, "smys_mpa")
     design_factor = _default_number(defaults, "design_factor")
     pressure_mpa = (pressure_barg + 1.01325) * 0.1
-    minimum_wall_mm = pressure_mpa * outer_diameter_mm / (2 * smys_mpa * design_factor)
+    minimum_wall_mm = barlow_minimum_wall_thickness_mm(
+        pressure_mpa=pressure_mpa,
+        outer_diameter_mm=outer_diameter_mm,
+        smys_mpa=smys_mpa,
+        design_factor=design_factor,
+    )
 
     reference_length_km = _default_number(defaults, "reference_cost_length_km")
     scale_factor = length_km / reference_length_km

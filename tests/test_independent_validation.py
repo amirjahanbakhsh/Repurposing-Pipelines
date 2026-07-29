@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT))
 
 from repurposing_pipelines.assumptions import read_scenario_assumptions  # noqa: E402
 from repurposing_pipelines.validation import (  # noqa: E402
+    validate_assumption_register,
     validate_co2_properties,
     validate_integrity_barlow_sanity,
 )
@@ -49,6 +50,18 @@ class IndependentValidationTest(unittest.TestCase):
 
         self.assertEqual(poster["status"], "review_required")
         self.assertGreater(poster["barlow_min_wall_mm"], poster["scenario_min_wall_mm"])
+
+    def test_assumption_register_allows_explicit_unknown_values(self) -> None:
+        rows = validate_assumption_register(
+            assumptions_path=ROOT / "model_layers" / "06_screening_and_decision" / "goldeneye_assumptions.csv",
+            defaults_path=ROOT / "model_layers" / "06_screening_and_decision" / "nsta_screening_defaults.csv",
+        )
+        required_trace = [
+            row for row in rows if row["validation_type"] == "required_trace_fields"
+        ][0]
+
+        self.assertEqual(required_trace["status"], "pass")
+        self.assertEqual(required_trace["observed"], 0)
 
 
 if __name__ == "__main__":

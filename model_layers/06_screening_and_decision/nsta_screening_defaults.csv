@@ -10,6 +10,7 @@ fanning_friction_factor,0.003,dimensionless,screening_default,assumed,Simple def
 pipe_grade,X60,text,screening_default,assumed,Default grade used only to estimate minimum wall thickness
 smys_mpa,413.7,MPa,screening_default,assumed,Approximate SMYS for X60 grade
 design_factor,0.72,fraction,screening_default,assumed,Simple Barlow-style screening factor; not a requalification code check
+wall_pressure_margin_review_fraction,0.20,fraction,screening_default,assumed,Flag NSTA pressure wall cases for review when the Barlow margin is below 20 percent of reported wall thickness
 outlet_pressure_psia,1100,psia,goldeneye_benchmark_default,assumed,Default outlet pressure; clipped to 80 percent of inlet if needed
 assessment_year,2026,year,project_default,assumed,Used to estimate historical operating years from NSTA start date
 fallback_historical_corrosion_years,25,years,screening_default,assumed,Used when NSTA start date is missing

@@ -7,6 +7,15 @@ Start here:
 - `START_HERE.md`
 - `model_layers/00_project_overview/how_to_run_the_model.md`
 
+## Local Setup
+
+- Public repo: `C:\Users\aj52\Documents\Repurposing Pipelines`
+- Private evidence vault: `C:\Users\aj52\Documents\Repurposing Pipelines Private Evidence`
+
+The public repo should contain the reproducible project code, public/shareable data, extracted notes, citation records, assumptions, mappings, validation registers, and generated model outputs.
+
+The private evidence vault should contain source PDFs, licensed ecoinvent/openLCA/Brightway files, private ecoinvent-derived factors, and private/commercial refurbishment unit-cost factors. Do not commit those files to GitHub.
+
 ## What This Project Does
 
 The model screens pipeline candidates using:
@@ -176,7 +185,7 @@ GitHub should not contain:
 - private ecoinvent-derived impact factors;
 - private or commercial refurbishment unit-cost factors.
 
-Keep source PDFs locally and store only citation details, extracted facts, and model-relevant notes in GitHub. Public NSTA route geometry can be stored with Git LFS because it is large but public/shareable.
+Keep source PDFs and private/licensed factor files in `C:\Users\aj52\Documents\Repurposing Pipelines Private Evidence`. Store only citation details, extracted facts, allowed summaries, and model-relevant notes in GitHub. Public NSTA route geometry can be stored with Git LFS because it is large but public/shareable.
 
 ## Current Status
 
@@ -196,7 +205,7 @@ Implemented so far:
 - first LCA proxy module and ecoinvent-linked conditional LCA workflow;
 - NETL cost-reference template;
 - independent validation reports and registers;
-- Git/data hygiene rules for keeping PDFs, ecoinvent data, private LCA factors, and private cost factors outside public GitHub.
+- clean public GitHub state with source PDFs, ecoinvent data, private LCA factors, and private cost factors kept outside the repository.
 
 Next technical priorities:
 

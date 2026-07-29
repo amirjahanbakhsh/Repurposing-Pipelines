@@ -4,12 +4,22 @@ Last updated: 2026-07-29
 
 ## Development State
 
+- The local public repository is now the clean reclone at `C:\Users\aj52\Documents\Repurposing Pipelines`.
 - The project is organised by model layer under `model_layers/`.
 - The model can screen all model-ready NSTA hydrocarbon pipelines and selected single-pipeline cases.
 - The Streamlit dashboard supports visual review, pipeline selection, map-based route display, saved outputs, and data-input/navigation work.
 - The evidence-based repurposing gate runs before cost/LCA decisions and produces quantified refurbishment work-scope rows.
 - Public screening cost and LCA factors give complete early estimates; private factors remain needed before final cost or LCA claims.
 - Independent validation reports and registers are in place for the current screening-level model.
+
+## Current Repository State
+
+- The public GitHub `main` branch is the clean working branch.
+- The old `codex-store-project-data` branch has no remaining role in development after cleanup and deletion.
+- Source PDFs, licensed ecoinvent/openLCA/Brightway data, private ecoinvent-derived factors, and private refurbishment unit-cost files must not be committed.
+- The local private evidence vault is outside the repository at `C:\Users\aj52\Documents\Repurposing Pipelines Private Evidence`.
+- The private evidence vault should hold source PDFs, licensed ecoinvent files, openLCA/Brightway exports where license-restricted, and private/commercial factor CSVs.
+- GitHub should hold only public/shareable data, extracted facts, citation records, mappings, assumptions, validation registers, scripts, tests, and generated model outputs.
 
 ## Data And GitHub Policy
 
@@ -18,12 +28,7 @@ Last updated: 2026-07-29
 - PDFs are local-only. GitHub should store citation records, extracted notes, and model-relevant facts, not source PDFs.
 - Licensed ecoinvent/openLCA/Brightway source data and private ecoinvent-derived impact factors are local-only.
 - Private or commercial refurbishment unit-cost files are local-only.
-
-## Current Cleanup Work
-
-- `.gitignore` is being updated to protect PDFs, ecoinvent data, private LCA factors, and private cost factors.
-- Previously tracked PDFs are being removed from Git tracking while remaining on the local machine.
-- The `codex-store-project-data` branch is being cleaned so it can be merged without publishing private cost data, then deleted afterwards.
+- When private sources support a model value, store the source file in the private vault and store only the citation, extracted fact, and allowed summary in GitHub.
 
 ## Next Technical Priorities
 

@@ -4,6 +4,14 @@ This page is the simple map for the project.
 
 If you are new to the repository, do not start by opening every folder. Start with the files below.
 
+## Current Local Setup
+
+- Public repo: `C:\Users\aj52\Documents\Repurposing Pipelines`
+- Private evidence vault: `C:\Users\aj52\Documents\Repurposing Pipelines Private Evidence`
+- The public repo is for code, public/shareable data, model outputs, assumptions, mappings, validation files, extracted notes, and citation records.
+- The private vault is for source PDFs, licensed ecoinvent/openLCA/Brightway files, private ecoinvent-derived factors, and private/commercial cost factors.
+- Do not copy private-vault files into the repo. If a private file supports the model, record the allowed citation, extracted fact, or summary in the repo instead.
+
 ## Most Important Files
 
 | What you want | Open this |
@@ -78,9 +86,9 @@ model_layers/05_lca/lca_report_nsta_pl774.md
 ## Data Rules
 
 - GitHub should contain code, public/shareable data, assumptions, mappings, generated CSV/JSON/Markdown outputs, and extracted notes.
-- PDFs should stay local only. Put citations and extracted facts in Markdown/CSV files instead.
+- PDFs should stay in the private evidence vault only. Put citations and extracted facts in Markdown/CSV files instead.
 - Licensed ecoinvent/openLCA/Brightway source data and private ecoinvent-derived impact factors should stay local only.
-- Private or commercial unit-cost factor files should stay local only.
+- Private or commercial unit-cost factor files should stay in the private evidence vault only.
 - Public NSTA geometry can be kept in GitHub through Git LFS.
 
 ## Important Warning

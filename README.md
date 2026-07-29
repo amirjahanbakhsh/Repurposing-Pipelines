@@ -201,7 +201,7 @@ Implemented so far:
 - ranking of model-ready hydrocarbon pipeline candidates;
 - Goldeneye dissertation/poster benchmark cases;
 - batch screening of 155 NSTA records;
-- NSTA wall-thickness pressure sanity check for all 155 ranked candidates;
+- NSTA wall-thickness pressure sanity check for all 155 ranked candidates, now carried into the main NSTA screening CSV/report;
 - first evidence-based repurposing gate with cited references and work-scope outputs;
 - quantified refurbishment work-scope CSVs for cost and LCA drivers;
 - private unit-cost factor workflow for refurbishment work-scope rows;

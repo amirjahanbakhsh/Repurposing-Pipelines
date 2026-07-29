@@ -1886,16 +1886,6 @@
             ],
             "result_name": "cost_total_usd_2025",
             "notes": ""
-          },
-          {
-            "name": "netl_cost_comparison",
-            "formula": "cost_total_usd_2025 - netl_reference_total_capex_usd_2025",
-            "inputs": [
-              "cost_total_usd_2025",
-              "netl_reference_total_capex_usd_2025"
-            ],
-            "result_name": "netl_cost_delta_usd_2025",
-            "notes": "Runs only when a like-for-like NETL CO2_T_COM reference is supplied."
           }
         ]
       },
@@ -2938,6 +2928,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 22.165714,
+      "pressure_wall_margin_mm": 0.534286,
+      "pressure_wall_margin_fraction": 0.023537,
+      "pressure_wall_utilization_fraction": 0.976463,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   }

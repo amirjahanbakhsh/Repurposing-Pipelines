@@ -129,6 +129,17 @@ def build_nsta_wall_thickness_check_rows(
         candidates = candidates[:limit]
 
     defaults = read_defaults(defaults_path)
+    return [
+        build_nsta_wall_thickness_check_row(candidate=candidate, defaults=defaults)
+        for candidate in candidates
+    ]
+
+
+def build_nsta_wall_thickness_check_row(
+    *,
+    candidate: dict[str, str],
+    defaults: dict[str, dict[str, str]],
+) -> dict[str, Any]:
     pipe_grade = defaults.get("pipe_grade", {}).get("value", "X60").strip().upper()
     smys_mpa = _to_float(defaults.get("smys_mpa", {}).get("value"))
     if smys_mpa is None:
@@ -140,96 +151,87 @@ def build_nsta_wall_thickness_check_rows(
     if review_margin_fraction is None:
         review_margin_fraction = 0.20
 
-    rows: list[dict[str, Any]] = []
-    for candidate in candidates:
-        nsta_id = candidate.get("NSTAPIPNO", "").strip()
-        inner_diameter_mm = _to_float(candidate.get("INT_DIAM"))
-        reported_wall_mm = _to_float(candidate.get("THICKNESS"))
-        pressure_barg = _to_float(candidate.get("MX_OP_PRES"))
-        length_km = _to_float(candidate.get("LENGTH_KM"))
+    nsta_id = candidate.get("NSTAPIPNO", "").strip()
+    inner_diameter_mm = _to_float(candidate.get("INT_DIAM"))
+    reported_wall_mm = _to_float(candidate.get("THICKNESS"))
+    pressure_barg = _to_float(candidate.get("MX_OP_PRES"))
+    length_km = _to_float(candidate.get("LENGTH_KM"))
 
-        base_row: dict[str, Any] = {
-            "nsta_rank": candidate.get("RANK", ""),
-            "nsta_pipeline_number": nsta_id,
-            "pipeline_name": candidate.get("PIPE_NAME", ""),
-            "fluid": candidate.get("FLUID", ""),
-            "nsta_status": candidate.get("STATUS", ""),
-            "length_km": _round(length_km, 6),
-            "pipe_grade": pipe_grade,
-            "smys_mpa": _round(smys_mpa, 3),
-            "design_factor": _round(design_factor, 3),
-            "pressure_basis": "NSTA MX_OP_PRES barg plus atmospheric pressure for screening consistency",
-            "max_operating_pressure_barg": _round(pressure_barg, 6),
-            "inner_diameter_mm": _round(inner_diameter_mm, 3),
-            "reported_wall_thickness_mm": _round(reported_wall_mm, 3),
-            "review_margin_fraction": _round(review_margin_fraction, 6),
+    base_row: dict[str, Any] = {
+        "nsta_rank": candidate.get("RANK", ""),
+        "nsta_pipeline_number": nsta_id,
+        "pipeline_name": candidate.get("PIPE_NAME", ""),
+        "fluid": candidate.get("FLUID", ""),
+        "nsta_status": candidate.get("STATUS", ""),
+        "length_km": _round(length_km, 6),
+        "pipe_grade": pipe_grade,
+        "smys_mpa": _round(smys_mpa, 3),
+        "design_factor": _round(design_factor, 3),
+        "pressure_basis": "NSTA MX_OP_PRES barg plus atmospheric pressure for screening consistency",
+        "max_operating_pressure_barg": _round(pressure_barg, 6),
+        "inner_diameter_mm": _round(inner_diameter_mm, 3),
+        "reported_wall_thickness_mm": _round(reported_wall_mm, 3),
+        "review_margin_fraction": _round(review_margin_fraction, 6),
+    }
+
+    missing = [
+        name
+        for name, value in [
+            ("INT_DIAM", inner_diameter_mm),
+            ("THICKNESS", reported_wall_mm),
+            ("MX_OP_PRES", pressure_barg),
+            ("smys_mpa", smys_mpa),
+            ("design_factor", design_factor),
+        ]
+        if value is None or value <= 0
+    ]
+    if missing:
+        return {
+            **base_row,
+            "pressure_mpa_for_check": "",
+            "outer_diameter_mm": "",
+            "barlow_min_wall_mm": "",
+            "pressure_margin_mm": "",
+            "pressure_margin_fraction": "",
+            "pressure_utilization_fraction": "",
+            "status": "insufficient_data",
+            "notes": "Missing or non-positive fields: " + "; ".join(missing),
         }
 
-        missing = [
-            name
-            for name, value in [
-                ("INT_DIAM", inner_diameter_mm),
-                ("THICKNESS", reported_wall_mm),
-                ("MX_OP_PRES", pressure_barg),
-                ("smys_mpa", smys_mpa),
-                ("design_factor", design_factor),
-            ]
-            if value is None or value <= 0
-        ]
-        if missing:
-            rows.append(
-                {
-                    **base_row,
-                    "pressure_mpa_for_check": "",
-                    "outer_diameter_mm": "",
-                    "barlow_min_wall_mm": "",
-                    "pressure_margin_mm": "",
-                    "pressure_margin_fraction": "",
-                    "pressure_utilization_fraction": "",
-                    "status": "insufficient_data",
-                    "notes": "Missing or non-positive fields: " + "; ".join(missing),
-                }
-            )
-            continue
+    assert inner_diameter_mm is not None
+    assert reported_wall_mm is not None
+    assert pressure_barg is not None
+    assert smys_mpa is not None
+    assert design_factor is not None
 
-        assert inner_diameter_mm is not None
-        assert reported_wall_mm is not None
-        assert pressure_barg is not None
-        assert smys_mpa is not None
-        assert design_factor is not None
+    outer_diameter_mm = inner_diameter_mm + 2 * reported_wall_mm
+    pressure_mpa = (pressure_barg + 1.01325) * 0.1
+    minimum_wall_mm = barlow_minimum_wall_thickness_mm(
+        pressure_mpa=pressure_mpa,
+        outer_diameter_mm=outer_diameter_mm,
+        smys_mpa=smys_mpa,
+        design_factor=design_factor,
+    )
+    pressure_margin_mm = reported_wall_mm - minimum_wall_mm
+    pressure_margin_fraction = pressure_margin_mm / reported_wall_mm
+    pressure_utilization_fraction = minimum_wall_mm / reported_wall_mm
+    status = pressure_wall_status(
+        reported_wall_thickness_mm=reported_wall_mm,
+        minimum_wall_thickness_mm=minimum_wall_mm,
+        review_margin_fraction=review_margin_fraction,
+    )
 
-        outer_diameter_mm = inner_diameter_mm + 2 * reported_wall_mm
-        pressure_mpa = (pressure_barg + 1.01325) * 0.1
-        minimum_wall_mm = barlow_minimum_wall_thickness_mm(
-            pressure_mpa=pressure_mpa,
-            outer_diameter_mm=outer_diameter_mm,
-            smys_mpa=smys_mpa,
-            design_factor=design_factor,
-        )
-        pressure_margin_mm = reported_wall_mm - minimum_wall_mm
-        pressure_margin_fraction = pressure_margin_mm / reported_wall_mm
-        pressure_utilization_fraction = minimum_wall_mm / reported_wall_mm
-        status = pressure_wall_status(
-            reported_wall_thickness_mm=reported_wall_mm,
-            minimum_wall_thickness_mm=minimum_wall_mm,
-            review_margin_fraction=review_margin_fraction,
-        )
-
-        rows.append(
-            {
-                **base_row,
-                "pressure_mpa_for_check": _round(pressure_mpa, 6),
-                "outer_diameter_mm": _round(outer_diameter_mm, 3),
-                "barlow_min_wall_mm": _round(minimum_wall_mm, 6),
-                "pressure_margin_mm": _round(pressure_margin_mm, 6),
-                "pressure_margin_fraction": _round(pressure_margin_fraction, 6),
-                "pressure_utilization_fraction": _round(pressure_utilization_fraction, 6),
-                "status": status,
-                "notes": _status_notes(status, review_margin_fraction),
-            }
-        )
-
-    return rows
+    return {
+        **base_row,
+        "pressure_mpa_for_check": _round(pressure_mpa, 6),
+        "outer_diameter_mm": _round(outer_diameter_mm, 3),
+        "barlow_min_wall_mm": _round(minimum_wall_mm, 6),
+        "pressure_margin_mm": _round(pressure_margin_mm, 6),
+        "pressure_margin_fraction": _round(pressure_margin_fraction, 6),
+        "pressure_utilization_fraction": _round(pressure_utilization_fraction, 6),
+        "status": status,
+        "notes": _status_notes(status, review_margin_fraction),
+    }
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
@@ -240,9 +242,19 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
             if key not in fieldnames:
                 fieldnames.append(key)
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
-        writer.writerows(rows)
+        writer.writerows(_csv_safe_row(row) for row in rows)
+
+
+def _csv_safe_value(value: Any) -> Any:
+    if isinstance(value, str):
+        return " ".join(value.replace("\r", " ").replace("\n", " ").split())
+    return value
+
+
+def _csv_safe_row(row: dict[str, Any]) -> dict[str, Any]:
+    return {key: _csv_safe_value(value) for key, value in row.items()}
 
 
 def _status_counts(rows: list[dict[str, Any]]) -> dict[str, int]:

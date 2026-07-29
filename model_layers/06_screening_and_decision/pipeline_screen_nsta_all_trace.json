@@ -1737,7 +1737,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 827344511.3437828,
+            "value": 827344511.3437829,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -1748,7 +1748,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 82734451.13437828,
+            "value": 82734451.1343783,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -1759,7 +1759,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 910078962.4781611,
+            "value": 910078962.4781612,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -2928,6 +2928,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 27.676798,
+      "pressure_wall_margin_mm": 0.723202,
+      "pressure_wall_margin_fraction": 0.025465,
+      "pressure_wall_utilization_fraction": 0.974535,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -5861,6 +5870,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "fail_sanity",
+      "pressure_wall_min_wall_mm": 20.125751,
+      "pressure_wall_margin_mm": -2.625751,
+      "pressure_wall_margin_fraction": -0.150043,
+      "pressure_wall_utilization_fraction": 1.150043,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Calculated pressure minimum exceeds reported wall thickness; verify NSTA dimensions, pressure basis, pipe grade, and design factor."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -8780,7 +8798,7 @@
       "BUNDLE": "0",
       "BUNDLE_FLG": "",
       "CRS_CODE": "23031",
-      "CRS_NAME": "UTM31, ED50\n",
+      "CRS_NAME": "UTM31, ED50\r\n",
       "END_REAS": "",
       "UNTRENCHED": "U",
       "EXPOSED": "E",
@@ -8792,6 +8810,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 22.165714,
+      "pressure_wall_margin_mm": 0.534286,
+      "pressure_wall_margin_fraction": 0.023537,
+      "pressure_wall_utilization_fraction": 0.976463,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -10504,7 +10531,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 102625563.61858773,
+            "value": 102625563.61858775,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -10515,7 +10542,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 10262556.361858774,
+            "value": 10262556.361858776,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -10526,7 +10553,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 112888119.9804465,
+            "value": 112888119.98044652,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -11680,6 +11707,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.353345,
+      "pressure_wall_margin_mm": 7.846655,
+      "pressure_wall_margin_fraction": 0.353453,
+      "pressure_wall_utilization_fraction": 0.646547,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -14613,6 +14649,15 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "fail_sanity",
+      "pressure_wall_min_wall_mm": 21.245447,
+      "pressure_wall_margin_mm": -0.345447,
+      "pressure_wall_margin_fraction": -0.016529,
+      "pressure_wall_utilization_fraction": 1.016529,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Calculated pressure minimum exceeds reported wall thickness; verify NSTA dimensions, pressure basis, pipe grade, and design factor."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -17529,6 +17574,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 12.616686,
+      "pressure_wall_margin_mm": 3.283314,
+      "pressure_wall_margin_fraction": 0.206498,
+      "pressure_wall_utilization_fraction": 0.793502,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -20453,6 +20507,15 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "fail_sanity",
+      "pressure_wall_min_wall_mm": 25.243309,
+      "pressure_wall_margin_mm": -3.483309,
+      "pressure_wall_margin_fraction": -0.160079,
+      "pressure_wall_utilization_fraction": 1.160079,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Calculated pressure minimum exceeds reported wall thickness; verify NSTA dimensions, pressure basis, pipe grade, and design factor."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -23370,6 +23433,15 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 28.009743,
+      "pressure_wall_margin_mm": 5.890257,
+      "pressure_wall_margin_fraction": 0.173754,
+      "pressure_wall_utilization_fraction": 0.826246,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -23384,7 +23456,7 @@
         "unit": "text",
         "source": "NSTA ranked candidate dataset",
         "quality": "reported",
-        "notes": "NSTA pipeline number PL762\nPL762\nPL762; rank 9"
+        "notes": "NSTA pipeline number PL762\r\nPL762\r\nPL762; rank 9"
       },
       {
         "scenario": "nsta_pl762_pl762_pl762",
@@ -26249,7 +26321,7 @@
     "nsta_candidate": {
       "RANK": "9",
       "SCREENING_SCORE": "58.8",
-      "NSTAPIPNO": "PL762\nPL762\nPL762",
+      "NSTAPIPNO": "PL762\r\nPL762\r\nPL762",
       "PIPE_NAME": "SAGE PIPELINE",
       "REP_GROUP": "WOOD GROUP",
       "FLUID": "GAS",
@@ -26286,6 +26358,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 22.509008,
+      "pressure_wall_margin_mm": 6.090992,
+      "pressure_wall_margin_fraction": 0.212972,
+      "pressure_wall_utilization_fraction": 0.787028,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -29210,6 +29291,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "fail_sanity",
+      "pressure_wall_min_wall_mm": 24.201952,
+      "pressure_wall_margin_mm": -3.581952,
+      "pressure_wall_margin_fraction": -0.173713,
+      "pressure_wall_utilization_fraction": 1.173713,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Calculated pressure minimum exceeds reported wall thickness; verify NSTA dimensions, pressure basis, pipe grade, and design factor."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -30912,7 +31002,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 72132775.14830841,
+            "value": 72132775.14830843,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -30923,7 +31013,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 7213277.514830842,
+            "value": 7213277.514830843,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -30934,7 +31024,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 79346052.66313925,
+            "value": 79346052.66313927,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -32088,6 +32178,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.028297,
+      "pressure_wall_margin_mm": 9.871703,
+      "pressure_wall_margin_fraction": 0.413042,
+      "pressure_wall_utilization_fraction": 0.586958,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -33829,7 +33928,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 15773273.206215577,
+            "value": 15773273.206215579,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -33840,7 +33939,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1577327.3206215578,
+            "value": 1577327.320621558,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -35005,6 +35104,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 17.720015,
+      "pressure_wall_margin_mm": 7.679985,
+      "pressure_wall_margin_fraction": 0.302362,
+      "pressure_wall_utilization_fraction": 0.697638,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -36746,7 +36854,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 74292182.17594415,
+            "value": 74292182.17594413,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -36757,7 +36865,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 7429218.217594415,
+            "value": 7429218.217594414,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -36768,7 +36876,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 81721400.39353856,
+            "value": 81721400.39353855,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -37922,6 +38030,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.415532,
+      "pressure_wall_margin_mm": 2.884468,
+      "pressure_wall_margin_fraction": 0.201711,
+      "pressure_wall_utilization_fraction": 0.798289,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -40802,6 +40919,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 13.827496,
+      "pressure_wall_margin_mm": 84.222504,
+      "pressure_wall_margin_fraction": 0.858975,
+      "pressure_wall_utilization_fraction": 0.141025,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -42504,7 +42630,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 46534506.410110146,
+            "value": 46534506.41011014,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -42515,7 +42641,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 4653450.641011015,
+            "value": 4653450.641011014,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -42526,7 +42652,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 51187957.05112116,
+            "value": 51187957.05112115,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -43680,6 +43806,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 13.188072,
+      "pressure_wall_margin_mm": 20.811928,
+      "pressure_wall_margin_fraction": 0.612116,
+      "pressure_wall_utilization_fraction": 0.387884,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -45383,7 +45518,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 46804176.91876475,
+            "value": 46804176.918764755,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -45394,7 +45529,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 4680417.691876475,
+            "value": 4680417.691876476,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -45405,7 +45540,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 51484594.610641226,
+            "value": 51484594.61064123,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -46559,6 +46694,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 13.188072,
+      "pressure_wall_margin_mm": 20.811928,
+      "pressure_wall_margin_fraction": 0.612116,
+      "pressure_wall_utilization_fraction": 0.387884,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -48271,7 +48415,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 60451863.205652855,
+            "value": 60451863.20565286,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -48282,7 +48426,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6045186.320565286,
+            "value": 6045186.320565287,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -48293,7 +48437,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 66497049.52621814,
+            "value": 66497049.526218146,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -49447,6 +49591,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.145855,
+      "pressure_wall_margin_mm": 9.454145,
+      "pressure_wall_margin_fraction": 0.458939,
+      "pressure_wall_utilization_fraction": 0.541061,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -52336,6 +52489,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 8.118971,
+      "pressure_wall_margin_mm": 7.781029,
+      "pressure_wall_margin_fraction": 0.489373,
+      "pressure_wall_utilization_fraction": 0.510627,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -55223,6 +55385,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.346914,
+      "pressure_wall_margin_mm": 8.153086,
+      "pressure_wall_margin_fraction": 0.465891,
+      "pressure_wall_utilization_fraction": 0.534109,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -58132,6 +58303,15 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 24.319322,
+      "pressure_wall_margin_mm": 3.140678,
+      "pressure_wall_margin_fraction": 0.114373,
+      "pressure_wall_utilization_fraction": 0.885627,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -59872,7 +60052,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 34730292.78127459,
+            "value": 34730292.78127458,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -59883,7 +60063,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 3473029.278127459,
+            "value": 3473029.278127458,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -59894,7 +60074,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 38203322.05940205,
+            "value": 38203322.05940203,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -61048,6 +61228,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 12.832147,
+      "pressure_wall_margin_mm": 1.467853,
+      "pressure_wall_margin_fraction": 0.102647,
+      "pressure_wall_utilization_fraction": 0.897353,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -62751,7 +62940,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 96019.04474822973,
+            "value": 96019.04474822972,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -62762,7 +62951,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9601.904474822973,
+            "value": 9601.904474822972,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -62773,7 +62962,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 105620.94922305271,
+            "value": 105620.94922305268,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -63927,6 +64116,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -66807,6 +67005,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -68509,7 +68716,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 96019.04474822973,
+            "value": 96019.04474822972,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -68520,7 +68727,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9601.904474822973,
+            "value": 9601.904474822972,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -68531,7 +68738,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 105620.94922305271,
+            "value": 105620.94922305268,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -69685,6 +69892,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -72565,6 +72781,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -74267,7 +74492,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170732,
+            "value": 126663.42073170733,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -74278,7 +74503,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170732,
+            "value": 12666.342073170734,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -75443,6 +75668,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -78323,6 +78557,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -80025,7 +80268,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 96019.04474822973,
+            "value": 96019.04474822972,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -80036,7 +80279,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9601.904474822973,
+            "value": 9601.904474822972,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -80047,7 +80290,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 105620.94922305271,
+            "value": 105620.94922305268,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -81201,6 +81444,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -84081,6 +84333,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -85783,7 +86044,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170732,
+            "value": 126663.42073170733,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -85794,7 +86055,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170732,
+            "value": 12666.342073170734,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -86959,6 +87220,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -88662,7 +88932,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 112362.71193941777,
+            "value": 112362.71193941776,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -88673,7 +88943,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11236.271193941779,
+            "value": 11236.271193941777,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -88684,7 +88954,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 123598.98313335955,
+            "value": 123598.98313335954,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -89838,6 +90108,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.158228,
+      "pressure_wall_margin_mm": 73.091772,
+      "pressure_wall_margin_fraction": 0.837728,
+      "pressure_wall_utilization_fraction": 0.162272,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -92762,6 +93041,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "fail_sanity",
+      "pressure_wall_min_wall_mm": 23.745578,
+      "pressure_wall_margin_mm": -2.305578,
+      "pressure_wall_margin_fraction": -0.107536,
+      "pressure_wall_utilization_fraction": 1.107536,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Calculated pressure minimum exceeds reported wall thickness; verify NSTA dimensions, pressure basis, pipe grade, and design factor."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -95685,6 +95973,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "fail_sanity",
+      "pressure_wall_min_wall_mm": 23.745578,
+      "pressure_wall_margin_mm": -2.305578,
+      "pressure_wall_margin_fraction": -0.107536,
+      "pressure_wall_utilization_fraction": 1.107536,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Calculated pressure minimum exceeds reported wall thickness; verify NSTA dimensions, pressure basis, pipe grade, and design factor."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -97396,7 +97693,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 31886494.69000787,
+            "value": 31886494.690007873,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -97407,7 +97704,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 3188649.469000787,
+            "value": 3188649.4690007875,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -98572,6 +98869,15 @@
       "REP_OPERTR": "N",
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.257516,
+      "pressure_wall_margin_mm": 14.542484,
+      "pressure_wall_margin_fraction": 0.611029,
+      "pressure_wall_utilization_fraction": 0.388971,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -101481,6 +101787,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.828119,
+      "pressure_wall_margin_mm": 6.471881,
+      "pressure_wall_margin_fraction": 0.353655,
+      "pressure_wall_utilization_fraction": 0.646345,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -104360,6 +104675,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 12.725859,
+      "pressure_wall_margin_mm": 7.874141,
+      "pressure_wall_margin_fraction": 0.38224,
+      "pressure_wall_utilization_fraction": 0.61776,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -106091,7 +106415,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 31776174.936467346,
+            "value": 31776174.936467342,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -106102,7 +106426,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 3177617.493646735,
+            "value": 3177617.4936467344,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -106113,7 +106437,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 34953792.43011408,
+            "value": 34953792.430114076,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -107267,6 +107591,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.828119,
+      "pressure_wall_margin_mm": 6.471881,
+      "pressure_wall_margin_fraction": 0.353655,
+      "pressure_wall_utilization_fraction": 0.646345,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -110147,6 +110480,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 10.484373,
+      "pressure_wall_margin_mm": 54.615627,
+      "pressure_wall_margin_fraction": 0.83895,
+      "pressure_wall_utilization_fraction": 0.16105,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -113026,6 +113368,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 10.484373,
+      "pressure_wall_margin_mm": 54.615627,
+      "pressure_wall_margin_fraction": 0.83895,
+      "pressure_wall_utilization_fraction": 0.16105,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -114737,7 +115088,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 15506046.104148997,
+            "value": 15506046.104148995,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -114748,7 +115099,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1550604.6104149,
+            "value": 1550604.6104148997,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -114759,7 +115110,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 17056650.7145639,
+            "value": 17056650.714563895,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -115913,6 +116264,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.145855,
+      "pressure_wall_margin_mm": 9.454145,
+      "pressure_wall_margin_fraction": 0.458939,
+      "pressure_wall_utilization_fraction": 0.541061,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -118817,6 +119177,15 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.42975,
+      "pressure_wall_margin_mm": 13.17025,
+      "pressure_wall_margin_fraction": 0.639333,
+      "pressure_wall_utilization_fraction": 0.360667,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -121720,6 +122089,15 @@
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.392972,
+      "pressure_wall_margin_mm": 13.207028,
+      "pressure_wall_margin_fraction": 0.641118,
+      "pressure_wall_utilization_fraction": 0.358882,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -124622,6 +125000,15 @@
       "REP_OPERTR": "N",
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.392972,
+      "pressure_wall_margin_mm": 13.207028,
+      "pressure_wall_margin_fraction": 0.641118,
+      "pressure_wall_utilization_fraction": 0.358882,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -127546,6 +127933,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.289171,
+      "pressure_wall_margin_mm": 2.210829,
+      "pressure_wall_margin_fraction": 0.232719,
+      "pressure_wall_utilization_fraction": 0.767281,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -130424,6 +130820,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.878157,
+      "pressure_wall_margin_mm": 55.371843,
+      "pressure_wall_margin_fraction": 0.848611,
+      "pressure_wall_utilization_fraction": 0.151389,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -133313,6 +133718,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 8.298203,
+      "pressure_wall_margin_mm": 6.001797,
+      "pressure_wall_margin_fraction": 0.419706,
+      "pressure_wall_utilization_fraction": 0.580294,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -136201,6 +136615,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 10.476823,
+      "pressure_wall_margin_mm": 9.523177,
+      "pressure_wall_margin_fraction": 0.476159,
+      "pressure_wall_utilization_fraction": 0.523841,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -137941,7 +138364,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 22242662.25309095,
+            "value": 22242662.253090955,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -137952,7 +138375,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 2224266.2253090953,
+            "value": 2224266.225309096,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -137963,7 +138386,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 24466928.478400048,
+            "value": 24466928.47840005,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -139117,6 +139540,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.396353,
+      "pressure_wall_margin_mm": 4.873647,
+      "pressure_wall_margin_fraction": 0.341531,
+      "pressure_wall_utilization_fraction": 0.658469,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -141997,6 +142429,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.72701,
+      "pressure_wall_margin_mm": 16.37299,
+      "pressure_wall_margin_fraction": 0.526463,
+      "pressure_wall_utilization_fraction": 0.473537,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -143699,7 +144140,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 210424.715086546,
+            "value": 210424.71508654597,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -143710,7 +144151,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 21042.471508654602,
+            "value": 21042.4715086546,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -143721,7 +144162,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 231467.1865952006,
+            "value": 231467.18659520056,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -144875,6 +145316,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.72701,
+      "pressure_wall_margin_mm": 16.37299,
+      "pressure_wall_margin_fraction": 0.526463,
+      "pressure_wall_utilization_fraction": 0.473537,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -147784,6 +148234,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 13.340941,
+      "pressure_wall_margin_mm": 3.959059,
+      "pressure_wall_margin_fraction": 0.228847,
+      "pressure_wall_utilization_fraction": 0.771153,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -150671,6 +151130,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.145855,
+      "pressure_wall_margin_mm": 9.454145,
+      "pressure_wall_margin_fraction": 0.458939,
+      "pressure_wall_utilization_fraction": 0.541061,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -153589,6 +154057,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 9.215064,
+      "pressure_wall_margin_mm": 1.684936,
+      "pressure_wall_margin_fraction": 0.154581,
+      "pressure_wall_utilization_fraction": 0.845419,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -156497,6 +156974,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.634469,
+      "pressure_wall_margin_mm": 7.265531,
+      "pressure_wall_margin_fraction": 0.331759,
+      "pressure_wall_utilization_fraction": 0.668241,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -158228,7 +158714,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 120438.71188873827,
+            "value": 120438.71188873828,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -158239,7 +158725,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12043.871188873827,
+            "value": 12043.871188873829,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -159404,6 +159890,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.634469,
+      "pressure_wall_margin_mm": 7.265531,
+      "pressure_wall_margin_fraction": 0.331759,
+      "pressure_wall_utilization_fraction": 0.668241,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -161136,7 +161631,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 134591.2311183865,
+            "value": 134591.23111838647,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -161147,7 +161642,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 13459.12311183865,
+            "value": 13459.123111838648,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -161158,7 +161653,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 148050.35423022514,
+            "value": 148050.35423022512,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -162312,6 +162807,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.634469,
+      "pressure_wall_margin_mm": 7.265531,
+      "pressure_wall_margin_fraction": 0.331759,
+      "pressure_wall_utilization_fraction": 0.668241,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -164044,7 +164548,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 136931.14009889096,
+            "value": 136931.14009889093,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -164055,7 +164559,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 13693.114009889097,
+            "value": 13693.114009889094,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -164066,7 +164570,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 150624.25410878006,
+            "value": 150624.25410878003,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -165220,6 +165724,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 14.634469,
+      "pressure_wall_margin_mm": 7.265531,
+      "pressure_wall_margin_fraction": 0.331759,
+      "pressure_wall_utilization_fraction": 0.668241,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -168108,6 +168621,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.775272,
+      "pressure_wall_margin_mm": 6.124728,
+      "pressure_wall_margin_fraction": 0.385203,
+      "pressure_wall_utilization_fraction": 0.614797,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -171017,6 +171539,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 11.929443,
+      "pressure_wall_margin_mm": 2.370557,
+      "pressure_wall_margin_fraction": 0.165773,
+      "pressure_wall_utilization_fraction": 0.834227,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -173925,6 +174456,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 11.929443,
+      "pressure_wall_margin_mm": 2.370557,
+      "pressure_wall_margin_fraction": 0.165773,
+      "pressure_wall_utilization_fraction": 0.834227,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -175656,7 +176196,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 181823.29750196694,
+            "value": 181823.29750196697,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -175667,7 +176207,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 18182.329750196695,
+            "value": 18182.3297501967,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -175678,7 +176218,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 200005.62725216363,
+            "value": 200005.62725216366,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -176832,6 +177372,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 11.929443,
+      "pressure_wall_margin_mm": 2.370557,
+      "pressure_wall_margin_fraction": 0.165773,
+      "pressure_wall_utilization_fraction": 0.834227,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -178535,7 +179084,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 110419.05525168203,
+            "value": 110419.05525168205,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -178546,7 +179095,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11041.905525168204,
+            "value": 11041.905525168206,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -178557,7 +179106,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 121460.96077685023,
+            "value": 121460.96077685025,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -179711,6 +180260,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 8.476105,
+      "pressure_wall_margin_mm": 40.923895,
+      "pressure_wall_margin_fraction": 0.828419,
+      "pressure_wall_utilization_fraction": 0.171581,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -181414,7 +181972,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 106307.50465810027,
+            "value": 106307.50465810025,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -181425,7 +181983,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 10630.750465810028,
+            "value": 10630.750465810026,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -181436,7 +181994,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 116938.25512391029,
+            "value": 116938.25512391028,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -182590,6 +183148,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 8.476105,
+      "pressure_wall_margin_mm": 40.923895,
+      "pressure_wall_margin_fraction": 0.828419,
+      "pressure_wall_utilization_fraction": 0.171581,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -184293,7 +184860,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 253326.84146341463,
+            "value": 253326.84146341466,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -184304,7 +184871,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 25332.684146341464,
+            "value": 25332.684146341468,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -185469,6 +186036,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.806395,
+      "pressure_wall_margin_mm": 13.693605,
+      "pressure_wall_margin_fraction": 0.537004,
+      "pressure_wall_utilization_fraction": 0.462996,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -188373,6 +188949,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 6.622799,
+      "pressure_wall_margin_mm": 24.477201,
+      "pressure_wall_margin_fraction": 0.787048,
+      "pressure_wall_utilization_fraction": 0.212952,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -191276,6 +191861,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 6.667645,
+      "pressure_wall_margin_mm": 4.332355,
+      "pressure_wall_margin_fraction": 0.39385,
+      "pressure_wall_utilization_fraction": 0.60615,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -194164,6 +194758,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 8.298203,
+      "pressure_wall_margin_mm": 6.001797,
+      "pressure_wall_margin_fraction": 0.419706,
+      "pressure_wall_utilization_fraction": 0.580294,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -195895,7 +196498,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 114405.6703383163,
+            "value": 114405.67033831628,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -195906,7 +196509,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11440.56703383163,
+            "value": 11440.567033831629,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -195917,7 +196520,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 125846.23737214792,
+            "value": 125846.23737214791,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -197071,6 +197674,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.971044,
+      "pressure_wall_margin_mm": 5.728956,
+      "pressure_wall_margin_fraction": 0.32367,
+      "pressure_wall_utilization_fraction": 0.67633,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -198803,7 +199415,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 63331.71036585366,
+            "value": 63331.710365853665,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -198814,7 +199426,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6333.171036585366,
+            "value": 6333.171036585367,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -199979,6 +200591,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.971044,
+      "pressure_wall_margin_mm": 5.728956,
+      "pressure_wall_margin_fraction": 0.32367,
+      "pressure_wall_utilization_fraction": 0.67633,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -201711,7 +202332,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 63331.71036585366,
+            "value": 63331.710365853665,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -201722,7 +202343,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6333.171036585366,
+            "value": 6333.171036585367,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -202887,6 +203508,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.971044,
+      "pressure_wall_margin_mm": 5.728956,
+      "pressure_wall_margin_fraction": 0.32367,
+      "pressure_wall_utilization_fraction": 0.67633,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -204619,7 +205249,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 367732.51180173084,
+            "value": 367732.5118017309,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -204630,7 +205260,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 36773.25118017309,
+            "value": 36773.251180173094,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -204641,7 +205271,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 404505.7629819039,
+            "value": 404505.762981904,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -205795,6 +206425,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.971044,
+      "pressure_wall_margin_mm": 5.728956,
+      "pressure_wall_margin_fraction": 0.32367,
+      "pressure_wall_utilization_fraction": 0.67633,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -207527,7 +208166,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 114405.6703383163,
+            "value": 114405.67033831628,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -207538,7 +208177,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11440.56703383163,
+            "value": 11440.567033831629,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -207549,7 +208188,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 125846.23737214792,
+            "value": 125846.23737214791,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -208703,6 +209342,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.971044,
+      "pressure_wall_margin_mm": 5.728956,
+      "pressure_wall_margin_fraction": 0.32367,
+      "pressure_wall_utilization_fraction": 0.67633,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -210435,7 +211083,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 89890.16955153421,
+            "value": 89890.1695515342,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -210446,7 +211094,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 8989.016955153422,
+            "value": 8989.01695515342,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -210457,7 +211105,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 98879.18650668763,
+            "value": 98879.18650668762,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -211611,6 +212259,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.971044,
+      "pressure_wall_margin_mm": 5.728956,
+      "pressure_wall_margin_fraction": 0.32367,
+      "pressure_wall_utilization_fraction": 0.67633,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -213343,7 +214000,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 96019.04474822973,
+            "value": 96019.04474822972,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -213354,7 +214011,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9601.904474822973,
+            "value": 9601.904474822972,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -213365,7 +214022,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 105620.94922305271,
+            "value": 105620.94922305268,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -214519,6 +215176,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.828119,
+      "pressure_wall_margin_mm": 4.071881,
+      "pressure_wall_margin_fraction": 0.256093,
+      "pressure_wall_utilization_fraction": 0.743907,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -217428,6 +218094,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 11.828119,
+      "pressure_wall_margin_mm": 4.071881,
+      "pressure_wall_margin_fraction": 0.256093,
+      "pressure_wall_utilization_fraction": 0.743907,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -220336,6 +221011,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.489348,
+      "pressure_wall_margin_mm": 4.010652,
+      "pressure_wall_margin_fraction": 0.297085,
+      "pressure_wall_utilization_fraction": 0.702915,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -222047,7 +222731,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 32133692.656274583,
+            "value": 32133692.65627458,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -222058,7 +222742,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 3213369.2656274587,
+            "value": 3213369.265627458,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -222069,7 +222753,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 35347061.921902046,
+            "value": 35347061.92190204,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -223238,6 +223922,15 @@
       "REP_OPERTR": "N",
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.856763,
+      "pressure_wall_margin_mm": 13.243237,
+      "pressure_wall_margin_fraction": 0.774458,
+      "pressure_wall_utilization_fraction": 0.225542,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -226171,6 +226864,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 6.667645,
+      "pressure_wall_margin_mm": 4.332355,
+      "pressure_wall_margin_fraction": 0.39385,
+      "pressure_wall_utilization_fraction": 0.60615,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -229050,6 +229752,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.091257,
+      "pressure_wall_margin_mm": 26.208743,
+      "pressure_wall_margin_fraction": 0.742457,
+      "pressure_wall_utilization_fraction": 0.257543,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -230752,7 +231463,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 13485568.39112903,
+            "value": 13485568.391129032,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -230763,7 +231474,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1348556.839112903,
+            "value": 1348556.8391129032,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -230774,7 +231485,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 14834125.230241932,
+            "value": 14834125.230241936,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -231928,6 +232639,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.489348,
+      "pressure_wall_margin_mm": 8.810652,
+      "pressure_wall_margin_fraction": 0.481456,
+      "pressure_wall_utilization_fraction": 0.518544,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -233631,7 +234351,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 304400.8014358773,
+            "value": 304400.8014358772,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -233642,7 +234362,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 30440.08014358773,
+            "value": 30440.080143587722,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -233653,7 +234373,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 334840.881579465,
+            "value": 334840.88157946494,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -234807,6 +235527,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.441706,
+      "pressure_wall_margin_mm": 23.558294,
+      "pressure_wall_margin_fraction": 0.713888,
+      "pressure_wall_utilization_fraction": 0.286112,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -237710,6 +238439,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.107755,
+      "pressure_wall_margin_mm": 5.792245,
+      "pressure_wall_margin_fraction": 0.531399,
+      "pressure_wall_utilization_fraction": 0.468601,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -240634,6 +241372,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 8.221458,
+      "pressure_wall_margin_mm": 3.478542,
+      "pressure_wall_margin_fraction": 0.297311,
+      "pressure_wall_utilization_fraction": 0.702689,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -243512,6 +244259,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.90271,
+      "pressure_wall_margin_mm": 8.09729,
+      "pressure_wall_margin_fraction": 0.449849,
+      "pressure_wall_utilization_fraction": 0.550151,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -246436,6 +247192,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.950399,
+      "pressure_wall_margin_mm": 2.949601,
+      "pressure_wall_margin_fraction": 0.373367,
+      "pressure_wall_utilization_fraction": 0.626633,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -249099,7 +249864,7 @@
         "outputs": [
           {
             "name": "lca_steel_mass_new_build_kg",
-            "value": 2272.8551041052815,
+            "value": 2272.855104105282,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -249109,7 +249874,7 @@
           },
           {
             "name": "lca_refurbishment_steel_kg",
-            "value": 113.64275520526408,
+            "value": 113.64275520526411,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -249141,7 +249906,7 @@
           },
           {
             "name": "lca_avoided_steel_kg",
-            "value": 2159.2123489000173,
+            "value": 2159.212348900018,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -249329,6 +250094,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.62469,
+      "pressure_wall_margin_mm": 8.67531,
+      "pressure_wall_margin_fraction": 0.606665,
+      "pressure_wall_utilization_fraction": 0.393335,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -252209,6 +252983,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.372726,
+      "pressure_wall_margin_mm": 25.677274,
+      "pressure_wall_margin_fraction": 0.776922,
+      "pressure_wall_utilization_fraction": 0.223078,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -253911,7 +254694,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 169565.5471085759,
+            "value": 169565.54710857588,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -253922,7 +254705,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 16956.554710857592,
+            "value": 16956.55471085759,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -253933,7 +254716,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 186522.1018194335,
+            "value": 186522.10181943348,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -254872,7 +255655,7 @@
         "outputs": [
           {
             "name": "lca_steel_mass_new_build_kg",
-            "value": 1905.5249862700848,
+            "value": 1905.524986270085,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -254914,7 +255697,7 @@
           },
           {
             "name": "lca_avoided_steel_kg",
-            "value": 1810.2487369565806,
+            "value": 1810.2487369565808,
             "unit": "kg",
             "quality": "calculated",
             "used_by": [
@@ -255102,6 +255885,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.62469,
+      "pressure_wall_margin_mm": 8.67531,
+      "pressure_wall_margin_fraction": 0.606665,
+      "pressure_wall_utilization_fraction": 0.393335,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -257981,6 +258773,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.588962,
+      "pressure_wall_margin_mm": 7.111038,
+      "pressure_wall_margin_fraction": 0.425811,
+      "pressure_wall_utilization_fraction": 0.574189,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -260876,6 +261677,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.545786,
+      "pressure_wall_margin_mm": 20.304214,
+      "pressure_wall_margin_fraction": 0.729056,
+      "pressure_wall_utilization_fraction": 0.270944,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -262616,7 +263426,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 11984291.577325677,
+            "value": 11984291.577325676,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -262627,7 +263437,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1198429.1577325677,
+            "value": 1198429.1577325675,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -262638,7 +263448,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 13182720.735058244,
+            "value": 13182720.735058242,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -263792,6 +264602,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 6.470554,
+      "pressure_wall_margin_mm": 3.029446,
+      "pressure_wall_margin_fraction": 0.318889,
+      "pressure_wall_utilization_fraction": 0.681111,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -265495,7 +266314,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 112362.71193941777,
+            "value": 112362.71193941776,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -265506,7 +266325,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11236.271193941779,
+            "value": 11236.271193941777,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -265517,7 +266336,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 123598.98313335955,
+            "value": 123598.98313335954,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -266671,6 +267490,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.068993,
+      "pressure_wall_margin_mm": 6.131007,
+      "pressure_wall_margin_fraction": 0.403356,
+      "pressure_wall_utilization_fraction": 0.596644,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -269551,6 +270379,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.068993,
+      "pressure_wall_margin_mm": 6.131007,
+      "pressure_wall_margin_fraction": 0.403356,
+      "pressure_wall_utilization_fraction": 0.596644,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -272430,6 +273267,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.068993,
+      "pressure_wall_margin_mm": 6.131007,
+      "pressure_wall_margin_fraction": 0.403356,
+      "pressure_wall_utilization_fraction": 0.596644,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -274132,7 +274978,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170732,
+            "value": 126663.42073170733,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -274143,7 +274989,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170732,
+            "value": 12666.342073170734,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -275308,6 +276154,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.068993,
+      "pressure_wall_margin_mm": 6.131007,
+      "pressure_wall_margin_fraction": 0.403356,
+      "pressure_wall_utilization_fraction": 0.596644,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -277011,7 +277866,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 67417.62716365067,
+            "value": 67417.62716365066,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -277022,7 +277877,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6741.762716365068,
+            "value": 6741.762716365066,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -277033,7 +277888,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 74159.38988001573,
+            "value": 74159.38988001572,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -278187,6 +279042,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.068993,
+      "pressure_wall_margin_mm": 6.131007,
+      "pressure_wall_margin_fraction": 0.403356,
+      "pressure_wall_utilization_fraction": 0.596644,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -279890,7 +280754,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170732,
+            "value": 126663.42073170733,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -279901,7 +280765,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170732,
+            "value": 12666.342073170734,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -281066,6 +281930,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.068993,
+      "pressure_wall_margin_mm": 6.131007,
+      "pressure_wall_margin_fraction": 0.403356,
+      "pressure_wall_utilization_fraction": 0.596644,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -283990,6 +284863,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.289171,
+      "pressure_wall_margin_mm": 3.680829,
+      "pressure_wall_margin_fraction": 0.335536,
+      "pressure_wall_utilization_fraction": 0.664464,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -286898,6 +287780,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 9.90271,
+      "pressure_wall_margin_mm": 2.79729,
+      "pressure_wall_margin_fraction": 0.220259,
+      "pressure_wall_utilization_fraction": 0.779741,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -288629,7 +289520,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 104190.87834382374,
+            "value": 104190.87834382376,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -288640,7 +289531,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 10419.087834382375,
+            "value": 10419.087834382377,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -288651,7 +289542,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 114609.96617820612,
+            "value": 114609.96617820613,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -289805,6 +290696,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 9.90271,
+      "pressure_wall_margin_mm": 2.39729,
+      "pressure_wall_margin_fraction": 0.194902,
+      "pressure_wall_utilization_fraction": 0.805098,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -292714,6 +293614,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 9.90271,
+      "pressure_wall_margin_mm": 2.39729,
+      "pressure_wall_margin_fraction": 0.194902,
+      "pressure_wall_utilization_fraction": 0.805098,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -294416,7 +295325,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 2711005.7953383164,
+            "value": 2711005.795338316,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -294438,7 +295347,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 2982106.374872148,
+            "value": 2982106.3748721476,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -295592,6 +296501,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.289171,
+      "pressure_wall_margin_mm": 5.410829,
+      "pressure_wall_margin_fraction": 0.42605,
+      "pressure_wall_utilization_fraction": 0.57395,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -298510,6 +299428,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 6.470554,
+      "pressure_wall_margin_mm": 3.029446,
+      "pressure_wall_margin_fraction": 0.318889,
+      "pressure_wall_utilization_fraction": 0.681111,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -300241,7 +301168,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 273756.42545239965,
+            "value": 273756.4254523996,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -300252,7 +301179,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 27375.642545239967,
+            "value": 27375.64254523996,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -300263,7 +301190,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 301132.0679976396,
+            "value": 301132.06799763953,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -301432,6 +302359,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.271647,
+      "pressure_wall_margin_mm": 1.228353,
+      "pressure_wall_margin_fraction": 0.223337,
+      "pressure_wall_utilization_fraction": 0.776663,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -303164,7 +304100,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 185909.21429976396,
+            "value": 185909.214299764,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -303175,7 +304111,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 18590.921429976395,
+            "value": 18590.9214299764,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -303186,7 +304122,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 204500.13572974034,
+            "value": 204500.13572974037,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -304355,6 +305291,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.271647,
+      "pressure_wall_margin_mm": 1.228353,
+      "pressure_wall_margin_fraction": 0.223337,
+      "pressure_wall_utilization_fraction": 0.776663,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -306087,7 +307032,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 153221.87991738788,
+            "value": 153221.8799173879,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -306098,7 +307043,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 15322.187991738789,
+            "value": 15322.187991738792,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -306109,7 +307054,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 168544.06790912666,
+            "value": 168544.0679091267,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -307278,6 +308223,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.271647,
+      "pressure_wall_margin_mm": 1.228353,
+      "pressure_wall_margin_fraction": 0.223337,
+      "pressure_wall_utilization_fraction": 0.776663,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -310187,6 +311141,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 9.215064,
+      "pressure_wall_margin_mm": 1.684936,
+      "pressure_wall_margin_fraction": 0.154581,
+      "pressure_wall_utilization_fraction": 0.845419,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -313090,6 +314053,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.184029,
+      "pressure_wall_margin_mm": 8.515971,
+      "pressure_wall_margin_fraction": 0.670549,
+      "pressure_wall_utilization_fraction": 0.329451,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -314792,7 +315764,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 484181.14053894574,
+            "value": 484181.1405389457,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -314803,7 +315775,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 48418.11405389458,
+            "value": 48418.11405389457,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -314814,7 +315786,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 532599.2545928403,
+            "value": 532599.2545928402,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -315968,6 +316940,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 6.815976,
+      "pressure_wall_margin_mm": 32.184024,
+      "pressure_wall_margin_fraction": 0.825231,
+      "pressure_wall_utilization_fraction": 0.174769,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -317700,7 +318681,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 7891948.294944924,
+            "value": 7891948.294944925,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -317711,7 +318692,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 789194.8294944925,
+            "value": 789194.8294944926,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -317722,7 +318703,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 8681143.124439416,
+            "value": 8681143.124439418,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -318876,6 +319857,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.94465,
+      "pressure_wall_margin_mm": 4.75535,
+      "pressure_wall_margin_fraction": 0.374437,
+      "pressure_wall_utilization_fraction": 0.625563,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -320588,7 +321578,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 13307831.010424862,
+            "value": 13307831.01042486,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -320599,7 +321589,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1330783.1010424863,
+            "value": 1330783.101042486,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -320610,7 +321600,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 14638614.111467348,
+            "value": 14638614.111467347,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -321779,6 +322769,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 1.6923,
+      "pressure_wall_margin_mm": 18.9077,
+      "pressure_wall_margin_fraction": 0.91785,
+      "pressure_wall_utilization_fraction": 0.08215,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -324658,6 +325657,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.289171,
+      "pressure_wall_margin_mm": 8.610829,
+      "pressure_wall_margin_fraction": 0.541562,
+      "pressure_wall_utilization_fraction": 0.458438,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -327591,6 +328599,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.958985,
+      "pressure_wall_margin_mm": 2.961015,
+      "pressure_wall_margin_fraction": 0.373865,
+      "pressure_wall_utilization_fraction": 0.626135,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -329302,7 +330319,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 15526483.831628637,
+            "value": 15526483.83162864,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -329313,7 +330330,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 1552648.3831628638,
+            "value": 1552648.383162864,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -330493,6 +331510,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.080347,
+      "pressure_wall_margin_mm": 3.319653,
+      "pressure_wall_margin_fraction": 0.518696,
+      "pressure_wall_utilization_fraction": 0.481304,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -333382,6 +334408,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.107755,
+      "pressure_wall_margin_mm": 5.792245,
+      "pressure_wall_margin_fraction": 0.531399,
+      "pressure_wall_utilization_fraction": 0.468601,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -336269,6 +337304,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.107755,
+      "pressure_wall_margin_mm": 5.792245,
+      "pressure_wall_margin_fraction": 0.531399,
+      "pressure_wall_utilization_fraction": 0.468601,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -339187,6 +340231,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.958985,
+      "pressure_wall_margin_mm": 2.961015,
+      "pressure_wall_margin_fraction": 0.373865,
+      "pressure_wall_utilization_fraction": 0.626135,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -342066,6 +343119,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.392167,
+      "pressure_wall_margin_mm": 25.107833,
+      "pressure_wall_margin_fraction": 0.823208,
+      "pressure_wall_utilization_fraction": 0.176792,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -343768,7 +344830,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 126663.42073170732,
+            "value": 126663.42073170733,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -343779,7 +344841,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 12666.342073170732,
+            "value": 12666.342073170734,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -344944,6 +346006,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.392167,
+      "pressure_wall_margin_mm": 25.107833,
+      "pressure_wall_margin_fraction": 0.823208,
+      "pressure_wall_utilization_fraction": 0.176792,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -347824,6 +348895,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.392167,
+      "pressure_wall_margin_mm": 25.107833,
+      "pressure_wall_margin_fraction": 0.823208,
+      "pressure_wall_utilization_fraction": 0.176792,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -350703,6 +351783,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.03491,
+      "pressure_wall_margin_mm": 5.66509,
+      "pressure_wall_margin_fraction": 0.44607,
+      "pressure_wall_utilization_fraction": 0.55393,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -353581,6 +354670,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 7.03491,
+      "pressure_wall_margin_mm": 5.66509,
+      "pressure_wall_margin_fraction": 0.44607,
+      "pressure_wall_utilization_fraction": 0.55393,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -356476,6 +357574,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.61396,
+      "pressure_wall_margin_mm": 29.08604,
+      "pressure_wall_margin_fraction": 0.889481,
+      "pressure_wall_utilization_fraction": 0.110519,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -359354,6 +360461,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.683453,
+      "pressure_wall_margin_mm": 13.916547,
+      "pressure_wall_margin_fraction": 0.748201,
+      "pressure_wall_utilization_fraction": 0.251799,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -362249,6 +363365,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.61396,
+      "pressure_wall_margin_mm": 29.08604,
+      "pressure_wall_margin_fraction": 0.889481,
+      "pressure_wall_utilization_fraction": 0.110519,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -363951,7 +365076,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 108268.08384443035,
+            "value": 108268.08384443037,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -363973,7 +365098,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 119094.89222887339,
+            "value": 119094.8922288734,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -365127,6 +366252,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.683453,
+      "pressure_wall_margin_mm": 13.916547,
+      "pressure_wall_margin_fraction": 0.748201,
+      "pressure_wall_utilization_fraction": 0.251799,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -368031,6 +369165,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.472423,
+      "pressure_wall_margin_mm": 3.667577,
+      "pressure_wall_margin_fraction": 0.513666,
+      "pressure_wall_utilization_fraction": 0.486334,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -369733,7 +370876,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 3133898.1839103065,
+            "value": 3133898.183910307,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -369744,7 +370887,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 313389.81839103065,
+            "value": 313389.8183910307,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -369755,7 +370898,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 3447288.002301337,
+            "value": 3447288.0023013377,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -370924,6 +372067,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.850311,
+      "pressure_wall_margin_mm": 3.749689,
+      "pressure_wall_margin_fraction": 0.49338,
+      "pressure_wall_utilization_fraction": 0.50662,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -372636,7 +373788,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 8903233.066249995,
+            "value": 8903233.066249993,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -372647,7 +373799,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 890323.3066249995,
+            "value": 890323.3066249993,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -372658,7 +373810,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 9793556.372874994,
+            "value": 9793556.372874992,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -373827,6 +374979,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.471207,
+      "pressure_wall_margin_mm": 4.448793,
+      "pressure_wall_margin_fraction": 0.561716,
+      "pressure_wall_utilization_fraction": 0.438284,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -375530,7 +376691,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 112362.71193941777,
+            "value": 112362.71193941776,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -375541,7 +376702,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 11236.271193941779,
+            "value": 11236.271193941777,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -375552,7 +376713,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 123598.98313335955,
+            "value": 123598.98313335954,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -376706,6 +377867,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.893879,
+      "pressure_wall_margin_mm": 15.706121,
+      "pressure_wall_margin_fraction": 0.801333,
+      "pressure_wall_utilization_fraction": 0.198667,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -378409,7 +379579,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 416763.513375295,
+            "value": 416763.51337529504,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -378420,7 +379590,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 41676.3513375295,
+            "value": 41676.35133752951,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -378431,7 +379601,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 458439.86471282446,
+            "value": 458439.8647128245,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -379585,6 +380755,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.67818,
+      "pressure_wall_margin_mm": 12.58182,
+      "pressure_wall_margin_fraction": 0.689037,
+      "pressure_wall_utilization_fraction": 0.310963,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -381288,7 +382467,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 124620.4623328088,
+            "value": 124620.46233280882,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -381310,7 +382489,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 137082.50856608967,
+            "value": 137082.5085660897,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -382464,6 +383643,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.67818,
+      "pressure_wall_margin_mm": 12.58182,
+      "pressure_wall_margin_fraction": 0.689037,
+      "pressure_wall_utilization_fraction": 0.310963,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -384167,7 +385355,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 27784.234225019663,
+            "value": 27784.234225019667,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -384178,7 +385366,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 2778.4234225019663,
+            "value": 2778.423422501967,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -384189,7 +385377,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 30562.657647521628,
+            "value": 30562.657647521635,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -385343,6 +386531,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 5.67818,
+      "pressure_wall_margin_mm": 12.58182,
+      "pressure_wall_margin_fraction": 0.689037,
+      "pressure_wall_utilization_fraction": 0.310963,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -387055,7 +388252,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 615653.4402336321,
+            "value": 615653.4402336322,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -387066,7 +388263,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 61565.34402336321,
+            "value": 61565.34402336323,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -387077,7 +388274,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 677218.7842569953,
+            "value": 677218.7842569954,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -388231,6 +389428,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.471207,
+      "pressure_wall_margin_mm": 4.448793,
+      "pressure_wall_margin_fraction": 0.561716,
+      "pressure_wall_utilization_fraction": 0.438284,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -391120,6 +392326,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.472423,
+      "pressure_wall_margin_mm": 3.667577,
+      "pressure_wall_margin_fraction": 0.513666,
+      "pressure_wall_utilization_fraction": 0.486334,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -392822,7 +394037,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 62718.822846184106,
+            "value": 62718.82284618411,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -392833,7 +394048,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6271.882284618411,
+            "value": 6271.882284618412,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -392844,7 +394059,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 68990.70513080251,
+            "value": 68990.70513080253,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -393998,6 +395213,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.47303,
+      "pressure_wall_margin_mm": 5.12697,
+      "pressure_wall_margin_fraction": 0.596159,
+      "pressure_wall_utilization_fraction": 0.403841,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -395701,7 +396925,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 400419.846184107,
+            "value": 400419.84618410695,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -395723,7 +396947,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 440461.8308025177,
+            "value": 440461.83080251765,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -396877,6 +398101,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.671157,
+      "pressure_wall_margin_mm": 4.828843,
+      "pressure_wall_margin_fraction": 0.508299,
+      "pressure_wall_utilization_fraction": 0.491701,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -398580,7 +399813,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 204295.8398898505,
+            "value": 204295.83988985053,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -398591,7 +399824,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 20429.58398898505,
+            "value": 20429.583988985054,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -398602,7 +399835,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 224725.42387883554,
+            "value": 224725.42387883557,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -399756,6 +400989,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.893879,
+      "pressure_wall_margin_mm": 15.706121,
+      "pressure_wall_margin_fraction": 0.801333,
+      "pressure_wall_utilization_fraction": 0.198667,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -402651,6 +403893,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.82167,
+      "pressure_wall_margin_mm": 15.97833,
+      "pressure_wall_margin_fraction": 0.806986,
+      "pressure_wall_utilization_fraction": 0.193014,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -402699,7 +403950,16 @@
       "SIMPLIFIED": "N"
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv",
-    "screening_error": "NSTA pipeline PL4421.1 cannot be screened because length is zero or missing."
+    "screening_error": "NSTA pipeline PL4421.1 cannot be screened because length is zero or missing.",
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.164317,
+      "pressure_wall_margin_mm": 4.455683,
+      "pressure_wall_margin_fraction": 0.584735,
+      "pressure_wall_utilization_fraction": 0.415265,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    }
   },
   {
     "scenario": "nsta_pl4768",
@@ -405593,6 +406853,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 2.817308,
+      "pressure_wall_margin_mm": 9.882692,
+      "pressure_wall_margin_fraction": 0.778165,
+      "pressure_wall_utilization_fraction": 0.221835,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -407295,7 +408564,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 171608.50550747442,
+            "value": 171608.50550747445,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -407317,7 +408586,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 188769.35605822186,
+            "value": 188769.3560582219,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -408471,6 +409740,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.506454,
+      "pressure_wall_margin_mm": 16.093546,
+      "pressure_wall_margin_fraction": 0.821099,
+      "pressure_wall_utilization_fraction": 0.178901,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -411351,6 +412629,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.506454,
+      "pressure_wall_margin_mm": 16.093546,
+      "pressure_wall_margin_fraction": 0.821099,
+      "pressure_wall_utilization_fraction": 0.178901,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -413062,7 +414349,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 20627750.953678206,
+            "value": 20627750.953678202,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -413073,7 +414360,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 2062775.0953678207,
+            "value": 2062775.0953678202,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -413084,7 +414371,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 22690526.049046025,
+            "value": 22690526.04904602,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -414253,6 +415540,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.185231,
+      "pressure_wall_margin_mm": 4.714769,
+      "pressure_wall_margin_fraction": 0.596806,
+      "pressure_wall_utilization_fraction": 0.403194,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -415956,7 +417252,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 67009.03548387096,
+            "value": 67009.03548387095,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -415967,7 +417263,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6700.903548387097,
+            "value": 6700.903548387095,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -415978,7 +417274,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 73709.93903225806,
+            "value": 73709.93903225804,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -417132,6 +418428,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.47303,
+      "pressure_wall_margin_mm": 5.12697,
+      "pressure_wall_margin_fraction": 0.596159,
+      "pressure_wall_utilization_fraction": 0.403841,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -420012,6 +421317,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.47303,
+      "pressure_wall_margin_mm": 5.12697,
+      "pressure_wall_margin_fraction": 0.596159,
+      "pressure_wall_utilization_fraction": 0.403841,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -421714,7 +423028,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 68643.40220298978,
+            "value": 68643.40220298976,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -421725,7 +423039,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 6864.340220298978,
+            "value": 6864.340220298976,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -421736,7 +423050,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 75507.74242328876,
+            "value": 75507.74242328874,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -422890,6 +424204,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 3.47303,
+      "pressure_wall_margin_mm": 5.12697,
+      "pressure_wall_margin_fraction": 0.596159,
+      "pressure_wall_utilization_fraction": 0.403841,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -425785,6 +427108,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 2.472958,
+      "pressure_wall_margin_mm": 10.227042,
+      "pressure_wall_margin_fraction": 0.805279,
+      "pressure_wall_utilization_fraction": 0.194721,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -427487,7 +428819,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 9358792.425354052,
+            "value": 9358792.42535405,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -427498,7 +428830,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 935879.2425354053,
+            "value": 935879.2425354051,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -427509,7 +428841,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 10294671.667889457,
+            "value": 10294671.667889455,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -428678,6 +430010,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 2.701246,
+      "pressure_wall_margin_mm": 4.898754,
+      "pressure_wall_margin_fraction": 0.644573,
+      "pressure_wall_utilization_fraction": 0.355427,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -430381,7 +431722,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 124620.4623328088,
+            "value": 124620.46233280882,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -430403,7 +431744,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 137082.50856608967,
+            "value": 137082.5085660897,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -431557,6 +432898,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 2.999704,
+      "pressure_wall_margin_mm": 4.620296,
+      "pressure_wall_margin_fraction": 0.606338,
+      "pressure_wall_utilization_fraction": 0.393662,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -434436,6 +435786,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 2.999704,
+      "pressure_wall_margin_mm": 4.620296,
+      "pressure_wall_margin_fraction": 0.606338,
+      "pressure_wall_utilization_fraction": 0.393662,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -437331,6 +438690,15 @@
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
     },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 2.250622,
+      "pressure_wall_margin_mm": 6.489378,
+      "pressure_wall_margin_fraction": 0.742492,
+      "pressure_wall_utilization_fraction": 0.257508,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
+    },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
   {
@@ -439042,7 +440410,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 4698804.317466562,
+            "value": 4698804.317466561,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -439053,7 +440421,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 469880.4317466562,
+            "value": 469880.4317466561,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -439064,7 +440432,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 5168684.749213218,
+            "value": 5168684.749213217,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -440233,6 +441601,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 2.638869,
+      "pressure_wall_margin_mm": 12.561131,
+      "pressure_wall_margin_fraction": 0.82639,
+      "pressure_wall_utilization_fraction": 0.17361,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -441936,7 +443313,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 130749.33752950432,
+            "value": 130749.33752950434,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -441958,7 +443335,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 143824.27128245475,
+            "value": 143824.27128245478,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -443112,6 +444489,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 4.686827,
+      "pressure_wall_margin_mm": 13.963173,
+      "pressure_wall_margin_fraction": 0.748696,
+      "pressure_wall_utilization_fraction": 0.251304,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   },
@@ -444815,7 +446201,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 91728.83211054286,
+            "value": 91728.83211054288,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -444826,7 +446212,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 9172.883211054286,
+            "value": 9172.883211054288,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -444837,7 +446223,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 100901.71532159715,
+            "value": 100901.71532159716,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -446006,6 +447392,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "Y",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "pass_sanity",
+      "pressure_wall_min_wall_mm": 0.695821,
+      "pressure_wall_margin_mm": 6.904179,
+      "pressure_wall_margin_fraction": 0.908445,
+      "pressure_wall_utilization_fraction": 0.091555,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Reported wall thickness is above the simple pressure minimum by at least the screening review threshold."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   }

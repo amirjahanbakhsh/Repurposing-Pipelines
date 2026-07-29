@@ -93,11 +93,15 @@ class PipelineScreenTest(unittest.TestCase):
             self.assertEqual(row["pipeline_name"], "CATS PIPELINE")
             self.assertIn(row["pre_lca_decision"], {"pass", "marginal", "fail"})
             self.assertIn(row["corrosion_risk_level"], {"low", "medium", "high"})
+            self.assertEqual(row["pressure_wall_check_status"], "review_required")
+            self.assertLess(float(row["pressure_wall_margin_fraction"]), 0.20)
             self.assertIn("lca_proxy_saving_percent", row)
             self.assertTrue((temp / "screen.csv").exists())
             self.assertTrue((temp / "trace.json").exists())
             self.assertTrue((temp / "work_scope.csv").exists())
-            self.assertIn("NSTA pipeline number", (temp / "report.md").read_text(encoding="utf-8"))
+            report = (temp / "report.md").read_text(encoding="utf-8")
+            self.assertIn("NSTA pipeline number", report)
+            self.assertIn("Pressure-wall check", report)
 
     def test_screen_all_nsta_pipelines_writes_batch_outputs(self) -> None:
         with TemporaryDirectory() as temp_dir:
@@ -119,6 +123,8 @@ class PipelineScreenTest(unittest.TestCase):
             report = (temp / "batch.md").read_text(encoding="utf-8")
             self.assertIn("NSTA Pipeline Batch Screening", report)
             self.assertIn("Screened pipelines: `3`", report)
+            self.assertIn("Wall check", report)
+            self.assertEqual(rows[0]["pressure_wall_check_status"], "review_required")
 
 
 if __name__ == "__main__":

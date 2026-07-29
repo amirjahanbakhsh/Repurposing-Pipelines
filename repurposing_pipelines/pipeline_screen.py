@@ -11,7 +11,10 @@ from typing import Any
 from .assumptions import AssumptionValue, ScenarioAssumptions, read_scenario_assumptions
 from .constants import BAR_TO_PSI
 from .goldeneye import benchmark_scenario_with_trace, write_trace
-from .wall_thickness import barlow_minimum_wall_thickness_mm
+from .wall_thickness import (
+    barlow_minimum_wall_thickness_mm,
+    build_nsta_wall_thickness_check_row,
+)
 from .work_scope import collect_refurbishment_work_scope_rows, write_refurbishment_work_scope_csv
 
 
@@ -42,9 +45,19 @@ def available_nsta_candidates(candidates_path: Path, limit: int = 10) -> list[di
 def write_pipeline_outputs(path: Path, row: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(row.keys()))
+        writer = csv.DictWriter(handle, fieldnames=list(row.keys()), lineterminator="\n")
         writer.writeheader()
-        writer.writerow(row)
+        writer.writerow(_csv_safe_row(row))
+
+
+def _csv_safe_value(value: Any) -> Any:
+    if isinstance(value, str):
+        return " ".join(value.replace("\r", " ").replace("\n", " ").split())
+    return value
+
+
+def _csv_safe_row(row: dict[str, Any]) -> dict[str, Any]:
+    return {key: _csv_safe_value(value) for key, value in row.items()}
 
 
 def _bullet_lines(text: str) -> str:
@@ -84,6 +97,15 @@ def _safe_float(value: Any, default: float = 0.0) -> float:
         return default
 
 
+def _format_percent(value: Any) -> str:
+    if value in {"", None}:
+        return "not calculated"
+    try:
+        return f"{float(value) * 100:.1f}%"
+    except (TypeError, ValueError):
+        return "not calculated"
+
+
 def _year_from_date(value: str) -> int | None:
     cleaned = value.strip()
     if not cleaned:
@@ -111,6 +133,12 @@ def write_single_pipeline_report(
     work_scope_csv_path: Path | None = None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    pressure_wall_rows = ""
+    if "pressure_wall_check_status" in row:
+        pressure_wall_rows = (
+            f"| Pressure-wall check | {row.get('pressure_wall_check_status', 'not calculated')} |\n"
+            f"| Pressure-wall margin | {_format_percent(row.get('pressure_wall_margin_fraction'))} |\n"
+        )
     report = f"""# Pipeline Screen: {row["scenario"]}
 
 Generated: {dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
@@ -146,7 +174,7 @@ Meaning: {row["pre_lca_reason_summary"]}
 | Remaining life | {row["remaining_life_years"]:.2f} years |
 | Remaining life range | {row["remaining_life_low_years"]:.2f} to {row["remaining_life_high_years"]:.2f} years |
 | Available wall thickness | {row["available_wall_thickness_mm"]:.2f} mm |
-| Corrosion risk | {row["corrosion_risk_level"]} |
+{pressure_wall_rows}| Corrosion risk | {row["corrosion_risk_level"]} |
 | Repurposing gate | {row["repurposing_gate_status"]} |
 | Repurposing evidence score | {row["repurposing_evidence_score"]:.1f} / 100 |
 | CO2 phase screen | {row["repurposing_phase_status"]} |
@@ -481,6 +509,22 @@ def build_nsta_scenario(
     return ScenarioAssumptions(name=scenario_name, records=records)
 
 
+def nsta_pressure_wall_outputs(
+    nsta_row: dict[str, str],
+    defaults: dict[str, dict[str, str]],
+) -> dict[str, Any]:
+    check = build_nsta_wall_thickness_check_row(candidate=nsta_row, defaults=defaults)
+    return {
+        "pressure_wall_check_status": check.get("status", ""),
+        "pressure_wall_min_wall_mm": check.get("barlow_min_wall_mm", ""),
+        "pressure_wall_margin_mm": check.get("pressure_margin_mm", ""),
+        "pressure_wall_margin_fraction": check.get("pressure_margin_fraction", ""),
+        "pressure_wall_utilization_fraction": check.get("pressure_utilization_fraction", ""),
+        "pressure_wall_review_margin_fraction": check.get("review_margin_fraction", ""),
+        "pressure_wall_check_notes": check.get("notes", ""),
+    }
+
+
 def screen_one_pipeline(
     *,
     assumptions_path: Path,
@@ -585,6 +629,8 @@ def write_batch_screening_report(
                 row.get("nsta_fluid", ""),
                 row.get("nsta_status", ""),
                 f"{float(row.get('length_km') or 0):.1f}",
+                row.get("pressure_wall_check_status", ""),
+                _format_percent(row.get("pressure_wall_margin_fraction")),
                 row.get("pre_lca_decision", ""),
                 f"{float(row.get('capacity_mtpa') or 0):.2f}",
                 f"{float(row.get('remaining_life_low_years') or 0):.1f}",
@@ -649,7 +695,7 @@ These rows are written to the work-scope CSV. They are quantity drivers for futu
 
 ## Top 30 Strategic Screened Pipelines
 
-{markdown_table(["NSTA rank", "NSTA no.", "Pipeline", "Fluid", "Status", "Length km", "Decision", "Capacity Mtpa", "Life low", "Life base", "Life high", "Corr. risk", "Reuse gate", "Evidence score", "LCA saving %"], top_rows)}
+{markdown_table(["NSTA rank", "NSTA no.", "Pipeline", "Fluid", "Status", "Length km", "Wall check", "Wall margin", "Decision", "Capacity Mtpa", "Life low", "Life base", "Life high", "Corr. risk", "Reuse gate", "Evidence score", "LCA saving %"], top_rows)}
 
 ## How To Use This
 
@@ -736,6 +782,8 @@ def screen_all_nsta_pipelines(
                 "defaults_path": _path_text(defaults_path),
                 "screening_error": str(exc),
             }
+        pressure_wall_outputs = nsta_pressure_wall_outputs(nsta_row, defaults)
+        row.update(pressure_wall_outputs)
         row["input_mode"] = "nsta_batch_candidate_plus_defaults"
         row["nsta_pipeline_number"] = nsta_row.get("NSTAPIPNO", "")
         row["nsta_rank"] = nsta_row.get("RANK", "")
@@ -743,6 +791,7 @@ def screen_all_nsta_pipelines(
         row["nsta_status"] = nsta_row.get("STATUS", "")
         trace["model_version"] = "pipeline_screen_nsta_batch_v0.1"
         trace["nsta_candidate"] = nsta_row
+        trace["nsta_wall_thickness_pressure_check"] = pressure_wall_outputs
         trace["defaults_path"] = _path_text(defaults_path)
         rows.append(row)
         traces.append(trace)
@@ -755,9 +804,14 @@ def screen_all_nsta_pipelines(
                 if key not in fieldnames:
                     fieldnames.append(key)
         with output_csv_path.open("w", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=fieldnames,
+                extrasaction="ignore",
+                lineterminator="\n",
+            )
             writer.writeheader()
-            writer.writerows(rows)
+            writer.writerows(_csv_safe_row(row) for row in rows)
     write_trace(trace_path, traces)
     if work_scope_csv_path is not None:
         write_refurbishment_work_scope_csv(
@@ -799,8 +853,11 @@ def screen_nsta_pipeline(
     row["nsta_rank"] = nsta_row.get("RANK", "")
     row["nsta_fluid"] = nsta_row.get("FLUID", "")
     row["nsta_status"] = nsta_row.get("STATUS", "")
+    pressure_wall_outputs = nsta_pressure_wall_outputs(nsta_row, defaults)
+    row.update(pressure_wall_outputs)
     trace["model_version"] = "pipeline_screen_nsta_v0.1"
     trace["nsta_candidate"] = nsta_row
+    trace["nsta_wall_thickness_pressure_check"] = pressure_wall_outputs
     trace["defaults_path"] = _path_text(defaults_path)
 
     write_pipeline_outputs(output_csv_path, row)

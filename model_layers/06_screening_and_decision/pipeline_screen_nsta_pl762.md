@@ -1,6 +1,6 @@
 # Pipeline Screen: nsta_pl762
 
-Generated: 2026-06-13T15:58:50+00:00
+Generated: 2026-07-29T14:56:36+00:00
 
 Input assumptions: `model_layers/06_screening_and_decision/nsta_screening_defaults.csv`
 
@@ -33,6 +33,8 @@ Meaning: Do not move to LCA until failed technical or cost checks are resolved.
 | Remaining life | 0.00 years |
 | Remaining life range | 0.00 to 408.95 years |
 | Available wall thickness | -1.17 mm |
+| Pressure-wall check | review_required |
+| Pressure-wall margin | 2.4% |
 | Corrosion risk | medium |
 | Repurposing gate | fail |
 | Repurposing evidence score | 23.5 / 100 |

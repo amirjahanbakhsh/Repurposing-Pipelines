@@ -6,8 +6,8 @@ Goldeneye benchmark cases, NSTA batch screening outputs, and pre-LCA decision fi
 | --- | --- |
 | `goldeneye_assumptions.csv` | Goldeneye dissertation/poster assumptions. |
 | `goldeneye_benchmark.md` | Goldeneye benchmark report. |
-| `pipeline_screen_nsta_all.md` | Main all-NSTA batch screening report. |
-| `pipeline_screen_nsta_all.csv` | Full all-NSTA batch screening output table. |
+| `pipeline_screen_nsta_all.md` | Main all-NSTA batch screening report, including pressure-wall status and margin columns. |
+| `pipeline_screen_nsta_all.csv` | Full all-NSTA batch screening output table, including pressure-wall triage fields. |
 | `refurbishment_work_scope_nsta_all.csv` | Quantified cost/LCA work-scope drivers for all screened NSTA candidates. |
 | `pipeline_screen_nsta_pl774.md` | CATS / PL774 example screening report. |
 | `refurbishment_work_scope_nsta_pl774.csv` | Quantified work-scope drivers for the PL774/CATS example. |

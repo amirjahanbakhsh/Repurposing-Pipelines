@@ -1737,7 +1737,7 @@
         "outputs": [
           {
             "name": "cost_subtotal_usd_2025",
-            "value": 827344511.3437828,
+            "value": 827344511.3437829,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -1748,7 +1748,7 @@
           },
           {
             "name": "cost_contingency_usd_2025",
-            "value": 82734451.13437828,
+            "value": 82734451.1343783,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -1759,7 +1759,7 @@
           },
           {
             "name": "cost_total_usd_2025",
-            "value": 910078962.4781611,
+            "value": 910078962.4781612,
             "unit": "USD 2025",
             "quality": "calculated",
             "used_by": [
@@ -2928,6 +2928,15 @@
       "REP_OPERTR": "Y",
       "REP_HOLDER": "N",
       "SIMPLIFIED": "N"
+    },
+    "nsta_wall_thickness_pressure_check": {
+      "pressure_wall_check_status": "review_required",
+      "pressure_wall_min_wall_mm": 27.676798,
+      "pressure_wall_margin_mm": 0.723202,
+      "pressure_wall_margin_fraction": 0.025465,
+      "pressure_wall_utilization_fraction": 0.974535,
+      "pressure_wall_review_margin_fraction": 0.2,
+      "pressure_wall_check_notes": "Positive pressure margin, but below the screening review threshold of 20% of reported wall thickness."
     },
     "defaults_path": "model_layers/06_screening_and_decision/nsta_screening_defaults.csv"
   }

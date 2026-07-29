@@ -160,6 +160,24 @@ The LCA files are now together:
 
 Important: licensed ecoinvent data are not committed to GitHub. The repo stores only shareable mapping metadata, templates, and model outputs.
 
+## Data Storage Rule
+
+GitHub should contain:
+
+- code and tests;
+- public/shareable input data;
+- generated CSV, JSON, GeoJSON, and Markdown model outputs;
+- assumptions, mappings, validation registers, source registers, and extracted notes.
+
+GitHub should not contain:
+
+- source PDFs;
+- licensed ecoinvent/openLCA/Brightway source data;
+- private ecoinvent-derived impact factors;
+- private or commercial refurbishment unit-cost factors.
+
+Keep source PDFs locally and store only citation details, extracted facts, and model-relevant notes in GitHub. Public NSTA route geometry can be stored with Git LFS because it is large but public/shareable.
+
 ## Current Status
 
 Implemented so far:
@@ -177,11 +195,13 @@ Implemented so far:
 - first corrosion screening module;
 - first LCA proxy module and ecoinvent-linked conditional LCA workflow;
 - NETL cost-reference template;
-- independent validation reports and registers.
+- independent validation reports and registers;
+- Git/data hygiene rules for keeping PDFs, ecoinvent data, private LCA factors, and private cost factors outside public GitHub.
 
 Next technical priorities:
 
 - fill project-specific private unit costs and ecoinvent/openLCA/Brightway LCA factors;
 - improve the wall-thickness/minimum-wall basis;
 - validate capacity and cost against external tools such as CO2 transport models and NETL CO2_T_COM;
+- keep `PROJECT_STATUS.md`, `START_HERE.md`, and `README.md` aligned with the actual Git/data policy;
 - keep wells as Phase 2 after pipeline screening is stable.

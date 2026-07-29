@@ -17,6 +17,7 @@ If you are new to the repository, do not start by opening every folder. Start wi
 | See validation status | `model_layers/07_independent_validation/independent_validation_report.md` |
 | Find LCA CSV files | `model_layers/05_lca/` |
 | Understand the modular model design | `model_layers/00_project_overview/system_architecture.md` |
+| Check current development status | `PROJECT_STATUS.md` |
 
 ## Normal Workflow
 
@@ -73,6 +74,14 @@ model_layers/05_lca/lca_report_nsta_pl774.md
 | `repurposing_pipelines/` | The Python model code. |
 | `scripts/` | Commands you run from PowerShell. |
 | `tests/` | Checks that help confirm the code still works. |
+
+## Data Rules
+
+- GitHub should contain code, public/shareable data, assumptions, mappings, generated CSV/JSON/Markdown outputs, and extracted notes.
+- PDFs should stay local only. Put citations and extracted facts in Markdown/CSV files instead.
+- Licensed ecoinvent/openLCA/Brightway source data and private ecoinvent-derived impact factors should stay local only.
+- Private or commercial unit-cost factor files should stay local only.
+- Public NSTA geometry can be kept in GitHub through Git LFS.
 
 ## Important Warning
 

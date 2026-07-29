@@ -1,10 +1,10 @@
 # Ecoinvent-Based Conditional LCA: nsta_pl774
 
-Generated: 2026-06-13T14:40:23+00:00
+Generated: 2026-06-13T15:59:01+00:00
 
 ## Plain Result
 
-Status: `sensitivity_only`
+Status: `blocked_missing_impact_factors`
 
 This is an ecoinvent-linked conditional LCA workflow. If the status is `screening_result`, public screening factors were used. This gives a complete early estimate, but final publishable kg CO2e results still need private ecoinvent/openLCA/Brightway-derived impact factors.
 
@@ -13,21 +13,21 @@ This is an ecoinvent-linked conditional LCA workflow. If the status is `screenin
 | Item | Value |
 | --- | --- |
 | Pre-LCA decision | fail |
-| New-build base impact | 543,104.28 tCO2e |
-| Reuse base impact | 33,229.82 tCO2e |
-| Base saving | 509,874.46 tCO2e |
-| Base saving percent | 93.9% |
-| Missing factor keys | none |
-| Factor quality | screening_default_unvalidated |
+| New-build base impact | 0.00 tCO2e |
+| Reuse base impact | 0.00 tCO2e |
+| Base saving | 0.00 tCO2e |
+| Base saving percent | 0.0% |
+| Missing factor keys | pipeline_steel; offshore_pipeline_construction; refurbishment_activity |
+| Factor quality | none |
 
 ## Required Inventory Rows
 
 | Alternative | Inventory item | Mapping key | Base quantity | Unit | Factor status |
 | --- | --- | --- | --- | --- | --- |
-| new_build | pipeline_steel_mass | pipeline_steel | 251,303,454.37 | kg | available |
-| new_build | offshore_pipeline_construction | offshore_pipeline_construction | 404.97 | km | available |
-| reuse | refurbishment_steel | pipeline_steel | 12,565,172.72 | kg | available |
-| reuse | pipeline_refurbishment_activity | refurbishment_activity | 404.97 | km | available |
+| new_build | pipeline_steel_mass | pipeline_steel | 251,303,454.37 | kg | missing |
+| new_build | offshore_pipeline_construction | offshore_pipeline_construction | 404.97 | km | missing |
+| reuse | refurbishment_steel | pipeline_steel | 12,565,172.72 | kg | missing |
+| reuse | pipeline_refurbishment_activity | refurbishment_activity | 404.97 | km | missing |
 
 ## Output Files
 
@@ -41,7 +41,7 @@ This is an ecoinvent-linked conditional LCA workflow. If the status is `screenin
 Expected private factor file:
 
 ```text
-model_layers/05_lca/lca_impact_factors_screening_defaults.csv
+model_layers/05_lca/private/lca_impact_factors_private.csv
 ```
 
 This file should contain ecoinvent/openLCA/Brightway-derived impact factors and should not be committed to GitHub.

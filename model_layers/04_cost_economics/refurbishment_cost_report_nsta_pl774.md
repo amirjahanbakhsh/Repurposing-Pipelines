@@ -1,6 +1,6 @@
 # Refurbishment Unit-Cost Report
 
-Generated: 2026-06-13T14:40:23+00:00
+Generated: 2026-06-13T15:59:01+00:00
 
 Model version: `refurbishment_unit_cost_v0.2`
 
@@ -16,12 +16,12 @@ If the status is `blocked_missing_unit_costs`, the model has quantities but the 
 
 | Scenario | Status | Base cost | Factors used | Missing | Missing drivers |
 | --- | --- | --- | --- | --- | --- |
-| nsta_pl774 | sensitivity_only | $79,534,912 | 10 | 0 | none |
+| nsta_pl774 | blocked_missing_unit_costs | $0 | 0 | 9 | cleaning_drying_per_km; compatibility_review_each; engineering_study_each; fracture_decompression_study_each; imr_plan_each; inspection_per_km; material_testing_campaign; replacement_steel_kg; wall_thickness_verification_per_km |
 
 ## Input Files
 
 - Work scope: `C:/Users/aj52/Documents/Repurposing Pipelines/model_layers/06_screening_and_decision/refurbishment_work_scope_nsta_pl774.csv`
-- Unit costs: `C:/Users/aj52/Documents/Repurposing Pipelines/model_layers/04_cost_economics/refurbishment_unit_cost_screening_defaults.csv`
+- Unit costs: `C:/Users/aj52/Documents/Repurposing Pipelines/model_layers/04_cost_economics/private/refurbishment_unit_costs_private.csv`
 
 ## Output Files
 
